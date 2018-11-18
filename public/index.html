@@ -150,6 +150,147 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-kafka-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/18/kafka-01/">Kafka学习 - 02</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/18/kafka-01/" class="archive-article-date">
+  	<time datetime="2018-11-18T14:29:01.843Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>kafka基础学习</p>
+<p>在centos7服务器上搭建kafka</p>
+<h3 id="安装zookeeper"><a href="#安装zookeeper" class="headerlink" title="安装zookeeper"></a>安装zookeeper</h3><ul>
+<li><p>下载zookeeper安装包 <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/</a></p>
+</li>
+<li><p>解压到指定目录 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf zookeeper-3.4.10.tar.gz -C /usr/<span class="built_in">local</span>/zookeeper</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/zookeeper/zookeeper-3.4.10/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改zoo.cfg一些基本设置 数据目录 日志目录等</p>
+</li>
+<li><p>配置环境变量(未生效 原因待定)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> ZOOKEEPER_HOME=/usr/<span class="built_in">local</span>/zookeeper/zookeeper-3.4.10/</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$ZOOKEEPER_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> /et/profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动zookeeper</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zkServer.sh start/status/stop/restart</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="安装kafka"><a href="#安装kafka" class="headerlink" title="安装kafka"></a>安装kafka</h3><ul>
+<li>下载kafka安装包 <a href="http://kafka.apache.org/downloads.html" target="_blank" rel="noopener">http://kafka.apache.org/downloads.html</a></li>
+</ul>
+<ul>
+<li><p>解压到指定目录 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf kafka_2.12-2.0.0.tgz -C /usr/<span class="built_in">local</span>/kafka/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置环境变量</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> KAFKA_HOME=/usr/<span class="built_in">local</span>/kafka/kafka_2.12-2.0.0</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$KAFKA_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> /et/profile</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>验证kafka功能</p>
+<ul>
+<li><p>启动zookeeper</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zookeeper-server-start.sh -daemon ../config/zookeeper.properties</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动kafka</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-server-start.sh ../config/server.properties</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我的服务器为1核1G，kafka启动报错,内存不足Cannot allocate memory</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   Java HotSpot(TM) 64-Bit Server VM warning: INFO: os::commit_memory(0x00000000c0000000, 1073741824, 0) failed; error=<span class="string">'Cannot allocate memory'</span> (errno=12)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># There is insufficient memory for the Java Runtime Environment to continue.</span></span><br><span class="line"><span class="comment"># Native memory allocation (mmap) failed to map 1073741824 bytes for committing reserved memory.</span></span><br><span class="line"><span class="comment"># An error report file with more information is saved as:</span></span><br><span class="line"><span class="comment"># /usr/local/kafka/kafka_2.12-2.0.0/bin/hs_err_pid6279.log</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看启动脚本 [kafka-server-start.sh] 发现默认配置为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">if</span> [ <span class="string">"x<span class="variable">$KAFKA_HEAP_OPTS</span>"</span> = <span class="string">"x"</span> ]; <span class="keyword">then</span></span><br><span class="line">   	<span class="built_in">export</span> KAFKA_HEAP_OPTS=<span class="string">"-Xmx1G -Xms1G"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>修改配置为 [-Xmx256M -Xms128M] 重启kafka成功</p>
+</li>
+<li><p>测试创建一个topic</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --create --zookeeper localhost:2181 --partitions 1 --replication-factor 1 --topic <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看topic列表</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --list --zookeeper localhost:2181</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生产者发送消息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./kafka-console-producer.sh --broker-list localhost:9092 --topic <span class="built_in">test</span></span><br><span class="line">&gt;haha</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>消费者接受消息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kettle_test --from-beginning</span><br><span class="line">haha</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>集群配置(未配置)…</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kafka</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Zookeeper</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/18/kafka-01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-spring-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -516,6 +657,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
               </li>
             
             <div class="clearfix"></div>
