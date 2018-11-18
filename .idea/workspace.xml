@@ -4,7 +4,6 @@
     <list default="true" id="afd66419-21be-4f73-8e5d-19cb46b2f12f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git" afterPath="$PROJECT_DIR$/.deploy_git" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/yilia" afterPath="$PROJECT_DIR$/themes/yilia" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.json" afterPath="$PROJECT_DIR$/db.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2018/10/09/hello-world/index.html" afterPath="$PROJECT_DIR$/public/2018/10/09/hello-world/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2018/10/09/mybatis_1/index.html" afterPath="$PROJECT_DIR$/public/2018/10/09/mybatis_1/index.html" />
@@ -14,7 +13,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2018/index.html" afterPath="$PROJECT_DIR$/public/archives/2018/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/index.html" afterPath="$PROJECT_DIR$/public/archives/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/hexo/index.html" afterPath="$PROJECT_DIR$/public/categories/hexo/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/content.json" afterPath="$PROJECT_DIR$/public/content.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/photos/index.html" afterPath="$PROJECT_DIR$/public/photos/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/Java/index.html" afterPath="$PROJECT_DIR$/public/tags/Java/index.html" />
@@ -318,12 +316,12 @@
       <workItem from="1540043649137" duration="247000" />
       <workItem from="1540131786867" duration="27000" />
       <workItem from="1540132149132" duration="27000" />
-      <workItem from="1542551078815" duration="460000" />
+      <workItem from="1542551078815" duration="655000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18690000" />
+    <option name="totallyTimeSpent" value="18885000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />

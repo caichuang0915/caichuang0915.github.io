@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.tupelo.cc">
-  <title>Tupelo</title>
+  <title>Spring学习 - 01 | Tupelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Tupelo">
+  <meta name="description" content="spring基础学习 Spring 基础及组件使用01工程从XML配置到注解 创建配置类 加上@Configuration注解 加上@ComponentScan注解 扫描指定的包 加载到IOC容器  12345678910111213@Configuration@ComponentScan(value = &quot;com.tupelo&quot;,useDefaultFilters = true,excludeF">
+<meta name="keywords" content="Java,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring学习 - 01">
 <meta property="og:url" content="http://blog.tupelo.cc/2018/10/21/spring-01/index.html">
 <meta property="og:site_name" content="Tupelo">
+<meta property="og:description" content="spring基础学习 Spring 基础及组件使用01工程从XML配置到注解 创建配置类 加上@Configuration注解 加上@ComponentScan注解 扫描指定的包 加载到IOC容器  12345678910111213@Configuration@ComponentScan(value = &quot;com.tupelo&quot;,useDefaultFilters = true,excludeF">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-21T16:11:41.784Z">
+<meta property="og:updated_time" content="2018-11-18T15:19:38.052Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tupelo">
+<meta name="twitter:title" content="Spring学习 - 01">
+<meta name="twitter:description" content="spring基础学习 Spring 基础及组件使用01工程从XML配置到注解 创建配置类 加上@Configuration注解 加上@ComponentScan注解 扫描指定的包 加载到IOC容器  12345678910111213@Configuration@ComponentScan(value = &quot;com.tupelo&quot;,useDefaultFilters = true,excludeF">
   
     <link rel="alternative" href="/atom.xml" title="Tupelo" type="application/atom+xml">
   
@@ -152,9 +156,41 @@
             <article id="post-spring-01" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring学习 - 01
+    </h1>
+  
+
+        
+        <a href="/2018/10/21/spring-01/" class="archive-article-date">
+  	<time datetime="2018-10-21T14:46:12.484Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-21</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>spring基础学习</p>
+<h2 id="Spring-基础及组件使用01"><a href="#Spring-基础及组件使用01" class="headerlink" title="Spring 基础及组件使用01"></a>Spring 基础及组件使用01</h2><h3 id="工程从XML配置到注解"><a href="#工程从XML配置到注解" class="headerlink" title="工程从XML配置到注解"></a>工程从XML配置到注解</h3><ul>
+<li>创建配置类 加上@Configuration注解 加上@ComponentScan注解 扫描指定的包 加载到IOC容器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(value = <span class="string">"com.tupelo"</span>,useDefaultFilters = <span class="keyword">true</span>,excludeFilters = &#123;</span><br><span class="line">        <span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="meta">@EnableAspectJAutoProxy</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">person</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Person(<span class="string">"jack"</span>,<span class="number">20</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<ul>
+<li>启动时加载配置类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       AnnotationConfigApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext(MainConfig.class);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="scop扫描规则"><a href="#scop扫描规则" class="headerlink" title="scop扫描规则"></a>scop扫描规则</h3><ul>
+<li>prototype  多实例 IOC初始化的时候不会创建类 使用的时候才创建(懒加载也是 懒加载是针对单实例bean)</li>
+<li>singleton  单实例</li>
+<li>request    一次请求创建一个类</li>
+<li>session    同一个session创建一个类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Lazy</span></span><br><span class="line">	<span class="comment">// @Scope("prototype")</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Person <span class="title">person</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Person(<span class="string">"jack"</span>,<span class="number">20</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -193,6 +229,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       

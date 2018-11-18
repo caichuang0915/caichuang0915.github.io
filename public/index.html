@@ -150,6 +150,173 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-spring-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/18/spring-04/">Spring学习 - 04</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/18/spring-04/" class="archive-article-date">
+  	<time datetime="2018-11-18T15:18:22.364Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>spring基础学习</p>
+<h2 id="Spring-基础及组件使用04"><a href="#Spring-基础及组件使用04" class="headerlink" title="Spring 基础及组件使用04"></a>Spring 基础及组件使用04</h2><h3 id="容器启动及BeanPostProcessor源码分析"><a href="#容器启动及BeanPostProcessor源码分析" class="headerlink" title="容器启动及BeanPostProcessor源码分析"></a>容器启动及BeanPostProcessor源码分析</h3><p>BeanPostProcessor原理:<br>可从容器类跟进顺序为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">AnnotationConfigApplicationContext--&gt;refresh()--&gt;</span><br><span class="line">finishBeanFactoryInitialization(beanFactory)---&gt;</span><br><span class="line">beanFactory.preInstantiateSingletons()--&gt;</span><br><span class="line">760行getBean(beanName)---&gt;</span><br><span class="line">199行doGetBean(name, null, null, false)--&gt;</span><br><span class="line">317行createBean(beanName, mbd, args)--&gt;</span><br><span class="line">501行doCreateBean(beanName, mbdToUse, args)--&gt;</span><br><span class="line">541行createBeanInstance(beanName, mbd, args)(完成bean创建)--&gt;</span><br><span class="line">578行populateBean(beanName, mbd, instanceWrapper)(属性赋值)--&gt;</span><br><span class="line">579行initializeBean(beanName, exposedObject, mbd)(Bean初始化)-&gt;</span><br><span class="line">1069行到1710行,后置处理器完成对init方法的前后处理.</span><br></pre></td></tr></table></figure></p>
+<p>initializeBean方法 对方法前后做处理<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);</span><br><span class="line">  invokeInitMethods(beanName, wrappedBean, mbd) <span class="comment">//执行自定义初始化</span></span><br><span class="line">  applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/18/spring-04/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/18/spring-03/">Spring学习 - 03</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/18/spring-03/" class="archive-article-date">
+  	<time datetime="2018-11-18T14:58:45.059Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>spring基础学习</p>
+<h2 id="Spring-基础及组件使用03"><a href="#Spring-基础及组件使用03" class="headerlink" title="Spring 基础及组件使用03"></a>Spring 基础及组件使用03</h2><h3 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h3><p>bean的生命周期:指   bean创建—初始化—销毁  的过程</p>
+<p>bean的生命周期是由容器进行管理的.我们可以自定义 bean初始化和销毁方法: 容器在bean进行到当前生命周期的时候, 来调用自定义的初始化和销毁方法</p>
+<h4 id="自定义-bean初始化和销毁方法"><a href="#自定义-bean初始化和销毁方法" class="headerlink" title="自定义 bean初始化和销毁方法"></a>自定义 bean初始化和销毁方法</h4><ul>
+<li>指定初始化和销毁方法 init-method和destory-mothod</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(initMethod=<span class="string">"init"</span>,destoryMothod=<span class="string">"destroy"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Person <span class="title">lison</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Person();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>容器关闭时，只有单实例Bean会调用distory方法，多实例容器只负责初始化,但不会管理bean, 容器关闭不会调用销毁方法。</p>
+        
+          <a class="article-more-a" href="/2018/11/18/spring-03/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/18/spring-03/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-kafka-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -170,8 +337,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>kafka基础学习</p>
-<p>在centos7服务器上搭建kafka</p>
+        <p>kafka基础学习-在centos7服务器上搭建kafka</p>
 <h3 id="安装zookeeper"><a href="#安装zookeeper" class="headerlink" title="安装zookeeper"></a>安装zookeeper</h3><ul>
 <li><p>下载zookeeper安装包 <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/</a></p>
 </li>
@@ -181,60 +347,10 @@
 <li><p>修改配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/zookeeper/zookeeper-3.4.10/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>修改zoo.cfg一些基本设置 数据目录 日志目录等</p>
-</li>
-<li><p>配置环境变量(未生效 原因待定)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> ZOOKEEPER_HOME=/usr/<span class="built_in">local</span>/zookeeper/zookeeper-3.4.10/</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$ZOOKEEPER_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> /et/profile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动zookeeper</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zkServer.sh start/status/stop/restart</span><br></pre></td></tr></table></figure>
-</li>
 </ul>
-<h3 id="安装kafka"><a href="#安装kafka" class="headerlink" title="安装kafka"></a>安装kafka</h3><ul>
-<li>下载kafka安装包 <a href="http://kafka.apache.org/downloads.html" target="_blank" rel="noopener">http://kafka.apache.org/downloads.html</a></li>
-</ul>
-<ul>
-<li><p>解压到指定目录 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf kafka_2.12-2.0.0.tgz -C /usr/<span class="built_in">local</span>/kafka/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置环境变量</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> KAFKA_HOME=/usr/<span class="built_in">local</span>/kafka/kafka_2.12-2.0.0</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$KAFKA_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> /et/profile</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>验证kafka功能</p>
-<ul>
-<li><p>启动zookeeper</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zookeeper-server-start.sh -daemon ../config/zookeeper.properties</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动kafka</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-server-start.sh ../config/server.properties</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>我的服务器为1核1G，kafka启动报错,内存不足Cannot allocate memory</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   Java HotSpot(TM) 64-Bit Server VM warning: INFO: os::commit_memory(0x00000000c0000000, 1073741824, 0) failed; error=<span class="string">'Cannot allocate memory'</span> (errno=12)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># There is insufficient memory for the Java Runtime Environment to continue.</span></span><br><span class="line"><span class="comment"># Native memory allocation (mmap) failed to map 1073741824 bytes for committing reserved memory.</span></span><br><span class="line"><span class="comment"># An error report file with more information is saved as:</span></span><br><span class="line"><span class="comment"># /usr/local/kafka/kafka_2.12-2.0.0/bin/hs_err_pid6279.log</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看启动脚本 [kafka-server-start.sh] 发现默认配置为：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">if</span> [ <span class="string">"x<span class="variable">$KAFKA_HEAP_OPTS</span>"</span> = <span class="string">"x"</span> ]; <span class="keyword">then</span></span><br><span class="line">   	<span class="built_in">export</span> KAFKA_HEAP_OPTS=<span class="string">"-Xmx1G -Xms1G"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-<p>修改配置为 [-Xmx256M -Xms128M] 重启kafka成功</p>
-</li>
-<li><p>测试创建一个topic</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --create --zookeeper localhost:2181 --partitions 1 --replication-factor 1 --topic <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看topic列表</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --list --zookeeper localhost:2181</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生产者发送消息</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./kafka-console-producer.sh --broker-list localhost:9092 --topic <span class="built_in">test</span></span><br><span class="line">&gt;haha</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>消费者接受消息</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kettle_test --from-beginning</span><br><span class="line">haha</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>集群配置(未配置)…</p>
-</li>
-</ul>
-</li>
-</ul>
-
+        
+          <a class="article-more-a" href="/2018/11/18/kafka-01/#more">more >></a>
+        
       
 
       
@@ -294,8 +410,30 @@
     <article id="post-spring-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/21/spring-01/">Spring学习 - 01</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/21/spring-01/" class="archive-article-date">
+  	<time datetime="2018-10-21T14:46:12.484Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-21</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
+        <p>spring基础学习</p>
+<h2 id="Spring-基础及组件使用01"><a href="#Spring-基础及组件使用01" class="headerlink" title="Spring 基础及组件使用01"></a>Spring 基础及组件使用01</h2><h3 id="工程从XML配置到注解"><a href="#工程从XML配置到注解" class="headerlink" title="工程从XML配置到注解"></a>工程从XML配置到注解</h3><ul>
+<li>创建配置类 加上@Configuration注解 加上@ComponentScan注解 扫描指定的包 加载到IOC容器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(value = <span class="string">"com.tupelo"</span>,useDefaultFilters = <span class="keyword">true</span>,excludeFilters = &#123;</span><br><span class="line">        <span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="meta">@EnableAspectJAutoProxy</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">person</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Person(<span class="string">"jack"</span>,<span class="number">20</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2018/10/21/spring-01/#more">more >></a>
         
       
 
@@ -304,6 +442,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -512,7 +665,7 @@
 
 
   
-    <article id="post-mybatis_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-mybatis_01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
@@ -529,7 +682,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/09/mybatis_1/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/10/09/mybatis_01/">展开全文 >></a>
         </p>
       
 
