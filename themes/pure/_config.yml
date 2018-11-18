@@ -31,17 +31,17 @@ site:
     width: 40
     height: 40
     url: ../images/logo.png
-  title: Hexo # 页面title
+  title: 裸奔奔也是一种美 # 页面title
   favicon: /favicon.png
   board: <p>欢迎交流与分享经验!</p> # 站点公告
   copyright: false # 底部版权信息
 
 # config
 config:
-  skin: # 主题颜色 theme-black theme-blue theme-green theme-purple
+  skin: theme-black # 主题颜色 theme-black theme-blue theme-green theme-purple
   layout: main-center # 布局方式 main-left main-center main-right
   toc: true # 是否开启文章章节目录导航
-  menu_highlight: false # 是否开启当前菜单高亮显示
+  menu_highlight: true # 是否开启当前菜单高亮显示
   thumbnail: false # enable posts thumbnail, options: true, false
   excerpt_link: Read More
 
@@ -100,7 +100,7 @@ share:
 
 # Github
 github: 
-  username: cofess  # github username
+  username: caichuang0915  # github username
 
 # Comment
 # Gitment
@@ -178,17 +178,17 @@ profile:
   enabled: true # Whether to show profile bar
   avatar: images/avatar.jpg
   gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
-  author: 昵称
-  author_title: Web Developer & Designer
-  author_description: 个人简介。
+  author: 裸奔奔也是一种美
+  author_title: ''
+  author_description: 好想在你的鼻尖 扎个猛子
   location: Shenzhen, China
-  follow: https://github.com/cofess
+  follow: https://github.com/caichuang0915 #https://github.com/cofess
   # Social Links
   social:
     links:
-      github: https://github.com/cofess
-      weibo: http://weibo.com/cofess
-      twitter: https://twitter.com/iwebued
+      github: https://github.com/caichuang0915 #https://github.com/cofess
+      weibo: https://weibo.com/u/3849399508?topnav=1&wvr=6&topsug=1 #http://weibo.com/cofess
+      twitter: http://blog.tupelo.cc/ #https://twitter.com/iwebued
       # facebook: /
       # dribbble: /
       behance: https://www.behance.net/cofess
@@ -197,31 +197,31 @@ profile:
   # My Skills 
   skills:
     Git: ★★★☆☆
-    Gulp: ★★★☆☆
+    Ruby: ★★★☆☆
     Javascript: ★★★☆☆
     HTML+CSS: ★★★☆☆
     Bootstrap: ★★★☆☆
-    ThinkPHP: ★★★☆☆
+    Java: ★★★☆☆
     平面设计: ★★★☆☆
   # My Personal Links
   links:
-    Github: https://github.com/cofess
-    Blog: http://blog.cofess.com
-    微博: http://weibo.com/cofess
+    Github: https://github.com/caichuang0915 #https://github.com/cofess
+    Blog: http://blog.tupelo.cc/ # http://blog.cofess.com
+    微博: https://weibo.com/u/3849399508?topnav=1&wvr=6&topsug=1 #http://weibo.com/cofess
     花瓣: http://huaban.com/cofess
     Behance: https://www.behance.net/cofess
   # My Personal Labels
   labels:
-    - 前端
-    - 前端开发
-    - 前端重构
-    - Web前端
-    - 网页重构
+    - 程序员
+    - 后端
+    - 后端开发
+    - Java
+    - Ruby
   # My Personal Works
   works:
     name:
       link: http://www.example.com
-      date: 2016
+      date: 2018
   # My Personal Projects
   projects:
     cofess/gulp-startpro: https://github.com/cofess/gulp-startpro
