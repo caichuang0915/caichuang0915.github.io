@@ -23,6 +23,7 @@ dubbo主要是使不同的服务通过注册中心互相调用，可以解耦。
 
 > API配置（研究Dubbo的入口）
 
+<!-- more -->
 - 添加dubbo所需要的依赖（zkclient dubbo）两个
 
 ```java
@@ -45,7 +46,6 @@ dubbo主要是使不同的服务通过注册中心互相调用，可以解耦。
 	</exclusions>
 </dependency>
 ```
-<!-- more -->
 
 - 新建dubbo的xml配置文件 首先是生产者provider的配置文件（以product为例）
 

@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Tupelo">
 <meta property="og:description" content="Dubbo基础学习配置 Dubbo 基本使用和配置dubbo主要是使不同的服务通过注册中心互相调用，可以解耦。但是依赖于spring,就是一个spring项目和一个python项目无法通过dubbo互相调用，通过consul可以互相调用。 问题：dubbo调用和maven依赖有什么区别(待查证) Dubbo配置的四种方式 XML配置 (使用最多)   注解配置   配置文件配置   API配置（研">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-03T17:14:22.083Z">
+<meta property="og:updated_time" content="2018-12-03T17:43:22.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo基础 - 01">
 <meta name="twitter:description" content="Dubbo基础学习配置 Dubbo 基本使用和配置dubbo主要是使不同的服务通过注册中心互相调用，可以解耦。但是依赖于spring,就是一个spring项目和一个python项目无法通过dubbo互相调用，通过consul可以互相调用。 问题：dubbo调用和maven依赖有什么区别(待查证) Dubbo配置的四种方式 XML配置 (使用最多)   注解配置   配置文件配置   API配置（研">
@@ -188,11 +188,11 @@
 <blockquote>
 <p>API配置（研究Dubbo的入口）</p>
 </blockquote>
+<a id="more"></a>
 <ul>
 <li>添加dubbo所需要的依赖（zkclient dubbo）两个</li>
 </ul>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.101tec&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;zkclient&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;0.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;dubbo&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;2.5.7&lt;/version&gt;</span><br><span class="line">	&lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">	&lt;exclusions&gt;</span><br><span class="line">		&lt;exclusion&gt;</span><br><span class="line">			&lt;artifactId&gt;spring&lt;/artifactId&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">		&lt;/exclusion&gt;</span><br><span class="line">	&lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
 <ul>
 <li>新建dubbo的xml配置文件 首先是生产者provider的配置文件（以product为例）</li>
 </ul>
@@ -467,11 +467,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+                <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -479,7 +475,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
               </li>
              
               <li class="article-tag-list-item">
