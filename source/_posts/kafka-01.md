@@ -111,7 +111,7 @@ source /et/profile
 
     - 消费者接受消息
     ```bash
-    ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kettle_test --from-beginning
+    ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
 	haha
     ```
 

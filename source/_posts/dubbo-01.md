@@ -1,5 +1,5 @@
 ---
-title: Dubbo基础 - 01
+title: Dubbo基础 - 配置
 tags:
   - Dubbo
 ---

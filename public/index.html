@@ -150,6 +150,181 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-dubbo-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/12/dubbo-02/">Dubbo基础 - 配置文件</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/12/dubbo-02/" class="archive-article-date">
+  	<time datetime="2018-12-12T15:35:01.844Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dubbo基础学习配置</p>
+<h2 id="Dubbo-配置文件"><a href="#Dubbo-配置文件" class="headerlink" title="Dubbo 配置文件"></a>Dubbo 配置文件</h2><ul>
+<li>消费方配置  </li>
+</ul>
+<blockquote>
+<p>check</p>
+</blockquote>
+<pre><code class="java">&lt;dubbo:consumer timeout=<span class="string">"3000"</span> check=<span class="string">"false"</span>/&gt;
+</code></pre>
+<p>check = false 防止启动报错 没有提供者会自动生成代理(测试环境使用)<br>check = true 没有提供者直接报错(正式环境使用)</p>
+        
+          <a class="article-more-a" href="/2018/12/12/dubbo-02/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/12/dubbo-02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kafka-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/09/kafka-01/">Kafka学习 - 02</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/09/kafka-01/" class="archive-article-date">
+  	<time datetime="2018-12-09T04:19:02.436Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>kafka基础学习-在centos7服务器上搭建kafka</p>
+<h3 id="安装zookeeper"><a href="#安装zookeeper" class="headerlink" title="安装zookeeper"></a>安装zookeeper</h3><ul>
+<li><p>下载zookeeper安装包 <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/</a></p>
+</li>
+<li><p>解压到指定目录 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf zookeeper-3.4.10.tar.gz -C /usr/<span class="built_in">local</span>/zookeeper</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/zookeeper/zookeeper-3.4.10/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2018/12/09/kafka-01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kafka</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Zookeeper</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/09/kafka-01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-maven-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -234,7 +409,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/04/dubbo-01/">Dubbo基础 - 01</a>
+      <a class="article-title" href="/2018/12/04/dubbo-01/">Dubbo基础 - 配置</a>
     </h1>
   
 
@@ -455,96 +630,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/11/18/spring-03/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kafka-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/18/kafka-01/">Kafka学习 - 02</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/18/kafka-01/" class="archive-article-date">
-  	<time datetime="2018-11-18T14:29:01.843Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>kafka基础学习-在centos7服务器上搭建kafka</p>
-<h3 id="安装zookeeper"><a href="#安装zookeeper" class="headerlink" title="安装zookeeper"></a>安装zookeeper</h3><ul>
-<li><p>下载zookeeper安装包 <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/</a></p>
-</li>
-<li><p>解压到指定目录 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf zookeeper-3.4.10.tar.gz -C /usr/<span class="built_in">local</span>/zookeeper</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/zookeeper/zookeeper-3.4.10/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/11/18/kafka-01/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kafka</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Zookeeper</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/18/kafka-01/">展开全文 >></a>
         </p>
       
 
