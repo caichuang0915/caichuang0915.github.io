@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.tupelo.cc">
-  <title>Spring学习 - 03 | Tupelo</title>
+  <title>Spring学习03 - bean的生命周期 | Tupelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="spring基础学习 bean的生命周期bean的生命周期:指   bean创建—初始化—销毁  的过程 bean的生命周期是由容器进行管理的.我们可以自定义 bean初始化和销毁方法: 容器在bean进行到当前生命周期的时候, 来调用自定义的初始化和销毁方法 自定义 bean初始化和销毁方法 指定初始化和销毁方法 init-method和destory-mothod  1234@Bean(ini">
 <meta name="keywords" content="Java,Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring学习 - 03">
+<meta property="og:title" content="Spring学习03 - bean的生命周期">
 <meta property="og:url" content="http://blog.tupelo.cc/2018/11/18/spring-03/index.html">
 <meta property="og:site_name" content="Tupelo">
 <meta property="og:description" content="spring基础学习 bean的生命周期bean的生命周期:指   bean创建—初始化—销毁  的过程 bean的生命周期是由容器进行管理的.我们可以自定义 bean初始化和销毁方法: 容器在bean进行到当前生命周期的时候, 来调用自定义的初始化和销毁方法 自定义 bean初始化和销毁方法 指定初始化和销毁方法 init-method和destory-mothod  1234@Bean(ini">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-18T15:25:25.795Z">
+<meta property="og:updated_time" content="2018-12-12T16:04:54.282Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring学习 - 03">
+<meta name="twitter:title" content="Spring学习03 - bean的生命周期">
 <meta name="twitter:description" content="spring基础学习 bean的生命周期bean的生命周期:指   bean创建—初始化—销毁  的过程 bean的生命周期是由容器进行管理的.我们可以自定义 bean初始化和销毁方法: 容器在bean进行到当前生命周期的时候, 来调用自定义的初始化和销毁方法 自定义 bean初始化和销毁方法 指定初始化和销毁方法 init-method和destory-mothod  1234@Bean(ini">
   
     <link rel="alternative" href="/atom.xml" title="Tupelo" type="application/atom+xml">
@@ -160,7 +160,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Spring学习 - 03
+      Spring学习03 - bean的生命周期
     </h1>
   
 
@@ -323,14 +323,14 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Spring学习 - 04
+          Spring学习04 - BeanPostProcessor源码分析
         
       </div>
     </a>
   
   
     <a href="/2018/10/21/spring-01/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spring学习 - 01</div>
+      <div class="article-nav-title">Spring学习01 - 工程从XML配置到注解</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -462,11 +462,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -475,10 +479,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">

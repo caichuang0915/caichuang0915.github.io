@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.tupelo.cc">
-  <title>Spring学习 - 04 | Tupelo</title>
+  <title>Spring学习04 - BeanPostProcessor源码分析 | Tupelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="spring基础学习 容器启动及BeanPostProcessor源码分析BeanPostProcessor原理:可从容器类跟进顺序为:1234567891011AnnotationConfigApplicationContext--&amp;gt;refresh()--&amp;gt;finishBeanFactoryInitialization(beanFactory)---&amp;gt;beanFactory.p">
 <meta name="keywords" content="Java,Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring学习 - 04">
+<meta property="og:title" content="Spring学习04 - BeanPostProcessor源码分析">
 <meta property="og:url" content="http://blog.tupelo.cc/2018/11/18/spring-04/index.html">
 <meta property="og:site_name" content="Tupelo">
 <meta property="og:description" content="spring基础学习 容器启动及BeanPostProcessor源码分析BeanPostProcessor原理:可从容器类跟进顺序为:1234567891011AnnotationConfigApplicationContext--&amp;gt;refresh()--&amp;gt;finishBeanFactoryInitialization(beanFactory)---&amp;gt;beanFactory.p">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-18T15:25:14.904Z">
+<meta property="og:updated_time" content="2018-12-12T16:05:13.376Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring学习 - 04">
+<meta name="twitter:title" content="Spring学习04 - BeanPostProcessor源码分析">
 <meta name="twitter:description" content="spring基础学习 容器启动及BeanPostProcessor源码分析BeanPostProcessor原理:可从容器类跟进顺序为:1234567891011AnnotationConfigApplicationContext--&amp;gt;refresh()--&amp;gt;finishBeanFactoryInitialization(beanFactory)---&amp;gt;beanFactory.p">
   
     <link rel="alternative" href="/atom.xml" title="Tupelo" type="application/atom+xml">
@@ -160,7 +160,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Spring学习 - 04
+      Spring学习04 - BeanPostProcessor源码分析
     </h1>
   
 
@@ -305,7 +305,7 @@
   
   
     <a href="/2018/11/18/spring-03/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spring学习 - 03</div>
+      <div class="article-nav-title">Spring学习03 - bean的生命周期</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -437,11 +437,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -450,10 +454,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">

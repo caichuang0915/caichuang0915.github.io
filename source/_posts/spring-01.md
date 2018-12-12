@@ -1,5 +1,5 @@
 ---
-title: Spring学习 - 01
+title: Spring学习01 - 工程从XML配置到注解
 tags:
   - Java
   - Spring

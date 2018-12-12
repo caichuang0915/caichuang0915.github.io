@@ -1,5 +1,5 @@
 ---
-title: Kafka学习 - 02
+title: Kafka学习 - 安装
 tags:
   - Kafka
   - Zookeeper
