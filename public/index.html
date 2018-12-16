@@ -150,6 +150,283 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-dubbo-05" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/17/dubbo-05/">Dubbo - 总结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/17/dubbo-05/" class="archive-article-date">
+  	<time datetime="2018-12-16T17:21:51.855Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dubbo 总结</p>
+<blockquote>
+<p>参考官方文档：<a href="http://dubbo.apache.org/zh-cn/docs/user/references/xml/dubbo-service.html" target="_blank" rel="noopener">http://dubbo.apache.org/zh-cn/docs/user/references/xml/dubbo-service.html</a></p>
+</blockquote>
+<h2 id="Dubbo-总结"><a href="#Dubbo-总结" class="headerlink" title="Dubbo 总结"></a>Dubbo 总结</h2><h4 id="dubbo初始化流程"><a href="#dubbo初始化流程" class="headerlink" title="dubbo初始化流程"></a>dubbo初始化流程</h4><ul>
+<li><p>入口</p>
+<ul>
+<li>spring标签DubboNameSpaceHandler</li>
+<li>referencebean + servicebean </li>
+<li>继承了spring initalizingBean接口</li>
+<li>afterPropertiesSet</li>
+<li>protocol.refer(url) + protocol.export(url)+(registryURL)</li>
+</ul>
+</li>
+<li><p>消费端</p>
+<ul>
+<li>RegistryProtocol.refer</li>
+<li>zkRegistry.subscribe</li>
+<li>触发监听器回调</li>
+<li>registryDictory </li>
+<li>protocol.refer </li>
+<li>dubboProtocol.refer + interface</li>
+<li>消费方interface代理对象</li>
+</ul>
+</li>
+<li><p>服务端</p>
+<ul>
+<li>RegistryProtocol.export </li>
+<li>protocol.export </li>
+<li>创建中转对象</li>
+<li>zkRegistry.subscribe注册</li>
+</ul>
+</li>
+</ul>
+<h4 id="spi"><a href="#spi" class="headerlink" title="spi"></a>spi</h4><p>jdk的spi：把实现类,装入一个list中<br>dubbo的spi：把实现类,装入一个map中(配置文件指定一key),key指代实现类</p>
+<h4 id="RegistryProtocol"><a href="#RegistryProtocol" class="headerlink" title="RegistryProtocol"></a>RegistryProtocol</h4><p>dubbo偷懒，借用protocol流程模块，把注册模块，伪装成protocol协议(注册协议),注册协议跟其它不一样，任何协议dubbo/rmi/rest,要生效,都必须注册,因此RegistryProtocol是最优先被调用，然后再转给真实的协议</p>
+<h4 id="服务治理"><a href="#服务治理" class="headerlink" title="服务治理"></a>服务治理</h4><ul>
+<li>dubbo只是服务治理，springcloud包含所有全套微服务功能</li>
+<li>dubbo把rpc做了成透明化的调度,减少出错机率(spring cloud易出错)</li>
+<li>springcloud的远程调用，没能完全透明化。透明化调度，意思你使用它，像本地服务一样用。</li>
+<li>dubbo控制台，可以关闭某个服务，不对外开放（开发环境常用）</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/17/dubbo-05/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-dubbo-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/17/dubbo-04/">Dubbo - Spi机制</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/17/dubbo-04/" class="archive-article-date">
+  	<time datetime="2018-12-16T16:16:21.248Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dubbo Spi机制</p>
+<h2 id="Dubbo-Spi机制"><a href="#Dubbo-Spi机制" class="headerlink" title="Dubbo Spi机制"></a>Dubbo Spi机制</h2><p>本质是解决同一个接口，有多种实现时，使用者如何能够方便选择实现的问题</p>
+        
+          <a class="article-more-a" href="/2018/12/17/dubbo-04/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/17/dubbo-04/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-dubbo-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/16/dubbo-03/">Dubbo - rpc调用过程</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/16/dubbo-03/" class="archive-article-date">
+  	<time datetime="2018-12-16T15:57:13.023Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dubbo rpc调用过程</p>
+<h2 id="Dubbo-rpc调用过程"><a href="#Dubbo-rpc调用过程" class="headerlink" title="Dubbo rpc调用过程"></a>Dubbo rpc调用过程</h2><ul>
+<li>Dubbo的RPC服务暴露和引入</li>
+</ul>
+<p><img src="http://image.tupelo.top/rpc%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2.png" alt="服务暴露和引入"></p>
+<pre><code>- 服务暴露：建立一个中转对象（它能调到Impl），来接收网络请求，返回结果到网络
+- 服务引入：找寻到对中转对象，创建一个代理，代理向中转对象传请求参数，等待返回值
+- URL总线：中转对象---URL信息，一一对应，通过URL来找寻中转对象 
+- URL包含完整rpc信息： rmi://192.168.56.1:20881/com.enjoy.service.ProductService?anyhost=true&amp;application=storeServer&amp;dubbo=2.5.7&amp;generic=false&amp;interface=com.enjoy.service.ProductService&amp;methods=modify,getDetail,status&amp;pid=2476&amp;side=provider&amp;timestamp=1542267315993
+</code></pre>
+        
+          <a class="article-more-a" href="/2018/12/16/dubbo-03/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/16/dubbo-03/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-dubbo-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -177,12 +454,13 @@
 <blockquote>
 <p>check</p>
 </blockquote>
-<pre><code class="java">&lt;dubbo:consumer timeout=<span class="string">"3000"</span> check=<span class="string">"false"</span>/&gt;
-</code></pre>
-<p>check = false 防止启动报错 没有提供者会自动生成代理(测试环境使用)<br>check = true 没有提供者直接报错(正式环境使用)</p>
-        
-          <a class="article-more-a" href="/2018/12/12/dubbo-02/#more">more >></a>
-        
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"> &lt;dubbo:consumer timeout=<span class="string">"3000"</span> check=<span class="string">"false"</span>/&gt;</span><br><span class="line">```  </span><br><span class="line">check = <span class="keyword">false</span> 防止启动报错 没有提供者会自动生成代理(测试环境使用)  </span><br><span class="line">check = <span class="keyword">true</span> 没有提供者直接报错(正式环境使用)</span><br><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">&gt; cluster 负载策略(常用的两种)</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">&lt;dubbo:reference id=<span class="string">"productService"</span> <span class="class"><span class="keyword">interface</span></span>=<span class="string">"com.tupelo.service.ProductService"</span> cluster=<span class="string">"failover"</span> /&gt;</span><br><span class="line">```  </span><br><span class="line">failover 重试其他服务 retries 重试次数  </span><br><span class="line">failfast 直接报错</span><br><span class="line"></span><br><span class="line">&gt; loadbalance 负载配置</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="comment">//消费者</span></span><br><span class="line">&lt;dubbo:reference id=<span class="string">"productService"</span> <span class="class"><span class="keyword">interface</span></span>=<span class="string">"com.tupelo.service.ProductService"</span>loadbalance=<span class="string">"random"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提供者</span></span><br><span class="line">&lt;dubbo:service <span class="class"><span class="keyword">interface</span></span>=<span class="string">"com.tupelo.dubboproduct.service.ProductService"</span> ref=<span class="string">"productService"</span> protocol=<span class="string">"dubbo"</span> weight=<span class="string">"20"</span>/&gt;</span><br><span class="line"></span><br><span class="line">```  </span><br><span class="line">random   按权重随机（权重 服务方配置 weight）  </span><br><span class="line">roundRobin 轮询  </span><br><span class="line">leastActive 按活跃程度</span><br><span class="line"></span><br><span class="line">&gt; 开启缓存</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">&lt;dubbo:reference id=<span class="string">"productService2"</span> <span class="class"><span class="keyword">interface</span></span>=<span class="string">"com.tupelo.dubboproduct.service.Product2Service"</span>&gt;</span><br><span class="line">        &lt;dubbo:method name="getProduct" cache="lru"&gt;&lt;/dubbo:method&gt;</span><br><span class="line">&lt;/dubbo:reference&gt;</span><br><span class="line">```  </span><br><span class="line">random   按权重随机（权重 服务方配置 weight） </span><br><span class="line">roundRobin 轮询  </span><br><span class="line">leastActive 按活跃程度  </span><br><span class="line">..(自定义缓存)</span><br><span class="line"></span><br><span class="line">&gt; 异步请求 async=<span class="string">"true"</span> 通常是配合时间通知一起处理 单独处理使用Future类(不提倡)</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">&lt;dubbo:reference id=<span class="string">"productService2"</span> <span class="class"><span class="keyword">interface</span></span>=<span class="string">"com.tupelo.dubboproduct.service.Product2Service"</span> async=<span class="string">"true"</span>&gt;</span><br><span class="line">    &lt;dubbo:method name="getProduct" cache="lru" onreturn="returnCallback" onthrow="errorCallback"&gt;&lt;/dubbo:method&gt;</span><br><span class="line">&lt;/dubbo:reference&gt;</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">&gt; 事件通知 回调方法一个参数为返回参数 其它参数为入参</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">&lt;dubbo:reference id=<span class="string">"productService2"</span> <span class="class"><span class="keyword">interface</span></span>=<span class="string">"com.tupelo.dubboproduct.service.Product2Service"</span>&gt;</span><br><span class="line">    &lt;dubbo:method name="getProduct" cache="lru" onreturn="returnCallback" onthrow="errorCallback"&gt;&lt;/dubbo:method&gt;</span><br><span class="line">&lt;/dubbo:reference&gt;</span><br><span class="line">```  </span><br><span class="line">onreturn 正常返回回调  </span><br><span class="line">onthrow 方法异常回调</span><br><span class="line"></span><br><span class="line">&gt; 回声测试 检查服务是否已经就绪</span><br><span class="line"></span><br><span class="line">```java </span><br><span class="line"><span class="function"><span class="keyword">public</span> HashMap <span class="title">test</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> </span>&#123;</span><br><span class="line">        String[] serviceIds = <span class="keyword">new</span> String[]&#123;<span class="string">"productService"</span>,<span class="string">"userService"</span>,<span class="string">"orderService"</span>,<span class="string">"payService"</span>&#125;;</span><br><span class="line">        HashMap&lt;String,String&gt; retMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        Object ret = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">for</span> (String id:serviceIds)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                EchoService echoService = (EchoService)ctx.getBean(id);</span><br><span class="line">                ret = echoService.$echo(<span class="string">"ok"</span>);</span><br><span class="line">                retMap.put(id,ret.toString());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                retMap.put(id,<span class="string">"not ready"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> retMap;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>泛化调用 当A项目没有得到B项目的接口描述 但是还是想调用B项目的接口</p>
+</blockquote>
+<p>1 配置dubbo引入，设置generic = true<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;dubbo:reference id=<span class="string">"otherService"</span> <span class="class"><span class="keyword">interface</span></span>=<span class="string">"com.enjoy.service.OtherService"</span> generic=<span class="string">"true"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2 从IOC容器中取出代理对象，转为泛型接口对象 通过$invoke方法调用目标方法（传入方法名/参数类型/参数值）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">other</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> </span>&#123;</span><br><span class="line">        GenericService genericService = (GenericService)ctx.getBean(<span class="string">"otherService"</span>);</span><br><span class="line">        Object ret = genericService.$invoke(<span class="string">"getDetail"</span>,<span class="keyword">new</span> String[]&#123;<span class="string">"java.lang.String"</span>&#125;,<span class="keyword">new</span> Object[]&#123;<span class="string">"name"</span>&#125;);</span><br><span class="line">        <span class="keyword">return</span> ret.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -743,227 +1021,10 @@
 
 
   
-    <article id="post-spring-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/21/spring-02/">Spring学习02 - 常用注解</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/21/spring-02/" class="archive-article-date">
-  	<time datetime="2018-10-21T14:26:32.259Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>spring基础学习</p>
-<h2 id="Spring-基础及组件使用02"><a href="#Spring-基础及组件使用02" class="headerlink" title="Spring 基础及组件使用02"></a>Spring 基础及组件使用02</h2><h3 id="Conditional条件注册Bean"><a href="#Conditional条件注册Bean" class="headerlink" title="@Conditional条件注册Bean"></a>@Conditional条件注册Bean</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.enjoy.cap5.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.config.ConfigurableListableBeanFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Condition;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ConditionContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.env.Environment;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.type.AnnotatedTypeMetadata;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinCondition</span> <span class="keyword">implements</span> <span class="title">Condition</span></span>&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	*ConditionContext: 判断条件可以使用的上下文(环境)</span></span><br><span class="line"><span class="comment">	*AnnotatedTypeMetadata: 注解的信息</span></span><br><span class="line"><span class="comment">	*</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(ConditionContext context, AnnotatedTypeMetadata metadata)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 业务逻辑</span></span><br><span class="line">		<span class="comment">//能获取到IOC容器正在使用的beanFactory</span></span><br><span class="line">		ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();</span><br><span class="line">		<span class="comment">//获取当前环境变量(包括我们操作系统是WIN还是LINUX??)</span></span><br><span class="line">		Environment environment = context.getEnvironment();</span><br><span class="line">		String os_name = environment.getProperty(<span class="string">"os.name"</span>);</span><br><span class="line">		<span class="keyword">if</span>(os_name.contains(<span class="string">"linux"</span>))&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>定义Bean时加上注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Conditional</span>(WinCondition.class)</span><br><span class="line"><span class="meta">@Bean</span>(<span class="string">"lison"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Person <span class="title">lison</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Person();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="BeanFactory-和-FactoryBean-的区别"><a href="#BeanFactory-和-FactoryBean-的区别" class="headerlink" title="BeanFactory 和 FactoryBean 的区别"></a>BeanFactory 和 FactoryBean 的区别</h3><ul>
-<li>FactoryBean ： 把我们的JAVA实例Bean通过FactoryBean注入到容器中</li>
-<li>BeanFactory ： 从容器中获取我们实例化的Bean</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/10/21/spring-02/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/21/spring-02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/09/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/09/hello-world/" class="archive-article-date">
-  	<time datetime="2018-10-09T15:16:36.318Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/10/09/hello-world/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/09/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mybatis_01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/09/mybatis_01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -1065,6 +1126,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
@@ -1074,10 +1139,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>
