@@ -150,6 +150,184 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-rabbitmq_02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/30/rabbitmq_02/">RabbitMq - 基础配置</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/30/rabbitmq_02/" class="archive-article-date">
+  	<time datetime="2018-12-30T03:32:54.252Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RabbitMq</p>
+<h2 id="RabbitMq-基础及组件使用01"><a href="#RabbitMq-基础及组件使用01" class="headerlink" title="RabbitMq 基础及组件使用01"></a>RabbitMq 基础及组件使用01</h2><p>fanout 根据交换机发送消息<br>direct 根据交换机和路由键发送消息<br>topic  根据交换机和路由键发送消息(路由键可进行匹配 # 匹配一次或者多次 * 匹配一次)</p>
+<p>需要多个队列接受同样的消息 多个队列绑定同一个路由键<br>一条消息只能被一个消费者消费</p>
+<p>guest只能localhost 访问</p>
+<p>rabbitmqctl add_vhost tupelo<br>rabbitmqctl list_vhosts<br>rabbitmqctl add_user tupelo 123456<br>rabbitmqctl  delete_user  Username<br>rabbitmqctl  change_password  Username  Newpassword<br>rabbitmqctl list_users<br>rabbitmqctl set_permissions -p tupelo tupelo “.<em>“ “.</em>“ “.*”<br>rabbitmqctl  set_user_tags  tupelo administrator<br>rabbitmqctl  set_user_tags  hncscwc  monitoring  policymaker</p>
+<p>rabbitmqctl  list_user_permissions  User<br>rabbitmqctl  clear_permissions  [-p VHostPath]  User<br>rabbitmqctl  list_permissions  [-p  VHostPath]</p>
+<p>(1) 超级管理员(administrator)</p>
+<p>可登陆管理控制台(启用management plugin的情况下)，可查看所有的信息，并且可以对用户，策略(policy)进行操作。</p>
+<p>(2) 监控者(monitoring)</p>
+<p>可登陆管理控制台(启用management plugin的情况下)，同时可以查看rabbitmq节点的相关信息(进程数，内存使用情况，磁盘使用情况等)</p>
+<p>(3) 策略制定者(policymaker)</p>
+<p>可登陆管理控制台(启用management plugin的情况下), 同时可以对policy进行管理。但无法查看节点的相关信息(上图红框标识的部分)。</p>
+<p>与administrator的对比，administrator能看到这些内容</p>
+<p>(4) 普通管理者(management)</p>
+<p>仅可登陆管理控制台(启用management plugin的情况下)，无法看到节点信息，也无法对策略进行管理。</p>
+<p>(5) 其他</p>
+<p>无法登陆管理控制台，通常就是普通的生产者和消费者。</p>
+<p>生产者权衡<br>快、低==========&gt; 慢、高<br>无保障<br>失败通知  参数mandatory 消息是否成功到达队列<br>发送方确认模式  消息是否成功到达exchange 和失败通知结合使用<br>备用交换机     定义个一个备用交换机 Map<br>高可用队列<br>事务          影响性能 2-10倍 强一致性<br>事务+高可用<br>持久化</p>
+<p>消费者权衡</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/30/rabbitmq_02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-rabbitmq-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/20/rabbitmq-01/">RabbitMq - 基础配置</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/20/rabbitmq-01/" class="archive-article-date">
+  	<time datetime="2018-12-19T16:11:29.150Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>AMQP概论</p>
+<h2 id="交换器、队列、绑定、路由键"><a href="#交换器、队列、绑定、路由键" class="headerlink" title="交换器、队列、绑定、路由键"></a>交换器、队列、绑定、路由键</h2><ul>
+<li>rabbitMq流程</li>
+</ul>
+<p><img src="http://image.tupelo.top/rabbitmq%E6%B5%81%E7%A8%8B.png" alt="rabbitMq流程"></p>
+<pre><code>fanout 交换机绑定队列,根据交换机发送消息到指定队列
+direct 交换机通过路由键绑定队列,根据交换机和路由键发送消息
+topic  交换机通过路由键绑定队列,根据交换机和路由键发送消息(路由键可进行匹配 #匹配一次或者多次 *匹配一次)
+</code></pre><blockquote>
+<p>需要多个队列接受同样的消息 多个队列绑定同一个路由键 一条消息只能被一个消费者消费</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2018/12/20/rabbitmq-01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/20/rabbitmq-01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-通讯协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -816,173 +994,6 @@
 
 
   
-    <article id="post-spring-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/18/spring-04/">Spring学习04 - BeanPostProcessor源码分析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/18/spring-04/" class="archive-article-date">
-  	<time datetime="2018-11-18T15:18:22.364Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>spring基础学习</p>
-<h3 id="容器启动及BeanPostProcessor源码分析"><a href="#容器启动及BeanPostProcessor源码分析" class="headerlink" title="容器启动及BeanPostProcessor源码分析"></a>容器启动及BeanPostProcessor源码分析</h3><p>BeanPostProcessor原理:<br>可从容器类跟进顺序为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">AnnotationConfigApplicationContext--&gt;refresh()--&gt;</span><br><span class="line">finishBeanFactoryInitialization(beanFactory)---&gt;</span><br><span class="line">beanFactory.preInstantiateSingletons()--&gt;</span><br><span class="line">760行getBean(beanName)---&gt;</span><br><span class="line">199行doGetBean(name, null, null, false)--&gt;</span><br><span class="line">317行createBean(beanName, mbd, args)--&gt;</span><br><span class="line">501行doCreateBean(beanName, mbdToUse, args)--&gt;</span><br><span class="line">541行createBeanInstance(beanName, mbd, args)(完成bean创建)--&gt;</span><br><span class="line">578行populateBean(beanName, mbd, instanceWrapper)(属性赋值)--&gt;</span><br><span class="line">579行initializeBean(beanName, exposedObject, mbd)(Bean初始化)-&gt;</span><br><span class="line">1069行到1710行,后置处理器完成对init方法的前后处理.</span><br></pre></td></tr></table></figure></p>
-<p>initializeBean方法 对方法前后做处理<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);</span><br><span class="line">  invokeInitMethods(beanName, wrappedBean, mbd) <span class="comment">//执行自定义初始化</span></span><br><span class="line">  applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/18/spring-04/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/18/spring-03/">Spring学习03 - bean的生命周期</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/18/spring-03/" class="archive-article-date">
-  	<time datetime="2018-11-18T14:58:45.059Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>spring基础学习</p>
-<h3 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h3><p>bean的生命周期:指   bean创建—初始化—销毁  的过程</p>
-<p>bean的生命周期是由容器进行管理的.我们可以自定义 bean初始化和销毁方法: 容器在bean进行到当前生命周期的时候, 来调用自定义的初始化和销毁方法</p>
-<h4 id="自定义-bean初始化和销毁方法"><a href="#自定义-bean初始化和销毁方法" class="headerlink" title="自定义 bean初始化和销毁方法"></a>自定义 bean初始化和销毁方法</h4><ul>
-<li>指定初始化和销毁方法 init-method和destory-mothod</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(initMethod=<span class="string">"init"</span>,destoryMothod=<span class="string">"destroy"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Person <span class="title">lison</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Person();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>容器关闭时，只有单实例Bean会调用distory方法，多实例容器只负责初始化,但不会管理bean, 容器关闭不会调用销毁方法。</p>
-        
-          <a class="article-more-a" href="/2018/11/18/spring-03/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/18/spring-03/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1084,11 +1095,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1101,6 +1108,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
