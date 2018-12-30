@@ -150,20 +150,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-rabbitmq_02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-rabbitmq-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/30/rabbitmq_02/">RabbitMq - 基础配置</a>
+      <a class="article-title" href="/2018/12/30/rabbitmq-03/">RabbitMq - 基础配置</a>
     </h1>
   
 
         
-        <a href="/2018/12/30/rabbitmq_02/" class="archive-article-date">
-  	<time datetime="2018-12-30T03:32:54.252Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-30</time>
+        <a href="/2018/12/30/rabbitmq-03/" class="archive-article-date">
+  	<time datetime="2018-12-30T04:16:40.045Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-30</time>
 </a>
         
       </header>
@@ -171,23 +171,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>RabbitMq</p>
-<h2 id="RabbitMq-基础及组件使用01"><a href="#RabbitMq-基础及组件使用01" class="headerlink" title="RabbitMq 基础及组件使用01"></a>RabbitMq 基础及组件使用01</h2><p>fanout 根据交换机发送消息<br>direct 根据交换机和路由键发送消息<br>topic  根据交换机和路由键发送消息(路由键可进行匹配 # 匹配一次或者多次 * 匹配一次)</p>
-<p>需要多个队列接受同样的消息 多个队列绑定同一个路由键<br>一条消息只能被一个消费者消费</p>
-<p>guest只能localhost 访问</p>
-<p>rabbitmqctl add_vhost tupelo<br>rabbitmqctl list_vhosts<br>rabbitmqctl add_user tupelo 123456<br>rabbitmqctl  delete_user  Username<br>rabbitmqctl  change_password  Username  Newpassword<br>rabbitmqctl list_users<br>rabbitmqctl set_permissions -p tupelo tupelo “.<em>“ “.</em>“ “.*”<br>rabbitmqctl  set_user_tags  tupelo administrator<br>rabbitmqctl  set_user_tags  hncscwc  monitoring  policymaker</p>
-<p>rabbitmqctl  list_user_permissions  User<br>rabbitmqctl  clear_permissions  [-p VHostPath]  User<br>rabbitmqctl  list_permissions  [-p  VHostPath]</p>
-<p>(1) 超级管理员(administrator)</p>
-<p>可登陆管理控制台(启用management plugin的情况下)，可查看所有的信息，并且可以对用户，策略(policy)进行操作。</p>
-<p>(2) 监控者(monitoring)</p>
-<p>可登陆管理控制台(启用management plugin的情况下)，同时可以查看rabbitmq节点的相关信息(进程数，内存使用情况，磁盘使用情况等)</p>
-<p>(3) 策略制定者(policymaker)</p>
-<p>可登陆管理控制台(启用management plugin的情况下), 同时可以对policy进行管理。但无法查看节点的相关信息(上图红框标识的部分)。</p>
-<p>与administrator的对比，administrator能看到这些内容</p>
-<p>(4) 普通管理者(management)</p>
-<p>仅可登陆管理控制台(启用management plugin的情况下)，无法看到节点信息，也无法对策略进行管理。</p>
-<p>(5) 其他</p>
-<p>无法登陆管理控制台，通常就是普通的生产者和消费者。</p>
-<p>生产者权衡<br>快、低==========&gt; 慢、高<br>无保障<br>失败通知  参数mandatory 消息是否成功到达队列<br>发送方确认模式  消息是否成功到达exchange 和失败通知结合使用<br>备用交换机     定义个一个备用交换机 Map<br>高可用队列<br>事务          影响性能 2-10倍 强一致性<br>事务+高可用<br>持久化</p>
+<h2 id="RabbitMq-基础及组件使用01"><a href="#RabbitMq-基础及组件使用01" class="headerlink" title="RabbitMq 基础及组件使用01"></a>RabbitMq 基础及组件使用01</h2><p>生产者权衡<br>快、低==========&gt; 慢、高<br>无保障<br>失败通知  参数mandatory 消息是否成功到达队列<br>发送方确认模式  消息是否成功到达exchange 和失败通知结合使用<br>备用交换机     定义个一个备用交换机 Map<br>高可用队列<br>事务          影响性能 2-10倍 强一致性<br>事务+高可用<br>持久化</p>
 <p>消费者权衡</p>
 
       
@@ -212,7 +196,115 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/30/rabbitmq_02/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/12/30/rabbitmq-03/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-rabbitmq-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/30/rabbitmq-02/">RabbitMq - 配置和相关命令</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/30/rabbitmq-02/" class="archive-article-date">
+  	<time datetime="2018-12-30T03:32:54.252Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RabbitMq 修改端口/用户权限 相关命令</p>
+<h2 id="RabbitMq-基相关命令"><a href="#RabbitMq-基相关命令" class="headerlink" title="RabbitMq 基相关命令"></a>RabbitMq 基相关命令</h2><ul>
+<li>配置文件</li>
+</ul>
+<blockquote>
+<p>RabbitMq配置文件在/etc/rabbitmq下,名为rabbitmq.config / rabbitmq-env.conf,需要自己创建。</p>
+</blockquote>
+<pre><code>修改端口:
+创建rabbitmq-env.conf文件,添加RABBITMQ_NODE_PORT=8500,重启RabbitMq即可生效.
+</code></pre><ul>
+<li>启动和关闭RabbitMq</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server <span class="comment">#会启动Erlang节点和Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl stop <span class="comment">#会关闭Erlang节点和Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl status  <span class="comment">#可以检查消息节点是否正常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#单独关闭RabbitMQ应用</span></span><br><span class="line">rabbitmqctl stop_app <span class="comment">#关闭Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl start_app <span class="comment">#启动Rabbitmq应用</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>管理虚拟主机</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl add_vhost tupelo <span class="comment"># 创建vhost</span></span><br><span class="line">rabbitmqctl list_vhosts   <span class="comment"># 列出所有的vhost</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>用户管理</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl add_user tupelo 123456 <span class="comment"># 创建用户</span></span><br><span class="line">rabbitmqctl  delete_user  Username <span class="comment"># 删除用户</span></span><br><span class="line">rabbitmqctl  change_password  Username  Newpassword <span class="comment"># 修改用户</span></span><br><span class="line">rabbitmqctl list_users <span class="comment"># 查询所有的用户</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>用户权限管理(guest特殊用户)</li>
+</ul>
+<blockquote>
+<p>guest是默认用户，具有默认virtual host “/“上的全部权限，仅能通过localhost访问RabbitMQ包括Plugin，建议删除或更改密码。可通过将配置文件中loopback_users来取消其本地访问的限制：[{rabbit, [{loopback_users, []}]}] </p>
+</blockquote>
+<pre><code>用户仅能对其所能访问的virtual hosts中的资源进行操作。这里的资源指的是virtual hosts中的exchanges、queues等，操作包括对资源进行配置、写、读。配置权限可创建、删除、资源并修改资源的行为，写权限可向资源发送消息，读权限从资源获取消息。比如：
+exchange和queue的declare与delete分别需要：exchange和queue上的配置权限
+queue的bind与unbind需要：queue写权限，exchange的读权限
+发消息(publish)需exchange的写权限
+获取或清除(get、consume、purge)消息需queue的读权限
+#对何种资源具有配置、写、读的权限通过正则表达式来匹配，具体命令如下：
+rabbitmqctl set_permissions [-p &lt;vhostpath&gt;] &lt;user&gt; &lt;conf&gt; &lt;write&gt; &lt;read&gt;
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#如用户Mark在虚拟主机logHost上的所有权限： </span></span><br><span class="line">rabbitmqctl set_permissions –p logHost Mark  <span class="string">'.*'</span>  <span class="string">'.*'</span>  <span class="string">'.*'</span></span><br><span class="line"><span class="comment"># 列出用户的权限</span></span><br><span class="line">rabbitmqctl  list_user_permissions  User  </span><br><span class="line"><span class="comment"># 清空(某一个vhost)用户的权限</span></span><br><span class="line">rabbitmqctl  clear_permissions  [-p VHostPath]  User</span><br><span class="line"><span class="comment"># 查询(某一个vhost)所有用户的权限</span></span><br><span class="line">rabbitmqctl  list_permissions  [-p  VHostPath]</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">- 用户角色</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"><span class="comment"># 设置用户角色</span></span><br><span class="line">rabbitmqctl  set_user_tags  tupelo administrator </span><br><span class="line"><span class="comment"># 设置用户多个角色</span></span><br><span class="line">rabbitmqctl  set_user_tags  tupelo  monitoring  policymaker</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">- 用户角色分类 (none、management、policymaker、monitoring、administrator)</span><br><span class="line"></span><br><span class="line">&gt; none、management、policymaker、monitoring、administrator</span><br><span class="line"></span><br><span class="line">	(1) 超级管理员(administrator)</span><br><span class="line">		policymaker和monitoring可以做的任何事加:</span><br><span class="line">		创建和删除virtual hosts</span><br><span class="line">		查看、创建和删除users</span><br><span class="line">		查看创建和删除permissions</span><br><span class="line">		关闭其他用户的connections</span><br><span class="line"></span><br><span class="line">	(2) 监控者(monitoring)</span><br><span class="line">		management可以做的任何事加：</span><br><span class="line">		列出所有virtual hosts，包括他们不能登录的virtual hosts</span><br><span class="line">		查看其他用户的connections和channels</span><br><span class="line">		查看节点级别的数据如clustering和memory使用情况</span><br><span class="line">		查看真正的关于所有virtual hosts的全局的统计信息</span><br><span class="line"></span><br><span class="line">	(3) 策略制定者(policymaker)</span><br><span class="line">		management可以做的任何事加：</span><br><span class="line">		查看、创建和删除自己的virtual hosts所属的policies和parameters</span><br><span class="line"></span><br><span class="line">	(4) 普通管理者(management)</span><br><span class="line">		普通的生产者和消费者加：</span><br><span class="line">		列出自己可以通过AMQP登入的virtual hosts  </span><br><span class="line">		查看自己的virtual hosts中的queues, exchanges 和 bindings</span><br><span class="line">		查看和关闭自己的channels 和 connections</span><br><span class="line">		查看有关自己的virtual hosts的“全局”的统计信息，包含其他用户在这些virtual hosts中的活动。</span><br><span class="line"></span><br><span class="line">	(5) 其他(none)</span><br><span class="line">		不能访问 management plugin，通常就是普通的生产者和消费者</span><br><span class="line"></span><br><span class="line">- 其他命令</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">rabbitmqctl list_queues    <span class="comment"># 查看所有的队列</span></span><br><span class="line">rabbitmqctl list_exchanges <span class="comment"># 查看所有的交换机</span></span><br><span class="line">rabbitmqctl list_bindings  <span class="comment">#查看所有的绑定</span></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/30/rabbitmq-02/">展开全文 >></a>
         </p>
       
 
@@ -249,7 +341,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/20/rabbitmq-01/">RabbitMq - 基础配置</a>
+      <a class="article-title" href="/2018/12/20/rabbitmq-01/">RabbitMq - 入门</a>
     </h1>
   
 
@@ -267,7 +359,8 @@
 <li>rabbitMq流程</li>
 </ul>
 <p><img src="http://image.tupelo.top/rabbitmq%E6%B5%81%E7%A8%8B.png" alt="rabbitMq流程"></p>
-<pre><code>fanout 交换机绑定队列,根据交换机发送消息到指定队列
+<pre><code>交换机类型:
+fanout 交换机绑定队列,根据交换机发送消息到指定队列
 direct 交换机通过路由键绑定队列,根据交换机和路由键发送消息
 topic  交换机通过路由键绑定队列,根据交换机和路由键发送消息(路由键可进行匹配 #匹配一次或者多次 *匹配一次)
 </code></pre><blockquote>
@@ -904,96 +997,6 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-dubbo-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/04/dubbo-01/">Dubbo基础 - 配置</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/04/dubbo-01/" class="archive-article-date">
-  	<time datetime="2018-12-03T16:40:12.582Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Dubbo基础学习配置</p>
-<h2 id="Dubbo-基本使用和配置"><a href="#Dubbo-基本使用和配置" class="headerlink" title="Dubbo 基本使用和配置"></a>Dubbo 基本使用和配置</h2><p>dubbo主要是使不同的服务通过注册中心互相调用，可以解耦。但是依赖于spring,就是一个spring项目和一个python项目无法通过dubbo互相调用，通过consul可以互相调用。</p>
-<p>问题：dubbo调用和maven依赖有什么区别(待查证)</p>
-<h3 id="Dubbo配置的四种方式"><a href="#Dubbo配置的四种方式" class="headerlink" title="Dubbo配置的四种方式"></a>Dubbo配置的四种方式</h3><blockquote>
-<p>XML配置 (使用最多)</p>
-</blockquote>
-<blockquote>
-<p>注解配置</p>
-</blockquote>
-<blockquote>
-<p>配置文件配置</p>
-</blockquote>
-<blockquote>
-<p>API配置（研究Dubbo的入口）</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/12/04/dubbo-01/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/04/dubbo-01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1095,11 +1098,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
