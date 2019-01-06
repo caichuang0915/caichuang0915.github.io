@@ -257,10 +257,9 @@
       
         <p>RabbitMq其它属性(定义时最后的一个Map)</p>
 <h2 id="RabbitMq-其它属性-定义时最后的一个Map"><a href="#RabbitMq-其它属性-定义时最后的一个Map" class="headerlink" title="RabbitMq 其它属性(定义时最后的一个Map)"></a>RabbitMq 其它属性(定义时最后的一个Map)</h2><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p><img src="http://image.tupelo.top/queue.png" alt="队列"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public Queue topicQueueDlxKeyBak()&#123;</span><br><span class="line">    Map&lt;String,Object&gt; map = new HashMap&lt;String,Object&gt;(16);</span><br><span class="line">    // 定义属性 ..</span><br><span class="line">    map.put(&quot;x-dead-letter-exchange&quot;,&quot;dlx.key.exchange&quot;);</span><br><span class="line">    map.put(&quot;x-dead-letter-routing-key&quot;,&quot;dlx.key.bind&quot;);</span><br><span class="line">    return new Queue(&quot;dlx.key.queue&quot;,false,false,false,map);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h4><p><img src="http://image.tupelo.top/rabbitMessage.png" alt="消息"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 设置消息属性</span><br><span class="line">Message message = MessageBuilder.withBody(&quot;测试&quot;.toString().getBytes())</span><br><span class="line">                .setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN)</span><br><span class="line">                .setCorrelationId(msgId).build();</span><br><span class="line">rabbitTemplateConfirm.send(&quot;exchange&quot;,&quot;routing&quot;,message);</span><br></pre></td></tr></table></figure>
-
+        
+          <a class="article-more-a" href="/2019/01/06/rabbitmq-05/#more">more >></a>
+        
       
 
       
@@ -1105,11 +1104,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1117,7 +1112,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
               </li>
              
               <li class="article-tag-list-item">
