@@ -150,6 +150,257 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Nginx-location-rewrite" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/31/Nginx-location-rewrite/">Nginx - location流程 和 rewirte</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/31/Nginx-location-rewrite/" class="archive-article-date">
+  	<time datetime="2019-05-31T03:41:07.178Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Location路径传递</p>
+<h4 id="rewrite使用"><a href="#rewrite使用" class="headerlink" title="rewrite使用"></a>rewrite使用</h4><p>语法:rewrite regex replacement [flag];  flag=【break/last/redirect/permanent】 </p>
+<ul>
+<li>regex 是正则表达式</li>
+<li>replacement 是替换值，新值</li>
+<li>flag – 是处理标志</li>
+</ul>
+<h4 id="proxy-pass-路径传递"><a href="#proxy-pass-路径传递" class="headerlink" title="proxy_pass 路径传递"></a>proxy_pass 路径传递</h4><ul>
+<li>通过url中【ip/域名+port】匹配server之后，携带后面path?params进入location逻辑</li>
+<li>location匹配后，path = 匹配中的path1 + 剩余path2</li>
+</ul>
+<p><img src="http://image.tupelo.top/root-alias.png" alt="路径传递"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/31/Nginx-location-rewrite/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Nginx-Location匹配规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/31/Nginx-Location匹配规则/">Nginx - Location匹配规则 和 负载均衡</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/31/Nginx-Location匹配规则/" class="archive-article-date">
+  	<time datetime="2019-05-31T03:06:00.676Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Location匹配规则 和 负载均衡</p>
+<h4 id="Location规则"><a href="#Location规则" class="headerlink" title="Location规则"></a>Location规则</h4><ul>
+<li>语法规则： location [=|~|~*|^~] /uri/ {… }</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://manage/;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/05/31/Nginx-Location匹配规则/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/31/Nginx-Location匹配规则/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Nginx简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/31/Nginx简介/">Nginx简介</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/31/Nginx简介/" class="archive-article-date">
+  	<time datetime="2019-05-31T02:26:21.433Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Nginx简介</p>
+<h4 id="Nginx作用"><a href="#Nginx作用" class="headerlink" title="Nginx作用"></a>Nginx作用</h4><ul>
+<li>路由功能（与微服务对应）：域名/路径，进行路由选择后台服务器</li>
+<li>负载功能（与高并发高可用对应）：对后台服务器集群进行负载</li>
+<li>静态服务器（比tomcat性能高很多）：在mvvm模式中，充当文件读取职责</li>
+</ul>
+<blockquote>
+<p>总结：实际使用中，这三项功用，会混合使用。比如先分离动静，再路由服务，再负载机器</p>
+</blockquote>
+<h4 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h4><p>源码编译方式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#一般系统中已经装了了make和g++，无须再装</span></span><br><span class="line">yum -y install autoconf automake make</span><br><span class="line">yum -y install gcc gcc-c++ </span><br><span class="line"></span><br><span class="line"><span class="comment">#安装nginx依赖的库</span></span><br><span class="line">yum -y install pcre pcre-devel    </span><br><span class="line">yum -y install zlib zlib-devel</span><br><span class="line">yum install -y openssl openssl-devel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 安装</span></span><br><span class="line">wget  http://nginx.org/download/nginx-1.9.15.tar.gz</span><br><span class="line">tar -zxvf nginx-1.9.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-1.9.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 后面的模块需要一起安装</span></span><br><span class="line">./configure   --prefix=/usr/<span class="built_in">local</span>/nginx --with-http_stub_status_module --with-http_ssl_module </span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止 </span></span><br><span class="line">nginx -s stop</span><br><span class="line"></span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/05/31/Nginx简介/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/31/Nginx简介/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -713,291 +964,6 @@
 
 
   
-    <article id="post-设计模式原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/13/设计模式原则/">设计模式-六大基本原则</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/13/设计模式原则/" class="archive-article-date">
-  	<time datetime="2019-05-13T14:46:58.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="六大基本原则"><a href="#六大基本原则" class="headerlink" title="六大基本原则"></a>六大基本原则</h3><blockquote>
-<p>  重要的是思想 ！！！</p>
-</blockquote>
-<ul>
-<li><p>开闭原则</p>
-<blockquote>
-<p>对扩展开发、对修改关闭</p>
-</blockquote>
-</li>
-<li><p>单一职责原则</p>
-<blockquote>
-<p>一个类只负责一个职责</p>
-</blockquote>
-</li>
-<li><p>依赖倒置原则</p>
-<blockquote>
-<p>面向接口编程</p>
-</blockquote>
-</li>
-<li><p>里氏替换原则</p>
-<blockquote>
-<p>子类可以扩展父类的功能、但不要改变父类原有的功能</p>
-</blockquote>
-</li>
-<li><p>接口隔离原则</p>
-<blockquote>
-<p>设计接口功能尽量细粒度、最小功能单元</p>
-</blockquote>
-</li>
-<li><p>迪米特法则</p>
-<blockquote>
-<p>降低耦合、局部变量中不要引入新的类</p>
-</blockquote>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/13/设计模式原则/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/26/多线程-02/">并发编程 - 线程的并发工具类</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/26/多线程-02/" class="archive-article-date">
-  	<time datetime="2019-02-25T16:33:28.959Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>线程的并发工具类</p>
-<h2 id="线程的并发工具类"><a href="#线程的并发工具类" class="headerlink" title="线程的并发工具类"></a>线程的并发工具类</h2><ul>
-<li>Fork-Join:分治思想</li>
-<li>CountDownLatch:是一组线程等待其他的线程完成工作以后在执行,加强版join await用来等待,countDown负责计数器的减1</li>
-<li>CyclicBarrier: 让一组线程达到某个屏障,被阻塞,一直到组内最后一个线程达到屏障时,屏障开放,所有被阻塞的线程会继续运行<ul>
-<li>countdownlatch放行由第三者控制,CyclicBarrier放行由一组线程本身控制</li>
-<li>countdownlatch放行条件》=线程数,CyclicBarrier放行条件=线程数</li>
-</ul>
-</li>
-<li>Semaphore:信号量</li>
-<li>Exchange:交换</li>
-<li>Callable、Future和FutureTask </li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/02/26/多线程-02/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/26/多线程-02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/15/多线程-01/">并发编程 - 线程基础、线程之间的共享和协作</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/15/多线程-01/" class="archive-article-date">
-  	<time datetime="2019-02-15T14:17:57.836Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>线程基础、线程之间的共享和协作</p>
-<h2 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h2><h4 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h4><ul>
-<li>进程：程序运行资源分配的最小单位,进程内部有多个线程,会共享这个进程的资源</li>
-<li>线程：CPU调度的最小单位,必须依赖进程而存在。</li>
-</ul>
-<h4 id="高并发编程的意义、好处和注意事项"><a href="#高并发编程的意义、好处和注意事项" class="headerlink" title="高并发编程的意义、好处和注意事项"></a>高并发编程的意义、好处和注意事项</h4><ul>
-<li>好处：充分利用cpu的资源、加快用户响应的时间,程序模块化,异步化</li>
-<li>问题：  <ul>
-<li>线程共享资源,存在冲突；  </li>
-<li>容易导致死锁；  </li>
-<li>启用太多的线程,就有搞垮机器的可能</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/02/15/多线程-01/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/15/多线程-01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1091,6 +1057,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
@@ -1103,15 +1073,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1123,11 +1093,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
