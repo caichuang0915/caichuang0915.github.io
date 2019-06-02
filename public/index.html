@@ -333,24 +333,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="Zookeeper集群"><a href="#Zookeeper集群" class="headerlink" title="Zookeeper集群"></a>Zookeeper集群</h4><ul>
-<li><p>顺序一致性</p>
-<pre><code>客户端的更新顺序与它们被发送的顺序相一致。
-</code></pre></li>
-<li><p>原子性</p>
-<pre><code>更新操作要么成功要么失败，没有第三种结果。
-</code></pre></li>
-<li><p>单一视图</p>
-<pre><code>无论客户端连接到哪一个服务器，客户端将看到相同的 ZooKeeper 视图。
-</code></pre></li>
-<li><p>可靠性</p>
-<pre><code>一旦一个更新操作被应用，那么在客户端再次更新它之前，它的值将不会改变。
-</code></pre></li>
-<li><p>实时性</p>
-<pre><code>连接上一个服务端数据修改，所以其他的服务端都会实时的跟新，不算完全的实时，有一点延时的
-</code></pre></li>
-<li><p>角色轮换避免单点故障</p>
-<pre><code>当leader出现问题的时候，会选举从follower中选举一个新的leader
-</code></pre></li>
+<li>顺序一致性<br>  客户端的更新顺序与它们被发送的顺序相一致。</li>
+<li>原子性<br>  更新操作要么成功要么失败，没有第三种结果。</li>
+<li>单一视图<br>  无论客户端连接到哪一个服务器，客户端将看到相同的 ZooKeeper 视图。</li>
+<li>可靠性<br>  一旦一个更新操作被应用，那么在客户端再次更新它之前，它的值将不会改变。</li>
+<li>实时性<br>  连接上一个服务端数据修改，所以其他的服务端都会实时的跟新，不算完全的实时，有一点延时的</li>
+<li>角色轮换避免单点故障<br>  当leader出现问题的时候，会选举从follower中选举一个新的leader</li>
 </ul>
 <h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><ul>
 <li>Leader  集群工作机制中的核心<ul>
@@ -1133,15 +1121,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1157,11 +1145,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
