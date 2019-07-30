@@ -150,6 +150,227 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-多线程-显式锁和AQS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/30/多线程-显式锁和AQS/">并发编程 - 显式锁和AQS</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/30/多线程-显式锁和AQS/" class="archive-article-date">
+  	<time datetime="2019-07-30T15:17:34.809Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>显式锁和AQS</p>
+<h2 id="显式锁"><a href="#显式锁" class="headerlink" title="显式锁"></a>显式锁</h2><p>Lock接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">  <span class="comment">// 一定要在finally中释放锁</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increament</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.lock.lock();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          ++<span class="keyword">this</span>.count;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.lock.unlock();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>可重入锁ReentrantLock(默认非公平锁 构造方法可控制是否是公平锁)</p>
+<pre><code>采用一个计数器，每重入一次次数加一，释放一个锁次数减一
+</code></pre></li>
+<li><p>读写锁ReentrantReadWriteLock</p>
+<pre><code>同一时刻允许多个读线程同时访问，但是写线程访问的时候，所有的读和写都被阻塞，最适宜与读多写少的情况
+</code></pre></li>
+<li><p>Condition接口</p>
+<pre><code>阻塞一个线程await()，唤醒是最好使用singal().wait()阻塞线程使用notfiyAll()唤醒。
+</code></pre></li>
+</ul>
+<h2 id="AQS-AbstractQueuedSynchronizer"><a href="#AQS-AbstractQueuedSynchronizer" class="headerlink" title="AQS AbstractQueuedSynchronizer"></a>AQS AbstractQueuedSynchronizer</h2><p>AQS是AbstractQueuedSynchronizer的简称。AQS提供了一种实现阻塞锁和一系列依赖FIFO等待队列的同步器的框架，如下图所示。AQS为一系列同步器依赖于一个单独的原子变量（state）的同步器提供了一个非常有用的基础。子类们必须定义改变state变量的protected方法，这些方法定义了state是如何被获取或释放的。鉴于此，本类中的其他方法执行所有的排队和阻塞机制。子类也可以维护其他的state变量，但是为了保证同步，必须原子地操作这些变量。</p>
+<p><img src="http://image.tupelo.top/53727-ae36db58241c256b.png" alt="AQS"></p>
+<ul>
+<li><p>设计模式</p>
+<p>  使用了模板方法设计模式，模板方法有：<br>  独占式获取：        </p>
+<pre><code>- accquire
+- acquireInterruptibly
+- tryAcquireNanos
+</code></pre><p>  共享式获取</p>
+<pre><code>- acquireShared
+- acquireSharedInterruptibly
+- tryAcquireSharedNanos
+</code></pre><p>  独占式释放锁</p>
+<pre><code>- release
+</code></pre><p>  共享式释放锁</p>
+<pre><code>- releaseShared
+</code></pre></li>
+</ul>
+<ul>
+<li>state状态</li>
+</ul>
+<p>  AbstractQueuedSynchronizer维护了一个volatile int类型的变量，用户表示当前同步状态。volatile虽然不能保证操作的原子性，但是保证了当前变量state的可见性。state的访问方式有三种:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getState()</span><br><span class="line">setState()</span><br><span class="line"><span class="comment">// CAS</span></span><br><span class="line">compareAndSetState()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>自定义资源共享方式</li>
+</ul>
+<p>AQS定义两种资源共享方式：Exclusive（独占，只有一个线程能执行，如ReentrantLock）和Share（共享，多个线程可同时执行，如Semaphore/CountDownLatch）。</p>
+<ul>
+<li><p>AQS中的数据结构-节点和同步队列</p>
+<p>  竞争失败的线程会打包成Node放到同步队列，Node可能的状态里：</p>
+<ul>
+<li>CANCELLED：线程等待超时或者被中断了，需要从队列中移走</li>
+<li>SIGNAL：后续的节点等待状态，当前节点，通知后面的节点去运行</li>
+<li>CONDITION :当前节点处于等待队列</li>
+<li>PROPAGATE：共享，表示状态要往后面的节点传播，0表示初始状态</li>
+</ul>
+</li>
+<li><p>独占式同步状态获取与释放</p>
+</li>
+</ul>
+<p><img src="http://image.tupelo.top/%E5%9B%BE%E7%89%87%201.png" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/30/多线程-显式锁和AQS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多线程-CAS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/30/多线程-CAS/">并发编程 - 原子操作CAS</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/30/多线程-CAS/" class="archive-article-date">
+  	<time datetime="2019-07-30T15:10:16.081Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原子操作</p>
+<h2 id="CAS的原理"><a href="#CAS的原理" class="headerlink" title="CAS的原理"></a>CAS的原理</h2><pre><code>利用了现代处理器都支持的CAS的指令，循环这个指令，直到成功为止
+三个运算符：  一个内存地址V，一个期望的值A，一个新值B
+基本思路：如果地址V上的值和期望的值A相等，就给地址V赋给新值B，如果不是，不做任何操作。
+循环（死循环，自旋）里不断的进行CAS操作
+</code></pre><h2 id="CAS的问题"><a href="#CAS的问题" class="headerlink" title="CAS的问题"></a>CAS的问题</h2><ul>
+<li>ABA问题（添加版本号解决）<ul>
+<li>AtomicMarkableReference，boolean 有没有动过</li>
+<li>AtomicStampedReference  动过几次</li>
+</ul>
+</li>
+<li>开销问题 长期不成功 会一直循环下去</li>
+<li>只能保证一个共享变量的原子操作</li>
+</ul>
+<h2 id="JDK中相关原子操作类的使用"><a href="#JDK中相关原子操作类的使用" class="headerlink" title="JDK中相关原子操作类的使用"></a>JDK中相关原子操作类的使用</h2><ul>
+<li>更新基本类型类：AtomicBoolean，AtomicInteger，AtomicLong，AtomicReference</li>
+<li>更新数组类：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray</li>
+<li>更新引用类型：AtomicReference，AtomicMarkableReference，AtomicStampedReference</li>
+<li>原子更新字段类：AtomicReferenceFieldUpdater，AtomicIntegerFieldUpdater，AtomicLongFieldUpdater</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/30/多线程-CAS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-多线程-线程安全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -864,171 +1085,6 @@
 
 
   
-    <article id="post-Nginx跨域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/31/Nginx跨域/">Nginx - 跨域/防盗链/缓存/压缩/Https</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/31/Nginx跨域/" class="archive-article-date">
-  	<time datetime="2019-05-31T09:31:07.355Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Nginx跨域/防盗链/缓存/压缩/Https</p>
-<h4 id="跨域解决"><a href="#跨域解决" class="headerlink" title="跨域解决"></a>跨域解决</h4><p>流程：</p>
-<ul>
-<li>当chrome发现ajax请求的网址，与当前主域名不一致（跨域）时，会在请求header中追加值页面主域名值，即：origin = <a href="http://static.enjoy.com" target="_blank" rel="noopener">http://static.enjoy.com</a></li>
-<li>nginx在接收到ajax请求时，会查看origin值，即请求我的网址是谁？此处使用正则来校验，即：只要是enjoy.com下的网址，都允许访问我，返回信息时，nginx追加header值：access-control-allow-origin = static.enjoy.com（回答浏览器，static域名网址可以访问我）</li>
-<li>chrome收到ajax返回值后，查看返回的header中access-control-allow-origin的值，发现其中的值是static.enjoy.com,正是当前的页面主域名。这是允许访问，于是执行ajax返回值内容。（ps：若此处access-control-allow-origin不存在，或者值不是static域名，chrome就拒绝执行返回值）</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/05/31/Nginx跨域/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/31/Nginx跨域/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Nginx-location-rewrite" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/31/Nginx-location-rewrite/">Nginx - location流程 和 rewirte</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/31/Nginx-location-rewrite/" class="archive-article-date">
-  	<time datetime="2019-05-31T03:41:07.178Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Location路径传递</p>
-<h4 id="rewrite使用"><a href="#rewrite使用" class="headerlink" title="rewrite使用"></a>rewrite使用</h4><p>语法:rewrite regex replacement [flag];  flag=【break/last/redirect/permanent】 </p>
-<ul>
-<li>regex 是正则表达式</li>
-<li>replacement 是替换值，新值</li>
-<li>flag – 是处理标志</li>
-</ul>
-<p>break/last 内部重定向，换path值<br>break标记，停止执行后续命令。for（）{break}<br>last标记，会引发location重新匹配。for（）{continue;} 不要轻易使用last标签<br>当有flag值的时候，rewrite层面的命令会中断。last会引发location重匹配<br>当没有flag值的时候，rewrite还会往下走，最后一个rewrite覆盖前面的。再引发location重匹配    </p>
-        
-          <a class="article-more-a" href="/2019/05/31/Nginx-location-rewrite/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/31/Nginx-location-rewrite/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1130,11 +1186,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1142,11 +1194,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1162,11 +1218,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
