@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://image.tupelo.top/53727-ae36db58241c256b.png">
 <meta property="og:image" content="http://image.tupelo.top/%E5%9B%BE%E7%89%87%201.png">
-<meta property="og:updated_time" content="2019-08-06T15:22:04.252Z">
+<meta property="og:updated_time" content="2019-08-06T15:24:42.553Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发编程 - 显式锁和AQS">
 <meta name="twitter:description" content="显式锁和AQS 显式锁Lock接口 1234567891011121314private Lock lock = new ReentrantLock();  private int count;  // 一定要在finally中释放锁  public void increament() &amp;#123;      this.lock.lock();      try &amp;#123;          +">
@@ -195,19 +195,26 @@
 <p><img src="http://image.tupelo.top/53727-ae36db58241c256b.png" alt="AQS"></p>
 <ul>
 <li><p>设计模式</p>
-<p>  使用了模板方法设计模式，模板方法有：<br>  独占式获取：        </p>
-<pre><code>- accquire
-- acquireInterruptibly
-- tryAcquireNanos
-</code></pre><p>  共享式获取</p>
-<pre><code>- acquireShared
-- acquireSharedInterruptibly
-- tryAcquireSharedNanos
-</code></pre><p>  独占式释放锁</p>
-<pre><code>- release
-</code></pre><p>  共享式释放锁</p>
-<pre><code>- releaseShared
-</code></pre></li>
+<p>  使用了模板方法设计模式，模板方法有：<br>  独占式获取：</p>
+<ul>
+<li>accquire</li>
+<li>acquireInterruptibly</li>
+<li><p>tryAcquireNanos</p>
+<p>共享式获取</p>
+</li>
+<li><p>acquireShared</p>
+</li>
+<li>acquireSharedInterruptibly</li>
+<li><p>tryAcquireSharedNanos</p>
+<p>独占式释放锁</p>
+</li>
+<li><p>release</p>
+<p>共享式释放锁</p>
+</li>
+<li><p>releaseShared</p>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li>state状态</li>
@@ -478,14 +485,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
@@ -515,6 +514,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -51,18 +51,25 @@ AQS是AbstractQueuedSynchronizer的简称。AQS提供了一种实现阻塞锁和
 - 设计模式
 	
 	使用了模板方法设计模式，模板方法有：		
-	独占式获取：		
-		- accquire
-		- acquireInterruptibly
-		- tryAcquireNanos
+	独占式获取：
+
+	- accquire
+	- acquireInterruptibly
+	- tryAcquireNanos
+
 	共享式获取
-		- acquireShared
-		- acquireSharedInterruptibly
-		- tryAcquireSharedNanos
+
+	- acquireShared
+	- acquireSharedInterruptibly
+	- tryAcquireSharedNanos
+
 	独占式释放锁
-		- release
+
+	- release
+
 	共享式释放锁
-		- releaseShared
+
+	- releaseShared
 
 
 
@@ -84,7 +91,7 @@ AQS定义两种资源共享方式：Exclusive（独占，只有一个线程能�
 - AQS中的数据结构-节点和同步队列
 
 	竞争失败的线程会打包成Node放到同步队列，Node可能的状态里：
-	
+
 	- CANCELLED：线程等待超时或者被中断了，需要从队列中移走
 	- SIGNAL：后续的节点等待状态，当前节点，通知后面的节点去运行
 	- CONDITION :当前节点处于等待队列
