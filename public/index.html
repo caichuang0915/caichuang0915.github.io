@@ -175,57 +175,18 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">  <span class="comment">// 一定要在finally中释放锁</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increament</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.lock.lock();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          ++<span class="keyword">this</span>.count;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.lock.unlock();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>可重入锁ReentrantLock(默认非公平锁 构造方法可控制是否是公平锁)</p>
-<pre><code>采用一个计数器，每重入一次次数加一，释放一个锁次数减一
-</code></pre></li>
+<p>  采用一个计数器，每重入一次次数加一，释放一个锁次数减一</p>
+</li>
 <li><p>读写锁ReentrantReadWriteLock</p>
-<pre><code>同一时刻允许多个读线程同时访问，但是写线程访问的时候，所有的读和写都被阻塞，最适宜与读多写少的情况
-</code></pre></li>
+<p>  同一时刻允许多个读线程同时访问，但是写线程访问的时候，所有的读和写都被阻塞，最适宜与读多写少的情况</p>
+</li>
 <li><p>Condition接口</p>
-<pre><code>阻塞一个线程await()，唤醒是最好使用singal().wait()阻塞线程使用notfiyAll()唤醒。
-</code></pre></li>
-</ul>
-<h2 id="AQS-AbstractQueuedSynchronizer"><a href="#AQS-AbstractQueuedSynchronizer" class="headerlink" title="AQS AbstractQueuedSynchronizer"></a>AQS AbstractQueuedSynchronizer</h2><p>AQS是AbstractQueuedSynchronizer的简称。AQS提供了一种实现阻塞锁和一系列依赖FIFO等待队列的同步器的框架，如下图所示。AQS为一系列同步器依赖于一个单独的原子变量（state）的同步器提供了一个非常有用的基础。子类们必须定义改变state变量的protected方法，这些方法定义了state是如何被获取或释放的。鉴于此，本类中的其他方法执行所有的排队和阻塞机制。子类也可以维护其他的state变量，但是为了保证同步，必须原子地操作这些变量。</p>
-<p><img src="http://image.tupelo.top/53727-ae36db58241c256b.png" alt="AQS"></p>
-<ul>
-<li><p>设计模式</p>
-<p>  使用了模板方法设计模式，模板方法有：<br>  独占式获取：        </p>
-<pre><code>- accquire
-- acquireInterruptibly
-- tryAcquireNanos
-</code></pre><p>  共享式获取</p>
-<pre><code>- acquireShared
-- acquireSharedInterruptibly
-- tryAcquireSharedNanos
-</code></pre><p>  独占式释放锁</p>
-<pre><code>- release
-</code></pre><p>  共享式释放锁</p>
-<pre><code>- releaseShared
-</code></pre></li>
-</ul>
-<ul>
-<li>state状态</li>
-</ul>
-<p>  AbstractQueuedSynchronizer维护了一个volatile int类型的变量，用户表示当前同步状态。volatile虽然不能保证操作的原子性，但是保证了当前变量state的可见性。state的访问方式有三种:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getState()</span><br><span class="line">setState()</span><br><span class="line"><span class="comment">// CAS</span></span><br><span class="line">compareAndSetState()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>自定义资源共享方式</li>
-</ul>
-<p>AQS定义两种资源共享方式：Exclusive（独占，只有一个线程能执行，如ReentrantLock）和Share（共享，多个线程可同时执行，如Semaphore/CountDownLatch）。</p>
-<ul>
-<li><p>AQS中的数据结构-节点和同步队列</p>
-<p>  竞争失败的线程会打包成Node放到同步队列，Node可能的状态里：</p>
-<ul>
-<li>CANCELLED：线程等待超时或者被中断了，需要从队列中移走</li>
-<li>SIGNAL：后续的节点等待状态，当前节点，通知后面的节点去运行</li>
-<li>CONDITION :当前节点处于等待队列</li>
-<li>PROPAGATE：共享，表示状态要往后面的节点传播，0表示初始状态</li>
-</ul>
-</li>
-<li><p>独占式同步状态获取与释放</p>
+<p>  阻塞一个线程await()，唤醒是最好使用singal().wait()阻塞线程使用notfiyAll()唤醒。</p>
 </li>
 </ul>
-<p><img src="http://image.tupelo.top/%E5%9B%BE%E7%89%87%201.png" alt=""></p>
-
+        
+          <a class="article-more-a" href="/2019/07/30/多线程-显式锁和AQS/#more">more >></a>
+        
       
 
       
@@ -1186,10 +1147,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
@@ -1198,11 +1155,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1222,11 +1183,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">

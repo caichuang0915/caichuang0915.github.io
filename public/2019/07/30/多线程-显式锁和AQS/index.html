@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://image.tupelo.top/53727-ae36db58241c256b.png">
 <meta property="og:image" content="http://image.tupelo.top/%E5%9B%BE%E7%89%87%201.png">
-<meta property="og:updated_time" content="2019-07-30T15:49:29.764Z">
+<meta property="og:updated_time" content="2019-08-06T15:22:04.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发编程 - 显式锁和AQS">
 <meta name="twitter:description" content="显式锁和AQS 显式锁Lock接口 1234567891011121314private Lock lock = new ReentrantLock();  private int count;  // 一定要在finally中释放锁  public void increament() &amp;#123;      this.lock.lock();      try &amp;#123;          +">
@@ -181,15 +181,16 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">  <span class="comment">// 一定要在finally中释放锁</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increament</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.lock.lock();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          ++<span class="keyword">this</span>.count;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.lock.unlock();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>可重入锁ReentrantLock(默认非公平锁 构造方法可控制是否是公平锁)</p>
-<pre><code>采用一个计数器，每重入一次次数加一，释放一个锁次数减一
-</code></pre></li>
+<p>  采用一个计数器，每重入一次次数加一，释放一个锁次数减一</p>
+</li>
 <li><p>读写锁ReentrantReadWriteLock</p>
-<pre><code>同一时刻允许多个读线程同时访问，但是写线程访问的时候，所有的读和写都被阻塞，最适宜与读多写少的情况
-</code></pre></li>
+<p>  同一时刻允许多个读线程同时访问，但是写线程访问的时候，所有的读和写都被阻塞，最适宜与读多写少的情况</p>
+</li>
 <li><p>Condition接口</p>
-<pre><code>阻塞一个线程await()，唤醒是最好使用singal().wait()阻塞线程使用notfiyAll()唤醒。
-</code></pre></li>
+<p>  阻塞一个线程await()，唤醒是最好使用singal().wait()阻塞线程使用notfiyAll()唤醒。</p>
+</li>
 </ul>
+<a id="more"></a>  
 <h2 id="AQS-AbstractQueuedSynchronizer"><a href="#AQS-AbstractQueuedSynchronizer" class="headerlink" title="AQS AbstractQueuedSynchronizer"></a>AQS AbstractQueuedSynchronizer</h2><p>AQS是AbstractQueuedSynchronizer的简称。AQS提供了一种实现阻塞锁和一系列依赖FIFO等待队列的同步器的框架，如下图所示。AQS为一系列同步器依赖于一个单独的原子变量（state）的同步器提供了一个非常有用的基础。子类们必须定义改变state变量的protected方法，这些方法定义了state是如何被获取或释放的。鉴于此，本类中的其他方法执行所有的排队和阻塞机制。子类也可以维护其他的state变量，但是为了保证同步，必须原子地操作这些变量。</p>
 <p><img src="http://image.tupelo.top/53727-ae36db58241c256b.png" alt="AQS"></p>
 <ul>
@@ -477,10 +478,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
@@ -489,11 +486,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,11 +514,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
