@@ -150,6 +150,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-rabbitmq-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/30/rabbitmq-02/">RabbitMq - 配置和相关命令</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/30/rabbitmq-02/" class="archive-article-date">
+  	<time datetime="2018-12-30T03:32:54.252Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RabbitMq 修改端口/用户权限 相关命令</p>
+<h2 id="RabbitMq-基相关命令"><a href="#RabbitMq-基相关命令" class="headerlink" title="RabbitMq 基相关命令"></a>RabbitMq 基相关命令</h2><ul>
+<li>配置文件</li>
+</ul>
+<blockquote>
+<p>RabbitMq配置文件在/etc/rabbitmq下,名为rabbitmq.config / rabbitmq-env.conf,需要自己创建。</p>
+</blockquote>
+<pre><code>修改端口:
+创建rabbitmq-env.conf文件,添加RABBITMQ_NODE_PORT=8500,重启RabbitMq即可生效.
+</code></pre><ul>
+<li>启动和关闭RabbitMq</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server <span class="comment">#会启动Erlang节点和Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl stop <span class="comment">#会关闭Erlang节点和Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl status  <span class="comment">#可以检查消息节点是否正常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#单独关闭RabbitMQ应用</span></span><br><span class="line">rabbitmqctl stop_app <span class="comment">#关闭Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl start_app <span class="comment">#启动Rabbitmq应用</span></span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2018/12/30/rabbitmq-02/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/30/rabbitmq-02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-rabbitmq-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -903,86 +991,6 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-spring-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/18/spring-04/">Spring学习04 - BeanPostProcessor源码分析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/18/spring-04/" class="archive-article-date">
-  	<time datetime="2018-11-18T15:18:22.364Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>spring基础学习</p>
-<h3 id="容器启动及BeanPostProcessor源码分析"><a href="#容器启动及BeanPostProcessor源码分析" class="headerlink" title="容器启动及BeanPostProcessor源码分析"></a>容器启动及BeanPostProcessor源码分析</h3><p>BeanPostProcessor原理:<br>可从容器类跟进顺序为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">AnnotationConfigApplicationContext--&gt;refresh()--&gt;</span><br><span class="line">finishBeanFactoryInitialization(beanFactory)---&gt;</span><br><span class="line">beanFactory.preInstantiateSingletons()--&gt;</span><br><span class="line">760行getBean(beanName)---&gt;</span><br><span class="line">199行doGetBean(name, null, null, false)--&gt;</span><br><span class="line">317行createBean(beanName, mbd, args)--&gt;</span><br><span class="line">501行doCreateBean(beanName, mbdToUse, args)--&gt;</span><br><span class="line">541行createBeanInstance(beanName, mbd, args)(完成bean创建)--&gt;</span><br><span class="line">578行populateBean(beanName, mbd, instanceWrapper)(属性赋值)--&gt;</span><br><span class="line">579行initializeBean(beanName, exposedObject, mbd)(Bean初始化)-&gt;</span><br><span class="line">1069行到1710行,后置处理器完成对init方法的前后处理.</span><br></pre></td></tr></table></figure></p>
-<p>initializeBean方法 对方法前后做处理<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);</span><br><span class="line">  invokeInitMethods(beanName, wrappedBean, mbd) <span class="comment">//执行自定义初始化</span></span><br><span class="line">  applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/18/spring-04/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1076,6 +1084,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
@@ -1084,7 +1096,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1096,11 +1108,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1116,15 +1128,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
