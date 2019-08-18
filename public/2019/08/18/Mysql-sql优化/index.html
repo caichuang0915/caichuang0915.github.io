@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://blog.tupelo.cc">
   <title>Mysql - sql优化 | Tupelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="sql优化 sql优化 尽量全值匹配  有联合索引的话key_len会保持在合适的大小  最佳左前缀法则  不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用  不要 select *  不等于要慎用  mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描  Null/Not Null 有影响  当字段可为空时，is null会使用索引，is not null">
+  <meta name="description" content="sql优化 sql优化 尽量全值匹配,有联合索引的话key_len会保持在合适的大小 最佳左前缀法则 不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用 不要 select * 不等于要慎用 mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描 Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。">
 <meta name="keywords" content="Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql - sql优化">
 <meta property="og:url" content="http://blog.tupelo.cc/2019/08/18/Mysql-sql优化/index.html">
 <meta property="og:site_name" content="Tupelo">
-<meta property="og:description" content="sql优化 sql优化 尽量全值匹配  有联合索引的话key_len会保持在合适的大小  最佳左前缀法则  不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用  不要 select *  不等于要慎用  mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描  Null/Not Null 有影响  当字段可为空时，is null会使用索引，is not null">
+<meta property="og:description" content="sql优化 sql优化 尽量全值匹配,有联合索引的话key_len会保持在合适的大小 最佳左前缀法则 不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用 不要 select * 不等于要慎用 mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描 Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-18T08:09:16.448Z">
+<meta property="og:updated_time" content="2019-08-18T08:11:40.854Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql - sql优化">
-<meta name="twitter:description" content="sql优化 sql优化 尽量全值匹配  有联合索引的话key_len会保持在合适的大小  最佳左前缀法则  不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用  不要 select *  不等于要慎用  mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描  Null/Not Null 有影响  当字段可为空时，is null会使用索引，is not null">
+<meta name="twitter:description" content="sql优化 sql优化 尽量全值匹配,有联合索引的话key_len会保持在合适的大小 最佳左前缀法则 不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用 不要 select * 不等于要慎用 mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描 Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。">
   
     <link rel="alternative" href="/atom.xml" title="Tupelo" type="application/atom+xml">
   
@@ -175,28 +175,16 @@
       
         <p>sql优化</p>
 <h4 id="sql优化"><a href="#sql优化" class="headerlink" title="sql优化"></a>sql优化</h4><ol>
-<li><p>尽量全值匹配</p>
-<p> 有联合索引的话key_len会保持在合适的大小</p>
-</li>
-<li><p>最佳左前缀法则</p>
-</li>
+<li>尽量全值匹配,有联合索引的话key_len会保持在合适的大小</li>
+<li>最佳左前缀法则</li>
 <li>不在索引列上做任何操作</li>
 <li>范围条件放最后</li>
-<li><p>覆盖索引尽量用</p>
-<p> 不要 <code>select *</code></p>
-</li>
-<li><p>不等于要慎用</p>
-<p> mysql 在使用不等于(!= 或者&lt;&gt;)的时候无法使用索引会导致全表扫描</p>
-</li>
-<li><p>Null/Not Null 有影响</p>
-<p> 当字段可为空时，is null会使用索引，is not null会导致索引失效。<br> 当字段不为空是，两者都不会使用索引。</p>
-</li>
-<li><p>Like查询要当心</p>
-</li>
+<li>覆盖索引尽量用 不要 <code>select *</code></li>
+<li>不等于要慎用 mysql 在使用不等于(!= 或者&lt;&gt;)的时候无法使用索引会导致全表扫描</li>
+<li>Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当字段不为空是，两者都不会使用索引。</li>
+<li>Like查询要当心</li>
 <li>字符类型加引号</li>
-<li><p>OR改UNION效率高</p>
-<p>用union更快</p>
-</li>
+<li>OR改UNION效率高,用union更快</li>
 </ol>
 
       
@@ -484,11 +472,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
