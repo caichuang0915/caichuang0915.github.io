@@ -125,6 +125,32 @@ Explain + SQL语句
 
 - possible_keys 可能用到的索引
 - key 实际用到的索引
+- key_len 索引中使用的字节数
+	
+	key_len显示的值为索引字段的最大可能长度，并非实际使用长度。在不损失精确性的情况下，长度越短越好。如果是联合索引，索引的大小代表使用索引的程度，如果太小了就代表了部分字段没有使用到索引。		
+	latin1占用1个字节，gbk占用2个字节，utf8占用3个字节。（不同字符编码占用的存储空间不同）		
+	字段可为空，长度+1，varchar类型+2		
+	datetime类型在5.6中字段长度是5个字节，datetime类型在5.5中字段长度是8个字节 		
+	NULL都需要1个字节的额外空间,所以索引字段最好不要为NULL，因为NULL让统计更加复杂并且需要额外的存储空间。			
+
+- ref 显示索引的哪一列被使用了，如果可能的话，是一个常数。哪些列或常量被用于查找索引列上的值
+- rows 扫描的行数，越小越好
+- Extra(重要) 额外信息
+
+	- Using filesort  使用一个外部的索引排序，需要优化
+	- Using temporary 使用了临时表
+	- USING index 使用了覆盖索引，避免访问了表的数据行，效率不错！
+	- Using where 使用了where条件
+	- Using join buffer 使用联合查询
+	- Impossible where where后面的条件一定是false
+
+ 
+
+
+
+
+
+
 
 
 
