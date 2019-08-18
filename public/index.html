@@ -176,12 +176,7 @@
 <li>最佳左前缀法则</li>
 <li>不在索引列上做任何操作</li>
 <li>范围条件放最后</li>
-<li>覆盖索引尽量用 不要 <code>select *</code></li>
-<li>不等于要慎用 mysql 在使用不等于(!= 或者&lt;&gt;)的时候无法使用索引会导致全表扫描</li>
-<li>Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当字段不为空是，两者都不会使用索引。</li>
-<li>Like查询要当心</li>
-<li>字符类型加引号</li>
-<li>OR改UNION效率高,用union更快</li>
+<li>覆盖索引尽量用 不要 <figure class="highlight plain"><figcaption><span>*```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">6. 不等于要慎用 mysql 在使用不等于(!= 或者&lt;&gt;)的时候无法使用索引会导致全表扫描</span><br><span class="line">7. Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当字段不为空是，两者都不会使用索引。</span><br><span class="line">8. Like查询要当心</span><br><span class="line">9. 字符类型加引号</span><br><span class="line">10. OR改UNION效率高,用union更快</span><br><span class="line"></span><br><span class="line">#### sql快速导入导出</span><br><span class="line"></span><br><span class="line">```sql</span><br><span class="line"># 导出</span><br><span class="line">select * into OUTFILE &apos;D:\\product.txt&apos; from product_info</span><br><span class="line"># 导入</span><br><span class="line">load data INFILE &apos;D:\\product.txt&apos; into table product_info</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -1179,11 +1174,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1203,11 +1198,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">

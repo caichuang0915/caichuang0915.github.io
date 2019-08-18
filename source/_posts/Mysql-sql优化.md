@@ -19,6 +19,15 @@ sql优化
 9. 字符类型加引号
 10. OR改UNION效率高,用union更快
 
+#### sql快速导入导出
+
+```sql
+# 导出
+select * into OUTFILE 'D:\\product.txt' from product_info
+# 导入
+load data INFILE 'D:\\product.txt' into table product_info
+```
+
 
 
 
