@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://blog.tupelo.cc">
   <title>Mysql - sql优化 | Tupelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="sql优化 sql优化 尽量全值匹配,有联合索引的话key_len会保持在合适的大小 最佳左前缀法则 不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用 不要 *```123456789101112136. 不等于要慎用 mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描7. Null/Not Null 有影响 当字段可为空时，is null会使用索引，is">
+  <meta name="description" content="sql优化 sql优化 尽量全值匹配,有联合索引的话key_len会保持在合适的大小 最佳左前缀法则 不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用 不要select * 不等于要慎用 mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描 Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当">
 <meta name="keywords" content="Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql - sql优化">
 <meta property="og:url" content="http://blog.tupelo.cc/2019/08/18/Mysql-sql优化/index.html">
 <meta property="og:site_name" content="Tupelo">
-<meta property="og:description" content="sql优化 sql优化 尽量全值匹配,有联合索引的话key_len会保持在合适的大小 最佳左前缀法则 不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用 不要 *```123456789101112136. 不等于要慎用 mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描7. Null/Not Null 有影响 当字段可为空时，is null会使用索引，is">
+<meta property="og:description" content="sql优化 sql优化 尽量全值匹配,有联合索引的话key_len会保持在合适的大小 最佳左前缀法则 不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用 不要select * 不等于要慎用 mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描 Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-18T08:15:15.656Z">
+<meta property="og:updated_time" content="2019-08-18T08:17:30.294Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql - sql优化">
-<meta name="twitter:description" content="sql优化 sql优化 尽量全值匹配,有联合索引的话key_len会保持在合适的大小 最佳左前缀法则 不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用 不要 *```123456789101112136. 不等于要慎用 mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描7. Null/Not Null 有影响 当字段可为空时，is null会使用索引，is">
+<meta name="twitter:description" content="sql优化 sql优化 尽量全值匹配,有联合索引的话key_len会保持在合适的大小 最佳左前缀法则 不在索引列上做任何操作 范围条件放最后 覆盖索引尽量用 不要select * 不等于要慎用 mysql 在使用不等于(!= 或者&amp;lt;&amp;gt;)的时候无法使用索引会导致全表扫描 Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当">
   
     <link rel="alternative" href="/atom.xml" title="Tupelo" type="application/atom+xml">
   
@@ -179,8 +179,14 @@
 <li>最佳左前缀法则</li>
 <li>不在索引列上做任何操作</li>
 <li>范围条件放最后</li>
-<li>覆盖索引尽量用 不要 <figure class="highlight plain"><figcaption><span>*```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">6. 不等于要慎用 mysql 在使用不等于(!= 或者&lt;&gt;)的时候无法使用索引会导致全表扫描</span><br><span class="line">7. Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当字段不为空是，两者都不会使用索引。</span><br><span class="line">8. Like查询要当心</span><br><span class="line">9. 字符类型加引号</span><br><span class="line">10. OR改UNION效率高,用union更快</span><br><span class="line"></span><br><span class="line">#### sql快速导入导出</span><br><span class="line"></span><br><span class="line">```sql</span><br><span class="line"># 导出</span><br><span class="line">select * into OUTFILE &apos;D:\\product.txt&apos; from product_info</span><br><span class="line"># 导入</span><br><span class="line">load data INFILE &apos;D:\\product.txt&apos; into table product_info</span><br></pre></td></tr></table></figure></li>
+<li>覆盖索引尽量用 不要select *</li>
+<li>不等于要慎用 mysql 在使用不等于(!= 或者&lt;&gt;)的时候无法使用索引会导致全表扫描</li>
+<li>Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当字段不为空是，两者都不会使用索引。</li>
+<li>Like查询要当心</li>
+<li>字符类型加引号</li>
+<li>OR改UNION效率高,用union更快</li>
 </ol>
+<h4 id="sql快速导入导出"><a href="#sql快速导入导出" class="headerlink" title="sql快速导入导出"></a>sql快速导入导出</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 导出</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">into</span> <span class="keyword">OUTFILE</span> <span class="string">'D:\\product.txt'</span> <span class="keyword">from</span> product_info</span><br><span class="line"># 导入</span><br><span class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">INFILE</span> <span class="string">'D:\\product.txt'</span> <span class="keyword">into</span> <span class="keyword">table</span> product_info</span><br></pre></td></tr></table></figure>
 
       
 
@@ -443,11 +449,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
