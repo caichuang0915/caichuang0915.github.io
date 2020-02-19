@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://blog.tupelo.cc">
   <title>JVM - 垃圾回收与内存分配策略 | Tupelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="垃圾回收与内存分配策略 判断对象的存活 引用计数法 当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。 优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。  可达性分析 通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索， 搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任">
+  <meta name="description" content="垃圾回收与内存分配策略 判断对象的存活 引用计数法   当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。  优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。  可达性分析   通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，  搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Ro">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM - 垃圾回收与内存分配策略">
 <meta property="og:url" content="http://blog.tupelo.cc/2020/02/20/jvm-垃圾回收与内存分配策略/index.html">
 <meta property="og:site_name" content="Tupelo">
-<meta property="og:description" content="垃圾回收与内存分配策略 判断对象的存活 引用计数法 当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。 优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。  可达性分析 通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索， 搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任">
+<meta property="og:description" content="垃圾回收与内存分配策略 判断对象的存活 引用计数法   当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。  优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。  可达性分析   通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，  搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Ro">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://image.tupelo.top/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6.jpg">
-<meta property="og:updated_time" content="2020-02-19T16:18:24.038Z">
+<meta property="og:updated_time" content="2020-02-19T16:27:47.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM - 垃圾回收与内存分配策略">
-<meta name="twitter:description" content="垃圾回收与内存分配策略 判断对象的存活 引用计数法 当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。 优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。  可达性分析 通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索， 搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任">
+<meta name="twitter:description" content="垃圾回收与内存分配策略 判断对象的存活 引用计数法   当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。  优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。  可达性分析   通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，  搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Ro">
 <meta name="twitter:image" content="http://image.tupelo.top/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Tupelo" type="application/atom+xml">
@@ -178,50 +178,43 @@
         <p>垃圾回收与内存分配策略</p>
 <h4 id="判断对象的存活"><a href="#判断对象的存活" class="headerlink" title="判断对象的存活"></a>判断对象的存活</h4><ul>
 <li><p>引用计数法</p>
-<pre><code>当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。
-优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。
-</code></pre></li>
+<p>  当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。<br>  优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。</p>
+</li>
 <li><p>可达性分析</p>
-<pre><code>通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，
-搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。
-作为GC Roots的对象包括下面几种：
-1. 虚拟机栈（栈帧中的本地变量表）中引用的对象。
-2. 方法区中类静态属性引用的对象。
-3. 方法区中常量引用的对象。
-4. 本地方法栈中JNI（即一般说的Native方法）引用的对象。
-</code></pre></li>
+<p>  通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，<br>  搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。<br>  作为GC Roots的对象包括下面几种：</p>
+<ol>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。</li>
+<li>方法区中类静态属性引用的对象。</li>
+<li>方法区中常量引用的对象。</li>
+<li>本地方法栈中JNI（即一般说的Native方法）引用的对象。</li>
+</ol>
+</li>
 </ul>
+<a id="more"></a>
 <h4 id="java中的引用"><a href="#java中的引用" class="headerlink" title="java中的引用"></a>java中的引用</h4><ul>
 <li><p>强引用</p>
-<pre><code>一般的Object obj = new Object() ，就属于强引用。
-</code></pre></li>
+<p>  一般的Object obj = new Object() ，就属于强引用。</p>
+</li>
 <li><p>软引用 SoftReference</p>
-<pre><code>一些有用但是并非必需，用软引用关联的对象，系统将要发生OOM之前，这些对象就会被回收。
-</code></pre></li>
+<p>  一些有用但是并非必需，用软引用关联的对象，系统将要发生OOM之前，这些对象就会被回收。</p>
+</li>
 <li><p>弱引用 WeakReference</p>
-<pre><code>一些有用（程度比软引用更低）但是并非必需，用弱引用关联的对象，只能生存到下一次垃圾回收之前，
-GC发生时，不管内存够不够，都会被回收。
-</code></pre></li>
+<p>  一些有用（程度比软引用更低）但是并非必需，用弱引用关联的对象，只能生存到下一次垃圾回收之前，<br>  GC发生时，不管内存够不够，都会被回收。</p>
+</li>
 <li><p>虚引用 PhantomReference</p>
 </li>
 </ul>
 <p>软引用 SoftReference和弱引用 WeakReference，可以用在内存资源紧张的情况下以及创建不是很重要的数据缓存。当系统内存不足的时候，缓存中的内容是可以被释放的。<br>例如，一个程序用来处理用户提供的图片。如果将所有图片读入内存，这样虽然可以很快的打开图片，但内存空间使用巨大，一些使用较少的图片浪费内存空间，需要手动从内存中移除。如果每次打开图片都从磁盘文件中读取到内存再显示出来，虽然内存占用较少，但一些经常使用的图片每次打开都要访问磁盘，代价巨大。这个时候就可以用软引用构建缓存。</p>
 <h4 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h4><ul>
 <li><p>标记-清除算法（Mark-Sweep）</p>
-<pre><code>算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。
-它的主要不足空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时，
-无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。
-</code></pre></li>
+<p>  算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。<br>  它的主要不足空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时，<br>  无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。</p>
+</li>
 <li><p>复制算法（Copying）</p>
-<pre><code>将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，
-然后再把已使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行内存回收，
-内存分配时也就不用考虑内存碎片等复杂情况，只要按顺序分配内存即可，实现简单，运行高效。
-只是这种算法的代价是将内存缩小为了原来的一半。
-</code></pre></li>
+<p>  将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，<br>  然后再把已使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行内存回收，<br>  内存分配时也就不用考虑内存碎片等复杂情况，只要按顺序分配内存即可，实现简单，运行高效。<br>  只是这种算法的代价是将内存缩小为了原来的一半。</p>
+</li>
 <li><p>标记-整理算法（Mark-Compact）</p>
-<pre><code>首先标记出所有需要回收的对象，在标记完成后，后续步骤不是直接对可回收对象进行清理，
-而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。
-</code></pre></li>
+<p>  首先标记出所有需要回收的对象，在标记完成后，后续步骤不是直接对可回收对象进行清理，<br>  而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。</p>
+</li>
 </ul>
 <p>当前商业虚拟机的垃圾收集都采用“分代收集”（Generational Collection）算法，这种算法并没有什么新的思想，只是根据对象存活周期的不同将内存划分为几块。一般是把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。<br>专门研究表明，新生代中的对象98%是“朝生夕死”的，所以并不需要按照1:1的比例来划分内存空间，而是将内存分为一块较大的Eden空间和两块较小的Survivor空间，每次使用Eden和其中一块Survivor[1]。当回收时，将Eden和Survivor中还存活着的对象一次性地复制到另外一块Survivor空间上，最后清理掉Eden和刚才用过的Survivor空间。HotSpot虚拟机默认Eden和Survivor的大小比例是8:1，也就是每次新生代中可用内存空间为整个新生代容量的90%（80%+10%），只有10%的内存会被“浪费”。当然，98%的对象可回收只是一般场景下的数据，我们没有办法保证每次回收都只有不多于10%的对象存活，当Survivor空间不够用时，需要依赖其他内存（这里指老年代）进行分配担保（Handle Promotion）。<br>在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。而老年代中因为对象存活率高、没有额外空间对它进行分配担保，就必须使用“标记—清理”或者“标记—整理”算法来进行回收。</p>
 <h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><h5 id="Serial"><a href="#Serial" class="headerlink" title="Serial"></a>Serial</h5><p>新生代,复制算法,单线程,进行垃圾收集时,必须暂停所有工作线程,直到完成(stop the world).简单高效,适合内存不大的情况.</p>
@@ -521,10 +514,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
@@ -538,6 +527,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,11 +554,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
