@@ -150,6 +150,493 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-jvm-java内存区域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/20/jvm-java内存区域/">JVM - java内存区域</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/20/jvm-java内存区域/" class="archive-article-date">
+  	<time datetime="2020-02-19T16:18:24.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>java内存区域</p>
+<h4 id="java内存区域"><a href="#java内存区域" class="headerlink" title="java内存区域"></a>java内存区域</h4><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域： </p>
+<p><img src="http://image.tupelo.top/jvm%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.png?imageMogr2/auto-orient/thumbnail/700x700" alt="java内存区域"></p>
+<ul>
+<li><p>程序计数器</p>
+<pre><code>当前线程执行的字节码的行号指示器，占用空间小，也无法干涉
+</code></pre></li>
+<li><p>虚拟机栈</p>
+<pre><code>每个线程私有的，线程在运行时，在执行每个方法的时候都会打包成一个栈帧，
+存储了局部变量表，操作数栈，动态链接，方法出口等信息，然后放入栈。
+每个时刻正在执行的当前方法就是虚拟机栈顶的栈桢。方法的执行就对应着栈帧在虚拟机栈中入栈和出栈的过程。
+栈桢大小缺省为1M，可用参数 –Xss调整大小，例如-Xss256k
+</code></pre></li>
+<li><p>本地方法栈</p>
+<pre><code>地方法栈保存的是native方法的信息，当一个JVM创建的线程调用native方法后，JVM不再为其在虚拟机栈中创建栈帧，
+JVM只是简单地动态链接并直接调用native方法。
+</code></pre></li>
+<li><p>Java堆</p>
+<pre><code>几乎所有对象都分配在这里，也是垃圾回收发生的主要区域，可用以下参数调整：
+-Xms：堆的最小值；
+-Xmx：堆的最大值；
+-Xmn：新生代的大小；
+-XX:NewSize；新生代最小值；
+-XX:MaxNewSize：新生代最大值；
+例如- Xmx256m
+</code></pre></li>
+</ul>
+<ul>
+<li><p>方法区(运行时常量池)</p>
+<pre><code>用于存储已经被虚拟机加载的类信息，常量(&quot;zdy&quot;,&quot;123&quot;等)，静态变量(static变量)等数据，可用以下参数调整：
+jdk1.7及以前：-XX:PermSize；-XX:MaxPermSize；
+jdk1.8以后：-XX:MetaspaceSize； -XX:MaxMetaspaceSize
+jdk1.8以后大小就只受本机总内存的限制
+如：-XX:MaxMetaspaceSize=3M
+</code></pre></li>
+</ul>
+<ul>
+<li><p>直接内存</p>
+<pre><code>不是虚拟机运行时数据区的一部分，也不是java虚拟机规范中定义的内存区域；
+如果使用了NIO,这块区域会被频繁使用，在java堆内可以用directByteBuffer对象直接引用并操作；
+这块内存不受java堆大小限制，但受本机总内存的限制，可以通过-XX:MaxDirectMemorySize来设置（默认与堆内存最大值一样），
+所以也会出现OOM异常。
+</code></pre></li>
+</ul>
+<p>栈、本地方法栈、程序计数器为线程私有内存区，随线程产生和消亡，不需要过多考虑内存回收的问题。堆和方法区为线程间共享。</p>
+<h4 id="java内存区域各个版本之间的变化"><a href="#java内存区域各个版本之间的变化" class="headerlink" title="java内存区域各个版本之间的变化"></a>java内存区域各个版本之间的变化</h4><ul>
+<li>jdk1.6 运行时常量池和方法区在一起</li>
+<li>jdk1.7 运行时常量池改为和堆在一起</li>
+<li>jdk1.8 方法区移出了运行时数据区，并改为了元空间metaspace</li>
+</ul>
+<h4 id="栈上分配和逃逸分析"><a href="#栈上分配和逃逸分析" class="headerlink" title="栈上分配和逃逸分析"></a>栈上分配和逃逸分析</h4><p>虚拟机提供的一种优化技术，基本思想是，对于线程私有的对象，将它打散分配在栈上，而不分配在堆上。好处是对象跟着方法调用自行销毁，不需要进行垃圾回收，可以提高性能。栈上分配需要的技术基础，逃逸分析。逃逸分析的目的是判断对象的作用域是否会逃逸出方法体。注意，<font color="red">任何可以在多个线程之间共享的对象，一定都属于逃逸对象。</font></p>
+<ul>
+<li>启用栈上分配</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-server JVM运行的模式之一, server模式才能进行逃逸分析， JVM运行的模式还有mix/client</span><br><span class="line">-Xmx10m和-Xms10m：堆的大小</span><br><span class="line">-XX:+DoEscapeAnalysis：启用逃逸分析(默认打开)</span><br><span class="line">-XX:+PrintGC：打印GC日志</span><br><span class="line">-XX:+EliminateAllocations：标量替换(默认打开)</span><br><span class="line">-XX:-UseTLAB 关闭本地线程分配缓冲TLABThreadLocalAllocBuffer</span><br></pre></td></tr></table></figure>
+<p>对栈上分配发生影响的参数就是三个，<code>-server、-XX:+DoEscapeAnalysis和-XX:+EliminateAllocations</code>，任何一个发生变化都不会发生栈上分配，其中启用逃逸分析和标量替换默认是打开的。</p>
+<h4 id="虚拟机中对象的分配"><a href="#虚拟机中对象的分配" class="headerlink" title="虚拟机中对象的分配"></a>虚拟机中对象的分配</h4><p>虚拟机遇到一条new指令时：      </p>
+<ol>
+<li>先执行相应的类加载过程。</li>
+<li>接下来虚拟机将为新生对象分配内存。为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来。<br>如果Java堆中<font color="red">内存是绝对规整的</font>，所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离，这种分配方式称为“<font color="red">指针碰撞</font>”。<br>如果Java堆中的<font color="red">内存并不是规整的</font>，已使用的内存和空闲的内存相互交错，那就没有办法简单地进行指针碰撞了，虚拟机就必须维护一个列表，记录上哪些内存块是可用的，在分配的时候从列表中找到一块足够大的空间划分给对象实例，并更新列表上的记录，这种分配方式称为“<font color="red">空闲列表</font>”。<br><font color="red">选择哪种分配方式由Java堆是否规整决定，而Java堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定。</font><br>除如何划分可用空间之外，还有另外一个需要考虑的问题是对象创建在虚拟机中是非常频繁的行为，即使是仅仅修改一个指针所指向的位置，在并发情况下也并不是线程安全的，可能出现正在给对象A分配内存，指针还没来得及修改，对象B又同时使用了原来的指针来分配内存的情况。<br>解决这个问题有两种方案，一种是对分配内存空间的动作进行同步处理,实际上虚拟机采用<font color="red">CAS配上失败重试的方式保证更新操作的原子性</font>；<br>另一种是<font color="red">把内存分配的动作按照线程划分在不同的空间之中进行</font>，即每个线程在Java堆中预先分配一小块私有内存，也就是本地线程分配缓冲（Thread Local Allocation Buffer,TLAB），如果设置了虚拟机参数<font color="red"><code>-XX:UseTLAB</code></font>，在线程初始化时，同时也会申请一块指定大小的内存，只给当前线程使用，这样每个线程都单独拥有一个Buffer，如果需要分配内存，就在自己的Buffer上分配，这样就不存在竞争的情况，可以大大提升分配效率，当Buffer容量不够的时候，再重新从Eden区域申请一块继续使用。<br>TLAB的目的是在为新对象分配内存空间时，让每个Java应用线程能在使用自己专属的分配指针来分配空间，减少同步开销。<br>TLAB只是让每个线程有私有的分配指针，但底下存对象的内存空间还是给所有线程访问的，只是其它线程无法在这个区域分配而已。当一个TLAB用满（分配指针top撞上分配极限end了），就新申请一个TLAB。</li>
+<li>内存分配完成后，虚拟机需要将分配到的内存空间都初始化为零值(如int值为0，boolean值为false等等)。这一步操作保证了对象的实例字段在Java代码中可以不赋初始值就直接使用，程序能访问到这些字段的数据类型所对应的零值。</li>
+<li>接下来，虚拟机要对对象进行必要的设置，例如这个对象是哪个类的实例、如何才能找到类的元数据信息、对象的哈希码、对象的GC分代年龄等信息。这些信息存放在对象的对象头之中</li>
+<li>在上面工作都完成之后，从虚拟机的视角来看，一个新的对象已经产生了，但从Java程序的视角来看，对象创建才刚刚开始，所有的字段都还为零值。所以，一般来说，执行new指令之后会接着把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。</li>
+</ol>
+<h4 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h4><ul>
+<li>对象头（Header）</li>
+<li>实例数据（Instance Data）</li>
+<li>对齐填充（Padding）</li>
+</ul>
+<h4 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h4><ul>
+<li>句柄访问</li>
+<li>直接指针访问</li>
+</ul>
+<h4 id="堆参数设置和内存溢出实战"><a href="#堆参数设置和内存溢出实战" class="headerlink" title="堆参数设置和内存溢出实战"></a>堆参数设置和内存溢出实战</h4><ul>
+<li>堆溢出</li>
+</ul>
+<p><code>java.lang.OutOfMemoryError: GC overhead limit exceeded</code> 一般是（某个循环里可能性最大）在不停的分配对象，但是分配的太多，把堆撑爆了。<br><code>java.lang.OutOfMemoryError: Java heap space</code> 一般是分配了巨型对象。     </p>
+<ul>
+<li>栈溢出</li>
+</ul>
+<p><code>java.lang.StackOverflowError</code> 一般的方法调用是很难出现的，如果出现了要考虑是否有无限递归。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/20/jvm-java内存区域/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-git使用笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/20/git使用笔记/">Git使用笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/20/git使用笔记/" class="archive-article-date">
+  	<time datetime="2020-02-19T16:18:24.100Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Git使用笔记</p>
+<h2 id="Git使用笔记"><a href="#Git使用笔记" class="headerlink" title="Git使用笔记"></a>Git使用笔记</h2><h4 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h4><p>下载地址 ： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查看当前git用户名： ```git config user.name```      </span><br><span class="line">查看当前git邮箱： ```git config user.email```      </span><br><span class="line">切换git用户名: ```git config --global user.name &quot;user name&quot;```       </span><br><span class="line">切换git邮箱： ```git config --global user.email  &quot;e-mail&quot;```     </span><br><span class="line">生成SSH Keys: ```ssh-keygen -t rsa -C &quot;e-mail&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Git指令模式"><a href="#Git指令模式" class="headerlink" title="Git指令模式"></a>Git指令模式</h4><h5 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h5><ul>
+<li><code>git init</code> 初始化一个git项目</li>
+<li><code>git commit -am &#39;new project&#39;</code> 加入缓存区并提交</li>
+<li><code>git chceckout [-b] king</code>  切换(新增分支)</li>
+</ul>
+<h5 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h5><ul>
+<li><code>git remote add origin https://github.com/xx/xxx.git</code>  本地新建一个远程连接</li>
+<li><code>git remote [-v]</code>  查看远程连接(详情)</li>
+<li><code>git branch --set-upstream-to=origin/xxx xxx</code>  本地分支与远程分支关联</li>
+<li><code>git push --set-upstream origin master</code>  上传本地项目至GitHub</li>
+<li><code>git fetch</code>  提取远程仓库</li>
+</ul>
+<h5 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h5><ul>
+<li><code>git merge xxx</code> 将指定版本与当前版本合并</li>
+</ul>
+<blockquote>
+<p>有冲突的话相关的文件会显示,需要手动解决冲突后再次push</p>
+</blockquote>
+<h5 id="日志标签"><a href="#日志标签" class="headerlink" title="日志标签"></a>日志标签</h5><ul>
+<li><code>git log [--oneline] [--graph]</code> 显示提交日志(简化成一行)(显示分支)</li>
+<li><code>git tag [-a][-d] xxx -m &#39;xxxx&#39;</code> 为某一个分支(创建)(删除)一个tag</li>
+<li><code>git show xxx</code> 显示某一个tag的附属信息</li>
+<li><code>git push origin -tags</code> 本地标签提交到远程仓库</li>
+</ul>
+<h5 id="代码回滚-两种方式：回退（reset）、反做（revert）"><a href="#代码回滚-两种方式：回退（reset）、反做（revert）" class="headerlink" title="代码回滚 两种方式：回退（reset）、反做（revert）"></a>代码回滚 两种方式：回退（reset）、反做（revert）</h5><ul>
+<li><code>git reset</code> 的作用是修改HEAD的位置，即将HEAD指向的位置改变为之前存在的某个版本。（比如需要回到到V0.3）使用 <code>git reset --hard 目标版本号</code> 命令将版本回退</li>
+<li><code>git revert</code> 的作用通过反做创建一个新的版本，这个版本的内容与我们要回退到的目标版本一样，但是HEAD指针是指向这个新生成的版本，而不是目标版本。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/20/git使用笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-jvm-执行子系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/20/jvm-执行子系统/">JVM - 执行子系统</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/20/jvm-执行子系统/" class="archive-article-date">
+  	<time datetime="2020-02-19T16:18:24.068Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>执行子系统</p>
+<h4 id="Class类文件结构"><a href="#Class类文件结构" class="headerlink" title="Class类文件结构"></a>Class类文件结构</h4><h4 id="字节码指令"><a href="#字节码指令" class="headerlink" title="字节码指令"></a>字节码指令</h4><h4 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h4><h4 id="方法调用详解"><a href="#方法调用详解" class="headerlink" title="方法调用详解"></a>方法调用详解</h4>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/20/jvm-执行子系统/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-jvm-垃圾回收与内存分配策略" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/20/jvm-垃圾回收与内存分配策略/">JVM - 垃圾回收与内存分配策略</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/20/jvm-垃圾回收与内存分配策略/" class="archive-article-date">
+  	<time datetime="2020-02-19T16:18:24.038Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>垃圾回收与内存分配策略</p>
+<h4 id="判断对象的存活"><a href="#判断对象的存活" class="headerlink" title="判断对象的存活"></a>判断对象的存活</h4><ul>
+<li><p>引用计数法</p>
+<pre><code>当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。
+优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。
+</code></pre></li>
+<li><p>可达性分析</p>
+<pre><code>通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，
+搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。
+作为GC Roots的对象包括下面几种：
+1. 虚拟机栈（栈帧中的本地变量表）中引用的对象。
+2. 方法区中类静态属性引用的对象。
+3. 方法区中常量引用的对象。
+4. 本地方法栈中JNI（即一般说的Native方法）引用的对象。
+</code></pre></li>
+</ul>
+<h4 id="java中的引用"><a href="#java中的引用" class="headerlink" title="java中的引用"></a>java中的引用</h4><ul>
+<li><p>强引用</p>
+<pre><code>一般的Object obj = new Object() ，就属于强引用。
+</code></pre></li>
+<li><p>软引用 SoftReference</p>
+<pre><code>一些有用但是并非必需，用软引用关联的对象，系统将要发生OOM之前，这些对象就会被回收。
+</code></pre></li>
+<li><p>弱引用 WeakReference</p>
+<pre><code>一些有用（程度比软引用更低）但是并非必需，用弱引用关联的对象，只能生存到下一次垃圾回收之前，
+GC发生时，不管内存够不够，都会被回收。
+</code></pre></li>
+<li><p>虚引用 PhantomReference</p>
+</li>
+</ul>
+<p>软引用 SoftReference和弱引用 WeakReference，可以用在内存资源紧张的情况下以及创建不是很重要的数据缓存。当系统内存不足的时候，缓存中的内容是可以被释放的。<br>例如，一个程序用来处理用户提供的图片。如果将所有图片读入内存，这样虽然可以很快的打开图片，但内存空间使用巨大，一些使用较少的图片浪费内存空间，需要手动从内存中移除。如果每次打开图片都从磁盘文件中读取到内存再显示出来，虽然内存占用较少，但一些经常使用的图片每次打开都要访问磁盘，代价巨大。这个时候就可以用软引用构建缓存。</p>
+<h4 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h4><ul>
+<li><p>标记-清除算法（Mark-Sweep）</p>
+<pre><code>算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。
+它的主要不足空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时，
+无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。
+</code></pre></li>
+<li><p>复制算法（Copying）</p>
+<pre><code>将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，
+然后再把已使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行内存回收，
+内存分配时也就不用考虑内存碎片等复杂情况，只要按顺序分配内存即可，实现简单，运行高效。
+只是这种算法的代价是将内存缩小为了原来的一半。
+</code></pre></li>
+<li><p>标记-整理算法（Mark-Compact）</p>
+<pre><code>首先标记出所有需要回收的对象，在标记完成后，后续步骤不是直接对可回收对象进行清理，
+而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。
+</code></pre></li>
+</ul>
+<p>当前商业虚拟机的垃圾收集都采用“分代收集”（Generational Collection）算法，这种算法并没有什么新的思想，只是根据对象存活周期的不同将内存划分为几块。一般是把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。<br>专门研究表明，新生代中的对象98%是“朝生夕死”的，所以并不需要按照1:1的比例来划分内存空间，而是将内存分为一块较大的Eden空间和两块较小的Survivor空间，每次使用Eden和其中一块Survivor[1]。当回收时，将Eden和Survivor中还存活着的对象一次性地复制到另外一块Survivor空间上，最后清理掉Eden和刚才用过的Survivor空间。HotSpot虚拟机默认Eden和Survivor的大小比例是8:1，也就是每次新生代中可用内存空间为整个新生代容量的90%（80%+10%），只有10%的内存会被“浪费”。当然，98%的对象可回收只是一般场景下的数据，我们没有办法保证每次回收都只有不多于10%的对象存活，当Survivor空间不够用时，需要依赖其他内存（这里指老年代）进行分配担保（Handle Promotion）。<br>在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。而老年代中因为对象存活率高、没有额外空间对它进行分配担保，就必须使用“标记—清理”或者“标记—整理”算法来进行回收。</p>
+<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><h5 id="Serial"><a href="#Serial" class="headerlink" title="Serial"></a>Serial</h5><p>新生代,复制算法,单线程,进行垃圾收集时,必须暂停所有工作线程,直到完成(stop the world).简单高效,适合内存不大的情况.</p>
+<h5 id="ParNew"><a href="#ParNew" class="headerlink" title="ParNew"></a>ParNew</h5><p>新生代,复制算法,并行的多线程收集器,ParNew垃圾收集器是Serial收集器的多线程版本.搭配CMS垃圾回收器的首选.</p>
+<h5 id="Parallel-Scavenge吞吐量优先收集器"><a href="#Parallel-Scavenge吞吐量优先收集器" class="headerlink" title="Parallel Scavenge吞吐量优先收集器"></a>Parallel Scavenge吞吐量优先收集器</h5><p>新生代,复制算法,并行的多线程收集器,类似ParNew,更加关注吞吐量,达到一个可控制的吞吐量.适合本身是Server级别多CPU机器上的默认GC方式,主要适合后台运算不需要太多交互的任务.</p>
+<h5 id="Serial-Old"><a href="#Serial-Old" class="headerlink" title="Serial Old"></a>Serial Old</h5><p>老年代,标记整理算法,单线程,jdk7/8默认的老生代垃圾回收器.适合Client模式下虚拟机使用.</p>
+<h5 id="Parallel-Old"><a href="#Parallel-Old" class="headerlink" title="Parallel Old"></a>Parallel Old</h5><p>老年代,标记整理算法,并行的多线程收集器,Parallel Scavenge收集器的老年代版本,为了配合Parallel Scavenge的面向吞吐量的特性而开发的对应组合. 在注重吞吐量以及CPU资源敏感的场合采用</p>
+<h5 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h5><p>老年代,标记清除算法 ,并行与并发收集器,尽可能的缩短垃圾收集时用户线程停止时间；缺点在于：</p>
+<ol>
+<li>内存碎片</li>
+<li>需要更多cpu资源</li>
+<li>浮动垃圾问题，需要更大的堆空间<br>适合于重视服务的响应速度、系统停顿时间和用户体验的互联网网站或者B/S系统。互联网后端目前cms是主流的垃圾回收器.</li>
+</ol>
+<h5 id="G1"><a href="#G1" class="headerlink" title="G1"></a>G1</h5><p>跨新生代和老年代；标记整理 + 化整为零,并行与并发收集器    JDK1.7才正式引入，采用分区回收的思维，基本不牺牲吞吐量的前提下完成低停顿的内存回收；可预测的停顿是其最大的优势,面向服务端应用的垃圾回收器，目标为取代CMS</p>
+<p>回收器之间的关系：</p>
+<p><img src="http://image.tupelo.top/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6.jpg" alt="垃圾回收器"></p>
+<p>回收器相关配置:</p>
+<p>-XX:+UseSerialGC 新生代和老年代都用串行收集器<br>-XX:+UseParNewGC 新生代使用ParNew，老年代使用Serial Old<br>-XX:+UseParallelGC 新生代使用ParallerGC，老年代使用Serial Old<br>-XX:+ UseParallelOldGC 新生代使用ParallerGC，老年代使用Parallel Old<br>-XX:+UseConcMarkSweepGC 表示新生代使用ParNew，老年代的用CMS<br>-XX:+UseG1GC 使用G1收集器        </p>
+<h4 id="Stop-The-World现象"><a href="#Stop-The-World现象" class="headerlink" title="Stop The World现象"></a>Stop The World现象</h4><p>GC收集器和我们GC调优的目标就是尽可能的减少STW的时间和次数.</p>
+<h4 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h4><ol>
+<li>对象优先在Eden分配，如果说Eden内存空间不足，就会发生Minor GC</li>
+<li>大对象直接进入老年代，大对象：需要大量连续内存空间的Java对象，比如很长的字符串和大型数组，1、导致内存有空间，还是需要提前进行垃圾回收获取连续空间来放他们，2、会进行大量的内存复制。<br>-XX:PretenureSizeThreshold 参数 ，大于这个数量直接在老年代分配，缺省为0 ，表示绝不会直接分配在老年代。</li>
+<li>长期存活的对象将进入老年代，默认15岁，-XX:MaxTenuringThreshold调整</li>
+<li>动态对象年龄判定，为了能更好地适应不同程序的内存状况，虚拟机并不是永远地要求对象的年龄必须达到了MaxTenuringThreshold才能晋升老年代，如果在Survivor空间中相同年龄所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，无须等到MaxTenuringThreshold中要求的年龄</li>
+<li>空间分配担保：新生代中有大量的对象存活，survivor空间不够，当出现大量对象在MinorGC后仍然存活的情况（最极端的情况就是内存回收后新生代中所有对象都存活），就需要老年代进行分配担保，把Survivor无法容纳的对象直接进入老年代.只要老年代的连续空间大于新生代对象的总大小或者历次晋升的平均大小，就进行Minor GC，否则FullGC。</li>
+</ol>
+<h4 id="内存泄漏和内存溢出辨析-todo"><a href="#内存泄漏和内存溢出辨析-todo" class="headerlink" title="内存泄漏和内存溢出辨析(todo)"></a>内存泄漏和内存溢出辨析(todo)</h4><p>内存溢出：实实在在的内存空间不足导致.<br>内存泄漏：该释放的对象没有释放，多见于自己使用容器保存元素的情况下.          </p>
+<h4 id="JDK为我们提供的工具"><a href="#JDK为我们提供的工具" class="headerlink" title="JDK为我们提供的工具"></a>JDK为我们提供的工具</h4><ul>
+<li>jps </li>
+<li>jstat</li>
+<li>jinfo </li>
+<li>jmap</li>
+<li>jhat</li>
+<li>jstack</li>
+</ul>
+<p>其它分析工具 MAT</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/20/jvm-垃圾回收与内存分配策略/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Mysql-sql优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -698,374 +1185,9 @@
 
 
   
-    <article id="post-多线程-显式锁和AQS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/30/多线程-显式锁和AQS/">并发编程 - 显式锁和AQS</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/30/多线程-显式锁和AQS/" class="archive-article-date">
-  	<time datetime="2019-07-30T15:17:34.809Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>显式锁和AQS</p>
-<h2 id="显式锁"><a href="#显式锁" class="headerlink" title="显式锁"></a>显式锁</h2><p>Lock接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">  <span class="comment">// 一定要在finally中释放锁</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increament</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.lock.lock();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          ++<span class="keyword">this</span>.count;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.lock.unlock();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>可重入锁ReentrantLock(默认非公平锁 构造方法可控制是否是公平锁)</p>
-<p>  采用一个计数器，每重入一次次数加一，释放一个锁次数减一</p>
-</li>
-<li><p>读写锁ReentrantReadWriteLock</p>
-<p>  同一时刻允许多个读线程同时访问，但是写线程访问的时候，所有的读和写都被阻塞，最适宜与读多写少的情况</p>
-</li>
-<li><p>Condition接口</p>
-<p>  阻塞一个线程await()，唤醒是最好使用singal().wait()阻塞线程使用notfiyAll()唤醒。</p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/07/30/多线程-显式锁和AQS/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/30/多线程-显式锁和AQS/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程-CAS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/30/多线程-CAS/">并发编程 - 原子操作CAS</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/30/多线程-CAS/" class="archive-article-date">
-  	<time datetime="2019-07-30T15:10:16.081Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原子操作</p>
-<h2 id="CAS的原理"><a href="#CAS的原理" class="headerlink" title="CAS的原理"></a>CAS的原理</h2><pre><code>利用了现代处理器都支持的CAS的指令，循环这个指令，直到成功为止
-三个运算符：  一个内存地址V，一个期望的值A，一个新值B
-基本思路：如果地址V上的值和期望的值A相等，就给地址V赋给新值B，如果不是，不做任何操作。
-循环（死循环，自旋）里不断的进行CAS操作
-</code></pre><h2 id="CAS的问题"><a href="#CAS的问题" class="headerlink" title="CAS的问题"></a>CAS的问题</h2><ul>
-<li>ABA问题（添加版本号解决）<ul>
-<li>AtomicMarkableReference，boolean 有没有动过</li>
-<li>AtomicStampedReference  动过几次</li>
-</ul>
-</li>
-<li>开销问题 长期不成功 会一直循环下去</li>
-<li>只能保证一个共享变量的原子操作</li>
-</ul>
-<h2 id="JDK中相关原子操作类的使用"><a href="#JDK中相关原子操作类的使用" class="headerlink" title="JDK中相关原子操作类的使用"></a>JDK中相关原子操作类的使用</h2><ul>
-<li>更新基本类型类：AtomicBoolean，AtomicInteger，AtomicLong，AtomicReference</li>
-<li>更新数组类：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray</li>
-<li>更新引用类型：AtomicReference，AtomicMarkableReference，AtomicStampedReference</li>
-<li>原子更新字段类：AtomicReferenceFieldUpdater，AtomicIntegerFieldUpdater，AtomicLongFieldUpdater</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/30/多线程-CAS/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程-线程安全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/24/多线程-线程安全/">并发编程 - 并发安全</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/24/多线程-线程安全/" class="archive-article-date">
-  	<time datetime="2019-07-24T15:59:20.181Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>并发安全</p>
-<h2 id="类的线程安全定义"><a href="#类的线程安全定义" class="headerlink" title="类的线程安全定义"></a>类的线程安全定义</h2><pre><code>如果多线程下使用这个类，不过多线程如何使用和调度这个类，这个类总是表示出正确的行为，这个类就是线程安全的。
-类的线程安全表现为：
-    操作的原子性
-    内存的可见性
-不做正确的同步，在多个线程之间共享状态的时候，就会出现线程不安全。
-</code></pre>
-        
-          <a class="article-more-a" href="/2019/07/24/多线程-线程安全/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/24/多线程-线程安全/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程-线程池" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/24/多线程-线程池/">并发编程 - 线程池</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/24/多线程-线程池/" class="archive-article-date">
-  	<time datetime="2019-07-24T14:35:30.494Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>线程池</p>
-<h2 id="使用线程池的好处"><a href="#使用线程池的好处" class="headerlink" title="使用线程池的好处"></a>使用线程池的好处</h2><ul>
-<li>降低资源的消耗。降低线程创建和销毁的资源消耗；</li>
-<li>提高响应速度：线程的创建时间为T1，执行时间T2,销毁时间T3，免去T1和T3的时间</li>
-<li>提高线程的可管理性。</li>
-</ul>
-<h2 id="线程池的创建"><a href="#线程池的创建" class="headerlink" title="线程池的创建"></a>线程池的创建</h2><blockquote>
-<p>ThreadPoolExecutor，jdk所有线程池实现的父类</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ThreadPoolExecutor executor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="keyword">int</span> corePoolSize,</span><br><span class="line">                              <span class="keyword">int</span> maximumPoolSize,</span><br><span class="line">                              <span class="keyword">long</span> keepAliveTime,</span><br><span class="line">                              TimeUnit unit,</span><br><span class="line">                              BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                              ThreadFactory threadFactory,</span><br><span class="line">                              RejectedExecutionHandler handler)</span><br></pre></td></tr></table></figure>
-<p>各个参数的含义:        </p>
-<ul>
-<li>corePoolSize  ：线程池中核心线程数，&lt; corePoolSize  ，就会创建新线程，= corePoolSize  ，这个任务就会保存到BlockingQueue，如果调用prestartAllCoreThreads（）方法就会一次性的启动corePoolSize  个数的线程。</li>
-<li>maximumPoolSize, 允许的最大线程数，BlockingQueue也满了，&lt; maximumPoolSize时候就会再次创建新的线程</li>
-<li>keepAliveTime, 线程空闲下来后，存活的时间，这个参数只在&gt; corePoolSize才有用<br>TimeUnit unit, 存活时间的单位值</li>
-<li>workQueue, 保存任务的阻塞队列</li>
-<li>threadFactory, 创建线程的工厂，给新建的线程赋予名字</li>
-<li>handler ：饱和策略<ul>
-<li>AbortPolicy ：直接抛出异常，默认；</li>
-<li>CallerRunsPolicy：用调用者所在的线程来执行任务</li>
-<li>DiscardOldestPolicy：丢弃阻塞队列里最老的任务，队列里最靠前的任务</li>
-<li>DiscardPolicy ：当前任务直接丢弃            </li>
-</ul>
-</li>
-</ul>
-<p>实现自己的饱和策略，实现RejectedExecutionHandler接口即可</p>
-        
-          <a class="article-more-a" href="/2019/07/24/多线程-线程池/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/24/多线程-线程池/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1077,7 +1199,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 Caichuang
+    		&copy; 2020 Caichuang
     	</div>
       	<div class="footer-right">
 
@@ -1168,7 +1290,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
