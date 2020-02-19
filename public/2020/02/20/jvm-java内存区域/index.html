@@ -17,7 +17,7 @@
 <meta property="og:description" content="java内存区域 java内存区域Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域：">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://image.tupelo.top/jvm%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.png?imageMogr2/auto-orient/thumbnail/700x700">
-<meta property="og:updated_time" content="2020-02-19T16:25:05.660Z">
+<meta property="og:updated_time" content="2020-02-19T16:30:56.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM - java内存区域">
 <meta name="twitter:description" content="java内存区域 java内存区域Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域：">
@@ -180,29 +180,29 @@
 <p><img src="http://image.tupelo.top/jvm%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.png?imageMogr2/auto-orient/thumbnail/700x700" alt="java内存区域"></p>
 <a id="more"></a>
 <ul>
-<li><p>程序计数器</p>
-<p>  当前线程执行的字节码的行号指示器，占用空间小，也无法干涉</p>
-</li>
-<li><p>虚拟机栈</p>
-<p>  每个线程私有的，线程在运行时，在执行每个方法的时候都会打包成一个栈帧，<br>  存储了局部变量表，操作数栈，动态链接，方法出口等信息，然后放入栈。<br>  每个时刻正在执行的当前方法就是虚拟机栈顶的栈桢。方法的执行就对应着栈帧在虚拟机栈中入栈和出栈的过程。<br>  栈桢大小缺省为1M，可用参数 –Xss调整大小，例如-Xss256k</p>
-</li>
-<li><p>本地方法栈</p>
-<p>  地方法栈保存的是native方法的信息，当一个JVM创建的线程调用native方法后，JVM不再为其在虚拟机栈中创建栈帧，<br>  JVM只是简单地动态链接并直接调用native方法。</p>
-</li>
-<li><p>Java堆</p>
-<p>  几乎所有对象都分配在这里，也是垃圾回收发生的主要区域，可用以下参数调整：<br>  -Xms：堆的最小值；<br>  -Xmx：堆的最大值；<br>  -Xmn：新生代的大小；<br>  -XX:NewSize；新生代最小值；<br>  -XX:MaxNewSize：新生代最大值；<br>  例如- Xmx256m</p>
-</li>
+<li>程序计数器</li>
 </ul>
+<p>当前线程执行的字节码的行号指示器，占用空间小，也无法干涉</p>
 <ul>
-<li><p>方法区(运行时常量池)</p>
-<p>  用于存储已经被虚拟机加载的类信息，常量(“zdy”,”123”等)，静态变量(static变量)等数据，可用以下参数调整：<br>  jdk1.7及以前：-XX:PermSize；-XX:MaxPermSize；<br>  jdk1.8以后：-XX:MetaspaceSize； -XX:MaxMetaspaceSize<br>  jdk1.8以后大小就只受本机总内存的限制<br>  如：-XX:MaxMetaspaceSize=3M</p>
-</li>
+<li>虚拟机栈</li>
 </ul>
+<p>每个线程私有的，线程在运行时，在执行每个方法的时候都会打包成一个栈帧，<br>存储了局部变量表，操作数栈，动态链接，方法出口等信息，然后放入栈。<br>每个时刻正在执行的当前方法就是虚拟机栈顶的栈桢。方法的执行就对应着栈帧在虚拟机栈中入栈和出栈的过程。<br>栈桢大小缺省为1M，可用参数 –Xss调整大小，例如-Xss256k</p>
 <ul>
-<li><p>直接内存</p>
-<p>  不是虚拟机运行时数据区的一部分，也不是java虚拟机规范中定义的内存区域；<br>  如果使用了NIO,这块区域会被频繁使用，在java堆内可以用directByteBuffer对象直接引用并操作；<br>  这块内存不受java堆大小限制，但受本机总内存的限制，可以通过-XX:MaxDirectMemorySize来设置（默认与堆内存最大值一样），<br>  所以也会出现OOM异常。</p>
-</li>
+<li>本地方法栈</li>
 </ul>
+<p>地方法栈保存的是native方法的信息，当一个JVM创建的线程调用native方法后，JVM不再为其在虚拟机栈中创建栈帧，<br>JVM只是简单地动态链接并直接调用native方法。</p>
+<ul>
+<li>Java堆</li>
+</ul>
+<p>几乎所有对象都分配在这里，也是垃圾回收发生的主要区域，可用以下参数调整：<br>-Xms：堆的最小值；<br>-Xmx：堆的最大值；<br>-Xmn：新生代的大小；<br>-XX:NewSize；新生代最小值；<br>-XX:MaxNewSize：新生代最大值；<br>例如- Xmx256m</p>
+<ul>
+<li>方法区(运行时常量池)</li>
+</ul>
+<p>用于存储已经被虚拟机加载的类信息，常量(“zdy”,”123”等)，静态变量(static变量)等数据，可用以下参数调整：<br>jdk1.7及以前：-XX:PermSize；-XX:MaxPermSize；<br>jdk1.8以后：-XX:MetaspaceSize； -XX:MaxMetaspaceSize<br>jdk1.8以后大小就只受本机总内存的限制<br>如：-XX:MaxMetaspaceSize=3M</p>
+<ul>
+<li>直接内存</li>
+</ul>
+<p>不是虚拟机运行时数据区的一部分，也不是java虚拟机规范中定义的内存区域；<br>如果使用了NIO,这块区域会被频繁使用，在java堆内可以用directByteBuffer对象直接引用并操作；<br>这块内存不受java堆大小限制，但受本机总内存的限制，可以通过-XX:MaxDirectMemorySize来设置（默认与堆内存最大值一样），<br>所以也会出现OOM异常。</p>
 <p>栈、本地方法栈、程序计数器为线程私有内存区，随线程产生和消亡，不需要过多考虑内存回收的问题。堆和方法区为线程间共享。</p>
 <h4 id="java内存区域各个版本之间的变化"><a href="#java内存区域各个版本之间的变化" class="headerlink" title="java内存区域各个版本之间的变化"></a>java内存区域各个版本之间的变化</h4><ul>
 <li>jdk1.6 运行时常量池和方法区在一起</li>
@@ -490,6 +490,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -507,10 +511,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -534,11 +534,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
