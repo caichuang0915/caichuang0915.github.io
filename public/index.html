@@ -150,31 +150,42 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-jvm-java内存区域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-通讯协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/20/jvm-java内存区域/">JVM - java内存区域</a>
+      <a class="article-title" href="/2020/05/28/通讯协议/">深入理解通讯协议</a>
     </h1>
   
 
         
-        <a href="/2020/02/20/jvm-java内存区域/" class="archive-article-date">
-  	<time datetime="2020-02-19T16:18:24.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
+        <a href="/2020/05/28/通讯协议/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.566Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>java内存区域</p>
-<h4 id="java内存区域"><a href="#java内存区域" class="headerlink" title="java内存区域"></a>java内存区域</h4><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域： </p>
-<p><img src="http://image.tupelo.top/jvm%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.png?imageMogr2/auto-orient/thumbnail/700x700" alt="java内存区域"></p>
+        <p>通讯协议</p>
+<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>七层模型</p>
+<ul>
+<li>OSI模型<ul>
+<li>应用层  为应用程序提供服务</li>
+<li>表示层  数据格式转换</li>
+<li>会话层  建立 管理 维护会话</li>
+<li>传输层  最重要 端对端的连接 数据可靠性传输</li>
+<li>网络层  ip 路由</li>
+<li>链路层  交换机</li>
+<li>物理层  物理介质 网线等等</li>
+</ul>
+</li>
+</ul>
         
-          <a class="article-more-a" href="/2020/02/20/jvm-java内存区域/#more">more >></a>
+          <a class="article-more-a" href="/2020/05/28/通讯协议/#more">more >></a>
         
       
 
@@ -188,7 +199,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">通讯协议</a>
         		</li>
       		
 		</ul>
@@ -198,7 +209,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/20/jvm-java内存区域/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/28/通讯协议/">展开全文 >></a>
         </p>
       
 
@@ -228,395 +239,460 @@
 
 
   
-    <article id="post-git使用笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/20/git使用笔记/">Git使用笔记</a>
+      <a class="article-title" href="/2020/05/28/适配器模式/">设计模式-适配器模式</a>
     </h1>
   
 
         
-        <a href="/2020/02/20/git使用笔记/" class="archive-article-date">
-  	<time datetime="2020-02-19T16:18:24.100Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
+        <a href="/2020/05/28/适配器模式/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.561Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Git使用笔记</p>
-<h2 id="Git使用笔记"><a href="#Git使用笔记" class="headerlink" title="Git使用笔记"></a>Git使用笔记</h2><h4 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h4><p>下载地址 ： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查看当前git用户名： ```git config user.name```      </span><br><span class="line">查看当前git邮箱： ```git config user.email```      </span><br><span class="line">切换git用户名: ```git config --global user.name &quot;user name&quot;```       </span><br><span class="line">切换git邮箱： ```git config --global user.email  &quot;e-mail&quot;```     </span><br><span class="line">生成SSH Keys: ```ssh-keygen -t rsa -C &quot;e-mail&quot;</span><br></pre></td></tr></table></figure></p>
-<h4 id="Git指令模式"><a href="#Git指令模式" class="headerlink" title="Git指令模式"></a>Git指令模式</h4><h5 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h5><ul>
-<li><code>git init</code> 初始化一个git项目</li>
-<li><code>git commit -am &#39;new project&#39;</code> 加入缓存区并提交</li>
-<li><code>git chceckout [-b] king</code>  切换(新增分支)</li>
+        <h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><blockquote>
+<p>  将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以一起工作。</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.png" alt="适配器模式"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/28/适配器模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-设计模式原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/28/设计模式原则/">设计模式-六大基本原则</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/28/设计模式原则/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.560Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="六大基本原则"><a href="#六大基本原则" class="headerlink" title="六大基本原则"></a>六大基本原则</h3><blockquote>
+<p>  重要的是思想 ！！！</p>
+</blockquote>
+<ul>
+<li><p>开闭原则</p>
+<blockquote>
+<p>对扩展开发、对修改关闭</p>
+</blockquote>
+</li>
+<li><p>单一职责原则</p>
+<blockquote>
+<p>一个类只负责一个职责</p>
+</blockquote>
+</li>
+<li><p>依赖倒置原则</p>
+<blockquote>
+<p>面向接口编程</p>
+</blockquote>
+</li>
+<li><p>里氏替换原则</p>
+<blockquote>
+<p>子类可以扩展父类的功能、但不要改变父类原有的功能</p>
+</blockquote>
+</li>
+<li><p>接口隔离原则</p>
+<blockquote>
+<p>设计接口功能尽量细粒度、最小功能单元</p>
+</blockquote>
+</li>
+<li><p>迪米特法则</p>
+<blockquote>
+<p>降低耦合、局部变量中不要引入新的类</p>
+</blockquote>
+</li>
 </ul>
-<h5 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h5><ul>
-<li><code>git remote add origin https://github.com/xx/xxx.git</code>  本地新建一个远程连接</li>
-<li><code>git remote [-v]</code>  查看远程连接(详情)</li>
-<li><code>git branch --set-upstream-to=origin/xxx xxx</code>  本地分支与远程分支关联</li>
-<li><code>git push --set-upstream origin master</code>  上传本地项目至GitHub</li>
-<li><code>git fetch</code>  提取远程仓库</li>
-</ul>
-<h5 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h5><ul>
-<li><code>git merge xxx</code> 将指定版本与当前版本合并</li>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/28/设计模式原则/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-简单工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/28/简单工厂模式/">设计模式-简单工厂模式</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/28/简单工厂模式/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.560Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><blockquote>
+<p>  当类没有管理的时候，使用者每次都需要自己去new一个对象，简单工厂模式就是用一个集中的类来负责产品对象的创建。不属于23种设计模式，但是是工厂模式的基础。</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.jpg" alt="简单工厂模式"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/28/简单工厂模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-抽象工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/28/抽象工厂模式/">设计模式-抽象工厂方法模式</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/28/抽象工厂模式/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.559Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="抽象工厂方法模式"><a href="#抽象工厂方法模式" class="headerlink" title="抽象工厂方法模式"></a>抽象工厂方法模式</h3><blockquote>
+<p>  当一个类别的产品有多个区分的时候，为了按照系列生产商品，使用抽象工厂区分。(将同一个类别的产品放在一个抽象类中)</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png" alt="抽象工厂方法模式"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/28/抽象工厂模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-建造者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/28/建造者模式/">设计模式-建造者模式</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/28/建造者模式/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.557Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="抽象工厂方法模式"><a href="#抽象工厂方法模式" class="headerlink" title="抽象工厂方法模式"></a>抽象工厂方法模式</h3><blockquote>
+<p>  当抽象工厂比较复杂时使用。(相当于一个流程)</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.png" alt="建造者模式"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/28/建造者模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-工厂模式总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/28/工厂模式总结/">设计模式-工厂模式总结</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/28/工厂模式总结/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.557Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="工厂模式总结"><a href="#工厂模式总结" class="headerlink" title="工厂模式总结"></a>工厂模式总结</h3><blockquote>
+<p>使用原则:</p>
+</blockquote>
+<ul>
+<li>解耦：把对象的创建和使用的过程分开。</li>
+<li>工厂负责对象的创建，包括其init方法的调用，黑盒创建过程。</li>
+<li>面向接口编程： 使用者只管使用，只知其接口而不知其实现类。</li>
 </ul>
 <blockquote>
-<p>有冲突的话相关的文件会显示,需要手动解决冲突后再次push</p>
+<p>对比:</p>
 </blockquote>
-<h5 id="日志标签"><a href="#日志标签" class="headerlink" title="日志标签"></a>日志标签</h5><ul>
-<li><code>git log [--oneline] [--graph]</code> 显示提交日志(简化成一行)(显示分支)</li>
-<li><code>git tag [-a][-d] xxx -m &#39;xxxx&#39;</code> 为某一个分支(创建)(删除)一个tag</li>
-<li><code>git show xxx</code> 显示某一个tag的附属信息</li>
-<li><code>git push origin -tags</code> 本地标签提交到远程仓库</li>
-</ul>
-<h5 id="代码回滚-两种方式：回退（reset）、反做（revert）"><a href="#代码回滚-两种方式：回退（reset）、反做（revert）" class="headerlink" title="代码回滚 两种方式：回退（reset）、反做（revert）"></a>代码回滚 两种方式：回退（reset）、反做（revert）</h5><ul>
-<li><code>git reset</code> 的作用是修改HEAD的位置，即将HEAD指向的位置改变为之前存在的某个版本。（比如需要回到到V0.3）使用 <code>git reset --hard 目标版本号</code> 命令将版本回退</li>
-<li><code>git revert</code> 的作用通过反做创建一个新的版本，这个版本的内容与我们要回退到的目标版本一样，但是HEAD指针是指向这个新生成的版本，而不是目标版本。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/20/git使用笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jvm-执行子系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/20/jvm-执行子系统/">JVM - 执行子系统</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/20/jvm-执行子系统/" class="archive-article-date">
-  	<time datetime="2020-02-19T16:18:24.068Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>执行子系统</p>
-<h4 id="Class类文件结构"><a href="#Class类文件结构" class="headerlink" title="Class类文件结构"></a>Class类文件结构</h4><h4 id="字节码指令"><a href="#字节码指令" class="headerlink" title="字节码指令"></a>字节码指令</h4><h4 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h4><h4 id="方法调用详解"><a href="#方法调用详解" class="headerlink" title="方法调用详解"></a>方法调用详解</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/20/jvm-执行子系统/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jvm-垃圾回收与内存分配策略" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/20/jvm-垃圾回收与内存分配策略/">JVM - 垃圾回收与内存分配策略</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/20/jvm-垃圾回收与内存分配策略/" class="archive-article-date">
-  	<time datetime="2020-02-19T16:18:24.038Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>垃圾回收与内存分配策略</p>
-<h4 id="判断对象的存活"><a href="#判断对象的存活" class="headerlink" title="判断对象的存活"></a>判断对象的存活</h4><ul>
-<li><p>引用计数法</p>
-<p>  当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。<br>  优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。</p>
-</li>
-<li><p>可达性分析</p>
-<p>  通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，<br>  搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。<br>  作为GC Roots的对象包括下面几种：</p>
-<ol>
-<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。</li>
-<li>方法区中类静态属性引用的对象。</li>
-<li>方法区中常量引用的对象。</li>
-<li>本地方法栈中JNI（即一般说的Native方法）引用的对象。</li>
-</ol>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2020/02/20/jvm-垃圾回收与内存分配策略/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/20/jvm-垃圾回收与内存分配策略/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mysql-sql优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/18/Mysql-sql优化/">Mysql - sql优化</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/18/Mysql-sql优化/" class="archive-article-date">
-  	<time datetime="2019-08-18T07:54:28.291Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>sql优化</p>
-<h4 id="sql优化"><a href="#sql优化" class="headerlink" title="sql优化"></a>sql优化</h4><ol>
-<li>尽量全值匹配,有联合索引的话key_len会保持在合适的大小</li>
-<li>最佳左前缀法则</li>
-<li>不在索引列上做任何操作</li>
-<li>范围条件放最后</li>
-<li>覆盖索引尽量用 不要select *</li>
-<li>不等于要慎用 mysql 在使用不等于(!= 或者&lt;&gt;)的时候无法使用索引会导致全表扫描</li>
-<li>Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当字段不为空是，两者都不会使用索引。</li>
-<li>Like查询要当心</li>
-<li>字符类型加引号</li>
-<li>OR改UNION效率高,用union更快</li>
-</ol>
-<h4 id="sql快速导入导出"><a href="#sql快速导入导出" class="headerlink" title="sql快速导入导出"></a>sql快速导入导出</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 导出</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">into</span> <span class="keyword">OUTFILE</span> <span class="string">'D:\\product.txt'</span> <span class="keyword">from</span> product_info</span><br><span class="line"># 导入</span><br><span class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">INFILE</span> <span class="string">'D:\\product.txt'</span> <span class="keyword">into</span> <span class="keyword">table</span> product_info</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/18/Mysql-sql优化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mysql-慢查询和执行计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/16/Mysql-慢查询和执行计划/">Mysql - MySql慢查询和执行计划(重点)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/16/Mysql-慢查询和执行计划/" class="archive-article-date">
-  	<time datetime="2019-08-15T16:06:56.755Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>MySql慢查询和执行计划</p>
-<h4 id="MySql慢查询"><a href="#MySql慢查询" class="headerlink" title="MySql慢查询"></a>MySql慢查询</h4><p>相关配置：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'%slow%'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启或者关闭</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> slow_query_log = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 设置时间</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> long_query_time = <span class="number">10</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>slow_query_log 启动停止技术慢查询日志</li>
-<li>slow_query_log_file 指定慢查询日志得存储路径及文件（默认和数据文件放一起）</li>
-<li>long_query_time 指定记录慢查询日志SQL执行时间得伐值（单位：秒，默认10秒）</li>
-<li>log_queries_not_using_indexes  是否记录未使用索引的SQL</li>
-<li><p>log_output 日志存放的地方【TABLE】【FILE】【FILE,TABLE】</p>
-<p>  使用TABLE时慢sql会存在mysql.slow_log 不建议使用。</p>
-</li>
+<li>静态工厂：把所有对象的创建逻辑集中到一个（专业）类里处理</li>
+<li>工厂方法模式：一个工厂负责创建一个产品类的创建</li>
+<li>抽象工厂模式：将一个系列的产品的工厂合并成一个工厂，负责生产这个系列的产品</li>
+<li>建造者模式：对象的创建比较复杂时，按步骤一块块创建，让创建过程模板化。</li>
 </ul>
-        
-          <a class="article-more-a" href="/2019/08/16/Mysql-慢查询和执行计划/#more">more >></a>
-        
+
       
 
       
@@ -629,7 +705,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -639,7 +715,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/16/Mysql-慢查询和执行计划/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/28/工厂模式总结/">展开全文 >></a>
         </p>
       
 
@@ -669,327 +745,131 @@
 
 
   
-    <article id="post-Mysql-业务设计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-工厂方法模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/15/Mysql-业务设计/">Mysql - MySql业务设计</a>
+      <a class="article-title" href="/2020/05/28/工厂方法模式/">设计模式-工厂方法模式</a>
     </h1>
   
 
         
-        <a href="/2019/08/15/Mysql-业务设计/" class="archive-article-date">
-  	<time datetime="2019-08-15T15:29:20.590Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
+        <a href="/2020/05/28/工厂方法模式/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.556Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>MySql业务设计</p>
-<h4 id="MySql业务设计"><a href="#MySql业务设计" class="headerlink" title="MySql业务设计"></a>MySql业务设计</h4><h5 id="范式设计"><a href="#范式设计" class="headerlink" title="范式设计"></a>范式设计</h5><ul>
-<li>第一大范式 数据库表中的所有字段都只具有单一属性</li>
-<li>第二大范式 要求表中只具有一个业务主键</li>
-<li>第三大范式 指每一个非主属性之间不能有互相依赖关系</li>
+        <h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><blockquote>
+<p>  将静态工厂类打散，每一类对象都有一个工厂来创建。</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.png" alt="工厂方法模式"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/28/工厂方法模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多线程-线程池" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/28/多线程-线程池/">并发编程 - 线程池</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/28/多线程-线程池/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.556Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>线程池</p>
+<h2 id="使用线程池的好处"><a href="#使用线程池的好处" class="headerlink" title="使用线程池的好处"></a>使用线程池的好处</h2><ul>
+<li>降低资源的消耗。降低线程创建和销毁的资源消耗；</li>
+<li>提高响应速度：线程的创建时间为T1，执行时间T2,销毁时间T3，免去T1和T3的时间</li>
+<li>提高线程的可管理性。</li>
 </ul>
-<p>问题：完全符合范式化的设计有时并不能得到良好得SQL查询性能<br>timestamp 和时区有关，而datetime无关</p>
-<h5 id="反范式化设计"><a href="#反范式化设计" class="headerlink" title="反范式化设计"></a>反范式化设计</h5><p>为了性能和读取效率得考虑而适当得对数据库设计范式得要求进行违反，允许存在少量得冗余，换句话来说反范式化就是使用空间来换取时间，不能完全按照范式得要求进行设计。</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>范式化</td>
-<td>可以尽量得减少数据冗余<br>范式化的更新操作比反范式化更快    <br>    范式化的表通常比反范式化的表更小</td>
-<td>对于查询需要对多个表进行关联<br>    更难进行索引优化</td>
-</tr>
-<tr>
-<td>反范式</td>
-<td>可以减少表的关联<br>可以更好的进行索引优化</td>
-<td>存在数据冗余及数据维护异常<br>对数据的修改需要更多的成本</td>
-</tr>
-</tbody>
-</table>
-<h4 id="物理设计"><a href="#物理设计" class="headerlink" title="物理设计"></a>物理设计</h4><ul>
-<li><p>定义数据库、表及字段的命名规范</p>
-<p>  可读性原则、表意性原则(意思清晰)、长名原则(不使用缩写)</p>
-</li>
-<li><p>选择合适的存储引擎</p>
-</li>
-<li><p>为表中的字段选择合适的数据类型</p>
+<h2 id="线程池的创建"><a href="#线程池的创建" class="headerlink" title="线程池的创建"></a>线程池的创建</h2><blockquote>
+<p>ThreadPoolExecutor，jdk所有线程池实现的父类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ThreadPoolExecutor executor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="keyword">int</span> corePoolSize,</span><br><span class="line">                              <span class="keyword">int</span> maximumPoolSize,</span><br><span class="line">                              <span class="keyword">long</span> keepAliveTime,</span><br><span class="line">                              TimeUnit unit,</span><br><span class="line">                              BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                              ThreadFactory threadFactory,</span><br><span class="line">                              RejectedExecutionHandler handler)</span><br></pre></td></tr></table></figure>
+<p>各个参数的含义:        </p>
 <ul>
-<li>优先考虑数字类型</li>
-<li>其次是日期、时间类型</li>
-<li>最后是字符类型</li>
-<li>对于相同级别的数据类型，应该优先选择占用空间小的数据类型。金额类除外，建议使用DECIMAL类型。(其它:timestamp和时区有关，而datetime无关)</li>
+<li>corePoolSize  ：线程池中核心线程数，&lt; corePoolSize  ，就会创建新线程，= corePoolSize  ，这个任务就会保存到BlockingQueue，如果调用prestartAllCoreThreads（）方法就会一次性的启动corePoolSize  个数的线程。</li>
+<li>maximumPoolSize, 允许的最大线程数，BlockingQueue也满了，&lt; maximumPoolSize时候就会再次创建新的线程</li>
+<li>keepAliveTime, 线程空闲下来后，存活的时间，这个参数只在&gt; corePoolSize才有用<br>TimeUnit unit, 存活时间的单位值</li>
+<li>workQueue, 保存任务的阻塞队列</li>
+<li>threadFactory, 创建线程的工厂，给新建的线程赋予名字</li>
+<li>handler ：饱和策略<ul>
+<li>AbortPolicy ：直接抛出异常，默认；</li>
+<li>CallerRunsPolicy：用调用者所在的线程来执行任务</li>
+<li>DiscardOldestPolicy：丢弃阻塞队列里最老的任务，队列里最靠前的任务</li>
+<li>DiscardPolicy ：当前任务直接丢弃            </li>
 </ul>
 </li>
-<li><p>建立数据库结构</p>
-</li>
 </ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/15/Mysql-业务设计/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
+<p>实现自己的饱和策略，实现RejectedExecutionHandler接口即可</p>
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mysql-锁和事务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/15/Mysql-锁和事务/">Mysql - Mysql锁和事务</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/15/Mysql-锁和事务/" class="archive-article-date">
-  	<time datetime="2019-08-15T14:59:59.121Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Mysql锁和事务</p>
-<h4 id="Mysql锁"><a href="#Mysql锁" class="headerlink" title="Mysql锁"></a>Mysql锁</h4><p>不同的存储引擎支持不同的锁机制,MyISAM和MEMORY存储引擎采用的是表级锁InnoDB存储引擎既支持行级锁，也支持表级锁，但默认情况下是采用行级锁。</p>
-<ul>
-<li>表级锁:开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高,并发度最低。</li>
-<li>行级锁:开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低,并发度也最高。</li>
-<li>页面锁:开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</li>
-</ul>
-<p>表级锁更适合于以查询为主，只有少量按索引条件更新数据的应用，如OLAP系统   </p>
-<p>行级锁则更适合于有大量按索引条件并发更新少量不同数据，同时又有并发查询的应用    </p>
-        
-          <a class="article-more-a" href="/2019/08/15/Mysql-锁和事务/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/15/Mysql-锁和事务/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mysql-逻辑架构和存储引擎" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/13/Mysql-逻辑架构和存储引擎/">Mysql - Mysql逻辑架构和存储引擎</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/13/Mysql-逻辑架构和存储引擎/" class="archive-article-date">
-  	<time datetime="2019-08-13T15:09:52.577Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Mysql逻辑架构和存储引擎</p>
-<h4 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h4><h5 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h5><ul>
-<li><p>TPS：Transactions Per Second（每秒传输的事物处理个数），这是指服务器每秒处理的事务数，支持事务的存储引擎如InnoDB等特有的一个性能指标。 </p>
-</li>
-<li><p>QPS：Queries Per Second（每秒查询处理量）同时适用与InnoDB和MyISAM 引擎</p>
-</li>
-<li><p>等待时间：执行Sql等待返回结果之间的等待时间</p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/08/13/Mysql-逻辑架构和存储引擎/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/13/Mysql-逻辑架构和存储引擎/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程-并发工具类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/06/多线程-并发工具类/">并发编程 - 并发工具类</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/06/多线程-并发工具类/" class="archive-article-date">
-  	<time datetime="2019-08-06T15:26:35.716Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>并发工具类</p>
-<h2 id="Hashmap和HashTable"><a href="#Hashmap和HashTable" class="headerlink" title="Hashmap和HashTable"></a>Hashmap和HashTable</h2><ul>
-<li>Hashmap多线程会导致HashMap的Entry链表形成环形数据结构，一旦形成环形数据结构，Entry的next节点永远不为空，就会产生死循环获取Entry。</li>
-<li>HashTable使用synchronized来保证线程安全，但在线程竞争激烈的情况下HashTable的效率非常低下。因为当一个线程访问HashTable的同步方法，其他线程也访问HashTable的同步方法时，会进入阻塞或轮询状态。如线程1使用put进行元素添加，线程2不但不能使用put方法添加元素，也不能使用get方法来获取元素，所以竞争越激烈效率越低。</li>
-</ul>
-<p>Hash</p>
-<p>散列，哈希：把任意长度的输入通过一种算法（散列），变换成为固定长度的输出，这个输出值就是散列值。属于压缩映射，容易产生哈希冲突。Hash算法有直接取余法等。<br>产生哈希冲突时解决办法:        </p>
-<ul>
-<li>开放寻址        </li>
-<li>再散列            </li>
-<li>链地址法（相同hash值的元素用链表串起来）</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/08/06/多线程-并发工具类/#more">more >></a>
+          <a class="article-more-a" href="/2020/05/28/多线程-线程池/#more">more >></a>
         
       
 
@@ -1013,7 +893,89 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/06/多线程-并发工具类/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/28/多线程-线程池/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多线程-线程安全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/28/多线程-线程安全/">并发编程 - 并发安全</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/28/多线程-线程安全/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.530Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>并发安全</p>
+<h2 id="类的线程安全定义"><a href="#类的线程安全定义" class="headerlink" title="类的线程安全定义"></a>类的线程安全定义</h2><pre><code>如果多线程下使用这个类，不过多线程如何使用和调度这个类，这个类总是表示出正确的行为，这个类就是线程安全的。
+类的线程安全表现为：
+    操作的原子性
+    内存的可见性
+不做正确的同步，在多个线程之间共享状态的时候，就会出现线程不安全。
+</code></pre>
+        
+          <a class="article-more-a" href="/2020/05/28/多线程-线程安全/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/28/多线程-线程安全/">展开全文 >></a>
         </p>
       
 
@@ -1148,11 +1110,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -150,119 +150,37 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-spring-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Mysql-逻辑架构和存储引擎" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/21/spring-01/">Spring学习01 - 工程从XML配置到注解</a>
+      <a class="article-title" href="/2020/05/28/Mysql-逻辑架构和存储引擎/">Mysql - Mysql逻辑架构和存储引擎</a>
     </h1>
   
 
         
-        <a href="/2018/10/21/spring-01/" class="archive-article-date">
-  	<time datetime="2018-10-21T14:46:12.484Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-21</time>
+        <a href="/2020/05/28/Mysql-逻辑架构和存储引擎/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.475Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>spring基础学习</p>
-<h2 id="Spring-基础及组件使用01"><a href="#Spring-基础及组件使用01" class="headerlink" title="Spring 基础及组件使用01"></a>Spring 基础及组件使用01</h2><h3 id="工程从XML配置到注解"><a href="#工程从XML配置到注解" class="headerlink" title="工程从XML配置到注解"></a>工程从XML配置到注解</h3><ul>
-<li>创建配置类 加上@Configuration注解 加上@ComponentScan注解 扫描指定的包 加载到IOC容器</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(value = <span class="string">"com.tupelo"</span>,useDefaultFilters = <span class="keyword">true</span>,excludeFilters = &#123;</span><br><span class="line">        <span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="meta">@EnableAspectJAutoProxy</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">person</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Person(<span class="string">"jack"</span>,<span class="number">20</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/10/21/spring-01/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/21/spring-01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/21/spring-02/">Spring学习02 - 常用注解</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/21/spring-02/" class="archive-article-date">
-  	<time datetime="2018-10-21T14:26:32.259Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>spring基础学习</p>
-<h2 id="Spring-基础及组件使用02"><a href="#Spring-基础及组件使用02" class="headerlink" title="Spring 基础及组件使用02"></a>Spring 基础及组件使用02</h2><h3 id="Conditional条件注册Bean"><a href="#Conditional条件注册Bean" class="headerlink" title="@Conditional条件注册Bean"></a>@Conditional条件注册Bean</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.enjoy.cap5.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.config.ConfigurableListableBeanFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Condition;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ConditionContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.env.Environment;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.type.AnnotatedTypeMetadata;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinCondition</span> <span class="keyword">implements</span> <span class="title">Condition</span></span>&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	*ConditionContext: 判断条件可以使用的上下文(环境)</span></span><br><span class="line"><span class="comment">	*AnnotatedTypeMetadata: 注解的信息</span></span><br><span class="line"><span class="comment">	*</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(ConditionContext context, AnnotatedTypeMetadata metadata)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 业务逻辑</span></span><br><span class="line">		<span class="comment">//能获取到IOC容器正在使用的beanFactory</span></span><br><span class="line">		ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();</span><br><span class="line">		<span class="comment">//获取当前环境变量(包括我们操作系统是WIN还是LINUX??)</span></span><br><span class="line">		Environment environment = context.getEnvironment();</span><br><span class="line">		String os_name = environment.getProperty(<span class="string">"os.name"</span>);</span><br><span class="line">		<span class="keyword">if</span>(os_name.contains(<span class="string">"linux"</span>))&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>定义Bean时加上注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Conditional</span>(WinCondition.class)</span><br><span class="line"><span class="meta">@Bean</span>(<span class="string">"lison"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Person <span class="title">lison</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Person();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="BeanFactory-和-FactoryBean-的区别"><a href="#BeanFactory-和-FactoryBean-的区别" class="headerlink" title="BeanFactory 和 FactoryBean 的区别"></a>BeanFactory 和 FactoryBean 的区别</h3><ul>
-<li>FactoryBean ： 把我们的JAVA实例Bean通过FactoryBean注入到容器中</li>
-<li>BeanFactory ： 从容器中获取我们实例化的Bean</li>
+        <p>Mysql逻辑架构和存储引擎</p>
+<h4 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h4><h5 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h5><ul>
+<li><p>TPS：Transactions Per Second（每秒传输的事物处理个数），这是指服务器每秒处理的事务数，支持事务的存储引擎如InnoDB等特有的一个性能指标。 </p>
+</li>
+<li><p>QPS：Queries Per Second（每秒查询处理量）同时适用与InnoDB和MyISAM 引擎</p>
+</li>
+<li><p>等待时间：执行Sql等待返回结果之间的等待时间</p>
+</li>
 </ul>
         
-          <a class="article-more-a" href="/2018/10/21/spring-02/#more">more >></a>
+          <a class="article-more-a" href="/2020/05/28/Mysql-逻辑架构和存储引擎/#more">more >></a>
         
       
 
@@ -276,11 +194,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
         		</li>
       		
 		</ul>
@@ -290,7 +204,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/21/spring-02/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/28/Mysql-逻辑架构和存储引擎/">展开全文 >></a>
         </p>
       
 
@@ -320,30 +234,40 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Mysql-慢查询和执行计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/09/hello-world/">Hello World</a>
+      <a class="article-title" href="/2020/05/28/Mysql-慢查询和执行计划/">Mysql - MySql慢查询和执行计划(重点)</a>
     </h1>
   
 
         
-        <a href="/2018/10/09/hello-world/" class="archive-article-date">
-  	<time datetime="2018-10-09T15:16:36.318Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-09</time>
+        <a href="/2020/05/28/Mysql-慢查询和执行计划/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.475Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>MySql慢查询和执行计划</p>
+<h4 id="MySql慢查询"><a href="#MySql慢查询" class="headerlink" title="MySql慢查询"></a>MySql慢查询</h4><p>相关配置：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'%slow%'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启或者关闭</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> slow_query_log = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 设置时间</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> long_query_time = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>slow_query_log 启动停止技术慢查询日志</li>
+<li>slow_query_log_file 指定慢查询日志得存储路径及文件（默认和数据文件放一起）</li>
+<li>long_query_time 指定记录慢查询日志SQL执行时间得伐值（单位：秒，默认10秒）</li>
+<li>log_queries_not_using_indexes  是否记录未使用索引的SQL</li>
+<li><p>log_output 日志存放的地方【TABLE】【FILE】【FILE,TABLE】</p>
+<p>  使用TABLE时慢sql会存在mysql.slow_log 不建议使用。</p>
+</li>
+</ul>
         
-          <a class="article-more-a" href="/2018/10/09/hello-world/#more">more >></a>
+          <a class="article-more-a" href="/2020/05/28/Mysql-慢查询和执行计划/#more">more >></a>
         
       
 
@@ -357,28 +281,17 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/09/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/28/Mysql-慢查询和执行计划/">展开全文 >></a>
         </p>
       
 
@@ -408,12 +321,73 @@
 
 
   
-    <article id="post-mybatis_01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Mysql-业务设计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/28/Mysql-业务设计/">Mysql - MySql业务设计</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/28/Mysql-业务设计/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.474Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>MySql业务设计</p>
+<h4 id="MySql业务设计"><a href="#MySql业务设计" class="headerlink" title="MySql业务设计"></a>MySql业务设计</h4><h5 id="范式设计"><a href="#范式设计" class="headerlink" title="范式设计"></a>范式设计</h5><ul>
+<li>第一大范式 数据库表中的所有字段都只具有单一属性</li>
+<li>第二大范式 要求表中只具有一个业务主键</li>
+<li>第三大范式 指每一个非主属性之间不能有互相依赖关系</li>
+</ul>
+<p>问题：完全符合范式化的设计有时并不能得到良好得SQL查询性能<br>timestamp 和时区有关，而datetime无关</p>
+<h5 id="反范式化设计"><a href="#反范式化设计" class="headerlink" title="反范式化设计"></a>反范式化设计</h5><p>为了性能和读取效率得考虑而适当得对数据库设计范式得要求进行违反，允许存在少量得冗余，换句话来说反范式化就是使用空间来换取时间，不能完全按照范式得要求进行设计。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>范式化</td>
+<td>可以尽量得减少数据冗余<br>范式化的更新操作比反范式化更快    <br>    范式化的表通常比反范式化的表更小</td>
+<td>对于查询需要对多个表进行关联<br>    更难进行索引优化</td>
+</tr>
+<tr>
+<td>反范式</td>
+<td>可以减少表的关联<br>可以更好的进行索引优化</td>
+<td>存在数据冗余及数据维护异常<br>对数据的修改需要更多的成本</td>
+</tr>
+</tbody>
+</table>
+<h4 id="物理设计"><a href="#物理设计" class="headerlink" title="物理设计"></a>物理设计</h4><ul>
+<li><p>定义数据库、表及字段的命名规范</p>
+<p>  可读性原则、表意性原则(意思清晰)、长名原则(不使用缩写)</p>
+</li>
+<li><p>选择合适的存储引擎</p>
+</li>
+<li><p>为表中的字段选择合适的数据类型</p>
+<ul>
+<li>优先考虑数字类型</li>
+<li>其次是日期、时间类型</li>
+<li>最后是字符类型</li>
+<li>对于相同级别的数据类型，应该优先选择占用空间小的数据类型。金额类除外，建议使用DECIMAL类型。(其它:timestamp和时区有关，而datetime无关)</li>
+</ul>
+</li>
+<li><p>建立数据库结构</p>
+</li>
+</ul>
+
       
 
       
@@ -421,11 +395,109 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/09/mybatis_01/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/05/28/Mysql-业务设计/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Mysql-sql优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/28/Mysql-sql优化/">Mysql - sql优化</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/28/Mysql-sql优化/" class="archive-article-date">
+  	<time datetime="2020-05-28T10:15:37.472Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>sql优化</p>
+<h4 id="sql优化"><a href="#sql优化" class="headerlink" title="sql优化"></a>sql优化</h4><ol>
+<li>尽量全值匹配,有联合索引的话key_len会保持在合适的大小</li>
+<li>最佳左前缀法则</li>
+<li>不在索引列上做任何操作</li>
+<li>范围条件放最后</li>
+<li>覆盖索引尽量用 不要select *</li>
+<li>不等于要慎用 mysql 在使用不等于(!= 或者&lt;&gt;)的时候无法使用索引会导致全表扫描</li>
+<li>Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当字段不为空是，两者都不会使用索引。</li>
+<li>Like查询要当心</li>
+<li>字符类型加引号</li>
+<li>OR改UNION效率高,用union更快</li>
+</ol>
+<h4 id="sql快速导入导出"><a href="#sql快速导入导出" class="headerlink" title="sql快速导入导出"></a>sql快速导入导出</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 导出</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">into</span> <span class="keyword">OUTFILE</span> <span class="string">'D:\\product.txt'</span> <span class="keyword">from</span> product_info</span><br><span class="line"># 导入</span><br><span class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">INFILE</span> <span class="string">'D:\\product.txt'</span> <span class="keyword">into</span> <span class="keyword">table</span> product_info</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/28/Mysql-sql优化/">展开全文 >></a>
         </p>
       
 
@@ -560,11 +632,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

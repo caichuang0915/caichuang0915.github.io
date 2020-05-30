@@ -163,15 +163,10 @@ http {
 
 - user :主模块命令， 指定Nginx的worker进程运行用户以及用户组，默认由nobody账号运行。       
 - worker_processes: 指定Nginx要开启的进程数。
-- error log:用来定义全局错设日志文件的路径和日志名称。
-			   日志输出级别有debug，info，notice，warn，error，crit 可供选择，其中debug输出日志最为详细，面crit（严重）输出日志最少。默认是error
+- error log:用来定义全局错设日志文件的路径和日志名称。日志输出级别有debug，info，notice，warn，error，crit可供选择，其中debug输出日志最为详细，面crit（严重）输出日志最少。默认是error
+
 - pid: 用来指定进程id的存储文件位置。
-- event：设定nginx的工作模式及连接数上限，
-		其中参数use用来指定nginx的工作模式（这里是epoll，epoll是多路复用IO(I/O Multiplexing)中的一种方式）,
-			nginx支持的工作模式有select ,poll,kqueue,epoll,rtsig,/dev/poll。
-			其中select和poll都是标准的工作模式，kqueue和epoll是高效的工作模式，对于linux系统，epoll是首选。
-     worker_connection是设置nginx每个进程最大的连接数，默认是1024，所以nginx最大的连接数max_client=worker_processes * worker_connections。
-		进程最大连接数受到系统最大打开文件数的限制，需要设置ulimit。
+- event：设定nginx的工作模式及连接数上限，其中参数use用来指定nginx的工作模式（这里是epoll，epoll是多路复用IO(I/O Multiplexing)中的一种方式）,nginx支持的工作模式有select ,poll,kqueue,epoll,rtsig,/dev/poll。其中select和poll都是标准的工作模式，kqueue和epoll是高效的工作模式，对于linux系统，epoll是首选。worker_connection是设置nginx每个进程最大的连接数，默认是1024，所以nginx最大的连接数max_client=worker_processes * worker_connections。进程最大连接数受到系统最大打开文件数的限制，需要设置ulimit。
 
 http服务器相关属性的设置：
 
