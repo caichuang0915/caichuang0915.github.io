@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.tupelo.cc">
-  <title>Archives | Tupelo</title>
+  <title>Nginx简介 | Tupelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Tupelo">
-<meta property="og:url" content="http://blog.tupelo.cc/archives/index.html">
+  <meta name="description" content="Nginx简介 Nginx作用 路由功能（与微服务对应）：域名/路径，进行路由选择后台服务器 负载功能（与高并发高可用对应）：对后台服务器集群进行负载 静态服务器（比tomcat性能高很多）：在mvvm模式中，充当文件读取职责   总结：实际使用中，这三项功用，会混合使用。比如先分离动静，再路由服务，再负载机器  Nginx安装源码编译方式： 123456789101112131415161718">
+<meta name="keywords" content="Nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx简介">
+<meta property="og:url" content="http://blog.tupelo.cc/2020/07/31/Nginx简介/index.html">
 <meta property="og:site_name" content="Tupelo">
+<meta property="og:description" content="Nginx简介 Nginx作用 路由功能（与微服务对应）：域名/路径，进行路由选择后台服务器 负载功能（与高并发高可用对应）：对后台服务器集群进行负载 静态服务器（比tomcat性能高很多）：在mvvm模式中，充当文件读取职责   总结：实际使用中，这三项功用，会混合使用。比如先分离动静，再路由服务，再负载机器  Nginx安装源码编译方式： 123456789101112131415161718">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-30T16:25:49.417Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tupelo">
+<meta name="twitter:title" content="Nginx简介">
+<meta name="twitter:description" content="Nginx简介 Nginx作用 路由功能（与微服务对应）：域名/路径，进行路由选择后台服务器 负载功能（与高并发高可用对应）：对后台服务器集群进行负载 静态服务器（比tomcat性能高很多）：在mvvm模式中，充当文件读取职责   总结：实际使用中，这三项功用，会混合使用。比如先分离动静，再路由服务，再负载机器  Nginx安装源码编译方式： 123456789101112131415161718">
   
     <link rel="alternative" href="/atom.xml" title="Tupelo" type="application/atom+xml">
   
@@ -148,36 +153,174 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Nginx简介" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/31/Nginx简介/" class="archive-article-date">
-  	<time datetime="2020-07-30T16:25:49.416Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-31</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/31/Nginx简介/">Nginx简介</a>
+    <h1 class="article-title" itemprop="name">
+      Nginx简介
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/07/31/Nginx简介/" class="archive-article-date">
+  	<time datetime="2020-07-30T16:25:49.416Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Nginx简介</p>
+<h4 id="Nginx作用"><a href="#Nginx作用" class="headerlink" title="Nginx作用"></a>Nginx作用</h4><ul>
+<li>路由功能（与微服务对应）：域名/路径，进行路由选择后台服务器</li>
+<li>负载功能（与高并发高可用对应）：对后台服务器集群进行负载</li>
+<li>静态服务器（比tomcat性能高很多）：在mvvm模式中，充当文件读取职责</li>
+</ul>
+<blockquote>
+<p>总结：实际使用中，这三项功用，会混合使用。比如先分离动静，再路由服务，再负载机器</p>
+</blockquote>
+<h4 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h4><p>源码编译方式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#一般系统中已经装了了make和g++，无须再装</span></span><br><span class="line">yum -y install autoconf automake make</span><br><span class="line">yum -y install gcc gcc-c++ </span><br><span class="line"></span><br><span class="line"><span class="comment">#安装nginx依赖的库</span></span><br><span class="line">yum -y install pcre pcre-devel    </span><br><span class="line">yum -y install zlib zlib-devel</span><br><span class="line">yum install -y openssl openssl-devel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 安装</span></span><br><span class="line">wget  http://nginx.org/download/nginx-1.9.15.tar.gz</span><br><span class="line">tar -zxvf nginx-1.9.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-1.9.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 后面的模块需要一起安装</span></span><br><span class="line">./configure   --prefix=/usr/<span class="built_in">local</span>/nginx --with-http_stub_status_module --with-http_ssl_module </span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止 </span></span><br><span class="line">nginx -s stop</span><br><span class="line"></span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="nginx模型概念"><a href="#nginx模型概念" class="headerlink" title="nginx模型概念"></a>nginx模型概念</h4><p>Nginx会按需同时运行多个进程：</p>
+<ul>
+<li>一个主进程(master)和几个工作进程(worker)，配置了缓存时还会有缓存加载器进程(cache loader)和缓存管理器进程(cache manager)等。 </li>
+<li>所有进程均是仅含有一个线程，并主要通过“共享内存”的机制实现进程间通信。 </li>
+<li>主进程以root用户身份运行，而worker、cache loader和cache manager均应以非特权用户身份（user配置项）运行。</li>
+</ul>
+<p>主进程主要完成如下工作：</p>
+<ol>
+<li>读取并验正配置信息；</li>
+<li>创建、绑定及关闭套接字；</li>
+<li>启动、终止及维护worker进程的个数；</li>
+<li>无须中止服务而重新配置工作特性；</li>
+<li>重新打开日志文件；</li>
+</ol>
+<p>worker进程主要完成的任务包括：</p>
+<ol>
+<li>接收、传入并处理来自客户端的连接；</li>
+<li>提供反向代理及过滤功能；</li>
+<li>nginx任何能完成的其它任务；</li>
+</ol>
+<h4 id="nginx配置文件"><a href="#nginx配置文件" class="headerlink" title="nginx配置文件"></a>nginx配置文件</h4><p>例:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#user www-data;</span></span><br><span class="line">worker_processes  4;</span><br><span class="line"></span><br><span class="line">error_log  /var/<span class="built_in">log</span>/nginx/error.log;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">	use epoll;</span><br><span class="line">    worker_connections 2048;</span><br><span class="line">    <span class="comment"># multi_accept on;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line"><span class="comment">#    include       /etc/nginx/mime.types;</span></span><br><span class="line"></span><br><span class="line">    types_hash_max_size 2048;</span><br><span class="line">    server_names_hash_bucket_size 64;</span><br><span class="line"></span><br><span class="line">    log_format custom <span class="string">'$remote_addr - $remote_user [$time_local] '</span></span><br><span class="line">                      <span class="string">'"$request" $status $request_time $body_bytes_sent '</span></span><br><span class="line">                      <span class="string">'"$http_referer" "$http_user_agent" "$request_body"'</span>;</span><br><span class="line"></span><br><span class="line">    access_log  /var/<span class="built_in">log</span>/nginx/access.log custom;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#keepalive_timeout  0;</span></span><br><span class="line">    keepalive_timeout  120;</span><br><span class="line">    tcp_nodelay        on;</span><br><span class="line"></span><br><span class="line">    proxy_connect_timeout 120;</span><br><span class="line">    proxy_send_timeout 120;</span><br><span class="line">    proxy_read_timeout 120;</span><br><span class="line">    send_timeout       120;</span><br><span class="line"></span><br><span class="line">    gzip  on;</span><br><span class="line">    gzip_disable <span class="string">"MSIE [1-6]\.(?!.*SV1)"</span>;</span><br><span class="line"></span><br><span class="line">    upstream backend &#123;</span><br><span class="line">      server localhost:3456 ;</span><br><span class="line">      server localhost:4567 ;</span><br><span class="line">      server localhost:5678 ;</span><br><span class="line">      server localhost:6789 ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    upstream manage &#123;</span><br><span class="line">      server 127.0.0.1:8080 ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    upstream web &#123;</span><br><span class="line">      server localhost:1603 ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">       listen 80;</span><br><span class="line">       location / &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://manage/;</span><br><span class="line">       &#125;</span><br><span class="line">       location /api &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://backend/api;</span><br><span class="line">         client_max_body_size    30m;</span><br><span class="line">       &#125;</span><br><span class="line">       location /trig &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://backend/trig;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">       listen 1604;</span><br><span class="line">       location / &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://web/;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>全局属性配置：</p>
+<ul>
+<li>user :主模块命令， 指定Nginx的worker进程运行用户以及用户组，默认由nobody账号运行。       </li>
+<li>worker_processes: 指定Nginx要开启的进程数。</li>
+<li><p>error log:用来定义全局错设日志文件的路径和日志名称。日志输出级别有debug，info，notice，warn，error，crit可供选择，其中debug输出日志最为详细，面crit（严重）输出日志最少。默认是error</p>
+</li>
+<li><p>pid: 用来指定进程id的存储文件位置。</p>
+</li>
+<li>event：设定nginx的工作模式及连接数上限，其中参数use用来指定nginx的工作模式（这里是epoll，epoll是多路复用IO(I/O Multiplexing)中的一种方式）,nginx支持的工作模式有select ,poll,kqueue,epoll,rtsig,/dev/poll。其中select和poll都是标准的工作模式，kqueue和epoll是高效的工作模式，对于linux系统，epoll是首选。worker_connection是设置nginx每个进程最大的连接数，默认是1024，所以nginx最大的连接数max_client=worker_processes * worker_connections。进程最大连接数受到系统最大打开文件数的限制，需要设置ulimit。</li>
+</ul>
+<p>http服务器相关属性的设置：</p>
+<ul>
+<li>http </li>
+</ul>
+<p>server段虚拟主机的配置:</p>
+<ul>
+<li>server </li>
+</ul>
+<h4 id="Nginx日志-log-format"><a href="#Nginx日志-log-format" class="headerlink" title="Nginx日志 - log_format"></a>Nginx日志 - log_format</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">log_format custom <span class="string">'$remote_addr - $remote_user [$time_local] '</span></span><br><span class="line">                      <span class="string">'"$request" $status $request_time $body_bytes_sent '</span></span><br><span class="line">                      <span class="string">'"$http_referer" "$http_user_agent" "$request_body"'</span>;</span><br><span class="line"></span><br><span class="line">access_log  /var/<span class="built_in">log</span>/nginx/access.log custom;</span><br></pre></td></tr></table></figure>
+<p>access_log: 配置日志位置 和 输出格式</p>
+<p>格式设置:</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$remote_addr</td>
+<td>客户端的ip地址(代理服务器，显示代理服务ip)</td>
+</tr>
+<tr>
+<td>$remote_user</td>
+<td>用于记录远程客户端的用户名称（一般为“-”）</td>
+</tr>
+<tr>
+<td>$time_local</td>
+<td>用于记录访问时间和时区</td>
+</tr>
+<tr>
+<td>$request</td>
+<td>用于记录请求的url以及请求方法</td>
+</tr>
+<tr>
+<td>$status</td>
+<td>响应状态码，例如：200成功、404页面找不到等。</td>
+</tr>
+<tr>
+<td>$body_bytes_sent</td>
+<td>给客户端发送的文件主体内容字节数</td>
+</tr>
+<tr>
+<td>$http_user_agent</td>
+<td>用户所使用的代理（一般为浏览器）</td>
+</tr>
+<tr>
+<td>$http_x_forwarded_for</td>
+<td>可以记录客户端IP，通过代理服务器来记录客户端的ip地址</td>
+</tr>
+<tr>
+<td>$http_referer</td>
+<td>可以记录用户是从哪个链接访问过来的</td>
+</tr>
+</tbody>
+</table>
+<h4 id="日志配置和及切割"><a href="#日志配置和及切割" class="headerlink" title="日志配置和及切割"></a>日志配置和及切割</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/rsyslog start  <span class="comment">#系统日志，如不开启，看不到定时任务日志</span></span><br><span class="line">/etc/rc.d/init.d/crond start	<span class="comment">#定时任务开启</span></span><br></pre></td></tr></table></figure>
+<p>编写sh：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#设置日志文件存放目录</span></span><br><span class="line">LOG_HOME=<span class="string">"/usr/local/nginx/logs/"</span></span><br><span class="line"><span class="comment">#备分文件名称</span></span><br><span class="line">LOG_PATH_BAK=<span class="string">"<span class="variable">$(date -d yesterday +%Y%m%d%H%M)</span>"</span></span><br><span class="line"><span class="comment">#重命名日志文件</span></span><br><span class="line">mv <span class="variable">$&#123;LOG_HOME&#125;</span>/access.log <span class="variable">$&#123;LOG_HOME&#125;</span>/access.<span class="variable">$&#123;LOG_PATH_BAK&#125;</span>.<span class="built_in">log</span></span><br><span class="line">mv <span class="variable">$&#123;LOG_HOME&#125;</span>/error.log <span class="variable">$&#123;LOG_HOME&#125;</span>/error.<span class="variable">$&#123;LOG_PATH_BAK&#125;</span>.<span class="built_in">log</span></span><br><span class="line"><span class="comment">#向nginx主进程发信号重新打开日志</span></span><br><span class="line"><span class="built_in">kill</span> -USR1 `cat <span class="variable">$&#123;LOG_HOME&#125;</span>/nginx.pid`</span><br></pre></td></tr></table></figure>
+<p>配置cron：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/1 * * * * /usr/<span class="built_in">local</span>/nginx/sbin/logcut.sh</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可写脚本将日志存入mongo</p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://tupelo.top/zhifubao.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://tupelo.top/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -189,374 +332,105 @@
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/30/正则表达式/" class="archive-article-date">
-  	<time datetime="2020-07-30T15:22:24.354Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/30/正则表达式/">正则表达式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">正则表达式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/20/jvm-java内存区域/" class="archive-article-date">
-  	<time datetime="2020-02-19T16:18:24.146Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/20/jvm-java内存区域/">JVM - java内存区域</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/20/git使用笔记/" class="archive-article-date">
-  	<time datetime="2020-02-19T16:18:24.100Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/20/git使用笔记/">Git使用笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/20/jvm-执行子系统/" class="archive-article-date">
-  	<time datetime="2020-02-19T16:18:24.068Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/20/jvm-执行子系统/">JVM - 执行子系统</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/20/jvm-垃圾回收与内存分配策略/" class="archive-article-date">
-  	<time datetime="2020-02-19T16:18:24.038Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/20/jvm-垃圾回收与内存分配策略/">JVM - 垃圾回收与内存分配策略</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/18/Mysql-sql优化/" class="archive-article-date">
-  	<time datetime="2019-08-18T07:54:28.291Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/18/Mysql-sql优化/">Mysql - sql优化</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.tupelo.cc/2020/07/31/Nginx简介/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/16/Mysql-慢查询和执行计划/" class="archive-article-date">
-  	<time datetime="2019-08-15T16:06:56.755Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-16</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/30/正则表达式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">正则表达式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/16/Mysql-慢查询和执行计划/">Mysql - MySql慢查询和执行计划(重点)</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/15/Mysql-业务设计/" class="archive-article-date">
-  	<time datetime="2019-08-15T15:29:20.590Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/15/Mysql-业务设计/">Mysql - MySql业务设计</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/15/Mysql-锁和事务/" class="archive-article-date">
-  	<time datetime="2019-08-15T14:59:59.121Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/15/Mysql-锁和事务/">Mysql - Mysql锁和事务</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -581,8 +455,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

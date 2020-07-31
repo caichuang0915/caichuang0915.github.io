@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Tupelo">
 <meta property="og:description" content="正则表达式 什么是正则表达式？ 正则表达式是一组由字母和符号组成的特殊文本，它可以用来从文本中找出满足你想要的格式的句子。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-30T16:18:05.488Z">
+<meta property="og:updated_time" content="2020-07-31T15:41:30.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式">
 <meta name="twitter:description" content="正则表达式 什么是正则表达式？ 正则表达式是一组由字母和符号组成的特殊文本，它可以用来从文本中找出满足你想要的格式的句子。">
@@ -244,62 +244,25 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">result = re.findall(<span class="string">r'[Th]'</span>,<span class="string">'The'</span>)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
 <p>方括号的句号就表示句号. 表达式 <code>ar[.]</code> 匹配 <code>ar.</code>字符串</p>
 <h5 id="2-2-1-否定字符集"><a href="#2-2-1-否定字符集" class="headerlink" title="2.2.1 否定字符集"></a>2.2.1 否定字符集</h5><p>一般来说 <code>^</code> 表示一个字符串的开头, 但它用在一个方括号的开头的时候, 它表示这个字符集是否定的.<br>例如, 表达式<code>[^c]ar</code> 匹配一个后面跟着<code>ar</code>的除了<code>c</code>的任意字符.</p>
-<pre>
-"[^c]ar" => The car <a href="#learn-regex"><strong>par</strong></a>ked in the <a href="#learn-regex"><strong>gar</strong></a>age.
-</pre>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'carparmar'</span></span><br><span class="line">print(re.findall(<span class="string">r'[^p]ar'</span>,s))</span><br></pre></td></tr></table></figure>
 <h4 id="2-3-重复次数"><a href="#2-3-重复次数" class="headerlink" title="2.3 重复次数"></a>2.3 重复次数</h4><p>后面跟着元字符 <code>+</code>, <code>*</code> or <code>?</code> 的, 用来指定匹配子模式的次数.<br>这些元字符在不同的情况下有着不同的意思.</p>
 <h5 id="2-3-1-号"><a href="#2-3-1-号" class="headerlink" title="2.3.1 * 号"></a>2.3.1 <code>*</code> 号</h5><p><code>*</code>号匹配 在<code>*</code>之前的字符出现<code>大于等于0</code>次.<br>例如, 表达式 <code>a*</code> 匹配以0或更多个a开头的字符, 因为有0个这个条件, 其实也就匹配了所有的字符. 表达式<code>[a-z]*</code> 匹配一个行中所有以小写字母开头的字符串.</p>
-<pre>
-"[a-z]*" => T<a href="#learn-regex"><strong>he</strong></a> <a href="#learn-regex"><strong>car</strong></a> <a href="#learn-regex"><strong>parked</strong></a> <a href="#learn-regex"><strong>in</strong></a> <a href="#learn-regex"><strong>the</strong></a> <a href="#learn-regex"><strong>garage</strong></a> #21.
-</pre>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'carparmar'</span></span><br><span class="line">print(re.search(<span class="string">r'.*ar'</span>,s).group())</span><br></pre></td></tr></table></figure>
 <p><code>*</code>字符和<code>.</code>字符搭配可以匹配所有的字符<code>.*</code>.<br><code>*</code>和表示匹配空格的符号<code>\s</code>连起来用, 如表达式<code>\s*cat\s*</code>匹配0或更多个空格开头和0或更多个空格结尾的cat字符串.</p>
-<pre>
-"\s*cat\s*" => The fat<a href="#learn-regex"><strong> cat </strong></a>sat on the <a href="#learn-regex">con<strong>cat</strong>enation</a>.
-</pre>
-
 <h5 id="2-3-2-号"><a href="#2-3-2-号" class="headerlink" title="2.3.2 + 号"></a>2.3.2 <code>+</code> 号</h5><p><code>+</code>号匹配<code>+</code>号之前的字符出现 &gt;=1 次个字符.<br>例如表达式<code>c.+t</code> 匹配以首字母<code>c</code>开头以<code>t</code>结尾,中间跟着任意个字符的字符串.</p>
-<pre>
-"c.+t" => The fat <a href="#learn-regex"><strong>cat sat on the mat</strong></a>.
-</pre>
-
-<h5 id="2-3-3-号"><a href="#2-3-3-号" class="headerlink" title="2.3.3 ? 号"></a>2.3.3 <code>?</code> 号</h5><p>在正则表达式中元字符 <code>?</code> 标记在符号前面的字符为可选, 即出现 0 或 1 次.<br>例如, 表达式 <code>[T]?he</code> 匹配字符串 <code>he</code> 和 <code>The</code>.</p>
-<pre>
-"[T]he" => <a href="#learn-regex"><strong>The</strong></a> car is parked in the garage.
-</pre>
-
-<pre>
-"[T]?he" => <a href="#learn-regex"><strong>The</strong></a> car is parked in t<a href="#learn-regex"><strong>he</strong></a> garage.
-</pre>
-
-<h4 id="2-4-号"><a href="#2-4-号" class="headerlink" title="2.4 {} 号"></a>2.4 <code>{}</code> 号</h4><p>在正则表达式中 <code>{}</code> 是一个量词, 常用来一个或一组字符可以重复出现的次数.<br>例如,  表达式 <code>[0-9]{2,3}</code> 匹配 2~3 位 0~9 的数字.</p>
-<pre>
-"[0-9]{2,3}" => The number was 9.<a href="#learn-regex"><strong>999</strong></a>7 but we rounded it off to <a href="#learn-regex"><strong>10</strong></a>.0.
-</pre>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'carparmar'</span></span><br><span class="line">print(re.search(<span class="string">r'.+ar'</span>,s).group())</span><br></pre></td></tr></table></figure>
+<h5 id="2-3-3-号"><a href="#2-3-3-号" class="headerlink" title="2.3.3 ? 号"></a>2.3.3 <code>?</code> 号</h5><p>在正则表达式中元字符 <code>?</code> 标记在符号前面的字符为可选, 即出现 0 或 1 次.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'carparmar'</span></span><br><span class="line">print(re.search(<span class="string">r'.*?ar'</span>,s).group())</span><br></pre></td></tr></table></figure>
+<h4 id="2-4-号"><a href="#2-4-号" class="headerlink" title="2.4 {} 号"></a>2.4 <code>{}</code> 号</h4><p>在正则表达式中 <code>{}</code> 是一个量词, 常用来一个或一组字符可以重复出现的次数.</p>
 <p>我们可以省略第二个参数.<br>例如, <code>[0-9]{2,}</code> 匹配至少两位 0~9 的数字.</p>
 <p>如果逗号也省略掉则表示重复固定的次数.<br>例如, <code>[0-9]{3}</code> 匹配3位数字</p>
-<pre>
-"[0-9]{2,}" => The number was 9.<a href="#learn-regex"><strong>9997</strong></a> but we rounded it off to <a href="#learn-regex"><strong>10</strong></a>.0.
-</pre>
-
-<pre>
-"[0-9]{3}" => The number was 9.<a href="#learn-regex"><strong>999</strong></a>7 but we rounded it off to 10.0.
-</pre>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'carparmar'</span></span><br><span class="line">print(re.search(<span class="string">r'([cpm]ar)&#123;1,2&#125;'</span>,s).group())</span><br></pre></td></tr></table></figure>
 <h4 id="2-5-特征标群"><a href="#2-5-特征标群" class="headerlink" title="2.5 (...) 特征标群"></a>2.5 <code>(...)</code> 特征标群</h4><p>特征标群是一组写在 <code>(...)</code> 中的子模式. 例如之前说的 <code>{}</code> 是用来表示前面一个字符出现指定次数. 但如果在 <code>{}</code> 前加入特征标群则表示整个标群内的字符重复 N 次. 例如, 表达式 <code>(ab)*</code> 匹配连续出现 0 或更多个 <code>ab</code>.</p>
 <p>我们还可以在 <code>()</code> 中用或字符 <code>|</code> 表示或. 例如, <code>(c|g|p)ar</code> 匹配 <code>car</code> 或 <code>gar</code> 或 <code>par</code>.</p>
-<pre>
-"(c|g|p)ar" => The <a href="#learn-regex"><strong>car</strong></a> is <a href="#learn-regex"><strong>par</strong></a>ked in the <a href="#learn-regex"><strong>gar</strong></a>age.
-</pre>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'carparmar'</span></span><br><span class="line">print(re.search(<span class="string">r'((c|p|m)ar)&#123;1,2&#125;'</span>,s).group())</span><br></pre></td></tr></table></figure>
 <h4 id="2-6-或运算符"><a href="#2-6-或运算符" class="headerlink" title="2.6 | 或运算符"></a>2.6 <code>|</code> 或运算符</h4><p>或运算符就表示或, 用作判断条件.</p>
 <p>例如 <code>(T|t)he|car</code> 匹配 <code>(T|t)he</code> 或 <code>car</code>.</p>
-<pre>
-"(T|t)he|car" => <a href="#learn-regex"><strong>The</strong></a> <a href="#learn-regex"><strong>car</strong></a> is parked in <a href="#learn-regex"><strong>the</strong></a> garage.
-</pre>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'carparmar'</span></span><br><span class="line">print(re.search(<span class="string">r'((c|p|m)ar)&#123;1,3&#125;$'</span>,s).group())</span><br></pre></td></tr></table></figure>
 <h4 id="2-7-转码特殊字符"><a href="#2-7-转码特殊字符" class="headerlink" title="2.7 转码特殊字符"></a>2.7 转码特殊字符</h4><p>反斜线 <code>\</code> 在表达式中用于转码紧跟其后的字符. 用于指定 <code>{ } [ ] / \ + * . $ ^ | ?</code> 这些特殊字符. 如果想要匹配这些特殊字符则要在其前面加上反斜线 <code>\</code>.</p>
 <p>例如 <code>.</code> 是用来匹配除换行符外的所有字符的. 如果想要匹配句子中的 <code>.</code> 则要写成 <code>\.</code>.</p>
 <pre>
@@ -399,30 +362,14 @@
 <h4 id="4-1-前置约束-存在"><a href="#4-1-前置约束-存在" class="headerlink" title="4.1 ?=... 前置约束(存在)"></a>4.1 <code>?=...</code> 前置约束(存在)</h4><p><code>?=...</code> 前置约束(存在), 表示第一部分表达式必须跟在 <code>?=...</code>定义的表达式之后.</p>
 <p>返回结果只瞒住第一部分表达式.<br>定义一个前置约束(存在)要使用 <code>()</code>. 在括号内部使用一个问号和等号: <code>(?=...)</code>. </p>
 <p>前置约束的内容写在括号中的等号后面.<br>例如, 表达式 <code>[T|t]he(?=\sfat)</code> 匹配 <code>The</code> 和 <code>the</code>, 在括号中我们又定义了前置约束(存在) <code>(?=\sfat)</code> ,即 <code>The</code> 和 <code>the</code> 后面紧跟着 <code>(空格)fat</code>.</p>
-<pre>
-"[T|t]he(?=\sfat)" => <a href="#learn-regex"><strong>The</strong></a> fat cat sat on the mat.
-</pre>
-
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'the fat the mat'</span></span><br><span class="line">print(re.findall(<span class="string">r'the(?=\sfat)'</span>,s))</span><br></pre></td></tr></table></figure>
 <h4 id="4-2-前置约束-排除"><a href="#4-2-前置约束-排除" class="headerlink" title="4.2 ?!... 前置约束-排除"></a>4.2 <code>?!...</code> 前置约束-排除</h4><p>前置约束-排除 <code>?!</code> 用于筛选所有匹配结果, 筛选条件为 其后不跟随着定义的格式<br><code>前置约束-排除</code>  定义和 <code>前置约束(存在)</code> 一样, 区别就是 <code>=</code> 替换成 <code>!</code> 也就是 <code>(?!...)</code>. </p>
 <p>表达式 <code>[T|t]he(?!\sfat)</code> 匹配 <code>The</code> 和 <code>the</code>, 且其后不跟着 <code>(空格)fat</code>.</p>
-<pre>
-"[T|t]he(?!\sfat)" => The fat cat sat on <a href="#learn-regex"><strong>the</strong></a> mat.
-</pre>
-
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'the fat the mat'</span></span><br><span class="line">print(re.findall(<span class="string">r'the(?!\sfat)'</span>,s))</span><br></pre></td></tr></table></figure>
 <h4 id="4-3-lt-后置约束-存在"><a href="#4-3-lt-后置约束-存在" class="headerlink" title="4.3 ?&lt;= ... 后置约束-存在"></a>4.3 <code>?&lt;= ...</code> 后置约束-存在</h4><p>后置约束-存在 记作<code>(?&lt;=...)</code> 用于筛选所有匹配结果, 筛选条件为 其前跟随着定义的格式.<br>例如, 表达式 <code>(?&lt;=[T|t]he\s)(fat|mat)</code> 匹配 <code>fat</code> 和 <code>mat</code>, 且其前跟着 <code>The</code> 或 <code>the</code>.</p>
-<pre>
-"(?<=[t|t]he\s)(fat|mat)" ==""> The <a href="#learn-regex"><strong>fat</strong></a> cat sat on the <a href="#learn-regex"><strong>mat</strong></a>.
-</=[t|t]he\s)(fat|mat)"></pre>
-
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'the fat hasd fat asd mat the mat'</span></span><br><span class="line">print(re.findall(<span class="string">r'(?&lt;=the\s)(fat|mat)'</span>,s))</span><br></pre></td></tr></table></figure>
 <h4 id="4-4-lt-后置约束-排除"><a href="#4-4-lt-后置约束-排除" class="headerlink" title="4.4 ?&lt;!... 后置约束-排除"></a>4.4 <code>?&lt;!...</code> 后置约束-排除</h4><p>后置约束-排除 记作 <code>(?&lt;!...)</code> 用于筛选所有匹配结果, 筛选条件为 其前不跟着定义的格式.<br>例如, 表达式 <code>(?&lt;!(T|t)he\s)(cat)</code> 匹配 <code>cat</code>, 且其前不跟着 <code>The</code> 或 <code>the</code>.</p>
-<pre>
-"(?&lt;![T|t]he\s)(cat)" => The cat sat on <a href="#learn-regex"><strong>cat</strong></a>.
-</pre>
-
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'the fat hasd fat the mat'</span></span><br><span class="line">print(re.findall(<span class="string">r'(?&lt;!the\s)(fat|mat)'</span>,s))</span><br></pre></td></tr></table></figure>
 <h3 id="5-标志"><a href="#5-标志" class="headerlink" title="5. 标志"></a>5. 标志</h3><p>标志也叫修饰语, 因为它可以用来修改表达式的搜索结果.<br>这些标志可以任意的组合使用, 它也是整个正则表达式的一部分.</p>
 <table>
 <thead>
@@ -780,15 +727,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
