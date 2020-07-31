@@ -150,6 +150,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Nginx简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/31/Nginx简介/">Nginx简介</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/31/Nginx简介/" class="archive-article-date">
+  	<time datetime="2020-07-30T16:25:49.416Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Nginx简介</p>
+<h4 id="Nginx作用"><a href="#Nginx作用" class="headerlink" title="Nginx作用"></a>Nginx作用</h4><ul>
+<li>路由功能（与微服务对应）：域名/路径，进行路由选择后台服务器</li>
+<li>负载功能（与高并发高可用对应）：对后台服务器集群进行负载</li>
+<li>静态服务器（比tomcat性能高很多）：在mvvm模式中，充当文件读取职责</li>
+</ul>
+<blockquote>
+<p>总结：实际使用中，这三项功用，会混合使用。比如先分离动静，再路由服务，再负载机器</p>
+</blockquote>
+<h4 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h4><p>源码编译方式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#一般系统中已经装了了make和g++，无须再装</span></span><br><span class="line">yum -y install autoconf automake make</span><br><span class="line">yum -y install gcc gcc-c++ </span><br><span class="line"></span><br><span class="line"><span class="comment">#安装nginx依赖的库</span></span><br><span class="line">yum -y install pcre pcre-devel    </span><br><span class="line">yum -y install zlib zlib-devel</span><br><span class="line">yum install -y openssl openssl-devel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 安装</span></span><br><span class="line">wget  http://nginx.org/download/nginx-1.9.15.tar.gz</span><br><span class="line">tar -zxvf nginx-1.9.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-1.9.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 后面的模块需要一起安装</span></span><br><span class="line">./configure   --prefix=/usr/<span class="built_in">local</span>/nginx --with-http_stub_status_module --with-http_ssl_module </span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止 </span></span><br><span class="line">nginx -s stop</span><br><span class="line"></span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2020/07/31/Nginx简介/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/31/Nginx简介/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-正则表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -951,90 +1037,6 @@
 
 
   
-    <article id="post-Mysql-逻辑架构和存储引擎" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/13/Mysql-逻辑架构和存储引擎/">Mysql - Mysql逻辑架构和存储引擎</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/13/Mysql-逻辑架构和存储引擎/" class="archive-article-date">
-  	<time datetime="2019-08-13T15:09:52.577Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Mysql逻辑架构和存储引擎</p>
-<h4 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h4><h5 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h5><ul>
-<li><p>TPS：Transactions Per Second（每秒传输的事物处理个数），这是指服务器每秒处理的事务数，支持事务的存储引擎如InnoDB等特有的一个性能指标。 </p>
-</li>
-<li><p>QPS：Queries Per Second（每秒查询处理量）同时适用与InnoDB和MyISAM 引擎</p>
-</li>
-<li><p>等待时间：执行Sql等待返回结果之间的等待时间</p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/08/13/Mysql-逻辑架构和存储引擎/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/13/Mysql-逻辑架构和存储引擎/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1140,23 +1142,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1165,6 +1159,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
               </li>
              
               <li class="article-tag-list-item">
