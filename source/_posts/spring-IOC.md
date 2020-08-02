@@ -9,7 +9,7 @@ IOC源码分析
 
 ### IOC流程
 
-####IOC源码入口
+#### IOC源码入口
 
 ```java
 
@@ -55,41 +55,40 @@ IOC源码分析
 <!-- more -->
 
 
-####IOC流程详解
+#### IOC流程详解
 
 Spring容器的refresh()【创建刷新】;
 
-1. prepareRefresh() 刷新前的预处理
+* prepareRefresh() 刷新前的预处理
 	- initPropertySources() 初始化一些属性设置;子类自定义个性化的属性设置方法
 	- getEnvironment().validateRequiredProperties() 检验属性的合法等
 	- earlyApplicationEvents= new LinkedHashSet<ApplicationEvent>() 保存容器中的一些早期的事件
 
-2. obtainFreshBeanFactory() 获取BeanFactory
-	- refreshBeanFactory();刷新【创建】BeanFactory；
-			110行:创建了一个this.beanFactory = new DefaultListableBeanFactory();
-			设置id；
+* obtainFreshBeanFactory() 获取BeanFactory
+	- refreshBeanFactory();刷新【创建】BeanFactory;110行:创建了一个this.beanFactory = new DefaultListableBeanFactory();设置id；
 	- getBeanFactory();返回刚才GenericApplicationContext创建的BeanFactory对象；
 	- 将创建的BeanFactory【DefaultListableBeanFactory】返回；
 
-3. prepareBeanFactory(beanFactory) BeanFactory的预准备工作（以上创建了beanFactory,现在对BeanFactory对象进行一些设置属性）
+* prepareBeanFactory(beanFactory) BeanFactory的预准备工作（以上创建了beanFactory,现在对BeanFactory对象进行一些设置属性）
 	- 设置BeanFactory的类加载器、支持表达式解析器...
 	- 添加部分BeanPostProcessor【ApplicationContextAwareProcessor】
 	- 设置忽略的自动装配的接口EnvironmentAware、EmbeddedValueResolverAware、xxx；
-	- 注册可以解析的自动装配；我们能直接在任何组件中自动注入:
-			BeanFactory、ResourceLoader、ApplicationEventPublisher、ApplicationContext
+	- 注册可以解析的自动装配；我们能直接在任何组件中自动注入:BeanFactory、ResourceLoader、ApplicationEventPublisher、ApplicationContext
 	- 添加BeanPostProcessor【ApplicationListenerDetector】
 	- 添加编译时的AspectJ；
-	- 给BeanFactory中注册一些能用的组件；
+	- 给BeanFactory中注册一些能用的组件; 
 		environment【ConfigurableEnvironment】、systemProperties【Map<String, Object>】、systemEnvironment【Map<String, Object>】
 
-4. postProcessBeanFactory(beanFactory) BeanFactory准备工作完成后进行的后置处理工作
+* postProcessBeanFactory(beanFactory) BeanFactory准备工作完成后进行的后置处理工作
 	- 子类通过重写这个方法来在BeanFactory创建并预准备完成以后做进一步的设置
 
 
-======================以上是BeanFactory的创建及预准备工作==================================
+> 以上是BeanFactory的创建及预准备工作
+
+---
 
 
-5. invokeBeanFactoryPostProcessors(beanFactory) 执行BeanFactoryPostProcessor的方法
+* invokeBeanFactoryPostProcessors(beanFactory) 执行BeanFactoryPostProcessor的方法
 
 	> BeanFactoryPostProcessor:BeanFactory的后置处理器。在BeanFactory标准初始化之后执行的,两个接口:BeanFactoryPostProcessor、BeanDefinitionRegistryPostProcessor
 
@@ -102,8 +101,6 @@ Spring容器的refresh()【创建刷新】;
 			postProcessor.postProcessBeanDefinitionRegistry(registry)
 		- 109行:最后执行没有实现任何优先级或者是顺序接口的BeanDefinitionRegistryPostProcessors；
 			postProcessor.postProcessBeanDefinitionRegistry(registry)
-			
-		
 	- 再执行BeanFactoryPostProcessor的方法
 		- 139行:获取所有的BeanFactoryPostProcessor
 		- 147行:看先执行实现了PriorityOrdered优先级接口的BeanFactoryPostProcessor、
@@ -114,15 +111,15 @@ Spring容器的refresh()【创建刷新】;
 			postProcessor.postProcessBeanFactory()
 
 
-6. registerBeanPostProcessors(beanFactory) 注册BeanPostProcessor（Bean的后置处理器）
-
-		不同接口类型的BeanPostProcessor；在Bean创建前后的执行时机是不一样的
-		BeanPostProcessor、
-		DestructionAwareBeanPostProcessor、
-		InstantiationAwareBeanPostProcessor、
-		SmartInstantiationAwareBeanPostProcessor、
-		MergedBeanDefinitionPostProcessor【internalPostProcessors】、
-		
+* registerBeanPostProcessors(beanFactory) 注册BeanPostProcessor（Bean的后置处理器）
+	```
+	不同接口类型的BeanPostProcessor；在Bean创建前后的执行时机是不一样的
+	BeanPostProcessor、
+	DestructionAwareBeanPostProcessor、
+	InstantiationAwareBeanPostProcessor、
+	SmartInstantiationAwareBeanPostProcessor、
+	MergedBeanDefinitionPostProcessor【internalPostProcessors】
+	```
 	- 189行:获取所有的BeanPostProcessor;后置处理器都默认可以通过PriorityOrdered、Ordered接口来执行优先级
 	- 204行:先注册PriorityOrdered优先级接口的BeanPostProcessor,把每一个BeanPostProcessor添加到BeanFactory中,beanFactory.addBeanPostProcessor(postProcessor);
 	- 224行:再注册Ordered接口的
@@ -131,7 +128,7 @@ Spring容器的refresh()【创建刷新】;
 	- 注册一个ApplicationListenerDetector；来在Bean创建完成后检查是否是ApplicationListener，如果是:applicationContext.addApplicationListener((ApplicationListener<?>) bean);
 
 
-7. initMessageSource() 初始化MessageSource组件（做国际化功能；消息绑定，消息解析）
+* initMessageSource() 初始化MessageSource组件（做国际化功能；消息绑定，消息解析）
 
 	- 718行:获取BeanFactory
 	- 719行:看容器中是否有id为messageSource的，类型是MessageSource的组件,如果有赋值给messageSource，如果没有自己创建一个DelegatingMessageSource;MessageSource:取出国际化配置文件中的某个key的值,能按照区域信息获取
@@ -145,7 +142,7 @@ Spring容器的refresh()【创建刷新】;
 	
 
 
-8. initApplicationEventMulticaster() 初始化事件派发器
+* initApplicationEventMulticaster() 初始化事件派发器
 
 	- 753行:获取BeanFactory
 	- 754行:从BeanFactory中获取applicationEventMulticaster的ApplicationEventMulticaster
@@ -153,24 +150,22 @@ Spring容器的refresh()【创建刷新】;
 	- 763行:将创建的ApplicationEventMulticaster添加到BeanFactory中，以后其他组件直接自动注入
 
 
-9. onRefresh() 留给子容器（子类）
+* onRefresh() 留给子容器（子类）
 
 	- 子类重写这个方法，在容器刷新的时候可以自定义逻辑；
 
 
-10. registerListeners() 给容器中将所有项目里面的ApplicationListener注册进来
+* registerListeners() 给容器中将所有项目里面的ApplicationListener注册进来
 
 	- 822行:从容器中拿到所有的ApplicationListener
-	- 824行:将每个监听器添加到事件派发器中；
-
+	- 824行:将每个监听器添加到事件派发器中
 	```java
-	getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);
-	```	
-
+	getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName)
+	```
 	- 832行:派发之前步骤产生的事件；
 
 
-11. finishBeanFactoryInitialization(beanFactory) 初始化所有剩下的单实例bean 
+* finishBeanFactoryInitialization(beanFactory) 初始化所有剩下的单实例bean 
 
 	- 867行:beanFactory.preInstantiateSingletons();初始化后剩下的单实例bean，跟进
 		- 734行:获取容器中的所有Bean，依次进行初始化和创建对象
@@ -188,8 +183,7 @@ Spring容器的refresh()【创建刷新】;
 				- 缓存中获取不到，开始Bean的创建对象流程；
 				- 287行:标记当前bean已经被创建（防止多线程同时创建，使用synchronized）
 				- 291行:获取Bean的定义信息；
-				- 295行:getDependsOn()，bean.xml里创建person时，加depend-on="jeep,moon"是先把jeep和moon创建出来
-				         【获取当前Bean依赖的其他Bean;如果有按照getBean()把依赖的Bean先创建出来；】
+				- 295行:getDependsOn()，bean.xml里创建person时，加depend-on="jeep,moon"是先把jeep和moon创建出来,【获取当前Bean依赖的其他Bean;如果有按照getBean()把依赖的Bean先创建出来；】
 				- 启动单实例Bean的创建流程；
 					- 462行:createBean(beanName, mbd, args);
 					- 490行:Object bean = resolveBeforeInstantiation(beanName, mbdToUse);让BeanPostProcessor先拦截返回代理对象；
@@ -229,15 +223,14 @@ Spring容器的refresh()【创建刷新】;
 			检查所有的Bean是否是SmartInitializingSingleton接口的；如果是；就执行afterSingletonsInstantiated()；
 
 
-12. finishRefresh() 完成BeanFactory的初始化创建工作,IOC容器就创建完成
+* finishRefresh() 完成BeanFactory的初始化创建工作,IOC容器就创建完成
 
-	- 882行:initLifecycleProcessor();初始化和生命周期有关的后置处理器；LifecycleProcessor
-			默认从容器中找是否有lifecycleProcessor的组件【LifecycleProcessor】;如果没有new DefaultLifecycleProcessor()加入到容器；
-			
-			自己也可以尝试写一个LifecycleProcessor的实现类，可以在BeanFactory
-				void onRefresh();
-				void onClose();	
-
+	- 882行:initLifecycleProcessor() 初始化和生命周期有关的后置处理器:LifecycleProcessor,默认从容器中找是否有lifecycleProcessor的组件【LifecycleProcessor】;如果没有new DefaultLifecycleProcessor()加入到容器；
+	```
+	自己也可以尝试写一个LifecycleProcessor的实现类，可以在BeanFactory
+		void onRefresh();
+		void onClose();	
+	```
 	- 885行:getLifecycleProcessor().onRefresh() 拿到前面定义的生命周期处理器（BeanFactory） 回调onRefresh()
 	- 888行:publishEvent(new ContextRefreshedEvent(this));发布容器刷新完成事件；
 	- 891行:liveBeansView.registerApplicationContext(this);
