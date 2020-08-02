@@ -6,23 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.tupelo.cc">
-  <title>并发编程 - 线程的并发工具类 | Tupelo</title>
+  <title>Archives: 2020/8 | Tupelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="线程的并发工具类 线程的并发工具类 Fork-Join:分治思想 CountDownLatch:是一组线程等待其他的线程完成工作以后在执行,加强版join await用来等待,countDown负责计数器的减1 CyclicBarrier: 让一组线程达到某个屏障,被阻塞,一直到组内最后一个线程达到屏障时,屏障开放,所有被阻塞的线程会继续运行 countdownlatch放行由第三者控制,Cycl">
-<meta name="keywords" content="并发编程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="并发编程 - 线程的并发工具类">
-<meta property="og:url" content="http://blog.tupelo.cc/2019/02/26/多线程-02/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Tupelo">
+<meta property="og:url" content="http://blog.tupelo.cc/archives/2020/08/index.html">
 <meta property="og:site_name" content="Tupelo">
-<meta property="og:description" content="线程的并发工具类 线程的并发工具类 Fork-Join:分治思想 CountDownLatch:是一组线程等待其他的线程完成工作以后在执行,加强版join await用来等待,countDown负责计数器的减1 CyclicBarrier: 让一组线程达到某个屏障,被阻塞,一直到组内最后一个线程达到屏障时,屏障开放,所有被阻塞的线程会继续运行 countdownlatch放行由第三者控制,Cycl">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://image.tupelo.top/forkJoin.jpeg">
-<meta property="og:image" content="http://image.tupelo.top/Callable.png">
-<meta property="og:updated_time" content="2019-02-25T17:14:25.250Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发编程 - 线程的并发工具类">
-<meta name="twitter:description" content="线程的并发工具类 线程的并发工具类 Fork-Join:分治思想 CountDownLatch:是一组线程等待其他的线程完成工作以后在执行,加强版join await用来等待,countDown负责计数器的减1 CyclicBarrier: 让一组线程达到某个屏障,被阻塞,一直到组内最后一个线程达到屏障时,屏障开放,所有被阻塞的线程会继续运行 countdownlatch放行由第三者控制,Cycl">
-<meta name="twitter:image" content="http://image.tupelo.top/forkJoin.jpeg">
+<meta name="twitter:title" content="Tupelo">
   
     <link rel="alternative" href="/atom.xml" title="Tupelo" type="application/atom+xml">
   
@@ -156,208 +148,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-多线程-02" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      并发编程 - 线程的并发工具类
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/08/02/spring-IOC/" class="archive-article-date">
+  	<time datetime="2020-08-02T15:48:32.863Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-02</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/08/02/spring-IOC/">SpringIOC - IOC源码分析</a>
     </h1>
   
 
-        
-        <a href="/2019/02/26/多线程-02/" class="archive-article-date">
-  	<time datetime="2019-02-25T16:33:28.959Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>线程的并发工具类</p>
-<h2 id="线程的并发工具类"><a href="#线程的并发工具类" class="headerlink" title="线程的并发工具类"></a>线程的并发工具类</h2><ul>
-<li>Fork-Join:分治思想</li>
-<li>CountDownLatch:是一组线程等待其他的线程完成工作以后在执行,加强版join await用来等待,countDown负责计数器的减1</li>
-<li>CyclicBarrier: 让一组线程达到某个屏障,被阻塞,一直到组内最后一个线程达到屏障时,屏障开放,所有被阻塞的线程会继续运行<ul>
-<li>countdownlatch放行由第三者控制,CyclicBarrier放行由一组线程本身控制</li>
-<li>countdownlatch放行条件》=线程数,CyclicBarrier放行条件=线程数</li>
-</ul>
-</li>
-<li>Semaphore:信号量</li>
-<li>Exchange:交换</li>
-<li>Callable、Future和FutureTask </li>
-</ul>
-<a id="more"></a>  
-<h4 id="Fork-Join"><a href="#Fork-Join" class="headerlink" title="Fork-Join"></a>Fork-Join</h4><blockquote>
-<p>继承 RecursiveAction/RecursiveTask/ForkJoinTask,重写compute方法</p>
-</blockquote>
-<p><img src="http://image.tupelo.top/forkJoin.jpeg" alt="Fork-Join"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *类说明：遍历指定目录（含子目录）找寻指定类型文件</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindDirsFiles</span> <span class="keyword">extends</span> <span class="title">RecursiveAction</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> File path;<span class="comment">//当前任务需要搜寻的目录</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FindDirsFiles</span><span class="params">(File path)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.path = path;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 用一个 ForkJoinPool 实例调度总任务</span></span><br><span class="line">            ForkJoinPool pool = <span class="keyword">new</span> ForkJoinPool();</span><br><span class="line">            FindDirsFiles task = <span class="keyword">new</span> FindDirsFiles(<span class="keyword">new</span> File(<span class="string">"F:/"</span>));</span><br><span class="line"></span><br><span class="line">            pool.execute(task);<span class="comment">//异步调用</span></span><br><span class="line">            <span class="comment">// pool.invokeAll(task);</span></span><br><span class="line">            System.out.println(<span class="string">"Task is Running......"</span>);</span><br><span class="line">            Thread.sleep(<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">int</span> otherWork = <span class="number">0</span>;</span><br><span class="line">            System.out.println(<span class="string">"Main Thread done sth......,otherWork="</span>+otherWork);</span><br><span class="line">            task.join();<span class="comment">//阻塞的方法</span></span><br><span class="line">            System.out.println(<span class="string">"Task end"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">compute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		List&lt;FindDirsFiles&gt; subTasks = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		File[] files = path.listFiles();</span><br><span class="line">		<span class="keyword">if</span>(files!=<span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">for</span>(File file:files) &#123;</span><br><span class="line">				<span class="keyword">if</span>(file.isDirectory()) &#123;</span><br><span class="line">					subTasks.add(<span class="keyword">new</span> FindDirsFiles(file));</span><br><span class="line">				&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="comment">//遇到文件，检查</span></span><br><span class="line">					<span class="keyword">if</span>(file.getAbsolutePath().endsWith(<span class="string">"txt"</span>)) &#123;</span><br><span class="line">						System.out.println(<span class="string">"文件："</span>+file.getAbsolutePath());</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(!subTasks.isEmpty()) &#123;</span><br><span class="line">				<span class="keyword">for</span>(FindDirsFiles subTask:invokeAll(subTasks)) &#123;</span><br><span class="line">					subTask.join();<span class="comment">//等待子任务执行完成</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置等待次数</span></span><br><span class="line">CountDownLatch latch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其他线程做完后次数减1</span></span><br><span class="line">latch.countDown();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 阻塞 latch 次数为0时执行</span></span><br><span class="line">latch.await();</span><br></pre></td></tr></table></figure>
-<h4 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置放开次数</span></span><br><span class="line">CyclicBarrier barrier = <span class="keyword">new</span> CyclicBarrier(<span class="number">4</span>,<span class="keyword">new</span> CollectThread());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 阻塞住 达到设置放开次数开放次数是会继续执行</span></span><br><span class="line">barrier.await();</span><br></pre></td></tr></table></figure>
-<h4 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义信号量</span></span><br><span class="line">Semaphore semaphore=<span class="keyword">new</span> Semaphore(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 闸门 判断是否有信号量是否还有 没有就阻塞</span></span><br><span class="line">semaphore.acquire();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可用信号量</span></span><br><span class="line">semaphore.availablePermits();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 释放信号量</span></span><br><span class="line">semaphore.release();</span><br></pre></td></tr></table></figure>
-<h4 id="Callable、Future和FutureTask"><a href="#Callable、Future和FutureTask" class="headerlink" title="Callable、Future和FutureTask"></a>Callable、Future和FutureTask</h4><p><img src="http://image.tupelo.top/Callable.png" alt="Callable、Future和FutureTask"></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="http://tupelo.top/zhifubao.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="http://tupelo.top/weixin.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.tupelo.cc/2019/02/26/多线程-02/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/05/13/设计模式原则/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          设计模式-六大基本原则
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/02/15/多线程-01/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">并发编程 - 线程基础、线程之间的共享和协作</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -381,8 +229,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
