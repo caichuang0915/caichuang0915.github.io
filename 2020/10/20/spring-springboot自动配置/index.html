@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.tupelo.cc">
-  <title>并发编程 - 显式锁和AQS | Tupelo</title>
+  <title>SpringBoot自动配置 | Tupelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="显式锁和AQS 显式锁Lock接口 1234567891011121314private Lock lock = new ReentrantLock();  private int count;  // 一定要在finally中释放锁  public void increament() &amp;#123;      this.lock.lock();      try &amp;#123;          +">
-<meta name="keywords" content="并发编程">
+  <meta name="description" content="SpringBoot自动配置 SpringBoot自动配置入口： 12345678@SpringBootApplicationpublic class StudyApplication &amp;#123;    public static void main(String[] args) &amp;#123;        SpringApplication.run(StudyApplication.class">
+<meta name="keywords" content="Java,Spring,SpringBoot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="并发编程 - 显式锁和AQS">
-<meta property="og:url" content="http://blog.tupelo.cc/2020/10/19/多线程-显式锁和AQS/index.html">
+<meta property="og:title" content="SpringBoot自动配置">
+<meta property="og:url" content="http://blog.tupelo.cc/2020/10/20/spring-springboot自动配置/index.html">
 <meta property="og:site_name" content="Tupelo">
-<meta property="og:description" content="显式锁和AQS 显式锁Lock接口 1234567891011121314private Lock lock = new ReentrantLock();  private int count;  // 一定要在finally中释放锁  public void increament() &amp;#123;      this.lock.lock();      try &amp;#123;          +">
+<meta property="og:description" content="SpringBoot自动配置 SpringBoot自动配置入口： 12345678@SpringBootApplicationpublic class StudyApplication &amp;#123;    public static void main(String[] args) &amp;#123;        SpringApplication.run(StudyApplication.class">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://image.tupelo.top/53727-ae36db58241c256b.png">
-<meta property="og:image" content="http://image.tupelo.top/%E5%9B%BE%E7%89%87%201.png">
-<meta property="og:updated_time" content="2020-10-18T16:04:29.385Z">
+<meta property="og:updated_time" content="2020-10-20T16:17:13.028Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发编程 - 显式锁和AQS">
-<meta name="twitter:description" content="显式锁和AQS 显式锁Lock接口 1234567891011121314private Lock lock = new ReentrantLock();  private int count;  // 一定要在finally中释放锁  public void increament() &amp;#123;      this.lock.lock();      try &amp;#123;          +">
-<meta name="twitter:image" content="http://image.tupelo.top/53727-ae36db58241c256b.png">
+<meta name="twitter:title" content="SpringBoot自动配置">
+<meta name="twitter:description" content="SpringBoot自动配置 SpringBoot自动配置入口： 12345678@SpringBootApplicationpublic class StudyApplication &amp;#123;    public static void main(String[] args) &amp;#123;        SpringApplication.run(StudyApplication.class">
   
     <link rel="alternative" href="/atom.xml" title="Tupelo" type="application/atom+xml">
   
@@ -156,89 +153,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-多线程-显式锁和AQS" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-spring-springboot自动配置" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      并发编程 - 显式锁和AQS
+      SpringBoot自动配置
     </h1>
   
 
         
-        <a href="/2020/10/19/多线程-显式锁和AQS/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.385Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+        <a href="/2020/10/20/spring-springboot自动配置/" class="archive-article-date">
+  	<time datetime="2020-10-20T14:28:25.185Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>显式锁和AQS</p>
-<h2 id="显式锁"><a href="#显式锁" class="headerlink" title="显式锁"></a>显式锁</h2><p>Lock接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">  <span class="comment">// 一定要在finally中释放锁</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increament</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.lock.lock();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          ++<span class="keyword">this</span>.count;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.lock.unlock();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>可重入锁ReentrantLock(默认非公平锁 构造方法可控制是否是公平锁)</p>
-<p>  采用一个计数器，每重入一次次数加一，释放一个锁次数减一</p>
-</li>
-<li><p>读写锁ReentrantReadWriteLock</p>
-<p>  同一时刻允许多个读线程同时访问，但是写线程访问的时候，所有的读和写都被阻塞，最适宜与读多写少的情况</p>
-</li>
-<li><p>Condition接口</p>
-<p>  阻塞一个线程await()，唤醒是最好使用singal().wait()阻塞线程使用notfiyAll()唤醒。</p>
-</li>
-</ul>
-<a id="more"></a>  
-<h2 id="AQS-AbstractQueuedSynchronizer"><a href="#AQS-AbstractQueuedSynchronizer" class="headerlink" title="AQS AbstractQueuedSynchronizer"></a>AQS AbstractQueuedSynchronizer</h2><p>AQS是AbstractQueuedSynchronizer的简称。AQS提供了一种实现阻塞锁和一系列依赖FIFO等待队列的同步器的框架，如下图所示。AQS为一系列同步器依赖于一个单独的原子变量（state）的同步器提供了一个非常有用的基础。子类们必须定义改变state变量的protected方法，这些方法定义了state是如何被获取或释放的。鉴于此，本类中的其他方法执行所有的排队和阻塞机制。子类也可以维护其他的state变量，但是为了保证同步，必须原子地操作这些变量。</p>
-<p><img src="http://image.tupelo.top/53727-ae36db58241c256b.png" alt="AQS"></p>
-<ul>
-<li><p>设计模式</p>
-<p>  使用了模板方法设计模式，模板方法有：<br>  独占式获取：</p>
-<ul>
-<li>accquire</li>
-<li>acquireInterruptibly</li>
-<li><p>tryAcquireNanos</p>
-<p>共享式获取</p>
-</li>
-<li><p>acquireShared</p>
-</li>
-<li>acquireSharedInterruptibly</li>
-<li><p>tryAcquireSharedNanos</p>
-<p>独占式释放锁</p>
-</li>
-<li><p>release</p>
-<p>共享式释放锁</p>
-</li>
-<li><p>releaseShared</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>state状态</li>
-</ul>
-<p>  AbstractQueuedSynchronizer维护了一个volatile int类型的变量，用户表示当前同步状态。volatile虽然不能保证操作的原子性，但是保证了当前变量state的可见性。state的访问方式有三种:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getState()</span><br><span class="line">setState()</span><br><span class="line"><span class="comment">// CAS</span></span><br><span class="line">compareAndSetState()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>自定义资源共享方式</li>
-</ul>
-<p>AQS定义两种资源共享方式：Exclusive（独占，只有一个线程能执行，如ReentrantLock）和Share（共享，多个线程可同时执行，如Semaphore/CountDownLatch）。</p>
-<ul>
-<li><p>AQS中的数据结构-节点和同步队列</p>
-<p>  竞争失败的线程会打包成Node放到同步队列，Node可能的状态里：</p>
-<ul>
-<li>CANCELLED：线程等待超时或者被中断了，需要从队列中移走</li>
-<li>SIGNAL：后续的节点等待状态，当前节点，通知后面的节点去运行</li>
-<li>CONDITION :当前节点处于等待队列</li>
-<li>PROPAGATE：共享，表示状态要往后面的节点传播，0表示初始状态</li>
-</ul>
-</li>
-<li><p>独占式同步状态获取与释放</p>
-</li>
-</ul>
-<p><img src="http://image.tupelo.top/%E5%9B%BE%E7%89%87%201.png" alt=""></p>
+        <p>SpringBoot自动配置</p>
+<h3 id="SpringBoot自动配置"><a href="#SpringBoot自动配置" class="headerlink" title="SpringBoot自动配置"></a>SpringBoot自动配置</h3><p>入口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudyApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(StudyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>@SpringBootApplication:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(</span><br><span class="line">    excludeFilters = &#123;<span class="meta">@Filter</span>(</span><br><span class="line">    type = FilterType.CUSTOM,</span><br><span class="line">    classes = &#123;TypeExcludeFilter.class&#125;</span><br><span class="line">), <span class="meta">@Filter</span>(</span><br><span class="line">    type = FilterType.CUSTOM,</span><br><span class="line">    classes = &#123;AutoConfigurationExcludeFilter.class&#125;</span><br><span class="line">)&#125;</span><br><span class="line">)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringBootApplication &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>@EnableAutoConfiguration:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import</span>(&#123;AutoConfigurationImportSelector.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>AutoConfigurationImportSelector:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> List&lt;String&gt; <span class="title">getCandidateConfigurations</span><span class="params">(AnnotationMetadata metadata, AnnotationAttributes attributes)</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; configurations = SpringFactoriesLoader.loadFactoryNames(<span class="keyword">this</span>.getSpringFactoriesLoaderFactoryClass(), <span class="keyword">this</span>.getBeanClassLoader());</span><br><span class="line">    Assert.notEmpty(configurations, <span class="string">"No auto configuration classes found in META-INF/spring.factories. If you are using a custom packaging, make sure that file is correct."</span>);</span><br><span class="line">    <span class="keyword">return</span> configurations;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>查看META-INF/spring.factories：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"># Auto Configuration Import Filters</span><br><span class="line">org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\</span><br><span class="line">org.springframework.boot.autoconfigure.condition.OnBeanCondition,\</span><br><span class="line">org.springframework.boot.autoconfigure.condition.OnClassCondition,\</span><br><span class="line">org.springframework.boot.autoconfigure.condition.OnWebApplicationCondition</span><br><span class="line"></span><br><span class="line"># Auto Configure</span><br><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\</span><br><span class="line">org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration,\</span><br><span class="line">org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration,\</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>查看其中的一个类org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span>(</span><br><span class="line">    proxyBeanMethods = <span class="keyword">false</span></span><br><span class="line">)</span><br><span class="line"><span class="meta">@ConditionalOnClass</span>(&#123;RabbitTemplate.class, Channel.class&#125;)</span><br><span class="line"><span class="meta">@EnableConfigurationProperties</span>(&#123;RabbitProperties.class&#125;)</span><br><span class="line"><span class="meta">@Import</span>(&#123;RabbitAnnotationDrivenConfiguration.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RabbitAutoConfiguration</span> </span>&#123;</span><br><span class="line">    .....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>查看RabbitProperties 即会配置相关spring.rabbitmq开头的配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(</span><br><span class="line">    prefix = <span class="string">"spring.rabbitmq"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RabbitProperties</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_PORT = <span class="number">5672</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_PORT_SECURE = <span class="number">5671</span>;</span><br><span class="line">    <span class="keyword">private</span> String host = <span class="string">"localhost"</span>;</span><br><span class="line">    <span class="keyword">private</span> Integer port;</span><br><span class="line">    <span class="keyword">private</span> String username = <span class="string">"guest"</span>;</span><br><span class="line">    <span class="keyword">private</span> String password = <span class="string">"guest"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RabbitProperties.Ssl ssl = <span class="keyword">new</span> RabbitProperties.Ssl();</span><br><span class="line">    <span class="keyword">private</span> String virtualHost;</span><br><span class="line">    <span class="keyword">private</span> String addresses;</span><br><span class="line">    <span class="meta">@DurationUnit</span>(ChronoUnit.SECONDS)</span><br><span class="line">    <span class="keyword">private</span> Duration requestedHeartbeat;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> requestedChannelMax = <span class="number">2047</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> publisherReturns;</span><br><span class="line">    <span class="keyword">private</span> ConfirmType publisherConfirmType;</span><br><span class="line">    <span class="keyword">private</span> Duration connectionTimeout;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RabbitProperties.Cache cache = <span class="keyword">new</span> RabbitProperties.Cache();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RabbitProperties.Listener listener = <span class="keyword">new</span> RabbitProperties.Listener();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RabbitProperties.Template template = <span class="keyword">new</span> RabbitProperties.Template();</span><br><span class="line">    <span class="keyword">private</span> List&lt;RabbitProperties.Address&gt; parsedAddresses;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="条件注解"><a href="#条件注解" class="headerlink" title="条件注解"></a>条件注解</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConditionalOnBean</span>：当容器里有指定的bean的条件下。</span><br><span class="line"></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span>：当容器里不存在指定bean的条件下。</span><br><span class="line"></span><br><span class="line"><span class="meta">@ConditionalOnClass</span>：当类路径下有指定类的条件下。</span><br><span class="line"></span><br><span class="line"><span class="meta">@ConditionalOnMissingClass</span>：当类路径下不存在指定类的条件下。</span><br><span class="line"></span><br><span class="line"><span class="meta">@ConditionalOnProperty</span>：指定的属性是否有指定的值，比如<span class="meta">@ConditionalOnProperties</span>(prefix=”xxx.xxx”, value=”enable”, matchIfMissing=<span class="keyword">true</span>)，代表当xxx.xxx为enable时条件的布尔值为<span class="keyword">true</span>，如果没有设置的情况下也为<span class="keyword">true</span>。</span><br></pre></td></tr></table></figure>
+<h4 id="自动配置流程"><a href="#自动配置流程" class="headerlink" title="自动配置流程"></a>自动配置流程</h4><p>Spring Boot启动的时候会通过@EnableAutoConfiguration注解找到META-INF/spring.factories配置文件中的所有自动配置类，并对其进行加载，而这些自动配置类都是以AutoConfiguration结尾来命名的，它实际上就是一个JavaConfig形式的Spring容器配置类，它能通过以Properties结尾命名的类中取得在全局配置文件中配置的属性如：server.port，而XxxxProperties类是通过@ConfigurationProperties注解与全局配置文件中对应的属性进行绑定的。</p>
 
       
 
@@ -283,7 +234,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
         		</li>
       		
 		</ul>
@@ -339,7 +298,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.tupelo.cc/2020/10/19/多线程-显式锁和AQS/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.tupelo.cc/2020/10/20/spring-springboot自动配置/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -353,18 +312,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/10/19/多线程-线程安全/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          并发编程 - 并发安全
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/10/19/多线程-线程池/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">并发编程 - 线程池</div>
+    <a href="/2020/10/19/spring-设计模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring设计模式</div>
       <i class="icon-circle-right"></i>
     </a>
   
