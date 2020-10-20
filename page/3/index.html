@@ -150,19 +150,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-zookeeper集群" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-分布式系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/zookeeper集群/">Zookeeper集群</a>
+      <a class="article-title" href="/2020/10/19/分布式系统/">分布式系统基础知识</a>
     </h1>
   
 
         
-        <a href="/2020/10/19/zookeeper集群/" class="archive-article-date">
+        <a href="/2020/10/19/分布式系统/" class="archive-article-date">
   	<time datetime="2020-10-18T16:04:29.382Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
@@ -170,34 +170,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="Zookeeper集群"><a href="#Zookeeper集群" class="headerlink" title="Zookeeper集群"></a>Zookeeper集群</h4><ul>
-<li>顺序一致性<br>  客户端的更新顺序与它们被发送的顺序相一致。</li>
-<li>原子性<br>  更新操作要么成功要么失败，没有第三种结果。</li>
-<li>单一视图<br>  无论客户端连接到哪一个服务器，客户端将看到相同的 ZooKeeper 视图。</li>
-<li>可靠性<br>  一旦一个更新操作被应用，那么在客户端再次更新它之前，它的值将不会改变。</li>
-<li>实时性<br>  连接上一个服务端数据修改，所以其他的服务端都会实时的跟新，不算完全的实时，有一点延时的</li>
-<li>角色轮换避免单点故障<br>  当leader出现问题的时候，会选举从follower中选举一个新的leader</li>
+        <h4 id="分布式系统带来的问题"><a href="#分布式系统带来的问题" class="headerlink" title="分布式系统带来的问题"></a>分布式系统带来的问题</h4><ul>
+<li>通信异常</li>
+<li>网络分区 （脑裂）</li>
+<li>三态 （成功、失败、超时）</li>
+<li>节点故障</li>
 </ul>
-<h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><ul>
-<li>Leader  集群工作机制中的核心<ul>
-<li>事务请求的唯一调度和处理者，保证集群事务处理的顺序性</li>
-<li>集群内部个服务器的调度者(管理follower,数据同步)</li>
-</ul>
+<h4 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h4><ul>
+<li><p>一致性</p>
+<p>  在分布式系统中，一致性是数据在多个副本之间是否能够保证一致的特性，这里说的一致性和前面说的对等性其实差不多。如果能够在分布式系统中针对某一个数据项的变更成功执行后，所有用户都可以马上读取到最新的值，那么这样的系统就被认为具有【强一致性】。     </p>
 </li>
-<li>Follower  集群工作机制中的跟随者<ul>
-<li>处理非事务请求，转发事务请求给Leader</li>
-<li>参与事务请求proposal投票<br>参与leader选举投票</li>
-</ul>
+<li><p>可用性</p>
+<p>  可用性指系统提供服务必须一直处于可用状态，对于用户的操作请求总是能够在有限的时间内访问结果。这里的重点是【有限的时间】和【返回结果】为了做到有限的时间需要用到缓存，需要用到负载，这个时候服务器增加的节点是为性能考虑；为了返回结果，需要考虑服务器主备，当主节点出现问题的时候需要备份的节点能最快的顶替上来，千万不能出现OutOfMemory或者其他500，404错误，否则这样的系统我们会认为是不可用的。</p>
 </li>
-<li>Observer 观察者  <ul>
-<li>3.30以上版本提供，和follower功能相同，但不参与任何形式投票</li>
-<li>处理非事务请求，转发事务请求给Leader</li>
-<li>提高集群非事务处理能力</li>
-</ul>
+<li><p>分区容错性</p>
+<p>  分布式系统在遇到任何网络分区故障的时候，仍然需要能够对外提供满足一致性和可用性的服务，除非是整个网络环境都发生了故障。</p>
 </li>
 </ul>
         
-          <a class="article-more-a" href="/2020/10/19/zookeeper集群/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/分布式系统/#more">more >></a>
         
       
 
@@ -211,7 +202,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
         		</li>
       		
 		</ul>
@@ -221,92 +212,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/zookeeper集群/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-zookeeper应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/zookeeper应用/">Zookeeper应用(服务注册与发现/分布式锁/Master选举/配置中心)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/zookeeper应用/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.381Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="服务注册与发现"><a href="#服务注册与发现" class="headerlink" title="服务注册与发现"></a>服务注册与发现</h4><p>注册：</p>
-<blockquote>
-<p>服务启动时 在某一个节点下新建一个临时顺序节点将ip+端口保存</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">register</span><span class="params">(String address,<span class="keyword">int</span> port)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ZooKeeper zooKeeper = <span class="keyword">new</span> ZooKeeper(<span class="string">"localhost:2181"</span>,<span class="number">5000</span>,(watchedEvent)-&gt;&#123;&#125;);</span><br><span class="line">            logger.warn(<span class="string">"连接zk"</span>);</span><br><span class="line">            Stat exists = zooKeeper.exists(BASE_SERVICES + SERVICE_NAME, <span class="keyword">false</span>);</span><br><span class="line">            logger.warn(<span class="string">"判断是否存在"</span> + exists);</span><br><span class="line">            <span class="keyword">if</span>(exists==<span class="keyword">null</span>) &#123;</span><br><span class="line">                logger.warn(<span class="string">"创建路径"</span> );</span><br><span class="line">                zooKeeper.create(BASE_SERVICES,<span class="string">""</span>.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);</span><br><span class="line">                zooKeeper.create(BASE_SERVICES + SERVICE_NAME,<span class="string">""</span>.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            String server_path = address+<span class="string">":"</span>+port;</span><br><span class="line">            logger.warn(<span class="string">"server_path:"</span> + server_path);</span><br><span class="line">            zooKeeper.create(BASE_SERVICES + SERVICE_NAME+<span class="string">"/child"</span>,server_path.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.EPHEMERAL_SEQUENTIAL);</span><br><span class="line">            logger.warn(<span class="string">"保存成功"</span> );</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>发现：</p>
-<blockquote>
-<p>监听某一个节点，当子节点发生变化时更新ip列表，请求时从列表中获取ip+端口</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateServiceList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">try</span>&#123;</span><br><span class="line"></span><br><span class="line">           logger.warn(<span class="string">"ip 改变 开始更新ip地址"</span>);</span><br><span class="line">           List&lt;String&gt; children = zooKeeper.getChildren(BASE_SERVICES  + SERVICE_NAME, <span class="keyword">true</span>);</span><br><span class="line">           List&lt;String&gt; newServerList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">           <span class="keyword">for</span>(String subNode:children) &#123;</span><br><span class="line">               <span class="keyword">byte</span>[] data = zooKeeper.getData(BASE_SERVICES  + SERVICE_NAME + <span class="string">"/"</span> + subNode, <span class="keyword">false</span>, <span class="keyword">null</span>);</span><br><span class="line">               String host = <span class="keyword">new</span> String(data, <span class="string">"utf-8"</span>);</span><br><span class="line">               System.out.println(<span class="string">"host:"</span>+host);</span><br><span class="line">               newServerList.add(host);</span><br><span class="line">           &#125;</span><br><span class="line">           LoadBalance.SERVICE_LIST = newServerList;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2020/10/19/zookeeper应用/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/zookeeper应用/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/分布式系统/">展开全文 >></a>
         </p>
       
 
@@ -398,6 +304,91 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/10/19/zookeeper特性/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-zookeeper应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/zookeeper应用/">Zookeeper应用(服务注册与发现/分布式锁/Master选举/配置中心)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/zookeeper应用/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.381Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="服务注册与发现"><a href="#服务注册与发现" class="headerlink" title="服务注册与发现"></a>服务注册与发现</h4><p>注册：</p>
+<blockquote>
+<p>服务启动时 在某一个节点下新建一个临时顺序节点将ip+端口保存</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">register</span><span class="params">(String address,<span class="keyword">int</span> port)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ZooKeeper zooKeeper = <span class="keyword">new</span> ZooKeeper(<span class="string">"localhost:2181"</span>,<span class="number">5000</span>,(watchedEvent)-&gt;&#123;&#125;);</span><br><span class="line">            logger.warn(<span class="string">"连接zk"</span>);</span><br><span class="line">            Stat exists = zooKeeper.exists(BASE_SERVICES + SERVICE_NAME, <span class="keyword">false</span>);</span><br><span class="line">            logger.warn(<span class="string">"判断是否存在"</span> + exists);</span><br><span class="line">            <span class="keyword">if</span>(exists==<span class="keyword">null</span>) &#123;</span><br><span class="line">                logger.warn(<span class="string">"创建路径"</span> );</span><br><span class="line">                zooKeeper.create(BASE_SERVICES,<span class="string">""</span>.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);</span><br><span class="line">                zooKeeper.create(BASE_SERVICES + SERVICE_NAME,<span class="string">""</span>.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            String server_path = address+<span class="string">":"</span>+port;</span><br><span class="line">            logger.warn(<span class="string">"server_path:"</span> + server_path);</span><br><span class="line">            zooKeeper.create(BASE_SERVICES + SERVICE_NAME+<span class="string">"/child"</span>,server_path.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.EPHEMERAL_SEQUENTIAL);</span><br><span class="line">            logger.warn(<span class="string">"保存成功"</span> );</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>发现：</p>
+<blockquote>
+<p>监听某一个节点，当子节点发生变化时更新ip列表，请求时从列表中获取ip+端口</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateServiceList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">try</span>&#123;</span><br><span class="line"></span><br><span class="line">           logger.warn(<span class="string">"ip 改变 开始更新ip地址"</span>);</span><br><span class="line">           List&lt;String&gt; children = zooKeeper.getChildren(BASE_SERVICES  + SERVICE_NAME, <span class="keyword">true</span>);</span><br><span class="line">           List&lt;String&gt; newServerList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">           <span class="keyword">for</span>(String subNode:children) &#123;</span><br><span class="line">               <span class="keyword">byte</span>[] data = zooKeeper.getData(BASE_SERVICES  + SERVICE_NAME + <span class="string">"/"</span> + subNode, <span class="keyword">false</span>, <span class="keyword">null</span>);</span><br><span class="line">               String host = <span class="keyword">new</span> String(data, <span class="string">"utf-8"</span>);</span><br><span class="line">               System.out.println(<span class="string">"host:"</span>+host);</span><br><span class="line">               newServerList.add(host);</span><br><span class="line">           &#125;</span><br><span class="line">           LoadBalance.SERVICE_LIST = newServerList;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2020/10/19/zookeeper应用/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/19/zookeeper应用/">展开全文 >></a>
         </p>
       
 
@@ -1140,11 +1131,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1153,10 +1148,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1176,11 +1167,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
