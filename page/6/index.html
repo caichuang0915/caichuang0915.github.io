@@ -236,6 +236,86 @@
 
 
   
+    <article id="post-Nginx-Location匹配规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/Nginx-Location匹配规则/">Nginx - Location匹配规则 和 负载均衡</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/Nginx-Location匹配规则/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.370Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Location匹配规则 和 负载均衡</p>
+<h4 id="Location规则"><a href="#Location规则" class="headerlink" title="Location规则"></a>Location规则</h4><ul>
+<li>语法规则： location [=|~|~*|^~] /uri/ {… }</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://manage/;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2020/10/19/Nginx-Location匹配规则/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/19/Nginx-Location匹配规则/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Mysql-锁和事务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -320,33 +400,37 @@
 
 
   
-    <article id="post-Nginx-Location匹配规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Mysql-逻辑架构和存储引擎" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/Nginx-Location匹配规则/">Nginx - Location匹配规则 和 负载均衡</a>
+      <a class="article-title" href="/2020/10/19/Mysql-逻辑架构和存储引擎/">Mysql - Mysql逻辑架构和存储引擎</a>
     </h1>
   
 
         
-        <a href="/2020/10/19/Nginx-Location匹配规则/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.370Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+        <a href="/2020/10/19/Mysql-逻辑架构和存储引擎/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.369Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Location匹配规则 和 负载均衡</p>
-<h4 id="Location规则"><a href="#Location规则" class="headerlink" title="Location规则"></a>Location规则</h4><ul>
-<li>语法规则： location [=|~|~*|^~] /uri/ {… }</li>
+        <p>Mysql逻辑架构和存储引擎</p>
+<h4 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h4><h5 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h5><ul>
+<li><p>TPS：Transactions Per Second（每秒传输的事物处理个数），这是指服务器每秒处理的事务数，支持事务的存储引擎如InnoDB等特有的一个性能指标。 </p>
+</li>
+<li><p>QPS：Queries Per Second（每秒查询处理量）同时适用与InnoDB和MyISAM 引擎</p>
+</li>
+<li><p>等待时间：执行Sql等待返回结果之间的等待时间</p>
+</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://manage/;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2020/10/19/Nginx-Location匹配规则/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/Mysql-逻辑架构和存储引擎/#more">more >></a>
         
       
 
@@ -360,7 +444,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
         		</li>
       		
 		</ul>
@@ -370,7 +454,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/Nginx-Location匹配规则/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/Mysql-逻辑架构和存储引擎/">展开全文 >></a>
         </p>
       
 
@@ -458,90 +542,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/10/19/Mysql-慢查询和执行计划/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mysql-逻辑架构和存储引擎" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/Mysql-逻辑架构和存储引擎/">Mysql - Mysql逻辑架构和存储引擎</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/Mysql-逻辑架构和存储引擎/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.369Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Mysql逻辑架构和存储引擎</p>
-<h4 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h4><h5 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h5><ul>
-<li><p>TPS：Transactions Per Second（每秒传输的事物处理个数），这是指服务器每秒处理的事务数，支持事务的存储引擎如InnoDB等特有的一个性能指标。 </p>
-</li>
-<li><p>QPS：Queries Per Second（每秒查询处理量）同时适用与InnoDB和MyISAM 引擎</p>
-</li>
-<li><p>等待时间：执行Sql等待返回结果之间的等待时间</p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2020/10/19/Mysql-逻辑架构和存储引擎/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/Mysql-逻辑架构和存储引擎/">展开全文 >></a>
         </p>
       
 
@@ -894,15 +894,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -922,15 +922,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">

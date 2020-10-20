@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://blog.tupelo.cc">
   <title>Spring设计模式 | Tupelo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Spring设计模式 Spring设计模式Spring中用到的设计模式简单工厂模式BeanFactory。Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。 实现原理：bean容器的启动阶段： 读取bean的xml配置文件,将bean元素分别转换成一个BeanDefinition">
+  <meta name="description" content="Spring设计模式 Spring设计模式简单工厂模式BeanFactory。Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。 实现原理：bean容器的启动阶段： 读取bean的xml配置文件,将bean元素分别转换成一个BeanDefinition对象。然后通过BeanDef">
 <meta name="keywords" content="Java,Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring设计模式">
 <meta property="og:url" content="http://blog.tupelo.cc/2020/10/19/spring-设计模式/index.html">
 <meta property="og:site_name" content="Tupelo">
-<meta property="og:description" content="Spring设计模式 Spring设计模式Spring中用到的设计模式简单工厂模式BeanFactory。Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。 实现原理：bean容器的启动阶段： 读取bean的xml配置文件,将bean元素分别转换成一个BeanDefinition">
+<meta property="og:description" content="Spring设计模式 Spring设计模式简单工厂模式BeanFactory。Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。 实现原理：bean容器的启动阶段： 读取bean的xml配置文件,将bean元素分别转换成一个BeanDefinition对象。然后通过BeanDef">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-10-20T13:58:56.845Z">
+<meta property="og:updated_time" content="2020-10-20T14:02:00.485Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring设计模式">
-<meta name="twitter:description" content="Spring设计模式 Spring设计模式Spring中用到的设计模式简单工厂模式BeanFactory。Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。 实现原理：bean容器的启动阶段： 读取bean的xml配置文件,将bean元素分别转换成一个BeanDefinition">
+<meta name="twitter:description" content="Spring设计模式 Spring设计模式简单工厂模式BeanFactory。Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。 实现原理：bean容器的启动阶段： 读取bean的xml配置文件,将bean元素分别转换成一个BeanDefinition对象。然后通过BeanDef">
   
     <link rel="alternative" href="/atom.xml" title="Tupelo" type="application/atom+xml">
   
@@ -174,7 +174,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Spring设计模式</p>
-<h3 id="Spring设计模式"><a href="#Spring设计模式" class="headerlink" title="Spring设计模式"></a>Spring设计模式</h3><h4 id="Spring中用到的设计模式"><a href="#Spring中用到的设计模式" class="headerlink" title="Spring中用到的设计模式"></a>Spring中用到的设计模式</h4><h5 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h5><p>BeanFactory。Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。</p>
+<h3 id="Spring设计模式"><a href="#Spring设计模式" class="headerlink" title="Spring设计模式"></a>Spring设计模式</h3><h5 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h5><p>BeanFactory。Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。</p>
 <p>实现原理：<br>bean容器的启动阶段：</p>
 <p>读取bean的xml配置文件,将bean元素分别转换成一个BeanDefinition对象。<br>然后通过BeanDefinitionRegistry将这些bean注册到beanFactory中，保存在它的一个ConcurrentHashMap中。<br>将BeanDefinition注册到了beanFactory之后，在这里Spring为我们提供了一个扩展的切口，允许我们通过实现接口BeanFactoryPostProcessor 在此处来插入我们定义的代码。</p>
 <p>简单工厂模式：</p>
@@ -472,15 +472,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,15 +500,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">

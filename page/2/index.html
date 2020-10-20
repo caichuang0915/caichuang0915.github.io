@@ -602,6 +602,94 @@
 
 
   
+    <article id="post-多线程-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/多线程-02/">并发编程 - 线程的并发工具类</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/多线程-02/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.383Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>线程的并发工具类</p>
+<h2 id="线程的并发工具类"><a href="#线程的并发工具类" class="headerlink" title="线程的并发工具类"></a>线程的并发工具类</h2><ul>
+<li>Fork-Join:分治思想</li>
+<li>CountDownLatch:是一组线程等待其他的线程完成工作以后在执行,加强版join await用来等待,countDown负责计数器的减1</li>
+<li>CyclicBarrier: 让一组线程达到某个屏障,被阻塞,一直到组内最后一个线程达到屏障时,屏障开放,所有被阻塞的线程会继续运行<ul>
+<li>countdownlatch放行由第三者控制,CyclicBarrier放行由一组线程本身控制</li>
+<li>countdownlatch放行条件》=线程数,CyclicBarrier放行条件=线程数</li>
+</ul>
+</li>
+<li>Semaphore:信号量</li>
+<li>Exchange:交换</li>
+<li>Callable、Future和FutureTask </li>
+</ul>
+        
+          <a class="article-more-a" href="/2020/10/19/多线程-02/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/19/多线程-02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -779,41 +867,54 @@
 
 
   
-    <article id="post-多线程-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-zookeeper集群" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/多线程-02/">并发编程 - 线程的并发工具类</a>
+      <a class="article-title" href="/2020/10/19/zookeeper集群/">Zookeeper集群</a>
     </h1>
   
 
         
-        <a href="/2020/10/19/多线程-02/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.383Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+        <a href="/2020/10/19/zookeeper集群/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.382Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>线程的并发工具类</p>
-<h2 id="线程的并发工具类"><a href="#线程的并发工具类" class="headerlink" title="线程的并发工具类"></a>线程的并发工具类</h2><ul>
-<li>Fork-Join:分治思想</li>
-<li>CountDownLatch:是一组线程等待其他的线程完成工作以后在执行,加强版join await用来等待,countDown负责计数器的减1</li>
-<li>CyclicBarrier: 让一组线程达到某个屏障,被阻塞,一直到组内最后一个线程达到屏障时,屏障开放,所有被阻塞的线程会继续运行<ul>
-<li>countdownlatch放行由第三者控制,CyclicBarrier放行由一组线程本身控制</li>
-<li>countdownlatch放行条件》=线程数,CyclicBarrier放行条件=线程数</li>
+        <h4 id="Zookeeper集群"><a href="#Zookeeper集群" class="headerlink" title="Zookeeper集群"></a>Zookeeper集群</h4><ul>
+<li>顺序一致性<br>  客户端的更新顺序与它们被发送的顺序相一致。</li>
+<li>原子性<br>  更新操作要么成功要么失败，没有第三种结果。</li>
+<li>单一视图<br>  无论客户端连接到哪一个服务器，客户端将看到相同的 ZooKeeper 视图。</li>
+<li>可靠性<br>  一旦一个更新操作被应用，那么在客户端再次更新它之前，它的值将不会改变。</li>
+<li>实时性<br>  连接上一个服务端数据修改，所以其他的服务端都会实时的跟新，不算完全的实时，有一点延时的</li>
+<li>角色轮换避免单点故障<br>  当leader出现问题的时候，会选举从follower中选举一个新的leader</li>
+</ul>
+<h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><ul>
+<li>Leader  集群工作机制中的核心<ul>
+<li>事务请求的唯一调度和处理者，保证集群事务处理的顺序性</li>
+<li>集群内部个服务器的调度者(管理follower,数据同步)</li>
 </ul>
 </li>
-<li>Semaphore:信号量</li>
-<li>Exchange:交换</li>
-<li>Callable、Future和FutureTask </li>
+<li>Follower  集群工作机制中的跟随者<ul>
+<li>处理非事务请求，转发事务请求给Leader</li>
+<li>参与事务请求proposal投票<br>参与leader选举投票</li>
+</ul>
+</li>
+<li>Observer 观察者  <ul>
+<li>3.30以上版本提供，和follower功能相同，但不参与任何形式投票</li>
+<li>处理非事务请求，转发事务请求给Leader</li>
+<li>提高集群非事务处理能力</li>
+</ul>
+</li>
 </ul>
         
-          <a class="article-more-a" href="/2020/10/19/多线程-02/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/zookeeper集群/#more">more >></a>
         
       
 
@@ -827,7 +928,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
         		</li>
       		
 		</ul>
@@ -837,7 +938,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/多线程-02/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/zookeeper集群/">展开全文 >></a>
         </p>
       
 
@@ -915,107 +1016,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/10/19/zookeeper集成java/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-zookeeper集群" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/zookeeper集群/">Zookeeper集群</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/zookeeper集群/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.382Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Zookeeper集群"><a href="#Zookeeper集群" class="headerlink" title="Zookeeper集群"></a>Zookeeper集群</h4><ul>
-<li>顺序一致性<br>  客户端的更新顺序与它们被发送的顺序相一致。</li>
-<li>原子性<br>  更新操作要么成功要么失败，没有第三种结果。</li>
-<li>单一视图<br>  无论客户端连接到哪一个服务器，客户端将看到相同的 ZooKeeper 视图。</li>
-<li>可靠性<br>  一旦一个更新操作被应用，那么在客户端再次更新它之前，它的值将不会改变。</li>
-<li>实时性<br>  连接上一个服务端数据修改，所以其他的服务端都会实时的跟新，不算完全的实时，有一点延时的</li>
-<li>角色轮换避免单点故障<br>  当leader出现问题的时候，会选举从follower中选举一个新的leader</li>
-</ul>
-<h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><ul>
-<li>Leader  集群工作机制中的核心<ul>
-<li>事务请求的唯一调度和处理者，保证集群事务处理的顺序性</li>
-<li>集群内部个服务器的调度者(管理follower,数据同步)</li>
-</ul>
-</li>
-<li>Follower  集群工作机制中的跟随者<ul>
-<li>处理非事务请求，转发事务请求给Leader</li>
-<li>参与事务请求proposal投票<br>参与leader选举投票</li>
-</ul>
-</li>
-<li>Observer 观察者  <ul>
-<li>3.30以上版本提供，和follower功能相同，但不参与任何形式投票</li>
-<li>处理非事务请求，转发事务请求给Leader</li>
-<li>提高集群非事务处理能力</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2020/10/19/zookeeper集群/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/zookeeper集群/">展开全文 >></a>
         </p>
       
 
@@ -1162,15 +1162,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1190,15 +1190,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">

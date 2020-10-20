@@ -227,95 +227,6 @@
 
 
   
-    <article id="post-rabbitmq-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/rabbitmq-03/">RabbitMq - 生产者消息确认</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/rabbitmq-03/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.377Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>RabbitMq生产者消息确认</p>
-<h2 id="RabbitMq-生产者消息确认"><a href="#RabbitMq-生产者消息确认" class="headerlink" title="RabbitMq 生产者消息确认"></a>RabbitMq 生产者消息确认</h2><h3 id="生产者权衡"><a href="#生产者权衡" class="headerlink" title="生产者权衡"></a>生产者权衡</h3><blockquote>
-<p>快、低==========&gt; 慢、高</p>
-</blockquote>
-<ul>
-<li>无保障</li>
-<li>失败通知  参数mandatory 消息是否成功到达队列</li>
-<li>发送方确认模式  消息是否成功到达exchange 和失败通知结合使用</li>
-<li>备用交换机     定义个一个备用交换机 Map</li>
-<li>高可用队列</li>
-<li>事务          影响性能 2-10倍 强一致性</li>
-<li>事务+高可用</li>
-<li>持久化</li>
-</ul>
-        
-          <a class="article-more-a" href="/2020/10/19/rabbitmq-03/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/rabbitmq-03/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-rabbitmq-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -491,11 +402,42 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-mybatis_01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-rabbitmq-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/rabbitmq-03/">RabbitMq - 生产者消息确认</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/rabbitmq-03/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.377Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
+        <p>RabbitMq生产者消息确认</p>
+<h2 id="RabbitMq-生产者消息确认"><a href="#RabbitMq-生产者消息确认" class="headerlink" title="RabbitMq 生产者消息确认"></a>RabbitMq 生产者消息确认</h2><h3 id="生产者权衡"><a href="#生产者权衡" class="headerlink" title="生产者权衡"></a>生产者权衡</h3><blockquote>
+<p>快、低==========&gt; 慢、高</p>
+</blockquote>
+<ul>
+<li>无保障</li>
+<li>失败通知  参数mandatory 消息是否成功到达队列</li>
+<li>发送方确认模式  消息是否成功到达exchange 和失败通知结合使用</li>
+<li>备用交换机     定义个一个备用交换机 Map</li>
+<li>高可用队列</li>
+<li>事务          影响性能 2-10倍 强一致性</li>
+<li>事务+高可用</li>
+<li>持久化</li>
+</ul>
+        
+          <a class="article-more-a" href="/2020/10/19/rabbitmq-03/#more">more >></a>
         
       
 
@@ -504,11 +446,22 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/mybatis_01/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/rabbitmq-03/">展开全文 >></a>
         </p>
       
 
@@ -538,30 +491,11 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-maven-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-mybatis_01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/maven-01/">Maven基础 - 打包调用异常</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/maven-01/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.376Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Maven基础学习配置</p>
-<h2 id="Maven-打包遇见的问题"><a href="#Maven-打包遇见的问题" class="headerlink" title="Maven 打包遇见的问题"></a>Maven 打包遇见的问题</h2><p>一个项目依赖以另一个项目时引入其依赖,想要调用其依赖的jar包中的类，则打包方式需使用maven的打包方式，不能使用spring-boot的打包方式 可以使用@Component将jar包中的类扫描注入到当前项目的IOC容器中</p>
-        
-          <a class="article-more-a" href="/2020/10/19/maven-01/#more">more >></a>
         
       
 
@@ -570,22 +504,11 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/maven-01/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/mybatis_01/">展开全文 >></a>
         </p>
       
 
@@ -705,31 +628,30 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-jvm-java内存区域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-maven-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/jvm-java内存区域/">JVM - java内存区域</a>
+      <a class="article-title" href="/2020/10/19/maven-01/">Maven基础 - 打包调用异常</a>
     </h1>
   
 
         
-        <a href="/2020/10/19/jvm-java内存区域/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.375Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+        <a href="/2020/10/19/maven-01/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.376Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>java内存区域</p>
-<h4 id="java内存区域"><a href="#java内存区域" class="headerlink" title="java内存区域"></a>java内存区域</h4><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域： </p>
-<p><img src="http://image.tupelo.top/jvm%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.png?imageMogr2/auto-orient/thumbnail/700x700" alt="java内存区域"></p>
+        <p>Maven基础学习配置</p>
+<h2 id="Maven-打包遇见的问题"><a href="#Maven-打包遇见的问题" class="headerlink" title="Maven 打包遇见的问题"></a>Maven 打包遇见的问题</h2><p>一个项目依赖以另一个项目时引入其依赖,想要调用其依赖的jar包中的类，则打包方式需使用maven的打包方式，不能使用spring-boot的打包方式 可以使用@Component将jar包中的类扫描注入到当前项目的IOC容器中</p>
         
-          <a class="article-more-a" href="/2020/10/19/jvm-java内存区域/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/maven-01/#more">more >></a>
         
       
 
@@ -743,7 +665,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
         		</li>
       		
 		</ul>
@@ -753,7 +675,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/jvm-java内存区域/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/maven-01/">展开全文 >></a>
         </p>
       
 
@@ -947,6 +869,84 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
+    <article id="post-jvm-java内存区域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/jvm-java内存区域/">JVM - java内存区域</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/jvm-java内存区域/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.375Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>java内存区域</p>
+<h4 id="java内存区域"><a href="#java内存区域" class="headerlink" title="java内存区域"></a>java内存区域</h4><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域： </p>
+<p><img src="http://image.tupelo.top/jvm%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.png?imageMogr2/auto-orient/thumbnail/700x700" alt="java内存区域"></p>
+        
+          <a class="article-more-a" href="/2020/10/19/jvm-java内存区域/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/19/jvm-java内存区域/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1064,15 +1064,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1092,15 +1092,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
