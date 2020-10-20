@@ -150,41 +150,31 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-rabbitmq-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-jvm-java内存区域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/30/rabbitmq-02/">RabbitMq - 配置和相关命令</a>
+      <a class="article-title" href="/2020/10/19/jvm-java内存区域/">JVM - java内存区域</a>
     </h1>
   
 
         
-        <a href="/2018/12/30/rabbitmq-02/" class="archive-article-date">
-  	<time datetime="2018-12-30T03:32:54.252Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-30</time>
+        <a href="/2020/10/19/jvm-java内存区域/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.375Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>RabbitMq 修改端口/用户权限 相关命令</p>
-<h2 id="RabbitMq-基相关命令"><a href="#RabbitMq-基相关命令" class="headerlink" title="RabbitMq 基相关命令"></a>RabbitMq 基相关命令</h2><ul>
-<li>配置文件</li>
-</ul>
-<blockquote>
-<p>RabbitMq配置文件在/etc/rabbitmq下,名为rabbitmq.config / rabbitmq-env.conf,需要自己创建。</p>
-</blockquote>
-<pre><code>修改端口:
-创建rabbitmq-env.conf文件,添加RABBITMQ_NODE_PORT=8500,重启RabbitMq即可生效.
-</code></pre><ul>
-<li>启动和关闭RabbitMq</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server <span class="comment">#会启动Erlang节点和Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl stop <span class="comment">#会关闭Erlang节点和Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl status  <span class="comment">#可以检查消息节点是否正常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#单独关闭RabbitMQ应用</span></span><br><span class="line">rabbitmqctl stop_app <span class="comment">#关闭Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl start_app <span class="comment">#启动Rabbitmq应用</span></span><br></pre></td></tr></table></figure>
+        <p>java内存区域</p>
+<h4 id="java内存区域"><a href="#java内存区域" class="headerlink" title="java内存区域"></a>java内存区域</h4><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域： </p>
+<p><img src="http://image.tupelo.top/jvm%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.png?imageMogr2/auto-orient/thumbnail/700x700" alt="java内存区域"></p>
         
-          <a class="article-more-a" href="/2018/12/30/rabbitmq-02/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/jvm-java内存区域/#more">more >></a>
         
       
 
@@ -198,7 +188,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
         		</li>
       		
 		</ul>
@@ -208,183 +198,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/30/rabbitmq-02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-rabbitmq-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/20/rabbitmq-01/">RabbitMq - 入门</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/20/rabbitmq-01/" class="archive-article-date">
-  	<time datetime="2018-12-19T16:11:29.150Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>AMQP概论</p>
-<h2 id="交换器、队列、绑定、路由键"><a href="#交换器、队列、绑定、路由键" class="headerlink" title="交换器、队列、绑定、路由键"></a>交换器、队列、绑定、路由键</h2><ul>
-<li>rabbitMq流程</li>
-</ul>
-<p><img src="http://image.tupelo.top/rabbitmq%E6%B5%81%E7%A8%8B.png" alt="rabbitMq流程"></p>
-<pre><code>交换机类型:
-fanout 交换机绑定队列,根据交换机发送消息到指定队列
-direct 交换机通过路由键绑定队列,根据交换机和路由键发送消息
-topic  交换机通过路由键绑定队列,根据交换机和路由键发送消息(路由键可进行匹配 #匹配一次或者多次 *匹配一次)
-</code></pre><blockquote>
-<p>需要多个队列接受同样的消息 多个队列绑定同一个路由键 一条消息只能被一个消费者消费</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/12/20/rabbitmq-01/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/20/rabbitmq-01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-通讯协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/17/通讯协议/">深入理解通讯协议</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/17/通讯协议/" class="archive-article-date">
-  	<time datetime="2018-12-17T15:35:45.653Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>通讯协议</p>
-<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>七层模型</p>
-<ul>
-<li>OSI模型<ul>
-<li>应用层  为应用程序提供服务</li>
-<li>表示层  数据格式转换</li>
-<li>会话层  建立 管理 维护会话</li>
-<li>传输层  最重要 端对端的连接 数据可靠性传输</li>
-<li>网络层  ip 路由</li>
-<li>链路层  交换机</li>
-<li>物理层  物理介质 网线等等</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/12/17/通讯协议/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">通讯协议</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/17/通讯协议/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/jvm-java内存区域/">展开全文 >></a>
         </p>
       
 
@@ -421,13 +235,13 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/17/dubbo-05/">Dubbo - 总结</a>
+      <a class="article-title" href="/2020/10/19/dubbo-05/">Dubbo - 总结</a>
     </h1>
   
 
         
-        <a href="/2018/12/17/dubbo-05/" class="archive-article-date">
-  	<time datetime="2018-12-16T17:21:51.855Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
+        <a href="/2020/10/19/dubbo-05/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.374Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
@@ -439,7 +253,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 <p>参考官方文档：<a href="http://dubbo.apache.org/zh-cn/docs/user/references/xml/dubbo-service.html" target="_blank" rel="noopener">http://dubbo.apache.org/zh-cn/docs/user/references/xml/dubbo-service.html</a></p>
 </blockquote>
         
-          <a class="article-more-a" href="/2018/12/17/dubbo-05/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/dubbo-05/#more">more >></a>
         
       
 
@@ -463,7 +277,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/17/dubbo-05/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/dubbo-05/">展开全文 >></a>
         </p>
       
 
@@ -493,30 +307,133 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-dubbo-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-git使用笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/17/dubbo-04/">Dubbo - Spi机制</a>
+      <a class="article-title" href="/2020/10/19/git使用笔记/">Git使用笔记</a>
     </h1>
   
 
         
-        <a href="/2018/12/17/dubbo-04/" class="archive-article-date">
-  	<time datetime="2018-12-16T16:16:21.248Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
+        <a href="/2020/10/19/git使用笔记/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.374Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Dubbo Spi机制</p>
-<h2 id="Dubbo-Spi机制"><a href="#Dubbo-Spi机制" class="headerlink" title="Dubbo Spi机制"></a>Dubbo Spi机制</h2><p>本质是解决同一个接口，有多种实现时，使用者如何能够方便选择实现的问题</p>
+        <p>Git使用笔记</p>
+<h2 id="Git使用笔记"><a href="#Git使用笔记" class="headerlink" title="Git使用笔记"></a>Git使用笔记</h2><h4 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h4><p>下载地址 ： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查看当前git用户名： ```git config user.name```      </span><br><span class="line">查看当前git邮箱： ```git config user.email```      </span><br><span class="line">切换git用户名: ```git config --global user.name &quot;user name&quot;```       </span><br><span class="line">切换git邮箱： ```git config --global user.email  &quot;e-mail&quot;```     </span><br><span class="line">生成SSH Keys: ```ssh-keygen -t rsa -C &quot;e-mail&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Git指令模式"><a href="#Git指令模式" class="headerlink" title="Git指令模式"></a>Git指令模式</h4><h5 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h5><ul>
+<li><code>git init</code> 初始化一个git项目</li>
+<li><code>git commit -am &#39;new project&#39;</code> 加入缓存区并提交</li>
+<li><code>git chceckout [-b] king</code>  切换(新增分支)</li>
+</ul>
+<h5 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h5><ul>
+<li><code>git remote add origin https://github.com/xx/xxx.git</code>  本地新建一个远程连接</li>
+<li><code>git remote [-v]</code>  查看远程连接(详情)</li>
+<li><code>git branch --set-upstream-to=origin/xxx xxx</code>  本地分支与远程分支关联</li>
+<li><code>git push --set-upstream origin master</code>  上传本地项目至GitHub</li>
+<li><code>git fetch</code>  提取远程仓库</li>
+</ul>
+<h5 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h5><ul>
+<li><code>git merge xxx</code> 将指定版本与当前版本合并</li>
+</ul>
+<blockquote>
+<p>有冲突的话相关的文件会显示,需要手动解决冲突后再次push</p>
+</blockquote>
+<h5 id="日志标签"><a href="#日志标签" class="headerlink" title="日志标签"></a>日志标签</h5><ul>
+<li><code>git log [--oneline] [--graph]</code> 显示提交日志(简化成一行)(显示分支)</li>
+<li><code>git tag [-a][-d] xxx -m &#39;xxxx&#39;</code> 为某一个分支(创建)(删除)一个tag</li>
+<li><code>git show xxx</code> 显示某一个tag的附属信息</li>
+<li><code>git push origin -tags</code> 本地标签提交到远程仓库</li>
+</ul>
+<h5 id="代码回滚-两种方式：回退（reset）、反做（revert）"><a href="#代码回滚-两种方式：回退（reset）、反做（revert）" class="headerlink" title="代码回滚 两种方式：回退（reset）、反做（revert）"></a>代码回滚 两种方式：回退（reset）、反做（revert）</h5><ul>
+<li><code>git reset</code> 的作用是修改HEAD的位置，即将HEAD指向的位置改变为之前存在的某个版本。（比如需要回到到V0.3）使用 <code>git reset --hard 目标版本号</code> 命令将版本回退</li>
+<li><code>git revert</code> 的作用通过反做创建一个新的版本，这个版本的内容与我们要回退到的目标版本一样，但是HEAD指针是指向这个新生成的版本，而不是目标版本。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/19/git使用笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
         
-          <a class="article-more-a" href="/2018/12/17/dubbo-04/#more">more >></a>
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/hello-world/">Hello World</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/hello-world/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.374Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2020/10/19/hello-world/#more">more >></a>
         
       
 
@@ -530,17 +447,28 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/17/dubbo-04/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/hello-world/">展开全文 >></a>
         </p>
       
 
@@ -577,13 +505,13 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/16/dubbo-03/">Dubbo - rpc调用过程</a>
+      <a class="article-title" href="/2020/10/19/dubbo-03/">Dubbo - rpc调用过程</a>
     </h1>
   
 
         
-        <a href="/2018/12/16/dubbo-03/" class="archive-article-date">
-  	<time datetime="2018-12-16T15:57:13.023Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-16</time>
+        <a href="/2020/10/19/dubbo-03/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.373Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
@@ -596,7 +524,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 </ul>
 <p><img src="http://image.tupelo.top/rpc%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2.png" alt="服务暴露和引入"></p>
         
-          <a class="article-more-a" href="/2018/12/16/dubbo-03/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/dubbo-03/#more">more >></a>
         
       
 
@@ -620,7 +548,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/16/dubbo-03/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/dubbo-03/">展开全文 >></a>
         </p>
       
 
@@ -657,13 +585,13 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/12/dubbo-02/">Dubbo基础 - 配置文件</a>
+      <a class="article-title" href="/2020/10/19/dubbo-02/">Dubbo基础 - 配置文件</a>
     </h1>
   
 
         
-        <a href="/2018/12/12/dubbo-02/" class="archive-article-date">
-  	<time datetime="2018-12-12T15:35:01.844Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-12</time>
+        <a href="/2020/10/19/dubbo-02/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.373Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
@@ -680,7 +608,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;dubbo:consumer timeout=<span class="string">"3000"</span> check=<span class="string">"false"</span>/&gt;</span><br></pre></td></tr></table></figure>
 <p>check = false 防止启动报错 没有提供者会自动生成代理(测试环境使用)<br>check = true 没有提供者直接报错(正式环境使用)</p>
         
-          <a class="article-more-a" href="/2018/12/12/dubbo-02/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/dubbo-02/#more">more >></a>
         
       
 
@@ -704,7 +632,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/12/dubbo-02/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/dubbo-02/">展开全文 >></a>
         </p>
       
 
@@ -734,39 +662,112 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-kafka-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-dubbo-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/09/kafka-01/">Kafka学习 - 安装</a>
+      <a class="article-title" href="/2020/10/19/dubbo-04/">Dubbo - Spi机制</a>
     </h1>
   
 
         
-        <a href="/2018/12/09/kafka-01/" class="archive-article-date">
-  	<time datetime="2018-12-09T04:19:02.436Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-09</time>
+        <a href="/2020/10/19/dubbo-04/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.373Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>kafka基础学习-在centos7服务器上搭建kafka</p>
-<h3 id="安装zookeeper"><a href="#安装zookeeper" class="headerlink" title="安装zookeeper"></a>安装zookeeper</h3><ul>
-<li><p>下载zookeeper安装包 <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/</a></p>
-</li>
-<li><p>解压到指定目录 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf zookeeper-3.4.10.tar.gz -C /usr/<span class="built_in">local</span>/zookeeper</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/zookeeper/zookeeper-3.4.10/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure>
-</li>
+        <p>Dubbo Spi机制</p>
+<h2 id="Dubbo-Spi机制"><a href="#Dubbo-Spi机制" class="headerlink" title="Dubbo Spi机制"></a>Dubbo Spi机制</h2><p>本质是解决同一个接口，有多种实现时，使用者如何能够方便选择实现的问题</p>
+        
+          <a class="article-more-a" href="/2020/10/19/dubbo-04/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/19/dubbo-04/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Nginx跨域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/Nginx跨域/">Nginx - 跨域/防盗链/缓存/压缩/Https</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/Nginx跨域/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.372Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Nginx跨域/防盗链/缓存/压缩/Https</p>
+<h4 id="跨域解决"><a href="#跨域解决" class="headerlink" title="跨域解决"></a>跨域解决</h4><p>流程：</p>
+<ul>
+<li>当chrome发现ajax请求的网址，与当前主域名不一致（跨域）时，会在请求header中追加值页面主域名值，即：origin = <a href="http://static.enjoy.com" target="_blank" rel="noopener">http://static.enjoy.com</a></li>
+<li>nginx在接收到ajax请求时，会查看origin值，即请求我的网址是谁？此处使用正则来校验，即：只要是enjoy.com下的网址，都允许访问我，返回信息时，nginx追加header值：access-control-allow-origin = static.enjoy.com（回答浏览器，static域名网址可以访问我）</li>
+<li>chrome收到ajax返回值后，查看返回的header中access-control-allow-origin的值，发现其中的值是static.enjoy.com,正是当前的页面主域名。这是允许访问，于是执行ajax返回值内容。（ps：若此处access-control-allow-origin不存在，或者值不是static域名，chrome就拒绝执行返回值）</li>
 </ul>
         
-          <a class="article-more-a" href="/2018/12/09/kafka-01/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/Nginx跨域/#more">more >></a>
         
       
 
@@ -780,11 +781,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kafka</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Zookeeper</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
         		</li>
       		
 		</ul>
@@ -794,7 +791,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/09/kafka-01/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/Nginx跨域/">展开全文 >></a>
         </p>
       
 
@@ -824,30 +821,38 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-maven-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Nginx高可用keepalived" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/04/maven-01/">Maven基础 - 打包调用异常</a>
+      <a class="article-title" href="/2020/10/19/Nginx高可用keepalived/">Nginx - keepalived</a>
     </h1>
   
 
         
-        <a href="/2018/12/04/maven-01/" class="archive-article-date">
-  	<time datetime="2018-12-03T17:14:37.102Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-04</time>
+        <a href="/2020/10/19/Nginx高可用keepalived/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.372Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Maven基础学习配置</p>
-<h2 id="Maven-打包遇见的问题"><a href="#Maven-打包遇见的问题" class="headerlink" title="Maven 打包遇见的问题"></a>Maven 打包遇见的问题</h2><p>一个项目依赖以另一个项目时引入其依赖,想要调用其依赖的jar包中的类，则打包方式需使用maven的打包方式，不能使用spring-boot的打包方式 可以使用@Component将jar包中的类扫描注入到当前项目的IOC容器中</p>
+        <p>Nginx高可用keepalived</p>
+<h4 id="keepalived"><a href="#keepalived" class="headerlink" title="keepalived"></a>keepalived</h4><p>思路：</p>
+<p>由 2台服务器软件虚拟出来一台 虚拟网关vip，此vip由两台机器共同协商生成。当有一台机器宕机时，另一台机器一样能维持vip。这保证了，只要两台机器不同时宕机，vip就存在(不可以用docker配置)        </p>
+<p>keepalived不常用：域名绑定ip是以实现IP路由功能 更方便</p>
+<p>功能：</p>
+<ul>
+<li>管理LVS负载均衡软件</li>
+<li>实现LVS集群节点的健康检查</li>
+<li>作为系统网络服务的高可用性（failover）</li>
+</ul>
         
-          <a class="article-more-a" href="/2018/12/04/maven-01/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/Nginx高可用keepalived/#more">more >></a>
         
       
 
@@ -861,7 +866,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
         		</li>
       		
 		</ul>
@@ -871,7 +876,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/04/maven-01/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/Nginx高可用keepalived/">展开全文 >></a>
         </p>
       
 
@@ -908,13 +913,13 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/04/dubbo-01/">Dubbo基础 - 配置</a>
+      <a class="article-title" href="/2020/10/19/dubbo-01/">Dubbo基础 - 配置</a>
     </h1>
   
 
         
-        <a href="/2018/12/04/dubbo-01/" class="archive-article-date">
-  	<time datetime="2018-12-03T16:40:12.582Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-04</time>
+        <a href="/2020/10/19/dubbo-01/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.372Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
@@ -937,7 +942,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 <p>API配置（研究Dubbo的入口）</p>
 </blockquote>
         
-          <a class="article-more-a" href="/2018/12/04/dubbo-01/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/dubbo-01/#more">more >></a>
         
       
 
@@ -961,7 +966,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/04/dubbo-01/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/dubbo-01/">展开全文 >></a>
         </p>
       
 
@@ -1112,15 +1117,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1132,6 +1137,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">zookeeper</a>
               </li>
              
@@ -1140,19 +1149,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
             
             <div class="clearfix"></div>
