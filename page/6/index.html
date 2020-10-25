@@ -150,36 +150,35 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Nginx-location-rewrite" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Nginx跨域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/Nginx-location-rewrite/">Nginx - location流程 和 rewirte</a>
+      <a class="article-title" href="/2020/10/19/Nginx跨域/">Nginx - 跨域/防盗链/缓存/压缩/Https</a>
     </h1>
   
 
         
-        <a href="/2020/10/19/Nginx-location-rewrite/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.371Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+        <a href="/2020/10/19/Nginx跨域/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.372Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Location路径传递</p>
-<h4 id="rewrite使用"><a href="#rewrite使用" class="headerlink" title="rewrite使用"></a>rewrite使用</h4><p>语法:rewrite regex replacement [flag];  flag=【break/last/redirect/permanent】 </p>
+        <p>Nginx跨域/防盗链/缓存/压缩/Https</p>
+<h4 id="跨域解决"><a href="#跨域解决" class="headerlink" title="跨域解决"></a>跨域解决</h4><p>流程：</p>
 <ul>
-<li>regex 是正则表达式</li>
-<li>replacement 是替换值，新值</li>
-<li>flag – 是处理标志</li>
+<li>当chrome发现ajax请求的网址，与当前主域名不一致（跨域）时，会在请求header中追加值页面主域名值，即：origin = <a href="http://static.enjoy.com" target="_blank" rel="noopener">http://static.enjoy.com</a></li>
+<li>nginx在接收到ajax请求时，会查看origin值，即请求我的网址是谁？此处使用正则来校验，即：只要是enjoy.com下的网址，都允许访问我，返回信息时，nginx追加header值：access-control-allow-origin = static.enjoy.com（回答浏览器，static域名网址可以访问我）</li>
+<li>chrome收到ajax返回值后，查看返回的header中access-control-allow-origin的值，发现其中的值是static.enjoy.com,正是当前的页面主域名。这是允许访问，于是执行ajax返回值内容。（ps：若此处access-control-allow-origin不存在，或者值不是static域名，chrome就拒绝执行返回值）</li>
 </ul>
-<p>break/last 内部重定向，换path值<br>break标记，停止执行后续命令。for（）{break}<br>last标记，会引发location重新匹配。for（）{continue;} 不要轻易使用last标签<br>当有flag值的时候，rewrite层面的命令会中断。last会引发location重匹配<br>当没有flag值的时候，rewrite还会往下走，最后一个rewrite覆盖前面的。再引发location重匹配    </p>
         
-          <a class="article-more-a" href="/2020/10/19/Nginx-location-rewrite/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/Nginx跨域/#more">more >></a>
         
       
 
@@ -203,7 +202,182 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/Nginx-location-rewrite/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/Nginx跨域/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Nginx高可用keepalived" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/Nginx高可用keepalived/">Nginx - keepalived</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/Nginx高可用keepalived/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.372Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Nginx高可用keepalived</p>
+<h4 id="keepalived"><a href="#keepalived" class="headerlink" title="keepalived"></a>keepalived</h4><p>思路：</p>
+<p>由 2台服务器软件虚拟出来一台 虚拟网关vip，此vip由两台机器共同协商生成。当有一台机器宕机时，另一台机器一样能维持vip。这保证了，只要两台机器不同时宕机，vip就存在(不可以用docker配置)        </p>
+<p>keepalived不常用：域名绑定ip是以实现IP路由功能 更方便</p>
+<p>功能：</p>
+<ul>
+<li>管理LVS负载均衡软件</li>
+<li>实现LVS集群节点的健康检查</li>
+<li>作为系统网络服务的高可用性（failover）</li>
+</ul>
+        
+          <a class="article-more-a" href="/2020/10/19/Nginx高可用keepalived/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/19/Nginx高可用keepalived/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-dubbo-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/dubbo-01/">Dubbo基础 - 配置</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/dubbo-01/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.372Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dubbo基础学习配置</p>
+<h2 id="Dubbo-基本使用和配置"><a href="#Dubbo-基本使用和配置" class="headerlink" title="Dubbo 基本使用和配置"></a>Dubbo 基本使用和配置</h2><p>dubbo主要是使不同的服务通过注册中心互相调用，可以解耦。但是依赖于spring,就是一个spring项目和一个python项目无法通过dubbo互相调用，通过consul可以互相调用。</p>
+<p>问题：dubbo调用和maven依赖有什么区别(待查证)</p>
+<h3 id="Dubbo配置的四种方式"><a href="#Dubbo配置的四种方式" class="headerlink" title="Dubbo配置的四种方式"></a>Dubbo配置的四种方式</h3><blockquote>
+<p>XML配置 (使用最多)</p>
+</blockquote>
+<blockquote>
+<p>注解配置</p>
+</blockquote>
+<blockquote>
+<p>配置文件配置</p>
+</blockquote>
+<blockquote>
+<p>API配置（研究Dubbo的入口）</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2020/10/19/dubbo-01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/19/dubbo-01/">展开全文 >></a>
         </p>
       
 
@@ -319,6 +493,169 @@
 
 
   
+    <article id="post-Nginx-location-rewrite" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/Nginx-location-rewrite/">Nginx - location流程 和 rewirte</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/Nginx-location-rewrite/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.371Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Location路径传递</p>
+<h4 id="rewrite使用"><a href="#rewrite使用" class="headerlink" title="rewrite使用"></a>rewrite使用</h4><p>语法:rewrite regex replacement [flag];  flag=【break/last/redirect/permanent】 </p>
+<ul>
+<li>regex 是正则表达式</li>
+<li>replacement 是替换值，新值</li>
+<li>flag – 是处理标志</li>
+</ul>
+<p>break/last 内部重定向，换path值<br>break标记，停止执行后续命令。for（）{break}<br>last标记，会引发location重新匹配。for（）{continue;} 不要轻易使用last标签<br>当有flag值的时候，rewrite层面的命令会中断。last会引发location重匹配<br>当没有flag值的时候，rewrite还会往下走，最后一个rewrite覆盖前面的。再引发location重匹配    </p>
+        
+          <a class="article-more-a" href="/2020/10/19/Nginx-location-rewrite/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/19/Nginx-location-rewrite/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Nginx-Location匹配规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/19/Nginx-Location匹配规则/">Nginx - Location匹配规则 和 负载均衡</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/19/Nginx-Location匹配规则/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.370Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Location匹配规则 和 负载均衡</p>
+<h4 id="Location规则"><a href="#Location规则" class="headerlink" title="Location规则"></a>Location规则</h4><ul>
+<li>语法规则： location [=|~|~*|^~] /uri/ {… }</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://manage/;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2020/10/19/Nginx-Location匹配规则/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/19/Nginx-Location匹配规则/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Mysql-锁和事务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -403,33 +740,37 @@
 
 
   
-    <article id="post-Nginx-Location匹配规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Mysql-逻辑架构和存储引擎" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/Nginx-Location匹配规则/">Nginx - Location匹配规则 和 负载均衡</a>
+      <a class="article-title" href="/2020/10/19/Mysql-逻辑架构和存储引擎/">Mysql - Mysql逻辑架构和存储引擎</a>
     </h1>
   
 
         
-        <a href="/2020/10/19/Nginx-Location匹配规则/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.370Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+        <a href="/2020/10/19/Mysql-逻辑架构和存储引擎/" class="archive-article-date">
+  	<time datetime="2020-10-18T16:04:29.369Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Location匹配规则 和 负载均衡</p>
-<h4 id="Location规则"><a href="#Location规则" class="headerlink" title="Location规则"></a>Location规则</h4><ul>
-<li>语法规则： location [=|~|~*|^~] /uri/ {… }</li>
+        <p>Mysql逻辑架构和存储引擎</p>
+<h4 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h4><h5 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h5><ul>
+<li><p>TPS：Transactions Per Second（每秒传输的事物处理个数），这是指服务器每秒处理的事务数，支持事务的存储引擎如InnoDB等特有的一个性能指标。 </p>
+</li>
+<li><p>QPS：Queries Per Second（每秒查询处理量）同时适用与InnoDB和MyISAM 引擎</p>
+</li>
+<li><p>等待时间：执行Sql等待返回结果之间的等待时间</p>
+</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://manage/;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2020/10/19/Nginx-Location匹配规则/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/19/Mysql-逻辑架构和存储引擎/#more">more >></a>
         
       
 
@@ -443,7 +784,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
         		</li>
       		
 		</ul>
@@ -453,7 +794,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/Nginx-Location匹配规则/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/19/Mysql-逻辑架构和存储引擎/">展开全文 >></a>
         </p>
       
 
@@ -570,90 +911,6 @@
 
 
   
-    <article id="post-Mysql-逻辑架构和存储引擎" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/Mysql-逻辑架构和存储引擎/">Mysql - Mysql逻辑架构和存储引擎</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/Mysql-逻辑架构和存储引擎/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.369Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Mysql逻辑架构和存储引擎</p>
-<h4 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h4><h5 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h5><ul>
-<li><p>TPS：Transactions Per Second（每秒传输的事物处理个数），这是指服务器每秒处理的事务数，支持事务的存储引擎如InnoDB等特有的一个性能指标。 </p>
-</li>
-<li><p>QPS：Queries Per Second（每秒查询处理量）同时适用与InnoDB和MyISAM 引擎</p>
-</li>
-<li><p>等待时间：执行Sql等待返回结果之间的等待时间</p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2020/10/19/Mysql-逻辑架构和存储引擎/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/Mysql-逻辑架构和存储引擎/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-Mysql-sql优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -741,128 +998,9 @@
 
 
   
-    <article id="post-Mysql-业务设计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/Mysql-业务设计/">Mysql - MySql业务设计</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/Mysql-业务设计/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.368Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>MySql业务设计</p>
-<h4 id="MySql业务设计"><a href="#MySql业务设计" class="headerlink" title="MySql业务设计"></a>MySql业务设计</h4><h5 id="范式设计"><a href="#范式设计" class="headerlink" title="范式设计"></a>范式设计</h5><ul>
-<li>第一大范式 数据库表中的所有字段都只具有单一属性</li>
-<li>第二大范式 要求表中只具有一个业务主键</li>
-<li>第三大范式 指每一个非主属性之间不能有互相依赖关系</li>
-</ul>
-<p>问题：完全符合范式化的设计有时并不能得到良好得SQL查询性能<br>timestamp 和时区有关，而datetime无关</p>
-<h5 id="反范式化设计"><a href="#反范式化设计" class="headerlink" title="反范式化设计"></a>反范式化设计</h5><p>为了性能和读取效率得考虑而适当得对数据库设计范式得要求进行违反，允许存在少量得冗余，换句话来说反范式化就是使用空间来换取时间，不能完全按照范式得要求进行设计。</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>范式化</td>
-<td>可以尽量得减少数据冗余<br>范式化的更新操作比反范式化更快    <br>    范式化的表通常比反范式化的表更小</td>
-<td>对于查询需要对多个表进行关联<br>    更难进行索引优化</td>
-</tr>
-<tr>
-<td>反范式</td>
-<td>可以减少表的关联<br>可以更好的进行索引优化</td>
-<td>存在数据冗余及数据维护异常<br>对数据的修改需要更多的成本</td>
-</tr>
-</tbody>
-</table>
-<h4 id="物理设计"><a href="#物理设计" class="headerlink" title="物理设计"></a>物理设计</h4><ul>
-<li><p>定义数据库、表及字段的命名规范</p>
-<p>  可读性原则、表意性原则(意思清晰)、长名原则(不使用缩写)</p>
-</li>
-<li><p>选择合适的存储引擎</p>
-</li>
-<li><p>为表中的字段选择合适的数据类型</p>
-<ul>
-<li>优先考虑数字类型</li>
-<li>其次是日期、时间类型</li>
-<li>最后是字符类型</li>
-<li>对于相同级别的数据类型，应该优先选择占用空间小的数据类型。金额类除外，建议使用DECIMAL类型。(其它:timestamp和时区有关，而datetime无关)</li>
-</ul>
-</li>
-<li><p>建立数据库结构</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/Mysql-业务设计/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
     </nav>
   
 
@@ -1005,11 +1143,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式事务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决方案</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">zookeeper</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1018,6 +1164,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">接口幂等性</a>
               </li>
              
               <li class="article-tag-list-item">
