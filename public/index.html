@@ -150,33 +150,31 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-分布式锁解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-抽象工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/25/分布式锁解决方案/">分布式锁解决方案</a>
+      <a class="article-title" href="/2021/12/05/抽象工厂模式/">设计模式-抽象工厂方法模式</a>
     </h1>
   
 
         
-        <a href="/2020/10/25/分布式锁解决方案/" class="archive-article-date">
-  	<time datetime="2020-10-25T04:56:51.145Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-25</time>
+        <a href="/2021/12/05/抽象工厂模式/" class="archive-article-date">
+  	<time datetime="2021-12-04T16:42:26.503Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>分布式锁解决方案</p>
-<h3 id="分布式锁解决方案"><a href="#分布式锁解决方案" class="headerlink" title="分布式锁解决方案"></a>分布式锁解决方案</h3><p>分布式锁：集群的情况下会产生</p>
-<p>CAP理论：一致性 可用性 分区容错性</p>
-<p>解决方案：<br>基于数据库实现分布式锁<br>基于缓存（Redis等）实现分布式锁<br>基于Zookeeper实现分布式锁</p>
-        
-          <a class="article-more-a" href="/2020/10/25/分布式锁解决方案/#more">more >></a>
-        
+        <h3 id="抽象工厂方法模式"><a href="#抽象工厂方法模式" class="headerlink" title="抽象工厂方法模式"></a>抽象工厂方法模式</h3><blockquote>
+<p>  当一个类别的产品有多个区分的时候，为了按照系列生产商品，使用抽象工厂区分。(将同一个类别的产品放在一个抽象类中)</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png" alt="抽象工厂方法模式"></p>
+
       
 
       
@@ -189,11 +187,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">解决方案</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">分布式锁</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -203,7 +197,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/25/分布式锁解决方案/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/05/抽象工厂模式/">展开全文 >></a>
         </p>
       
 
@@ -233,39 +227,31 @@
 
 
   
-    <article id="post-分布式事务解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-简单工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/25/分布式事务解决方案/">分布式事务解决方案</a>
+      <a class="article-title" href="/2021/12/05/简单工厂模式/">设计模式-简单工厂模式</a>
     </h1>
   
 
         
-        <a href="/2020/10/25/分布式事务解决方案/" class="archive-article-date">
-  	<time datetime="2020-10-25T04:55:51.509Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-25</time>
+        <a href="/2021/12/05/简单工厂模式/" class="archive-article-date">
+  	<time datetime="2021-12-04T16:42:26.503Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>分布式事务解决方案</p>
-<h3 id="分布式事务解决方案"><a href="#分布式事务解决方案" class="headerlink" title="分布式事务解决方案"></a>分布式事务解决方案</h3><p>数据库事务正确执行的四个基本要素ACID ：</p>
-<p>原子性<br>一致性<br>隔离性<br>持久性</p>
-<p>CAP定理：在一个分布式系统中，一致性（Consistency）、可用性（Availability）、分区容忍性（Partition tolerance）三个要素最多只能同时实现两点，不可能三者兼顾。</p>
-<ul>
-<li>一致性：在分布式系统中的所有数据备份，在同一时刻是否同样的值。</li>
-<li>可用性：在集群中一部分节点故障后，集群整体是否还能响应客户端的读写请求。</li>
-<li>分区容忍性：以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择。</li>
-</ul>
-<p>BASE理论：我们无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性。</p>
-        
-          <a class="article-more-a" href="/2020/10/25/分布式事务解决方案/#more">more >></a>
-        
+        <h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><blockquote>
+<p>  当类没有管理的时候，使用者每次都需要自己去new一个对象，简单工厂模式就是用一个集中的类来负责产品对象的创建。不属于23种设计模式，但是是工厂模式的基础。</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.jpg" alt="简单工厂模式"></p>
+
       
 
       
@@ -278,11 +264,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">分布式事务</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">解决方案</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -292,7 +274,251 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/25/分布式事务解决方案/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/05/简单工厂模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-建造者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/05/建造者模式/">设计模式-建造者模式</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/05/建造者模式/" class="archive-article-date">
+  	<time datetime="2021-12-04T16:42:26.502Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="抽象工厂方法模式"><a href="#抽象工厂方法模式" class="headerlink" title="抽象工厂方法模式"></a>抽象工厂方法模式</h3><blockquote>
+<p>  当抽象工厂比较复杂时使用。(相当于一个流程)</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F.png" alt="建造者模式"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/05/建造者模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-工厂模式总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/05/工厂模式总结/">设计模式-工厂模式总结</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/05/工厂模式总结/" class="archive-article-date">
+  	<time datetime="2021-12-04T16:42:26.501Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="工厂模式总结"><a href="#工厂模式总结" class="headerlink" title="工厂模式总结"></a>工厂模式总结</h3><blockquote>
+<p>使用原则:</p>
+</blockquote>
+<ul>
+<li>解耦：把对象的创建和使用的过程分开。</li>
+<li>工厂负责对象的创建，包括其init方法的调用，黑盒创建过程。</li>
+<li>面向接口编程： 使用者只管使用，只知其接口而不知其实现类。</li>
+</ul>
+<blockquote>
+<p>对比:</p>
+</blockquote>
+<ul>
+<li>静态工厂：把所有对象的创建逻辑集中到一个（专业）类里处理</li>
+<li>工厂方法模式：一个工厂负责创建一个产品类的创建</li>
+<li>抽象工厂模式：将一个系列的产品的工厂合并成一个工厂，负责生产这个系列的产品</li>
+<li>建造者模式：对象的创建比较复杂时，按步骤一块块创建，让创建过程模板化。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/05/工厂模式总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-工厂方法模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/05/工厂方法模式/">设计模式-工厂方法模式</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/05/工厂方法模式/" class="archive-article-date">
+  	<time datetime="2021-12-04T16:42:26.501Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><blockquote>
+<p>  将静态工厂类打散，每一类对象都有一个工厂来创建。</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.png" alt="工厂方法模式"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/05/工厂方法模式/">展开全文 >></a>
         </p>
       
 
@@ -329,13 +555,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/25/接口幂等性解决方案/">接口幂等性解决方案</a>
+      <a class="article-title" href="/2021/12/02/接口幂等性解决方案/">接口幂等性解决方案</a>
     </h1>
   
 
         
-        <a href="/2020/10/25/接口幂等性解决方案/" class="archive-article-date">
-  	<time datetime="2020-10-25T04:55:37.237Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-25</time>
+        <a href="/2021/12/02/接口幂等性解决方案/" class="archive-article-date">
+  	<time datetime="2021-12-02T12:50:23.640Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-02</time>
 </a>
         
       </header>
@@ -375,93 +601,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/25/接口幂等性解决方案/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring-springboot自动配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/20/spring-springboot自动配置/">SpringBoot自动配置</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/20/spring-springboot自动配置/" class="archive-article-date">
-  	<time datetime="2020-10-20T14:28:25.185Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>SpringBoot自动配置</p>
-<h3 id="SpringBoot自动配置"><a href="#SpringBoot自动配置" class="headerlink" title="SpringBoot自动配置"></a>SpringBoot自动配置</h3><p>入口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudyApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(StudyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2020/10/20/spring-springboot自动配置/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/20/spring-springboot自动配置/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/02/接口幂等性解决方案/">展开全文 >></a>
         </p>
       
 
@@ -498,13 +638,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/spring-设计模式/">Spring设计模式</a>
+      <a class="article-title" href="/2021/12/02/spring-设计模式/">Spring设计模式</a>
     </h1>
   
 
         
-        <a href="/2020/10/19/spring-设计模式/" class="archive-article-date">
-  	<time datetime="2020-10-19T08:26:49.776Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+        <a href="/2021/12/02/spring-设计模式/" class="archive-article-date">
+  	<time datetime="2021-12-02T12:50:23.639Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-02</time>
 </a>
         
       </header>
@@ -523,7 +663,7 @@
 </ul>
 <p>缺点：<br>违背了开闭原则,工厂类可能容易成为上帝类。</p>
         
-          <a class="article-more-a" href="/2020/10/19/spring-设计模式/#more">more >></a>
+          <a class="article-more-a" href="/2021/12/02/spring-设计模式/#more">more >></a>
         
       
 
@@ -551,7 +691,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/spring-设计模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/02/spring-设计模式/">展开全文 >></a>
         </p>
       
 
@@ -581,42 +721,124 @@
 
 
   
-    <article id="post-通讯协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-spring-springboot自动配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/通讯协议/">深入理解通讯协议</a>
+      <a class="article-title" href="/2021/12/02/spring-springboot自动配置/">SpringBoot自动配置</a>
     </h1>
   
 
         
-        <a href="/2020/10/19/通讯协议/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.389Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+        <a href="/2021/12/02/spring-springboot自动配置/" class="archive-article-date">
+  	<time datetime="2021-12-02T12:50:23.639Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>通讯协议</p>
-<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>七层模型</p>
+        <p>SpringBoot自动配置</p>
+<h3 id="SpringBoot自动配置"><a href="#SpringBoot自动配置" class="headerlink" title="SpringBoot自动配置"></a>SpringBoot自动配置</h3><p>入口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudyApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(StudyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2021/12/02/spring-springboot自动配置/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/02/spring-springboot自动配置/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-分布式事务解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/02/分布式事务解决方案/">分布式事务解决方案</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/02/分布式事务解决方案/" class="archive-article-date">
+  	<time datetime="2021-12-02T12:50:23.639Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>分布式事务解决方案</p>
+<h3 id="分布式事务解决方案"><a href="#分布式事务解决方案" class="headerlink" title="分布式事务解决方案"></a>分布式事务解决方案</h3><p>数据库事务正确执行的四个基本要素ACID ：</p>
+<p>原子性<br>一致性<br>隔离性<br>持久性</p>
+<p>CAP定理：在一个分布式系统中，一致性（Consistency）、可用性（Availability）、分区容忍性（Partition tolerance）三个要素最多只能同时实现两点，不可能三者兼顾。</p>
 <ul>
-<li>OSI模型<ul>
-<li>应用层  为应用程序提供服务</li>
-<li>表示层  数据格式转换</li>
-<li>会话层  建立 管理 维护会话</li>
-<li>传输层  最重要 端对端的连接 数据可靠性传输</li>
-<li>网络层  ip 路由</li>
-<li>链路层  交换机</li>
-<li>物理层  物理介质 网线等等</li>
+<li>一致性：在分布式系统中的所有数据备份，在同一时刻是否同样的值。</li>
+<li>可用性：在集群中一部分节点故障后，集群整体是否还能响应客户端的读写请求。</li>
+<li>分区容忍性：以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择。</li>
 </ul>
-</li>
-</ul>
+<p>BASE理论：我们无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性。</p>
         
-          <a class="article-more-a" href="/2020/10/19/通讯协议/#more">more >></a>
+          <a class="article-more-a" href="/2021/12/02/分布式事务解决方案/#more">more >></a>
         
       
 
@@ -630,7 +852,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">通讯协议</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">解决方案</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">分布式事务</a>
         		</li>
       		
 		</ul>
@@ -640,7 +866,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/通讯协议/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/02/分布式事务解决方案/">展开全文 >></a>
         </p>
       
 
@@ -670,62 +896,33 @@
 
 
   
-    <article id="post-设计模式原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-分布式锁解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/设计模式原则/">设计模式-六大基本原则</a>
+      <a class="article-title" href="/2021/12/02/分布式锁解决方案/">分布式锁解决方案</a>
     </h1>
   
 
         
-        <a href="/2020/10/19/设计模式原则/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.388Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
+        <a href="/2021/12/02/分布式锁解决方案/" class="archive-article-date">
+  	<time datetime="2021-12-02T12:50:23.639Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="六大基本原则"><a href="#六大基本原则" class="headerlink" title="六大基本原则"></a>六大基本原则</h3><blockquote>
-<p>  重要的是思想 ！！！</p>
-</blockquote>
-<ul>
-<li><p>开闭原则</p>
-<blockquote>
-<p>对扩展开发、对修改关闭</p>
-</blockquote>
-</li>
-<li><p>单一职责原则</p>
-<blockquote>
-<p>一个类只负责一个职责</p>
-</blockquote>
-</li>
-<li><p>依赖倒置原则</p>
-<blockquote>
-<p>面向接口编程</p>
-</blockquote>
-</li>
-<li><p>里氏替换原则</p>
-<blockquote>
-<p>子类可以扩展父类的功能、但不要改变父类原有的功能</p>
-</blockquote>
-</li>
-<li><p>接口隔离原则</p>
-<blockquote>
-<p>设计接口功能尽量细粒度、最小功能单元</p>
-</blockquote>
-</li>
-<li><p>迪米特法则</p>
-<blockquote>
-<p>降低耦合、局部变量中不要引入新的类</p>
-</blockquote>
-</li>
-</ul>
-
+        <p>分布式锁解决方案</p>
+<h3 id="分布式锁解决方案"><a href="#分布式锁解决方案" class="headerlink" title="分布式锁解决方案"></a>分布式锁解决方案</h3><p>分布式锁：集群的情况下会产生</p>
+<p>CAP理论：一致性 可用性 分区容错性</p>
+<p>解决方案：<br>基于数据库实现分布式锁<br>基于缓存（Redis等）实现分布式锁<br>基于Zookeeper实现分布式锁</p>
+        
+          <a class="article-more-a" href="/2021/12/02/分布式锁解决方案/#more">more >></a>
+        
       
 
       
@@ -738,84 +935,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">分布式锁</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/设计模式原则/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/适配器模式/">设计模式-适配器模式</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/适配器模式/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.388Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><blockquote>
-<p>  将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以一起工作。</p>
-</blockquote>
-<p><img src="http://image.tupelo.top/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.png" alt="适配器模式"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">解决方案</a>
         		</li>
       		
 		</ul>
@@ -825,161 +949,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/适配器模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-抽象工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/抽象工厂模式/">设计模式-抽象工厂方法模式</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/抽象工厂模式/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.387Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="抽象工厂方法模式"><a href="#抽象工厂方法模式" class="headerlink" title="抽象工厂方法模式"></a>抽象工厂方法模式</h3><blockquote>
-<p>  当一个类别的产品有多个区分的时候，为了按照系列生产商品，使用抽象工厂区分。(将同一个类别的产品放在一个抽象类中)</p>
-</blockquote>
-<p><img src="http://image.tupelo.top/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png" alt="抽象工厂方法模式"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/抽象工厂模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-简单工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/简单工厂模式/">设计模式-简单工厂模式</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/简单工厂模式/" class="archive-article-date">
-  	<time datetime="2020-10-18T16:04:29.387Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><blockquote>
-<p>  当类没有管理的时候，使用者每次都需要自己去new一个对象，简单工厂模式就是用一个集中的类来负责产品对象的创建。不属于23种设计模式，但是是工厂模式的基础。</p>
-</blockquote>
-<p><img src="http://image.tupelo.top/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.jpg" alt="简单工厂模式"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/简单工厂模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/02/分布式锁解决方案/">展开全文 >></a>
         </p>
       
 
@@ -1023,7 +993,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 Caichuang
+    		&copy; 2021 Caichuang
     	</div>
       	<div class="footer-right">
 
@@ -1114,19 +1084,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1135,6 +1101,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1154,27 +1124,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分布式事务</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决方案</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">zookeeper</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1182,15 +1132,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决方案</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式事务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">接口幂等性</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
             
             <div class="clearfix"></div>
