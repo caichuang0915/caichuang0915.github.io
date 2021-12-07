@@ -150,417 +150,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-zookeeper集群" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/zookeeper集群/">Zookeeper集群</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/zookeeper集群/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Zookeeper集群"><a href="#Zookeeper集群" class="headerlink" title="Zookeeper集群"></a>Zookeeper集群</h4><ul>
-<li>顺序一致性<br>  客户端的更新顺序与它们被发送的顺序相一致。</li>
-<li>原子性<br>  更新操作要么成功要么失败，没有第三种结果。</li>
-<li>单一视图<br>  无论客户端连接到哪一个服务器，客户端将看到相同的 ZooKeeper 视图。</li>
-<li>可靠性<br>  一旦一个更新操作被应用，那么在客户端再次更新它之前，它的值将不会改变。</li>
-<li>实时性<br>  连接上一个服务端数据修改，所以其他的服务端都会实时的跟新，不算完全的实时，有一点延时的</li>
-<li>角色轮换避免单点故障<br>  当leader出现问题的时候，会选举从follower中选举一个新的leader</li>
-</ul>
-<h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><ul>
-<li>Leader  集群工作机制中的核心<ul>
-<li>事务请求的唯一调度和处理者，保证集群事务处理的顺序性</li>
-<li>集群内部个服务器的调度者(管理follower,数据同步)</li>
-</ul>
-</li>
-<li>Follower  集群工作机制中的跟随者<ul>
-<li>处理非事务请求，转发事务请求给Leader</li>
-<li>参与事务请求proposal投票<br>参与leader选举投票</li>
-</ul>
-</li>
-<li>Observer 观察者  <ul>
-<li>3.30以上版本提供，和follower功能相同，但不参与任何形式投票</li>
-<li>处理非事务请求，转发事务请求给Leader</li>
-<li>提高集群非事务处理能力</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2021/12/06/zookeeper集群/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/zookeeper集群/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-zookeeper特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/zookeeper特性/">Zookeeper特性</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/zookeeper特性/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h4><ul>
-<li>简单的数据结构：共享的树形结构，类似文件系统，存储于内存；</li>
-<li>可以构建集群：避免单点故障，3-5台机器就可以组成集群，超过半数正常工作就能对外提供服务；</li>
-<li>顺序访问：对于每个读请求，zk会分配一个全局唯一的递增编号，利用这个特性可以实现高级协调服务；</li>
-<li>高性能：基于内存操作，服务于非事务请求，适用于读操作为主的业务场景。3台zk集群能达到13w QPS；</li>
-</ul>
-<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><ul>
-<li>数据发布订阅</li>
-<li>负载均衡</li>
-<li>命名服务</li>
-<li>Master选举</li>
-<li>集群管理</li>
-<li>配置管理</li>
-<li>分布式队列</li>
-<li>分布式锁</li>
-</ul>
-        
-          <a class="article-more-a" href="/2021/12/06/zookeeper特性/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/zookeeper特性/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-分布式系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/分布式系统/">分布式系统基础知识</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/分布式系统/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="分布式系统带来的问题"><a href="#分布式系统带来的问题" class="headerlink" title="分布式系统带来的问题"></a>分布式系统带来的问题</h4><ul>
-<li>通信异常</li>
-<li>网络分区 （脑裂）</li>
-<li>三态 （成功、失败、超时）</li>
-<li>节点故障</li>
-</ul>
-<h4 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h4><ul>
-<li><p>一致性</p>
-<p>  在分布式系统中，一致性是数据在多个副本之间是否能够保证一致的特性，这里说的一致性和前面说的对等性其实差不多。如果能够在分布式系统中针对某一个数据项的变更成功执行后，所有用户都可以马上读取到最新的值，那么这样的系统就被认为具有【强一致性】。     </p>
-</li>
-<li><p>可用性</p>
-<p>  可用性指系统提供服务必须一直处于可用状态，对于用户的操作请求总是能够在有限的时间内访问结果。这里的重点是【有限的时间】和【返回结果】为了做到有限的时间需要用到缓存，需要用到负载，这个时候服务器增加的节点是为性能考虑；为了返回结果，需要考虑服务器主备，当主节点出现问题的时候需要备份的节点能最快的顶替上来，千万不能出现OutOfMemory或者其他500，404错误，否则这样的系统我们会认为是不可用的。</p>
-</li>
-<li><p>分区容错性</p>
-<p>  分布式系统在遇到任何网络分区故障的时候，仍然需要能够对外提供满足一致性和可用性的服务，除非是整个网络环境都发生了故障。</p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2021/12/06/分布式系统/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/分布式系统/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mybatis_01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/mybatis_01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Nginx-Location匹配规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/Nginx-Location匹配规则/">Nginx - Location匹配规则 和 负载均衡</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/Nginx-Location匹配规则/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Location匹配规则 和 负载均衡</p>
-<h4 id="Location规则"><a href="#Location规则" class="headerlink" title="Location规则"></a>Location规则</h4><ul>
-<li>语法规则： location [=|~|~*|^~] /uri/ {… }</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://manage/;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2021/12/06/Nginx-Location匹配规则/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/Nginx-Location匹配规则/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-Nginx-location-rewrite" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -615,90 +204,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/12/06/Nginx-location-rewrite/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mysql-锁和事务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/Mysql-锁和事务/">Mysql - Mysql锁和事务</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/Mysql-锁和事务/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Mysql锁和事务</p>
-<h4 id="Mysql锁"><a href="#Mysql锁" class="headerlink" title="Mysql锁"></a>Mysql锁</h4><p>不同的存储引擎支持不同的锁机制,MyISAM和MEMORY存储引擎采用的是表级锁InnoDB存储引擎既支持行级锁，也支持表级锁，但默认情况下是采用行级锁。</p>
-<ul>
-<li>表级锁:开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高,并发度最低。</li>
-<li>行级锁:开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低,并发度也最高。</li>
-<li>页面锁:开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</li>
-</ul>
-<p>表级锁更适合于以查询为主，只有少量按索引条件更新数据的应用，如OLAP系统   </p>
-<p>行级锁则更适合于有大量按索引条件并发更新少量不同数据，同时又有并发查询的应用    </p>
-        
-          <a class="article-more-a" href="/2021/12/06/Mysql-锁和事务/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/Mysql-锁和事务/">展开全文 >></a>
         </p>
       
 
@@ -981,6 +486,519 @@
 
 
   
+    <article id="post-dubbo-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/06/dubbo-01/">Dubbo基础 - 配置</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/06/dubbo-01/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dubbo基础学习配置</p>
+<h2 id="Dubbo-基本使用和配置"><a href="#Dubbo-基本使用和配置" class="headerlink" title="Dubbo 基本使用和配置"></a>Dubbo 基本使用和配置</h2><p>dubbo主要是使不同的服务通过注册中心互相调用，可以解耦。但是依赖于spring,就是一个spring项目和一个python项目无法通过dubbo互相调用，通过consul可以互相调用。</p>
+<p>问题：dubbo调用和maven依赖有什么区别(待查证)</p>
+<h3 id="Dubbo配置的四种方式"><a href="#Dubbo配置的四种方式" class="headerlink" title="Dubbo配置的四种方式"></a>Dubbo配置的四种方式</h3><blockquote>
+<p>XML配置 (使用最多)</p>
+</blockquote>
+<blockquote>
+<p>注解配置</p>
+</blockquote>
+<blockquote>
+<p>配置文件配置</p>
+</blockquote>
+<blockquote>
+<p>API配置（研究Dubbo的入口）</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2021/12/06/dubbo-01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/06/dubbo-01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-dubbo-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/06/dubbo-02/">Dubbo基础 - 配置文件</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/06/dubbo-02/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dubbo基础学习配置</p>
+<h2 id="Dubbo-配置文件"><a href="#Dubbo-配置文件" class="headerlink" title="Dubbo 配置文件"></a>Dubbo 配置文件</h2><ul>
+<li>消费方配置  </li>
+</ul>
+<blockquote>
+<p>check</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;dubbo:consumer timeout=<span class="string">"3000"</span> check=<span class="string">"false"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>check = false 防止启动报错 没有提供者会自动生成代理(测试环境使用)<br>check = true 没有提供者直接报错(正式环境使用)</p>
+        
+          <a class="article-more-a" href="/2021/12/06/dubbo-02/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/06/dubbo-02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-dubbo-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/06/dubbo-03/">Dubbo - rpc调用过程</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/06/dubbo-03/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dubbo rpc调用过程</p>
+<h2 id="Dubbo-rpc调用过程"><a href="#Dubbo-rpc调用过程" class="headerlink" title="Dubbo rpc调用过程"></a>Dubbo rpc调用过程</h2><ul>
+<li>Dubbo的RPC服务暴露和引入</li>
+</ul>
+<p><img src="http://image.tupelo.top/rpc%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2.png" alt="服务暴露和引入"></p>
+        
+          <a class="article-more-a" href="/2021/12/06/dubbo-03/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/06/dubbo-03/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-dubbo-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/06/dubbo-04/">Dubbo - Spi机制</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/06/dubbo-04/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dubbo Spi机制</p>
+<h2 id="Dubbo-Spi机制"><a href="#Dubbo-Spi机制" class="headerlink" title="Dubbo Spi机制"></a>Dubbo Spi机制</h2><p>本质是解决同一个接口，有多种实现时，使用者如何能够方便选择实现的问题</p>
+        
+          <a class="article-more-a" href="/2021/12/06/dubbo-04/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/06/dubbo-04/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-dubbo-05" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/06/dubbo-05/">Dubbo - 总结</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/06/dubbo-05/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dubbo 总结</p>
+<blockquote>
+<p>参考官方文档：<a href="http://dubbo.apache.org/zh-cn/docs/user/references/xml/dubbo-service.html" target="_blank" rel="noopener">http://dubbo.apache.org/zh-cn/docs/user/references/xml/dubbo-service.html</a></p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2021/12/06/dubbo-05/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/06/dubbo-05/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-git使用笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/06/git使用笔记/">Git使用笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/06/git使用笔记/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Git使用笔记</p>
+<h2 id="Git使用笔记"><a href="#Git使用笔记" class="headerlink" title="Git使用笔记"></a>Git使用笔记</h2><h4 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h4><p>下载地址 ： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查看当前git用户名： ```git config user.name```      </span><br><span class="line">查看当前git邮箱： ```git config user.email```      </span><br><span class="line">切换git用户名: ```git config --global user.name &quot;user name&quot;```       </span><br><span class="line">切换git邮箱： ```git config --global user.email  &quot;e-mail&quot;```     </span><br><span class="line">生成SSH Keys: ```ssh-keygen -t rsa -C &quot;e-mail&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Git指令模式"><a href="#Git指令模式" class="headerlink" title="Git指令模式"></a>Git指令模式</h4><h5 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h5><ul>
+<li><code>git init</code> 初始化一个git项目</li>
+<li><code>git commit -am &#39;new project&#39;</code> 加入缓存区并提交</li>
+<li><code>git chceckout [-b] king</code>  切换(新增分支)</li>
+</ul>
+<h5 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h5><ul>
+<li><code>git remote add origin https://github.com/xx/xxx.git</code>  本地新建一个远程连接</li>
+<li><code>git remote [-v]</code>  查看远程连接(详情)</li>
+<li><code>git branch --set-upstream-to=origin/xxx xxx</code>  本地分支与远程分支关联</li>
+<li><code>git push --set-upstream origin master</code>  上传本地项目至GitHub</li>
+<li><code>git fetch</code>  提取远程仓库</li>
+</ul>
+<h5 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h5><ul>
+<li><code>git merge xxx</code> 将指定版本与当前版本合并</li>
+</ul>
+<blockquote>
+<p>有冲突的话相关的文件会显示,需要手动解决冲突后再次push</p>
+</blockquote>
+<h5 id="日志标签"><a href="#日志标签" class="headerlink" title="日志标签"></a>日志标签</h5><ul>
+<li><code>git log [--oneline] [--graph]</code> 显示提交日志(简化成一行)(显示分支)</li>
+<li><code>git tag [-a][-d] xxx -m &#39;xxxx&#39;</code> 为某一个分支(创建)(删除)一个tag</li>
+<li><code>git show xxx</code> 显示某一个tag的附属信息</li>
+<li><code>git push origin -tags</code> 本地标签提交到远程仓库</li>
+</ul>
+<h5 id="代码回滚-两种方式：回退（reset）、反做（revert）"><a href="#代码回滚-两种方式：回退（reset）、反做（revert）" class="headerlink" title="代码回滚 两种方式：回退（reset）、反做（revert）"></a>代码回滚 两种方式：回退（reset）、反做（revert）</h5><ul>
+<li><code>git reset</code> 的作用是修改HEAD的位置，即将HEAD指向的位置改变为之前存在的某个版本。（比如需要回到到V0.3）使用 <code>git reset --hard 目标版本号</code> 命令将版本回退</li>
+<li><code>git revert</code> 的作用通过反做创建一个新的版本，这个版本的内容与我们要回退到的目标版本一样，但是HEAD指针是指向这个新生成的版本，而不是目标版本。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/06/git使用笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -1138,11 +1156,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1151,6 +1169,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">接口幂等性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1163,14 +1189,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">适配器模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">接口幂等性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
