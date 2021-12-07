@@ -150,42 +150,54 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-多线程-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-zookeeper集群" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/15/多线程-01/">并发编程 - 线程基础、线程之间的共享和协作</a>
+      <a class="article-title" href="/2021/12/06/zookeeper集群/">Zookeeper集群</a>
     </h1>
   
 
         
-        <a href="/2019/02/15/多线程-01/" class="archive-article-date">
-  	<time datetime="2019-02-15T14:17:57.836Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-15</time>
+        <a href="/2021/12/06/zookeeper集群/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>线程基础、线程之间的共享和协作</p>
-<h2 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h2><h4 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h4><ul>
-<li>进程：程序运行资源分配的最小单位,进程内部有多个线程,会共享这个进程的资源</li>
-<li>线程：CPU调度的最小单位,必须依赖进程而存在。</li>
+        <h4 id="Zookeeper集群"><a href="#Zookeeper集群" class="headerlink" title="Zookeeper集群"></a>Zookeeper集群</h4><ul>
+<li>顺序一致性<br>  客户端的更新顺序与它们被发送的顺序相一致。</li>
+<li>原子性<br>  更新操作要么成功要么失败，没有第三种结果。</li>
+<li>单一视图<br>  无论客户端连接到哪一个服务器，客户端将看到相同的 ZooKeeper 视图。</li>
+<li>可靠性<br>  一旦一个更新操作被应用，那么在客户端再次更新它之前，它的值将不会改变。</li>
+<li>实时性<br>  连接上一个服务端数据修改，所以其他的服务端都会实时的跟新，不算完全的实时，有一点延时的</li>
+<li>角色轮换避免单点故障<br>  当leader出现问题的时候，会选举从follower中选举一个新的leader</li>
 </ul>
-<h4 id="高并发编程的意义、好处和注意事项"><a href="#高并发编程的意义、好处和注意事项" class="headerlink" title="高并发编程的意义、好处和注意事项"></a>高并发编程的意义、好处和注意事项</h4><ul>
-<li>好处：充分利用cpu的资源、加快用户响应的时间,程序模块化,异步化</li>
-<li>问题：  <ul>
-<li>线程共享资源,存在冲突；  </li>
-<li>容易导致死锁；  </li>
-<li>启用太多的线程,就有搞垮机器的可能</li>
+<h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><ul>
+<li>Leader  集群工作机制中的核心<ul>
+<li>事务请求的唯一调度和处理者，保证集群事务处理的顺序性</li>
+<li>集群内部个服务器的调度者(管理follower,数据同步)</li>
+</ul>
+</li>
+<li>Follower  集群工作机制中的跟随者<ul>
+<li>处理非事务请求，转发事务请求给Leader</li>
+<li>参与事务请求proposal投票<br>参与leader选举投票</li>
+</ul>
+</li>
+<li>Observer 观察者  <ul>
+<li>3.30以上版本提供，和follower功能相同，但不参与任何形式投票</li>
+<li>处理非事务请求，转发事务请求给Leader</li>
+<li>提高集群非事务处理能力</li>
 </ul>
 </li>
 </ul>
         
-          <a class="article-more-a" href="/2019/02/15/多线程-01/#more">more >></a>
+          <a class="article-more-a" href="/2021/12/06/zookeeper集群/#more">more >></a>
         
       
 
@@ -199,7 +211,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
         		</li>
       		
 		</ul>
@@ -209,7 +221,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/15/多线程-01/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/06/zookeeper集群/">展开全文 >></a>
         </p>
       
 
@@ -239,38 +251,44 @@
 
 
   
-    <article id="post-rabbitmq-06" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-zookeeper特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/06/rabbitmq-06/">RabbitMq - 集群</a>
+      <a class="article-title" href="/2021/12/06/zookeeper特性/">Zookeeper特性</a>
     </h1>
   
 
         
-        <a href="/2019/01/06/rabbitmq-06/" class="archive-article-date">
-  	<time datetime="2019-01-06T15:23:14.673Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-06</time>
+        <a href="/2021/12/06/zookeeper特性/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>RabbitMq集群</p>
-<h2 id="RabbitMq-集群-局域网-网络速度快"><a href="#RabbitMq-集群-局域网-网络速度快" class="headerlink" title="RabbitMq 集群(局域网/网络速度快)"></a>RabbitMq 集群(局域网/网络速度快)</h2><h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>实现某一台机器挂了 程序还能运行 并不是为了保证消息万无一失  </p>
-<blockquote>
-<p>交换器全局复制 队列只有元数据复制 </p>
-</blockquote>
-<h4 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h4><ul>
-<li>rabbitmqctl join_culster [rabbit@node] 加入集群  </li>
-<li>rabbitmqctl status   集群状态  </li>
-<li>rabbitmqctl reset    </li>
+        <h4 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h4><ul>
+<li>简单的数据结构：共享的树形结构，类似文件系统，存储于内存；</li>
+<li>可以构建集群：避免单点故障，3-5台机器就可以组成集群，超过半数正常工作就能对外提供服务；</li>
+<li>顺序访问：对于每个读请求，zk会分配一个全局唯一的递增编号，利用这个特性可以实现高级协调服务；</li>
+<li>高性能：基于内存操作，服务于非事务请求，适用于读操作为主的业务场景。3台zk集群能达到13w QPS；</li>
+</ul>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><ul>
+<li>数据发布订阅</li>
+<li>负载均衡</li>
+<li>命名服务</li>
+<li>Master选举</li>
+<li>集群管理</li>
+<li>配置管理</li>
+<li>分布式队列</li>
+<li>分布式锁</li>
 </ul>
         
-          <a class="article-more-a" href="/2019/01/06/rabbitmq-06/#more">more >></a>
+          <a class="article-more-a" href="/2021/12/06/zookeeper特性/#more">more >></a>
         
       
 
@@ -284,7 +302,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
         		</li>
       		
 		</ul>
@@ -294,7 +312,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/06/rabbitmq-06/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/06/zookeeper特性/">展开全文 >></a>
         </p>
       
 
@@ -324,30 +342,45 @@
 
 
   
-    <article id="post-rabbitmq-05" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-分布式系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/06/rabbitmq-05/">RabbitMq - 定义队列,消息的其它属性(定义时最后的一个Map)</a>
+      <a class="article-title" href="/2021/12/06/分布式系统/">分布式系统基础知识</a>
     </h1>
   
 
         
-        <a href="/2019/01/06/rabbitmq-05/" class="archive-article-date">
-  	<time datetime="2019-01-06T07:43:05.508Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-06</time>
+        <a href="/2021/12/06/分布式系统/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>RabbitMq其它属性(定义时最后的一个Map)</p>
-<h2 id="RabbitMq-其它属性-定义时最后的一个Map"><a href="#RabbitMq-其它属性-定义时最后的一个Map" class="headerlink" title="RabbitMq 其它属性(定义时最后的一个Map)"></a>RabbitMq 其它属性(定义时最后的一个Map)</h2><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p><img src="http://image.tupelo.top/queue.png" alt="队列"></p>
+        <h4 id="分布式系统带来的问题"><a href="#分布式系统带来的问题" class="headerlink" title="分布式系统带来的问题"></a>分布式系统带来的问题</h4><ul>
+<li>通信异常</li>
+<li>网络分区 （脑裂）</li>
+<li>三态 （成功、失败、超时）</li>
+<li>节点故障</li>
+</ul>
+<h4 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h4><ul>
+<li><p>一致性</p>
+<p>  在分布式系统中，一致性是数据在多个副本之间是否能够保证一致的特性，这里说的一致性和前面说的对等性其实差不多。如果能够在分布式系统中针对某一个数据项的变更成功执行后，所有用户都可以马上读取到最新的值，那么这样的系统就被认为具有【强一致性】。     </p>
+</li>
+<li><p>可用性</p>
+<p>  可用性指系统提供服务必须一直处于可用状态，对于用户的操作请求总是能够在有限的时间内访问结果。这里的重点是【有限的时间】和【返回结果】为了做到有限的时间需要用到缓存，需要用到负载，这个时候服务器增加的节点是为性能考虑；为了返回结果，需要考虑服务器主备，当主节点出现问题的时候需要备份的节点能最快的顶替上来，千万不能出现OutOfMemory或者其他500，404错误，否则这样的系统我们会认为是不可用的。</p>
+</li>
+<li><p>分区容错性</p>
+<p>  分布式系统在遇到任何网络分区故障的时候，仍然需要能够对外提供满足一致性和可用性的服务，除非是整个网络环境都发生了故障。</p>
+</li>
+</ul>
         
-          <a class="article-more-a" href="/2019/01/06/rabbitmq-05/#more">more >></a>
+          <a class="article-more-a" href="/2021/12/06/分布式系统/#more">more >></a>
         
       
 
@@ -361,7 +394,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
         		</li>
       		
 		</ul>
@@ -371,7 +404,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/06/rabbitmq-05/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/06/分布式系统/">展开全文 >></a>
         </p>
       
 
@@ -401,54 +434,11 @@
 
 
   
-    <article id="post-rabbitmq-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-mybatis_01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/05/rabbitmq-04/">RabbitMq - 消费者消息确认</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/05/rabbitmq-04/" class="archive-article-date">
-  	<time datetime="2019-01-05T15:19:43.929Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-05</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>RabbitMq消费者消息确认</p>
-<h2 id="RabbitMq-消费者消息确认"><a href="#RabbitMq-消费者消息确认" class="headerlink" title="RabbitMq 消费者消息确认"></a>RabbitMq 消费者消息确认</h2><h3 id="消费者权衡"><a href="#消费者权衡" class="headerlink" title="消费者权衡"></a>消费者权衡</h3><ul>
-<li>获取消息方式<ul>
-<li>拉取get</li>
-<li>自动推送</li>
-</ul>
-</li>
-<li>消息应答方式<ul>
-<li>自动确认</li>
-<li>手动确认</li>
-</ul>
-</li>
-<li>Qos预取模式</li>
-<li>可靠性<ul>
-<li>Qos 批量2500事务(高)</li>
-<li>拉取事务(低)</li>
-</ul>
-</li>
-<li>性能 <ul>
-<li>总量2500Qos(高)</li>
-<li>少量Qos 批量2500事务</li>
-<li>事务</li>
-<li>拉取(低)</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/01/05/rabbitmq-04/#more">more >></a>
         
       
 
@@ -457,22 +447,11 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/05/rabbitmq-04/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/06/mybatis_01/">展开全文 >></a>
         </p>
       
 
@@ -502,42 +481,116 @@
 
 
   
-    <article id="post-rabbitmq-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Nginx-Location匹配规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/30/rabbitmq-03/">RabbitMq - 生产者消息确认</a>
+      <a class="article-title" href="/2021/12/06/Nginx-Location匹配规则/">Nginx - Location匹配规则 和 负载均衡</a>
     </h1>
   
 
         
-        <a href="/2018/12/30/rabbitmq-03/" class="archive-article-date">
-  	<time datetime="2018-12-30T04:16:40.045Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-30</time>
+        <a href="/2021/12/06/Nginx-Location匹配规则/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>RabbitMq生产者消息确认</p>
-<h2 id="RabbitMq-生产者消息确认"><a href="#RabbitMq-生产者消息确认" class="headerlink" title="RabbitMq 生产者消息确认"></a>RabbitMq 生产者消息确认</h2><h3 id="生产者权衡"><a href="#生产者权衡" class="headerlink" title="生产者权衡"></a>生产者权衡</h3><blockquote>
-<p>快、低==========&gt; 慢、高</p>
-</blockquote>
+        <p>Location匹配规则 和 负载均衡</p>
+<h4 id="Location规则"><a href="#Location规则" class="headerlink" title="Location规则"></a>Location规则</h4><ul>
+<li>语法规则： location [=|~|~*|^~] /uri/ {… }</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://manage/;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2021/12/06/Nginx-Location匹配规则/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/06/Nginx-Location匹配规则/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Nginx-location-rewrite" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/06/Nginx-location-rewrite/">Nginx - location流程 和 rewirte</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/06/Nginx-location-rewrite/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Location路径传递</p>
+<h4 id="rewrite使用"><a href="#rewrite使用" class="headerlink" title="rewrite使用"></a>rewrite使用</h4><p>语法:rewrite regex replacement [flag];  flag=【break/last/redirect/permanent】 </p>
 <ul>
-<li>无保障</li>
-<li>失败通知  参数mandatory 消息是否成功到达队列</li>
-<li>发送方确认模式  消息是否成功到达exchange 和失败通知结合使用</li>
-<li>备用交换机     定义个一个备用交换机 Map</li>
-<li>高可用队列</li>
-<li>事务          影响性能 2-10倍 强一致性</li>
-<li>事务+高可用</li>
-<li>持久化</li>
+<li>regex 是正则表达式</li>
+<li>replacement 是替换值，新值</li>
+<li>flag – 是处理标志</li>
 </ul>
+<p>break/last 内部重定向，换path值<br>break标记，停止执行后续命令。for（）{break}<br>last标记，会引发location重新匹配。for（）{continue;} 不要轻易使用last标签<br>当有flag值的时候，rewrite层面的命令会中断。last会引发location重匹配<br>当没有flag值的时候，rewrite还会往下走，最后一个rewrite覆盖前面的。再引发location重匹配    </p>
         
-          <a class="article-more-a" href="/2018/12/30/rabbitmq-03/#more">more >></a>
+          <a class="article-more-a" href="/2021/12/06/Nginx-location-rewrite/#more">more >></a>
         
       
 
@@ -551,7 +604,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
         		</li>
       		
 		</ul>
@@ -561,7 +614,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/30/rabbitmq-03/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/06/Nginx-location-rewrite/">展开全文 >></a>
         </p>
       
 
@@ -591,217 +644,37 @@
 
 
   
-    <article id="post-rabbitmq-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Mysql-锁和事务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/30/rabbitmq-02/">RabbitMq - 配置和相关命令</a>
+      <a class="article-title" href="/2021/12/06/Mysql-锁和事务/">Mysql - Mysql锁和事务</a>
     </h1>
   
 
         
-        <a href="/2018/12/30/rabbitmq-02/" class="archive-article-date">
-  	<time datetime="2018-12-30T03:32:54.252Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-30</time>
+        <a href="/2021/12/06/Mysql-锁和事务/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>RabbitMq 修改端口/用户权限 相关命令</p>
-<h2 id="RabbitMq-基相关命令"><a href="#RabbitMq-基相关命令" class="headerlink" title="RabbitMq 基相关命令"></a>RabbitMq 基相关命令</h2><ul>
-<li>配置文件</li>
-</ul>
-<blockquote>
-<p>RabbitMq配置文件在/etc/rabbitmq下,名为rabbitmq.config / rabbitmq-env.conf,需要自己创建。</p>
-</blockquote>
-<pre><code>修改端口:
-创建rabbitmq-env.conf文件,添加RABBITMQ_NODE_PORT=8500,重启RabbitMq即可生效.
-</code></pre><ul>
-<li>启动和关闭RabbitMq</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server <span class="comment">#会启动Erlang节点和Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl stop <span class="comment">#会关闭Erlang节点和Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl status  <span class="comment">#可以检查消息节点是否正常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#单独关闭RabbitMQ应用</span></span><br><span class="line">rabbitmqctl stop_app <span class="comment">#关闭Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl start_app <span class="comment">#启动Rabbitmq应用</span></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/12/30/rabbitmq-02/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/30/rabbitmq-02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-rabbitmq-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/20/rabbitmq-01/">RabbitMq - 入门</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/20/rabbitmq-01/" class="archive-article-date">
-  	<time datetime="2018-12-19T16:11:29.150Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>AMQP概论</p>
-<h2 id="交换器、队列、绑定、路由键"><a href="#交换器、队列、绑定、路由键" class="headerlink" title="交换器、队列、绑定、路由键"></a>交换器、队列、绑定、路由键</h2><ul>
-<li>rabbitMq流程</li>
-</ul>
-<p><img src="http://image.tupelo.top/rabbitmq%E6%B5%81%E7%A8%8B.png" alt="rabbitMq流程"></p>
-<pre><code>交换机类型:
-fanout 交换机绑定队列,根据交换机发送消息到指定队列
-direct 交换机通过路由键绑定队列,根据交换机和路由键发送消息
-topic  交换机通过路由键绑定队列,根据交换机和路由键发送消息(路由键可进行匹配 #匹配一次或者多次 *匹配一次)
-</code></pre><blockquote>
-<p>需要多个队列接受同样的消息 多个队列绑定同一个路由键 一条消息只能被一个消费者消费</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/12/20/rabbitmq-01/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/20/rabbitmq-01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-通讯协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/17/通讯协议/">深入理解通讯协议</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/17/通讯协议/" class="archive-article-date">
-  	<time datetime="2018-12-17T15:35:45.653Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>通讯协议</p>
-<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>七层模型</p>
+        <p>Mysql锁和事务</p>
+<h4 id="Mysql锁"><a href="#Mysql锁" class="headerlink" title="Mysql锁"></a>Mysql锁</h4><p>不同的存储引擎支持不同的锁机制,MyISAM和MEMORY存储引擎采用的是表级锁InnoDB存储引擎既支持行级锁，也支持表级锁，但默认情况下是采用行级锁。</p>
 <ul>
-<li>OSI模型<ul>
-<li>应用层  为应用程序提供服务</li>
-<li>表示层  数据格式转换</li>
-<li>会话层  建立 管理 维护会话</li>
-<li>传输层  最重要 端对端的连接 数据可靠性传输</li>
-<li>网络层  ip 路由</li>
-<li>链路层  交换机</li>
-<li>物理层  物理介质 网线等等</li>
+<li>表级锁:开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高,并发度最低。</li>
+<li>行级锁:开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低,并发度也最高。</li>
+<li>页面锁:开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</li>
 </ul>
-</li>
-</ul>
+<p>表级锁更适合于以查询为主，只有少量按索引条件更新数据的应用，如OLAP系统   </p>
+<p>行级锁则更适合于有大量按索引条件并发更新少量不同数据，同时又有并发查询的应用    </p>
         
-          <a class="article-more-a" href="/2018/12/17/通讯协议/#more">more >></a>
+          <a class="article-more-a" href="/2021/12/06/Mysql-锁和事务/#more">more >></a>
         
       
 
@@ -815,7 +688,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">通讯协议</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
         		</li>
       		
 		</ul>
@@ -825,7 +698,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/17/通讯协议/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/06/Mysql-锁和事务/">展开全文 >></a>
         </p>
       
 
@@ -855,32 +728,39 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-dubbo-05" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Nginx简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/17/dubbo-05/">Dubbo - 总结</a>
+      <a class="article-title" href="/2021/12/06/Nginx简介/">Nginx简介</a>
     </h1>
   
 
         
-        <a href="/2018/12/17/dubbo-05/" class="archive-article-date">
-  	<time datetime="2018-12-16T17:21:51.855Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
+        <a href="/2021/12/06/Nginx简介/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Dubbo 总结</p>
+        <p>Nginx简介</p>
+<h4 id="Nginx作用"><a href="#Nginx作用" class="headerlink" title="Nginx作用"></a>Nginx作用</h4><ul>
+<li>路由功能（与微服务对应）：域名/路径，进行路由选择后台服务器</li>
+<li>负载功能（与高并发高可用对应）：对后台服务器集群进行负载</li>
+<li>静态服务器（比tomcat性能高很多）：在mvvm模式中，充当文件读取职责</li>
+</ul>
 <blockquote>
-<p>参考官方文档：<a href="http://dubbo.apache.org/zh-cn/docs/user/references/xml/dubbo-service.html" target="_blank" rel="noopener">http://dubbo.apache.org/zh-cn/docs/user/references/xml/dubbo-service.html</a></p>
+<p>总结：实际使用中，这三项功用，会混合使用。比如先分离动静，再路由服务，再负载机器</p>
 </blockquote>
+<h4 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h4><p>源码编译方式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#一般系统中已经装了了make和g++，无须再装</span></span><br><span class="line">yum -y install autoconf automake make</span><br><span class="line">yum -y install gcc gcc-c++ </span><br><span class="line"></span><br><span class="line"><span class="comment">#安装nginx依赖的库</span></span><br><span class="line">yum -y install pcre pcre-devel    </span><br><span class="line">yum -y install zlib zlib-devel</span><br><span class="line">yum install -y openssl openssl-devel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 安装</span></span><br><span class="line">wget  http://nginx.org/download/nginx-1.9.15.tar.gz</span><br><span class="line">tar -zxvf nginx-1.9.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-1.9.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 后面的模块需要一起安装</span></span><br><span class="line">./configure   --prefix=/usr/<span class="built_in">local</span>/nginx --with-http_stub_status_module --with-http_ssl_module </span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止 </span></span><br><span class="line">nginx -s stop</span><br><span class="line"></span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2018/12/17/dubbo-05/#more">more >></a>
+          <a class="article-more-a" href="/2021/12/06/Nginx简介/#more">more >></a>
         
       
 
@@ -894,7 +774,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
         		</li>
       		
 		</ul>
@@ -904,7 +784,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/17/dubbo-05/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/06/Nginx简介/">展开全文 >></a>
         </p>
       
 
@@ -934,30 +814,35 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-dubbo-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Nginx跨域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/17/dubbo-04/">Dubbo - Spi机制</a>
+      <a class="article-title" href="/2021/12/06/Nginx跨域/">Nginx - 跨域/防盗链/缓存/压缩/Https</a>
     </h1>
   
 
         
-        <a href="/2018/12/17/dubbo-04/" class="archive-article-date">
-  	<time datetime="2018-12-16T16:16:21.248Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-17</time>
+        <a href="/2021/12/06/Nginx跨域/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Dubbo Spi机制</p>
-<h2 id="Dubbo-Spi机制"><a href="#Dubbo-Spi机制" class="headerlink" title="Dubbo Spi机制"></a>Dubbo Spi机制</h2><p>本质是解决同一个接口，有多种实现时，使用者如何能够方便选择实现的问题</p>
+        <p>Nginx跨域/防盗链/缓存/压缩/Https</p>
+<h4 id="跨域解决"><a href="#跨域解决" class="headerlink" title="跨域解决"></a>跨域解决</h4><p>流程：</p>
+<ul>
+<li>当chrome发现ajax请求的网址，与当前主域名不一致（跨域）时，会在请求header中追加值页面主域名值，即：origin = <a href="http://static.enjoy.com" target="_blank" rel="noopener">http://static.enjoy.com</a></li>
+<li>nginx在接收到ajax请求时，会查看origin值，即请求我的网址是谁？此处使用正则来校验，即：只要是enjoy.com下的网址，都允许访问我，返回信息时，nginx追加header值：access-control-allow-origin = static.enjoy.com（回答浏览器，static域名网址可以访问我）</li>
+<li>chrome收到ajax返回值后，查看返回的header中access-control-allow-origin的值，发现其中的值是static.enjoy.com,正是当前的页面主域名。这是允许访问，于是执行ajax返回值内容。（ps：若此处access-control-allow-origin不存在，或者值不是static域名，chrome就拒绝执行返回值）</li>
+</ul>
         
-          <a class="article-more-a" href="/2018/12/17/dubbo-04/#more">more >></a>
+          <a class="article-more-a" href="/2021/12/06/Nginx跨域/#more">more >></a>
         
       
 
@@ -971,7 +856,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
         		</li>
       		
 		</ul>
@@ -981,7 +866,92 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/17/dubbo-04/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/06/Nginx跨域/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Nginx高可用keepalived" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/06/Nginx高可用keepalived/">Nginx - keepalived</a>
+    </h1>
+  
+
+        
+        <a href="/2021/12/06/Nginx高可用keepalived/" class="archive-article-date">
+  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Nginx高可用keepalived</p>
+<h4 id="keepalived"><a href="#keepalived" class="headerlink" title="keepalived"></a>keepalived</h4><p>思路：</p>
+<p>由 2台服务器软件虚拟出来一台 虚拟网关vip，此vip由两台机器共同协商生成。当有一台机器宕机时，另一台机器一样能维持vip。这保证了，只要两台机器不同时宕机，vip就存在(不可以用docker配置)        </p>
+<p>keepalived不常用：域名绑定ip是以实现IP路由功能 更方便</p>
+<p>功能：</p>
+<ul>
+<li>管理LVS负载均衡软件</li>
+<li>实现LVS集群节点的健康检查</li>
+<li>作为系统网络服务的高可用性（failover）</li>
+</ul>
+        
+          <a class="article-more-a" href="/2021/12/06/Nginx高可用keepalived/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/06/Nginx高可用keepalived/">展开全文 >></a>
         </p>
       
 
@@ -1116,11 +1086,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1160,6 +1130,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式事务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">解决方案</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
@@ -1168,19 +1150,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">解决方案</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分布式事务</a>
+                <a href="javascript:void(0)" class="js-tag color2">模板方法模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">适配器模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1188,11 +1170,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
               </li>
             
             <div class="clearfix"></div>

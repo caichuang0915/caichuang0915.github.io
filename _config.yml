@@ -79,7 +79,8 @@ theme: yilia
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/caichuang0915/caichuang0915.github.io.git
+  repo: git@github.com:caichuang0915/caichuang0915.github.io.git
+  #repo: https://github.com/caichuang0915/caichuang0915.github.io.git
   branch: master
 
 jsonContent:
