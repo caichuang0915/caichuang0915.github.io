@@ -150,6 +150,357 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-docker-基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/18/docker-基础/">docker基础</a>
+    </h1>
+  
+
+        
+        <a href="/2022/05/18/docker-基础/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:57:12.927Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>docker</p>
+<h3 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yum update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加源</span></span><br><span class="line">yum-config-manager --add-repo https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看可安装的docker版本</span></span><br><span class="line">yum list docker-ce --showduplicates</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装最新版本</span></span><br><span class="line">yum install docker-ce -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">docker -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动docker</span></span><br><span class="line">systemctl start docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看docker 状态</span></span><br><span class="line">systemctl status docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置开机启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置docker镜像加速 阿里云地址 https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors  通过修改daemon配置文件/etc/docker/daemon.json来使用加速器</span></span><br><span class="line"></span><br><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://8cnlnwwc.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/05/18/docker-基础/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/18/docker-基础/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-通讯协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/18/通讯协议/">深入理解通讯协议</a>
+    </h1>
+  
+
+        
+        <a href="/2022/05/18/通讯协议/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.209Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通讯协议</p>
+<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>七层模型</p>
+<ul>
+<li>OSI模型<ul>
+<li>应用层  为应用程序提供服务</li>
+<li>表示层  数据格式转换</li>
+<li>会话层  建立 管理 维护会话</li>
+<li>传输层  最重要 端对端的连接 数据可靠性传输</li>
+<li>网络层  ip 路由</li>
+<li>链路层  交换机</li>
+<li>物理层  物理介质 网线等等</li>
+</ul>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2022/05/18/通讯协议/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">通讯协议</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/18/通讯协议/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/18/适配器模式/">设计模式-适配器模式</a>
+    </h1>
+  
+
+        
+        <a href="/2022/05/18/适配器模式/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.209Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><blockquote>
+<p>  将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以一起工作。</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.png" alt="适配器模式"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/18/适配器模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-设计模式原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/18/设计模式原则/">设计模式-六大基本原则</a>
+    </h1>
+  
+
+        
+        <a href="/2022/05/18/设计模式原则/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.209Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="六大基本原则"><a href="#六大基本原则" class="headerlink" title="六大基本原则"></a>六大基本原则</h3><blockquote>
+<p>  重要的是思想 ！！！</p>
+</blockquote>
+<ul>
+<li><p>开闭原则</p>
+<blockquote>
+<p>对扩展开发、对修改关闭</p>
+</blockquote>
+</li>
+<li><p>单一职责原则</p>
+<blockquote>
+<p>一个类只负责一个职责</p>
+</blockquote>
+</li>
+<li><p>依赖倒置原则</p>
+<blockquote>
+<p>面向接口编程</p>
+</blockquote>
+</li>
+<li><p>里氏替换原则</p>
+<blockquote>
+<p>子类可以扩展父类的功能、但不要改变父类原有的功能</p>
+</blockquote>
+</li>
+<li><p>接口隔离原则</p>
+<blockquote>
+<p>设计接口功能尽量细粒度、最小功能单元</p>
+</blockquote>
+</li>
+<li><p>迪米特法则</p>
+<blockquote>
+<p>降低耦合、局部变量中不要引入新的类</p>
+</blockquote>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/18/设计模式原则/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-设计模式-适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -157,13 +508,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/07/设计模式-适配器模式/">适配器模式</a>
+      <a class="article-title" href="/2022/05/18/设计模式-适配器模式/">适配器模式</a>
     </h1>
   
 
         
-        <a href="/2021/12/07/设计模式-适配器模式/" class="archive-article-date">
-  	<time datetime="2021-12-07T02:01:45.594Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-07</time>
+        <a href="/2022/05/18/设计模式-适配器模式/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.209Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
@@ -201,7 +552,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/07/设计模式-适配器模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/设计模式-适配器模式/">展开全文 >></a>
         </p>
       
 
@@ -238,13 +589,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/07/设计模式-深拷贝浅拷贝及原型模式/">深拷贝浅拷贝及原型模式</a>
+      <a class="article-title" href="/2022/05/18/设计模式-深拷贝浅拷贝及原型模式/">深拷贝浅拷贝及原型模式</a>
     </h1>
   
 
         
-        <a href="/2021/12/07/设计模式-深拷贝浅拷贝及原型模式/" class="archive-article-date">
-  	<time datetime="2021-12-07T02:01:45.576Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-07</time>
+        <a href="/2022/05/18/设计模式-深拷贝浅拷贝及原型模式/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.209Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
@@ -297,7 +648,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/07/设计模式-深拷贝浅拷贝及原型模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/设计模式-深拷贝浅拷贝及原型模式/">展开全文 >></a>
         </p>
       
 
@@ -334,13 +685,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/07/设计模式-模板方法模式/">模板方法模式</a>
+      <a class="article-title" href="/2022/05/18/设计模式-模板方法模式/">模板方法模式</a>
     </h1>
   
 
         
-        <a href="/2021/12/07/设计模式-模板方法模式/" class="archive-article-date">
-  	<time datetime="2021-12-07T02:01:45.559Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-07</time>
+        <a href="/2022/05/18/设计模式-模板方法模式/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.209Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
@@ -383,7 +734,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/07/设计模式-模板方法模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/设计模式-模板方法模式/">展开全文 >></a>
         </p>
       
 
@@ -413,124 +764,30 @@
 
 
   
-    <article id="post-分布式锁解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-工厂方法模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/分布式锁解决方案/">分布式锁解决方案</a>
+      <a class="article-title" href="/2022/05/18/工厂方法模式/">设计模式-工厂方法模式</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/分布式锁解决方案/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.270Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/工厂方法模式/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.208Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>分布式锁解决方案</p>
-<h3 id="分布式锁解决方案"><a href="#分布式锁解决方案" class="headerlink" title="分布式锁解决方案"></a>分布式锁解决方案</h3><p>分布式锁：集群的情况下会产生</p>
-<p>CAP理论：一致性 可用性 分区容错性</p>
-<p>解决方案：<br>基于数据库实现分布式锁<br>基于缓存（Redis等）实现分布式锁<br>基于Zookeeper实现分布式锁</p>
-        
-          <a class="article-more-a" href="/2021/12/06/分布式锁解决方案/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">解决方案</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">分布式锁</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/分布式锁解决方案/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/单例模式/">设计模式-单例模式</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/单例模式/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.270Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><blockquote>
-<p>  保证一个类有且只有一个实例，并提供一个访问它的全局访问点。</p>
+        <h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><blockquote>
+<p>  将静态工厂类打散，每一类对象都有一个工厂来创建。</p>
 </blockquote>
-<ul>
-<li>饿汉式</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Single</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 私有变量</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Single single = <span class="keyword">new</span> Single();</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 私有化构造方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Single</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 全局访问</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Single</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Single <span class="title">getSingle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> single;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>懒汉式</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Single</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 私有变量</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Single single;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 私有化构造方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Single</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 全局访问</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Single</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Single <span class="title">getSingle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	single = <span class="keyword">new</span> Single();</span><br><span class="line">        <span class="keyword">return</span> single;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>安全单例模式</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 全局访问</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> Single</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Single <span class="title">getSingle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(single==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (Single.class)&#123;</span><br><span class="line">            <span class="keyword">if</span>(single==<span class="keyword">null</span>)&#123;</span><br><span class="line">                single = <span class="keyword">new</span> Single();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> single;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.tupelo.top/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.png" alt="工厂方法模式"></p>
 
       
 
@@ -554,7 +811,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/单例模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/工厂方法模式/">展开全文 >></a>
         </p>
       
 
@@ -584,42 +841,32 @@
 
 
   
-    <article id="post-多线程-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-正则表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/多线程-01/">并发编程 - 线程基础、线程之间的共享和协作</a>
+      <a class="article-title" href="/2022/05/18/正则表达式/">正则表达式</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/多线程-01/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.270Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/正则表达式/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.208Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>线程基础、线程之间的共享和协作</p>
-<h2 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h2><h4 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h4><ul>
-<li>进程：程序运行资源分配的最小单位,进程内部有多个线程,会共享这个进程的资源</li>
-<li>线程：CPU调度的最小单位,必须依赖进程而存在。</li>
-</ul>
-<h4 id="高并发编程的意义、好处和注意事项"><a href="#高并发编程的意义、好处和注意事项" class="headerlink" title="高并发编程的意义、好处和注意事项"></a>高并发编程的意义、好处和注意事项</h4><ul>
-<li>好处：充分利用cpu的资源、加快用户响应的时间,程序模块化,异步化</li>
-<li>问题：  <ul>
-<li>线程共享资源,存在冲突；  </li>
-<li>容易导致死锁；  </li>
-<li>启用太多的线程,就有搞垮机器的可能</li>
-</ul>
-</li>
-</ul>
+        <p>正则表达式</p>
+<h3 id="什么是正则表达式？"><a href="#什么是正则表达式？" class="headerlink" title="什么是正则表达式？"></a>什么是正则表达式？</h3><blockquote>
+<p>正则表达式是一组由字母和符号组成的特殊文本，它可以用来从文本中找出满足你想要的格式的句子。</p>
+</blockquote>
         
-          <a class="article-more-a" href="/2021/12/06/多线程-01/#more">more >></a>
+          <a class="article-more-a" href="/2022/05/18/正则表达式/#more">more >></a>
         
       
 
@@ -633,7 +880,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">正则表达式</a>
         		</li>
       		
 		</ul>
@@ -643,7 +890,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/多线程-01/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/正则表达式/">展开全文 >></a>
         </p>
       
 
@@ -673,134 +920,30 @@
 
 
   
-    <article id="post-多线程-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-简单工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/多线程-02/">并发编程 - 线程的并发工具类</a>
+      <a class="article-title" href="/2022/05/18/简单工厂模式/">设计模式-简单工厂模式</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/多线程-02/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.270Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/简单工厂模式/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.208Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>线程的并发工具类</p>
-<h2 id="线程的并发工具类"><a href="#线程的并发工具类" class="headerlink" title="线程的并发工具类"></a>线程的并发工具类</h2><ul>
-<li>Fork-Join:分治思想</li>
-<li>CountDownLatch:是一组线程等待其他的线程完成工作以后在执行,加强版join await用来等待,countDown负责计数器的减1</li>
-<li>CyclicBarrier: 让一组线程达到某个屏障,被阻塞,一直到组内最后一个线程达到屏障时,屏障开放,所有被阻塞的线程会继续运行<ul>
-<li>countdownlatch放行由第三者控制,CyclicBarrier放行由一组线程本身控制</li>
-<li>countdownlatch放行条件》=线程数,CyclicBarrier放行条件=线程数</li>
-</ul>
-</li>
-<li>Semaphore:信号量</li>
-<li>Exchange:交换</li>
-<li>Callable、Future和FutureTask </li>
-</ul>
-        
-          <a class="article-more-a" href="/2021/12/06/多线程-02/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/多线程-02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程-CAS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/多线程-CAS/">并发编程 - 原子操作CAS</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/多线程-CAS/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.270Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原子操作</p>
-<h2 id="CAS的原理"><a href="#CAS的原理" class="headerlink" title="CAS的原理"></a>CAS的原理</h2><pre><code>利用了现代处理器都支持的CAS的指令，循环这个指令，直到成功为止
-三个运算符：  一个内存地址V，一个期望的值A，一个新值B
-基本思路：如果地址V上的值和期望的值A相等，就给地址V赋给新值B，如果不是，不做任何操作。
-循环（死循环，自旋）里不断的进行CAS操作
-</code></pre><h2 id="CAS的问题"><a href="#CAS的问题" class="headerlink" title="CAS的问题"></a>CAS的问题</h2><ul>
-<li>ABA问题（添加版本号解决）<ul>
-<li>AtomicMarkableReference，boolean 有没有动过</li>
-<li>AtomicStampedReference  动过几次</li>
-</ul>
-</li>
-<li>开销问题 长期不成功 会一直循环下去</li>
-<li>只能保证一个共享变量的原子操作</li>
-</ul>
-<h2 id="JDK中相关原子操作类的使用"><a href="#JDK中相关原子操作类的使用" class="headerlink" title="JDK中相关原子操作类的使用"></a>JDK中相关原子操作类的使用</h2><ul>
-<li>更新基本类型类：AtomicBoolean，AtomicInteger，AtomicLong，AtomicReference</li>
-<li>更新数组类：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray</li>
-<li>更新引用类型：AtomicReference，AtomicMarkableReference，AtomicStampedReference</li>
-<li>原子更新字段类：AtomicReferenceFieldUpdater，AtomicIntegerFieldUpdater，AtomicLongFieldUpdater</li>
-</ul>
+        <h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><blockquote>
+<p>  当类没有管理的时候，使用者每次都需要自己去new一个对象，简单工厂模式就是用一个集中的类来负责产品对象的创建。不属于23种设计模式，但是是工厂模式的基础。</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.jpg" alt="简单工厂模式"></p>
 
       
 
@@ -814,7 +957,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -824,183 +967,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/多线程-CAS/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程-并发工具类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/多线程-并发工具类/">并发编程 - 并发工具类</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/多线程-并发工具类/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.270Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>并发工具类</p>
-<h2 id="Hashmap和HashTable"><a href="#Hashmap和HashTable" class="headerlink" title="Hashmap和HashTable"></a>Hashmap和HashTable</h2><ul>
-<li>Hashmap多线程会导致HashMap的Entry链表形成环形数据结构，一旦形成环形数据结构，Entry的next节点永远不为空，就会产生死循环获取Entry。</li>
-<li>HashTable使用synchronized来保证线程安全，但在线程竞争激烈的情况下HashTable的效率非常低下。因为当一个线程访问HashTable的同步方法，其他线程也访问HashTable的同步方法时，会进入阻塞或轮询状态。如线程1使用put进行元素添加，线程2不但不能使用put方法添加元素，也不能使用get方法来获取元素，所以竞争越激烈效率越低。</li>
-</ul>
-<p>Hash</p>
-<p>散列，哈希：把任意长度的输入通过一种算法（散列），变换成为固定长度的输出，这个输出值就是散列值。属于压缩映射，容易产生哈希冲突。Hash算法有直接取余法等。<br>产生哈希冲突时解决办法:        </p>
-<ul>
-<li>开放寻址        </li>
-<li>再散列            </li>
-<li>链地址法（相同hash值的元素用链表串起来）</li>
-</ul>
-        
-          <a class="article-more-a" href="/2021/12/06/多线程-并发工具类/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/多线程-并发工具类/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程-显式锁和AQS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/多线程-显式锁和AQS/">并发编程 - 显式锁和AQS</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/多线程-显式锁和AQS/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.270Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>显式锁和AQS</p>
-<h2 id="显式锁"><a href="#显式锁" class="headerlink" title="显式锁"></a>显式锁</h2><p>Lock接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">  <span class="comment">// 一定要在finally中释放锁</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increament</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.lock.lock();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          ++<span class="keyword">this</span>.count;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.lock.unlock();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>可重入锁ReentrantLock(默认非公平锁 构造方法可控制是否是公平锁)</p>
-<p>  采用一个计数器，每重入一次次数加一，释放一个锁次数减一</p>
-</li>
-<li><p>读写锁ReentrantReadWriteLock</p>
-<p>  同一时刻允许多个读线程同时访问，但是写线程访问的时候，所有的读和写都被阻塞，最适宜与读多写少的情况</p>
-</li>
-<li><p>Condition接口</p>
-<p>  阻塞一个线程await()，唤醒是最好使用singal().wait()阻塞线程使用notfiyAll()唤醒。</p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2021/12/06/多线程-显式锁和AQS/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/多线程-显式锁和AQS/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/简单工厂模式/">展开全文 >></a>
         </p>
       
 
@@ -1044,7 +1011,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 Caichuang
+    		&copy; 2022 Caichuang
     	</div>
       	<div class="footer-right">
 
@@ -1131,6 +1098,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
@@ -1147,15 +1118,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1187,10 +1158,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
               </li>
              
@@ -1203,11 +1170,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">接口幂等性</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color1">接口幂等性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1224,6 +1191,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
             
             <div class="clearfix"></div>

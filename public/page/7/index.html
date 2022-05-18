@@ -150,41 +150,41 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Mysql-sql优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Mysql-慢查询和执行计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/Mysql-sql优化/">Mysql - sql优化</a>
+      <a class="article-title" href="/2022/05/18/Mysql-慢查询和执行计划/">Mysql - MySql慢查询和执行计划(重点)</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/Mysql-sql优化/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.266Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/Mysql-慢查询和执行计划/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.196Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>sql优化</p>
-<h4 id="sql优化"><a href="#sql优化" class="headerlink" title="sql优化"></a>sql优化</h4><ol>
-<li>尽量全值匹配,有联合索引的话key_len会保持在合适的大小</li>
-<li>最佳左前缀法则</li>
-<li>不在索引列上做任何操作</li>
-<li>范围条件放最后</li>
-<li>覆盖索引尽量用 不要select *</li>
-<li>不等于要慎用 mysql 在使用不等于(!= 或者&lt;&gt;)的时候无法使用索引会导致全表扫描</li>
-<li>Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当字段不为空是，两者都不会使用索引。</li>
-<li>Like查询要当心</li>
-<li>字符类型加引号</li>
-<li>OR改UNION效率高,用union更快</li>
-</ol>
-<h4 id="sql快速导入导出"><a href="#sql快速导入导出" class="headerlink" title="sql快速导入导出"></a>sql快速导入导出</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 导出</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">into</span> <span class="keyword">OUTFILE</span> <span class="string">'D:\\product.txt'</span> <span class="keyword">from</span> product_info</span><br><span class="line"># 导入</span><br><span class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">INFILE</span> <span class="string">'D:\\product.txt'</span> <span class="keyword">into</span> <span class="keyword">table</span> product_info</span><br></pre></td></tr></table></figure>
-
+        <p>MySql慢查询和执行计划</p>
+<h4 id="MySql慢查询"><a href="#MySql慢查询" class="headerlink" title="MySql慢查询"></a>MySql慢查询</h4><p>相关配置：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'%slow%'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启或者关闭</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> slow_query_log = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 设置时间</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> long_query_time = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>slow_query_log 启动停止技术慢查询日志</li>
+<li>slow_query_log_file 指定慢查询日志得存储路径及文件（默认和数据文件放一起）</li>
+<li>long_query_time 指定记录慢查询日志SQL执行时间得伐值（单位：秒，默认10秒）</li>
+<li>log_queries_not_using_indexes  是否记录未使用索引的SQL</li>
+<li><p>log_output 日志存放的地方【TABLE】【FILE】【FILE,TABLE】</p>
+<p>  使用TABLE时慢sql会存在mysql.slow_log 不建议使用。</p>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2022/05/18/Mysql-慢查询和执行计划/#more">more >></a>
+        
       
 
       
@@ -207,7 +207,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/Mysql-sql优化/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/Mysql-慢查询和执行计划/">展开全文 >></a>
         </p>
       
 
@@ -244,13 +244,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/Mysql-业务设计/">Mysql - MySql业务设计</a>
+      <a class="article-title" href="/2022/05/18/Mysql-业务设计/">Mysql - MySql业务设计</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/Mysql-业务设计/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.266Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/Mysql-业务设计/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.196Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
@@ -326,7 +326,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/Mysql-业务设计/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/Mysql-业务设计/">展开全文 >></a>
         </p>
       
 
@@ -356,40 +356,37 @@
 
 
   
-    <article id="post-Mysql-慢查询和执行计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Mysql-逻辑架构和存储引擎" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/Mysql-慢查询和执行计划/">Mysql - MySql慢查询和执行计划(重点)</a>
+      <a class="article-title" href="/2022/05/18/Mysql-逻辑架构和存储引擎/">Mysql - Mysql逻辑架构和存储引擎</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/Mysql-慢查询和执行计划/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.266Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/Mysql-逻辑架构和存储引擎/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.196Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>MySql慢查询和执行计划</p>
-<h4 id="MySql慢查询"><a href="#MySql慢查询" class="headerlink" title="MySql慢查询"></a>MySql慢查询</h4><p>相关配置：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'%slow%'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 开启或者关闭</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> slow_query_log = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 设置时间</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> long_query_time = <span class="number">10</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>slow_query_log 启动停止技术慢查询日志</li>
-<li>slow_query_log_file 指定慢查询日志得存储路径及文件（默认和数据文件放一起）</li>
-<li>long_query_time 指定记录慢查询日志SQL执行时间得伐值（单位：秒，默认10秒）</li>
-<li>log_queries_not_using_indexes  是否记录未使用索引的SQL</li>
-<li><p>log_output 日志存放的地方【TABLE】【FILE】【FILE,TABLE】</p>
-<p>  使用TABLE时慢sql会存在mysql.slow_log 不建议使用。</p>
+        <p>Mysql逻辑架构和存储引擎</p>
+<h4 id="Mysql逻辑架构"><a href="#Mysql逻辑架构" class="headerlink" title="Mysql逻辑架构"></a>Mysql逻辑架构</h4><h5 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h5><ul>
+<li><p>TPS：Transactions Per Second（每秒传输的事物处理个数），这是指服务器每秒处理的事务数，支持事务的存储引擎如InnoDB等特有的一个性能指标。 </p>
+</li>
+<li><p>QPS：Queries Per Second（每秒查询处理量）同时适用与InnoDB和MyISAM 引擎</p>
+</li>
+<li><p>等待时间：执行Sql等待返回结果之间的等待时间</p>
 </li>
 </ul>
         
-          <a class="article-more-a" href="/2021/12/06/Mysql-慢查询和执行计划/#more">more >></a>
+          <a class="article-more-a" href="/2022/05/18/Mysql-逻辑架构和存储引擎/#more">more >></a>
         
       
 
@@ -413,7 +410,94 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/Mysql-慢查询和执行计划/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/Mysql-逻辑架构和存储引擎/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Mysql-sql优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/18/Mysql-sql优化/">Mysql - sql优化</a>
+    </h1>
+  
+
+        
+        <a href="/2022/05/18/Mysql-sql优化/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.196Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>sql优化</p>
+<h4 id="sql优化"><a href="#sql优化" class="headerlink" title="sql优化"></a>sql优化</h4><ol>
+<li>尽量全值匹配,有联合索引的话key_len会保持在合适的大小</li>
+<li>最佳左前缀法则</li>
+<li>不在索引列上做任何操作</li>
+<li>范围条件放最后</li>
+<li>覆盖索引尽量用 不要select *</li>
+<li>不等于要慎用 mysql 在使用不等于(!= 或者&lt;&gt;)的时候无法使用索引会导致全表扫描</li>
+<li>Null/Not Null 有影响 当字段可为空时，is null会使用索引，is not null会导致索引失效。当字段不为空是，两者都不会使用索引。</li>
+<li>Like查询要当心</li>
+<li>字符类型加引号</li>
+<li>OR改UNION效率高,用union更快</li>
+</ol>
+<h4 id="sql快速导入导出"><a href="#sql快速导入导出" class="headerlink" title="sql快速导入导出"></a>sql快速导入导出</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 导出</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">into</span> <span class="keyword">OUTFILE</span> <span class="string">'D:\\product.txt'</span> <span class="keyword">from</span> product_info</span><br><span class="line"># 导入</span><br><span class="line"><span class="keyword">load</span> <span class="keyword">data</span> <span class="keyword">INFILE</span> <span class="string">'D:\\product.txt'</span> <span class="keyword">into</span> <span class="keyword">table</span> product_info</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/18/Mysql-sql优化/">展开全文 >></a>
         </p>
       
 
@@ -457,7 +541,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 Caichuang
+    		&copy; 2022 Caichuang
     	</div>
       	<div class="footer-right">
 
@@ -544,6 +628,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
@@ -560,15 +648,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,10 +688,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
               </li>
              
@@ -616,11 +700,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">接口幂等性</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color1">接口幂等性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -637,6 +721,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
             
             <div class="clearfix"></div>

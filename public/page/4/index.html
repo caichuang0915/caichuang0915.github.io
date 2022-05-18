@@ -150,39 +150,36 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-spring-设计模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-spring-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/spring-设计模式/">Spring设计模式</a>
+      <a class="article-title" href="/2022/05/18/spring-03/">Spring学习03 - bean的生命周期</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/spring-设计模式/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/spring-03/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.205Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Spring设计模式</p>
-<h3 id="Spring设计模式"><a href="#Spring设计模式" class="headerlink" title="Spring设计模式"></a>Spring设计模式</h3><h5 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h5><p>BeanFactory。Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。</p>
-<p>实现原理：<br>bean容器的启动阶段：</p>
-<p>读取bean的xml配置文件,将bean元素分别转换成一个BeanDefinition对象。<br>然后通过BeanDefinitionRegistry将这些bean注册到beanFactory中，保存在它的一个ConcurrentHashMap中。<br>将BeanDefinition注册到了beanFactory之后，在这里Spring为我们提供了一个扩展的切口，允许我们通过实现接口BeanFactoryPostProcessor 在此处来插入我们定义的代码。</p>
-<p>简单工厂模式：</p>
-<ul>
-<li>创建抽象父类</li>
-<li>子类继承父类实现抽象方法</li>
-<li>工厂类根据条件产生不同的子类</li>
+        <p>spring基础学习</p>
+<h3 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h3><p>bean的生命周期:指   bean创建—初始化—销毁  的过程</p>
+<p>bean的生命周期是由容器进行管理的.我们可以自定义 bean初始化和销毁方法: 容器在bean进行到当前生命周期的时候, 来调用自定义的初始化和销毁方法</p>
+<h4 id="自定义-bean初始化和销毁方法"><a href="#自定义-bean初始化和销毁方法" class="headerlink" title="自定义 bean初始化和销毁方法"></a>自定义 bean初始化和销毁方法</h4><ul>
+<li>指定初始化和销毁方法 init-method和destory-mothod</li>
 </ul>
-<p>缺点：<br>违背了开闭原则,工厂类可能容易成为上帝类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(initMethod=<span class="string">"init"</span>,destoryMothod=<span class="string">"destroy"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Person <span class="title">lison</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Person();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>容器关闭时，只有单实例Bean会调用distory方法，多实例容器只负责初始化,但不会管理bean, 容器关闭不会调用销毁方法。</p>
         
-          <a class="article-more-a" href="/2021/12/06/spring-设计模式/#more">more >></a>
+          <a class="article-more-a" href="/2022/05/18/spring-03/#more">more >></a>
         
       
 
@@ -210,7 +207,87 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/spring-设计模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/spring-03/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/18/spring-04/">Spring学习04 - BeanPostProcessor源码分析</a>
+    </h1>
+  
+
+        
+        <a href="/2022/05/18/spring-04/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.205Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>spring基础学习</p>
+<h3 id="容器启动及BeanPostProcessor源码分析"><a href="#容器启动及BeanPostProcessor源码分析" class="headerlink" title="容器启动及BeanPostProcessor源码分析"></a>容器启动及BeanPostProcessor源码分析</h3><p>BeanPostProcessor原理:<br>可从容器类跟进顺序为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">AnnotationConfigApplicationContext--&gt;refresh()--&gt;</span><br><span class="line">finishBeanFactoryInitialization(beanFactory)---&gt;</span><br><span class="line">beanFactory.preInstantiateSingletons()--&gt;</span><br><span class="line">760行getBean(beanName)---&gt;</span><br><span class="line">199行doGetBean(name, null, null, false)--&gt;</span><br><span class="line">317行createBean(beanName, mbd, args)--&gt;</span><br><span class="line">501行doCreateBean(beanName, mbdToUse, args)--&gt;</span><br><span class="line">541行createBeanInstance(beanName, mbd, args)(完成bean创建)--&gt;</span><br><span class="line">578行populateBean(beanName, mbd, instanceWrapper)(属性赋值)--&gt;</span><br><span class="line">579行initializeBean(beanName, exposedObject, mbd)(Bean初始化)-&gt;</span><br><span class="line">1069行到1710行,后置处理器完成对init方法的前后处理.</span><br></pre></td></tr></table></figure></p>
+<p>initializeBean方法 对方法前后做处理<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);</span><br><span class="line">  invokeInitMethods(beanName, wrappedBean, mbd) <span class="comment">//执行自定义初始化</span></span><br><span class="line">  applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/18/spring-04/">展开全文 >></a>
         </p>
       
 
@@ -247,13 +324,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/zookeeper应用/">Zookeeper应用(服务注册与发现/分布式锁/Master选举/配置中心)</a>
+      <a class="article-title" href="/2022/05/18/zookeeper应用/">Zookeeper应用(服务注册与发现/分布式锁/Master选举/配置中心)</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/zookeeper应用/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/zookeeper应用/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.205Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
@@ -271,7 +348,7 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateServiceList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">try</span>&#123;</span><br><span class="line"></span><br><span class="line">           logger.warn(<span class="string">"ip 改变 开始更新ip地址"</span>);</span><br><span class="line">           List&lt;String&gt; children = zooKeeper.getChildren(BASE_SERVICES  + SERVICE_NAME, <span class="keyword">true</span>);</span><br><span class="line">           List&lt;String&gt; newServerList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">           <span class="keyword">for</span>(String subNode:children) &#123;</span><br><span class="line">               <span class="keyword">byte</span>[] data = zooKeeper.getData(BASE_SERVICES  + SERVICE_NAME + <span class="string">"/"</span> + subNode, <span class="keyword">false</span>, <span class="keyword">null</span>);</span><br><span class="line">               String host = <span class="keyword">new</span> String(data, <span class="string">"utf-8"</span>);</span><br><span class="line">               System.out.println(<span class="string">"host:"</span>+host);</span><br><span class="line">               newServerList.add(host);</span><br><span class="line">           &#125;</span><br><span class="line">           LoadBalance.SERVICE_LIST = newServerList;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2021/12/06/zookeeper应用/#more">more >></a>
+          <a class="article-more-a" href="/2022/05/18/zookeeper应用/#more">more >></a>
         
       
 
@@ -295,7 +372,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/zookeeper应用/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/zookeeper应用/">展开全文 >></a>
         </p>
       
 
@@ -325,44 +402,30 @@
 
 
   
-    <article id="post-zookeeper特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-rabbitmq-05" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/zookeeper特性/">Zookeeper特性</a>
+      <a class="article-title" href="/2022/05/18/rabbitmq-05/">RabbitMq - 定义队列,消息的其它属性(定义时最后的一个Map)</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/zookeeper特性/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/rabbitmq-05/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.204Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h4><ul>
-<li>简单的数据结构：共享的树形结构，类似文件系统，存储于内存；</li>
-<li>可以构建集群：避免单点故障，3-5台机器就可以组成集群，超过半数正常工作就能对外提供服务；</li>
-<li>顺序访问：对于每个读请求，zk会分配一个全局唯一的递增编号，利用这个特性可以实现高级协调服务；</li>
-<li>高性能：基于内存操作，服务于非事务请求，适用于读操作为主的业务场景。3台zk集群能达到13w QPS；</li>
-</ul>
-<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><ul>
-<li>数据发布订阅</li>
-<li>负载均衡</li>
-<li>命名服务</li>
-<li>Master选举</li>
-<li>集群管理</li>
-<li>配置管理</li>
-<li>分布式队列</li>
-<li>分布式锁</li>
-</ul>
+        <p>RabbitMq其它属性(定义时最后的一个Map)</p>
+<h2 id="RabbitMq-其它属性-定义时最后的一个Map"><a href="#RabbitMq-其它属性-定义时最后的一个Map" class="headerlink" title="RabbitMq 其它属性(定义时最后的一个Map)"></a>RabbitMq 其它属性(定义时最后的一个Map)</h2><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p><img src="http://image.tupelo.top/queue.png" alt="队列"></p>
         
-          <a class="article-more-a" href="/2021/12/06/zookeeper特性/#more">more >></a>
+          <a class="article-more-a" href="/2022/05/18/rabbitmq-05/#more">more >></a>
         
       
 
@@ -376,7 +439,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
         		</li>
       		
 		</ul>
@@ -386,7 +449,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/zookeeper特性/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/rabbitmq-05/">展开全文 >></a>
         </p>
       
 
@@ -416,30 +479,38 @@
 
 
   
-    <article id="post-zookeeper集成java" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-rabbitmq-06" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/zookeeper集成java/">Zookeeper集成java</a>
+      <a class="article-title" href="/2022/05/18/rabbitmq-06/">RabbitMq - 集群</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/zookeeper集成java/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/rabbitmq-06/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.204Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="源生API"><a href="#源生API" class="headerlink" title="源生API"></a>源生API</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Maven配置</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.4.6&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SESSION_TIMEOUT = <span class="number">10000</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONNECTION_STRING = <span class="string">"127.0.0.1:2181"</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ZK_PATH = <span class="string">"/leader"</span>;</span><br><span class="line"><span class="keyword">private</span> ZooKeeper zk = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> CountDownLatch connectedSemaphore = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建ZK连接</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> connectString  ZK服务器地址列表</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> sessionTimeout Session超时时间</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createConnection</span><span class="params">(String connectString, <span class="keyword">int</span> sessionTimeout)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.releaseConnection();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// this代表有监听</span></span><br><span class="line">        zk = <span class="keyword">new</span> ZooKeeper(connectString, sessionTimeout, <span class="keyword">this</span>);</span><br><span class="line">        connectedSemaphore.await();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">"连接创建失败，发生 InterruptedException"</span>);</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">"连接创建失败，发生 IOException"</span>);</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>RabbitMq集群</p>
+<h2 id="RabbitMq-集群-局域网-网络速度快"><a href="#RabbitMq-集群-局域网-网络速度快" class="headerlink" title="RabbitMq 集群(局域网/网络速度快)"></a>RabbitMq 集群(局域网/网络速度快)</h2><h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>实现某一台机器挂了 程序还能运行 并不是为了保证消息万无一失  </p>
+<blockquote>
+<p>交换器全局复制 队列只有元数据复制 </p>
+</blockquote>
+<h4 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h4><ul>
+<li>rabbitmqctl join_culster [rabbit@node] 加入集群  </li>
+<li>rabbitmqctl status   集群状态  </li>
+<li>rabbitmqctl reset    </li>
+</ul>
         
-          <a class="article-more-a" href="/2021/12/06/zookeeper集成java/#more">more >></a>
+          <a class="article-more-a" href="/2022/05/18/rabbitmq-06/#more">more >></a>
         
       
 
@@ -453,7 +524,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
         		</li>
       		
 		</ul>
@@ -463,7 +534,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/zookeeper集成java/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/rabbitmq-06/">展开全文 >></a>
         </p>
       
 
@@ -493,139 +564,42 @@
 
 
   
-    <article id="post-zookeeper集群" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-rabbitmq-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/zookeeper集群/">Zookeeper集群</a>
+      <a class="article-title" href="/2022/05/18/rabbitmq-03/">RabbitMq - 生产者消息确认</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/zookeeper集群/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/rabbitmq-03/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.204Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="Zookeeper集群"><a href="#Zookeeper集群" class="headerlink" title="Zookeeper集群"></a>Zookeeper集群</h4><ul>
-<li>顺序一致性<br>  客户端的更新顺序与它们被发送的顺序相一致。</li>
-<li>原子性<br>  更新操作要么成功要么失败，没有第三种结果。</li>
-<li>单一视图<br>  无论客户端连接到哪一个服务器，客户端将看到相同的 ZooKeeper 视图。</li>
-<li>可靠性<br>  一旦一个更新操作被应用，那么在客户端再次更新它之前，它的值将不会改变。</li>
-<li>实时性<br>  连接上一个服务端数据修改，所以其他的服务端都会实时的跟新，不算完全的实时，有一点延时的</li>
-<li>角色轮换避免单点故障<br>  当leader出现问题的时候，会选举从follower中选举一个新的leader</li>
-</ul>
-<h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><ul>
-<li>Leader  集群工作机制中的核心<ul>
-<li>事务请求的唯一调度和处理者，保证集群事务处理的顺序性</li>
-<li>集群内部个服务器的调度者(管理follower,数据同步)</li>
-</ul>
-</li>
-<li>Follower  集群工作机制中的跟随者<ul>
-<li>处理非事务请求，转发事务请求给Leader</li>
-<li>参与事务请求proposal投票<br>参与leader选举投票</li>
-</ul>
-</li>
-<li>Observer 观察者  <ul>
-<li>3.30以上版本提供，和follower功能相同，但不参与任何形式投票</li>
-<li>处理非事务请求，转发事务请求给Leader</li>
-<li>提高集群非事务处理能力</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2021/12/06/zookeeper集群/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/zookeeper集群/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-分布式事务解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/分布式事务解决方案/">分布式事务解决方案</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/分布式事务解决方案/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>分布式事务解决方案</p>
-<h3 id="分布式事务解决方案"><a href="#分布式事务解决方案" class="headerlink" title="分布式事务解决方案"></a>分布式事务解决方案</h3><p>数据库事务正确执行的四个基本要素ACID ：</p>
-<p>原子性<br>一致性<br>隔离性<br>持久性</p>
-<p>CAP定理：在一个分布式系统中，一致性（Consistency）、可用性（Availability）、分区容忍性（Partition tolerance）三个要素最多只能同时实现两点，不可能三者兼顾。</p>
+        <p>RabbitMq生产者消息确认</p>
+<h2 id="RabbitMq-生产者消息确认"><a href="#RabbitMq-生产者消息确认" class="headerlink" title="RabbitMq 生产者消息确认"></a>RabbitMq 生产者消息确认</h2><h3 id="生产者权衡"><a href="#生产者权衡" class="headerlink" title="生产者权衡"></a>生产者权衡</h3><blockquote>
+<p>快、低==========&gt; 慢、高</p>
+</blockquote>
 <ul>
-<li>一致性：在分布式系统中的所有数据备份，在同一时刻是否同样的值。</li>
-<li>可用性：在集群中一部分节点故障后，集群整体是否还能响应客户端的读写请求。</li>
-<li>分区容忍性：以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择。</li>
+<li>无保障</li>
+<li>失败通知  参数mandatory 消息是否成功到达队列</li>
+<li>发送方确认模式  消息是否成功到达exchange 和失败通知结合使用</li>
+<li>备用交换机     定义个一个备用交换机 Map</li>
+<li>高可用队列</li>
+<li>事务          影响性能 2-10倍 强一致性</li>
+<li>事务+高可用</li>
+<li>持久化</li>
 </ul>
-<p>BASE理论：我们无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性。</p>
         
-          <a class="article-more-a" href="/2021/12/06/分布式事务解决方案/#more">more >></a>
+          <a class="article-more-a" href="/2022/05/18/rabbitmq-03/#more">more >></a>
         
       
 
@@ -639,11 +613,192 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">分布式事务</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/18/rabbitmq-03/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-rabbitmq-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/18/rabbitmq-04/">RabbitMq - 消费者消息确认</a>
+    </h1>
+  
+
+        
+        <a href="/2022/05/18/rabbitmq-04/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.204Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RabbitMq消费者消息确认</p>
+<h2 id="RabbitMq-消费者消息确认"><a href="#RabbitMq-消费者消息确认" class="headerlink" title="RabbitMq 消费者消息确认"></a>RabbitMq 消费者消息确认</h2><h3 id="消费者权衡"><a href="#消费者权衡" class="headerlink" title="消费者权衡"></a>消费者权衡</h3><ul>
+<li>获取消息方式<ul>
+<li>拉取get</li>
+<li>自动推送</li>
+</ul>
+</li>
+<li>消息应答方式<ul>
+<li>自动确认</li>
+<li>手动确认</li>
+</ul>
+</li>
+<li>Qos预取模式</li>
+<li>可靠性<ul>
+<li>Qos 批量2500事务(高)</li>
+<li>拉取事务(低)</li>
+</ul>
+</li>
+<li>性能 <ul>
+<li>总量2500Qos(高)</li>
+<li>少量Qos 批量2500事务</li>
+<li>事务</li>
+<li>拉取(低)</li>
+</ul>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2022/05/18/rabbitmq-04/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/18/rabbitmq-04/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/05/18/spring-01/">Spring学习01 - 工程从XML配置到注解</a>
+    </h1>
+  
+
+        
+        <a href="/2022/05/18/spring-01/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.204Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>spring基础学习</p>
+<h2 id="Spring-基础及组件使用01"><a href="#Spring-基础及组件使用01" class="headerlink" title="Spring 基础及组件使用01"></a>Spring 基础及组件使用01</h2><h3 id="工程从XML配置到注解"><a href="#工程从XML配置到注解" class="headerlink" title="工程从XML配置到注解"></a>工程从XML配置到注解</h3><ul>
+<li>创建配置类 加上@Configuration注解 加上@ComponentScan注解 扫描指定的包 加载到IOC容器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(value = <span class="string">"com.tupelo"</span>,useDefaultFilters = <span class="keyword">true</span>,excludeFilters = &#123;</span><br><span class="line">        <span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="meta">@EnableAspectJAutoProxy</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">person</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Person(<span class="string">"jack"</span>,<span class="number">20</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/05/18/spring-01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">解决方案</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -653,7 +808,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/分布式事务解决方案/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/spring-01/">展开全文 >></a>
         </p>
       
 
@@ -683,45 +838,35 @@
 
 
   
-    <article id="post-分布式系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-spring-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/分布式系统/">分布式系统基础知识</a>
+      <a class="article-title" href="/2022/05/18/spring-02/">Spring学习02 - 常用注解</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/分布式系统/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.269Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/spring-02/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.204Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="分布式系统带来的问题"><a href="#分布式系统带来的问题" class="headerlink" title="分布式系统带来的问题"></a>分布式系统带来的问题</h4><ul>
-<li>通信异常</li>
-<li>网络分区 （脑裂）</li>
-<li>三态 （成功、失败、超时）</li>
-<li>节点故障</li>
-</ul>
-<h4 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h4><ul>
-<li><p>一致性</p>
-<p>  在分布式系统中，一致性是数据在多个副本之间是否能够保证一致的特性，这里说的一致性和前面说的对等性其实差不多。如果能够在分布式系统中针对某一个数据项的变更成功执行后，所有用户都可以马上读取到最新的值，那么这样的系统就被认为具有【强一致性】。     </p>
-</li>
-<li><p>可用性</p>
-<p>  可用性指系统提供服务必须一直处于可用状态，对于用户的操作请求总是能够在有限的时间内访问结果。这里的重点是【有限的时间】和【返回结果】为了做到有限的时间需要用到缓存，需要用到负载，这个时候服务器增加的节点是为性能考虑；为了返回结果，需要考虑服务器主备，当主节点出现问题的时候需要备份的节点能最快的顶替上来，千万不能出现OutOfMemory或者其他500，404错误，否则这样的系统我们会认为是不可用的。</p>
-</li>
-<li><p>分区容错性</p>
-<p>  分布式系统在遇到任何网络分区故障的时候，仍然需要能够对外提供满足一致性和可用性的服务，除非是整个网络环境都发生了故障。</p>
-</li>
+        <p>spring基础学习</p>
+<h2 id="Spring-基础及组件使用02"><a href="#Spring-基础及组件使用02" class="headerlink" title="Spring 基础及组件使用02"></a>Spring 基础及组件使用02</h2><h3 id="Conditional条件注册Bean"><a href="#Conditional条件注册Bean" class="headerlink" title="@Conditional条件注册Bean"></a>@Conditional条件注册Bean</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.enjoy.cap5.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.config.ConfigurableListableBeanFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Condition;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ConditionContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.env.Environment;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.type.AnnotatedTypeMetadata;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinCondition</span> <span class="keyword">implements</span> <span class="title">Condition</span></span>&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	*ConditionContext: 判断条件可以使用的上下文(环境)</span></span><br><span class="line"><span class="comment">	*AnnotatedTypeMetadata: 注解的信息</span></span><br><span class="line"><span class="comment">	*</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(ConditionContext context, AnnotatedTypeMetadata metadata)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 业务逻辑</span></span><br><span class="line">		<span class="comment">//能获取到IOC容器正在使用的beanFactory</span></span><br><span class="line">		ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();</span><br><span class="line">		<span class="comment">//获取当前环境变量(包括我们操作系统是WIN还是LINUX??)</span></span><br><span class="line">		Environment environment = context.getEnvironment();</span><br><span class="line">		String os_name = environment.getProperty(<span class="string">"os.name"</span>);</span><br><span class="line">		<span class="keyword">if</span>(os_name.contains(<span class="string">"linux"</span>))&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义Bean时加上注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Conditional</span>(WinCondition.class)</span><br><span class="line"><span class="meta">@Bean</span>(<span class="string">"lison"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Person <span class="title">lison</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Person();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="BeanFactory-和-FactoryBean-的区别"><a href="#BeanFactory-和-FactoryBean-的区别" class="headerlink" title="BeanFactory 和 FactoryBean 的区别"></a>BeanFactory 和 FactoryBean 的区别</h3><ul>
+<li>FactoryBean ： 把我们的JAVA实例Bean通过FactoryBean注入到容器中</li>
+<li>BeanFactory ： 从容器中获取我们实例化的Bean</li>
 </ul>
         
-          <a class="article-more-a" href="/2021/12/06/分布式系统/#more">more >></a>
+          <a class="article-more-a" href="/2022/05/18/spring-02/#more">more >></a>
         
       
 
@@ -735,7 +880,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -745,7 +894,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/分布式系统/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/spring-02/">展开全文 >></a>
         </p>
       
 
@@ -775,84 +924,41 @@
 
 
   
-    <article id="post-mybatis_01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/mybatis_01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mysql-锁和事务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-rabbitmq-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/Mysql-锁和事务/">Mysql - Mysql锁和事务</a>
+      <a class="article-title" href="/2022/05/18/rabbitmq-02/">RabbitMq - 配置和相关命令</a>
     </h1>
   
 
         
-        <a href="/2021/12/06/Mysql-锁和事务/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
+        <a href="/2022/05/18/rabbitmq-02/" class="archive-article-date">
+  	<time datetime="2022-05-18T14:42:49.203Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Mysql锁和事务</p>
-<h4 id="Mysql锁"><a href="#Mysql锁" class="headerlink" title="Mysql锁"></a>Mysql锁</h4><p>不同的存储引擎支持不同的锁机制,MyISAM和MEMORY存储引擎采用的是表级锁InnoDB存储引擎既支持行级锁，也支持表级锁，但默认情况下是采用行级锁。</p>
-<ul>
-<li>表级锁:开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高,并发度最低。</li>
-<li>行级锁:开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低,并发度也最高。</li>
-<li>页面锁:开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</li>
+        <p>RabbitMq 修改端口/用户权限 相关命令</p>
+<h2 id="RabbitMq-基相关命令"><a href="#RabbitMq-基相关命令" class="headerlink" title="RabbitMq 基相关命令"></a>RabbitMq 基相关命令</h2><ul>
+<li>配置文件</li>
 </ul>
-<p>表级锁更适合于以查询为主，只有少量按索引条件更新数据的应用，如OLAP系统   </p>
-<p>行级锁则更适合于有大量按索引条件并发更新少量不同数据，同时又有并发查询的应用    </p>
+<blockquote>
+<p>RabbitMq配置文件在/etc/rabbitmq下,名为rabbitmq.config / rabbitmq-env.conf,需要自己创建。</p>
+</blockquote>
+<pre><code>修改端口:
+创建rabbitmq-env.conf文件,添加RABBITMQ_NODE_PORT=8500,重启RabbitMq即可生效.
+</code></pre><ul>
+<li>启动和关闭RabbitMq</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server <span class="comment">#会启动Erlang节点和Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl stop <span class="comment">#会关闭Erlang节点和Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl status  <span class="comment">#可以检查消息节点是否正常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#单独关闭RabbitMQ应用</span></span><br><span class="line">rabbitmqctl stop_app <span class="comment">#关闭Rabbitmq应用 </span></span><br><span class="line">rabbitmqctl start_app <span class="comment">#启动Rabbitmq应用</span></span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2021/12/06/Mysql-锁和事务/#more">more >></a>
+          <a class="article-more-a" href="/2022/05/18/rabbitmq-02/#more">more >></a>
         
       
 
@@ -866,7 +972,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
         		</li>
       		
 		</ul>
@@ -876,87 +982,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/Mysql-锁和事务/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Nginx-Location匹配规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/06/Nginx-Location匹配规则/">Nginx - Location匹配规则 和 负载均衡</a>
-    </h1>
-  
-
-        
-        <a href="/2021/12/06/Nginx-Location匹配规则/" class="archive-article-date">
-  	<time datetime="2021-12-06T12:46:09.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Location匹配规则 和 负载均衡</p>
-<h4 id="Location规则"><a href="#Location规则" class="headerlink" title="Location规则"></a>Location规则</h4><ul>
-<li>语法规则： location [=|~|~*|^~] /uri/ {… }</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">         proxy_set_header Referer <span class="string">""</span>;</span><br><span class="line">         proxy_pass http://manage/;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2021/12/06/Nginx-Location匹配规则/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/06/Nginx-Location匹配规则/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/18/rabbitmq-02/">展开全文 >></a>
         </p>
       
 
@@ -1000,7 +1026,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 Caichuang
+    		&copy; 2022 Caichuang
     	</div>
       	<div class="footer-right">
 
@@ -1087,6 +1113,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
@@ -1103,15 +1133,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Zookeeper</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1143,10 +1173,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
               </li>
              
@@ -1159,11 +1185,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">接口幂等性</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color1">接口幂等性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1180,6 +1206,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
             
             <div class="clearfix"></div>
