@@ -150,42 +150,54 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-多线程-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-多线程-线程池" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/18/多线程-01/">并发编程 - 线程基础、线程之间的共享和协作</a>
+      <a class="article-title" href="/2023/02/02/多线程-线程池/">并发编程 - 线程池</a>
     </h1>
   
 
         
-        <a href="/2022/05/18/多线程-01/" class="archive-article-date">
-  	<time datetime="2022-05-18T14:42:49.206Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+        <a href="/2023/02/02/多线程-线程池/" class="archive-article-date">
+  	<time datetime="2023-02-02T09:15:12.219Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>线程基础、线程之间的共享和协作</p>
-<h2 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h2><h4 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h4><ul>
-<li>进程：程序运行资源分配的最小单位,进程内部有多个线程,会共享这个进程的资源</li>
-<li>线程：CPU调度的最小单位,必须依赖进程而存在。</li>
+        <p>线程池</p>
+<h2 id="使用线程池的好处"><a href="#使用线程池的好处" class="headerlink" title="使用线程池的好处"></a>使用线程池的好处</h2><ul>
+<li>降低资源的消耗。降低线程创建和销毁的资源消耗；</li>
+<li>提高响应速度：线程的创建时间为T1，执行时间T2,销毁时间T3，免去T1和T3的时间</li>
+<li>提高线程的可管理性。</li>
 </ul>
-<h4 id="高并发编程的意义、好处和注意事项"><a href="#高并发编程的意义、好处和注意事项" class="headerlink" title="高并发编程的意义、好处和注意事项"></a>高并发编程的意义、好处和注意事项</h4><ul>
-<li>好处：充分利用cpu的资源、加快用户响应的时间,程序模块化,异步化</li>
-<li>问题：  <ul>
-<li>线程共享资源,存在冲突；  </li>
-<li>容易导致死锁；  </li>
-<li>启用太多的线程,就有搞垮机器的可能</li>
+<h2 id="线程池的创建"><a href="#线程池的创建" class="headerlink" title="线程池的创建"></a>线程池的创建</h2><blockquote>
+<p>ThreadPoolExecutor，jdk所有线程池实现的父类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ThreadPoolExecutor executor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="keyword">int</span> corePoolSize,</span><br><span class="line">                              <span class="keyword">int</span> maximumPoolSize,</span><br><span class="line">                              <span class="keyword">long</span> keepAliveTime,</span><br><span class="line">                              TimeUnit unit,</span><br><span class="line">                              BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                              ThreadFactory threadFactory,</span><br><span class="line">                              RejectedExecutionHandler handler)</span><br></pre></td></tr></table></figure>
+<p>各个参数的含义:        </p>
+<ul>
+<li>corePoolSize  ：线程池中核心线程数，&lt; corePoolSize  ，就会创建新线程，= corePoolSize  ，这个任务就会保存到BlockingQueue，如果调用prestartAllCoreThreads（）方法就会一次性的启动corePoolSize  个数的线程。</li>
+<li>maximumPoolSize, 允许的最大线程数，BlockingQueue也满了，&lt; maximumPoolSize时候就会再次创建新的线程</li>
+<li>keepAliveTime, 线程空闲下来后，存活的时间，这个参数只在&gt; corePoolSize才有用<br>TimeUnit unit, 存活时间的单位值</li>
+<li>workQueue, 保存任务的阻塞队列</li>
+<li>threadFactory, 创建线程的工厂，给新建的线程赋予名字</li>
+<li>handler ：饱和策略<ul>
+<li>AbortPolicy ：直接抛出异常，默认；</li>
+<li>CallerRunsPolicy：用调用者所在的线程来执行任务</li>
+<li>DiscardOldestPolicy：丢弃阻塞队列里最老的任务，队列里最靠前的任务</li>
+<li>DiscardPolicy ：当前任务直接丢弃            </li>
 </ul>
 </li>
 </ul>
+<p>实现自己的饱和策略，实现RejectedExecutionHandler接口即可</p>
         
-          <a class="article-more-a" href="/2022/05/18/多线程-01/#more">more >></a>
+          <a class="article-more-a" href="/2023/02/02/多线程-线程池/#more">more >></a>
         
       
 
@@ -209,7 +221,448 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/18/多线程-01/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/02/02/多线程-线程池/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-工厂模式总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/02/02/工厂模式总结/">设计模式-工厂模式总结</a>
+    </h1>
+  
+
+        
+        <a href="/2023/02/02/工厂模式总结/" class="archive-article-date">
+  	<time datetime="2023-02-02T09:15:12.219Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="工厂模式总结"><a href="#工厂模式总结" class="headerlink" title="工厂模式总结"></a>工厂模式总结</h3><blockquote>
+<p>使用原则:</p>
+</blockquote>
+<ul>
+<li>解耦：把对象的创建和使用的过程分开。</li>
+<li>工厂负责对象的创建，包括其init方法的调用，黑盒创建过程。</li>
+<li>面向接口编程： 使用者只管使用，只知其接口而不知其实现类。</li>
+</ul>
+<blockquote>
+<p>对比:</p>
+</blockquote>
+<ul>
+<li>静态工厂：把所有对象的创建逻辑集中到一个（专业）类里处理</li>
+<li>工厂方法模式：一个工厂负责创建一个产品类的创建</li>
+<li>抽象工厂模式：将一个系列的产品的工厂合并成一个工厂，负责生产这个系列的产品</li>
+<li>建造者模式：对象的创建比较复杂时，按步骤一块块创建，让创建过程模板化。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/02/02/工厂模式总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多线程-线程安全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/02/02/多线程-线程安全/">并发编程 - 并发安全</a>
+    </h1>
+  
+
+        
+        <a href="/2023/02/02/多线程-线程安全/" class="archive-article-date">
+  	<time datetime="2023-02-02T09:15:12.218Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>并发安全</p>
+<h2 id="类的线程安全定义"><a href="#类的线程安全定义" class="headerlink" title="类的线程安全定义"></a>类的线程安全定义</h2><pre><code>如果多线程下使用这个类，不过多线程如何使用和调度这个类，这个类总是表示出正确的行为，这个类就是线程安全的。
+类的线程安全表现为：
+    操作的原子性
+    内存的可见性
+不做正确的同步，在多个线程之间共享状态的时候，就会出现线程不安全。
+</code></pre>
+        
+          <a class="article-more-a" href="/2023/02/02/多线程-线程安全/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/02/02/多线程-线程安全/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多线程-并发工具类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/02/02/多线程-并发工具类/">并发编程 - 并发工具类</a>
+    </h1>
+  
+
+        
+        <a href="/2023/02/02/多线程-并发工具类/" class="archive-article-date">
+  	<time datetime="2023-02-02T09:15:12.217Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>并发工具类</p>
+<h2 id="Hashmap和HashTable"><a href="#Hashmap和HashTable" class="headerlink" title="Hashmap和HashTable"></a>Hashmap和HashTable</h2><ul>
+<li>Hashmap多线程会导致HashMap的Entry链表形成环形数据结构，一旦形成环形数据结构，Entry的next节点永远不为空，就会产生死循环获取Entry。</li>
+<li>HashTable使用synchronized来保证线程安全，但在线程竞争激烈的情况下HashTable的效率非常低下。因为当一个线程访问HashTable的同步方法，其他线程也访问HashTable的同步方法时，会进入阻塞或轮询状态。如线程1使用put进行元素添加，线程2不但不能使用put方法添加元素，也不能使用get方法来获取元素，所以竞争越激烈效率越低。</li>
+</ul>
+<p>Hash</p>
+<p>散列，哈希：把任意长度的输入通过一种算法（散列），变换成为固定长度的输出，这个输出值就是散列值。属于压缩映射，容易产生哈希冲突。Hash算法有直接取余法等。<br>产生哈希冲突时解决办法:        </p>
+<ul>
+<li>开放寻址        </li>
+<li>再散列            </li>
+<li>链地址法（相同hash值的元素用链表串起来）</li>
+</ul>
+        
+          <a class="article-more-a" href="/2023/02/02/多线程-并发工具类/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/02/02/多线程-并发工具类/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多线程-CAS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/02/02/多线程-CAS/">并发编程 - 原子操作CAS</a>
+    </h1>
+  
+
+        
+        <a href="/2023/02/02/多线程-CAS/" class="archive-article-date">
+  	<time datetime="2023-02-02T09:15:12.217Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原子操作</p>
+<h2 id="CAS的原理"><a href="#CAS的原理" class="headerlink" title="CAS的原理"></a>CAS的原理</h2><pre><code>利用了现代处理器都支持的CAS的指令，循环这个指令，直到成功为止
+三个运算符：  一个内存地址V，一个期望的值A，一个新值B
+基本思路：如果地址V上的值和期望的值A相等，就给地址V赋给新值B，如果不是，不做任何操作。
+循环（死循环，自旋）里不断的进行CAS操作
+</code></pre><h2 id="CAS的问题"><a href="#CAS的问题" class="headerlink" title="CAS的问题"></a>CAS的问题</h2><ul>
+<li>ABA问题（添加版本号解决）<ul>
+<li>AtomicMarkableReference，boolean 有没有动过</li>
+<li>AtomicStampedReference  动过几次</li>
+</ul>
+</li>
+<li>开销问题 长期不成功 会一直循环下去</li>
+<li>只能保证一个共享变量的原子操作</li>
+</ul>
+<h2 id="JDK中相关原子操作类的使用"><a href="#JDK中相关原子操作类的使用" class="headerlink" title="JDK中相关原子操作类的使用"></a>JDK中相关原子操作类的使用</h2><ul>
+<li>更新基本类型类：AtomicBoolean，AtomicInteger，AtomicLong，AtomicReference</li>
+<li>更新数组类：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray</li>
+<li>更新引用类型：AtomicReference，AtomicMarkableReference，AtomicStampedReference</li>
+<li>原子更新字段类：AtomicReferenceFieldUpdater，AtomicIntegerFieldUpdater，AtomicLongFieldUpdater</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/02/02/多线程-CAS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多线程-显式锁和AQS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/02/02/多线程-显式锁和AQS/">并发编程 - 显式锁和AQS</a>
+    </h1>
+  
+
+        
+        <a href="/2023/02/02/多线程-显式锁和AQS/" class="archive-article-date">
+  	<time datetime="2023-02-02T09:15:12.217Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>显式锁和AQS</p>
+<h2 id="显式锁"><a href="#显式锁" class="headerlink" title="显式锁"></a>显式锁</h2><p>Lock接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">  <span class="comment">// 一定要在finally中释放锁</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increament</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.lock.lock();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          ++<span class="keyword">this</span>.count;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.lock.unlock();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>可重入锁ReentrantLock(默认非公平锁 构造方法可控制是否是公平锁)</p>
+<p>  采用一个计数器，每重入一次次数加一，释放一个锁次数减一</p>
+</li>
+<li><p>读写锁ReentrantReadWriteLock</p>
+<p>  同一时刻允许多个读线程同时访问，但是写线程访问的时候，所有的读和写都被阻塞，最适宜与读多写少的情况</p>
+</li>
+<li><p>Condition接口</p>
+<p>  阻塞一个线程await()，唤醒是最好使用singal().wait()阻塞线程使用notfiyAll()唤醒。</p>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2023/02/02/多线程-显式锁和AQS/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/02/02/多线程-显式锁和AQS/">展开全文 >></a>
         </p>
       
 
@@ -246,13 +699,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/18/单例模式/">设计模式-单例模式</a>
+      <a class="article-title" href="/2023/02/02/单例模式/">设计模式-单例模式</a>
     </h1>
   
 
         
-        <a href="/2022/05/18/单例模式/" class="archive-article-date">
-  	<time datetime="2022-05-18T14:42:49.206Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+        <a href="/2023/02/02/单例模式/" class="archive-article-date">
+  	<time datetime="2023-02-02T09:15:12.216Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
 </a>
         
       </header>
@@ -297,7 +750,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/18/单例模式/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/02/02/单例模式/">展开全文 >></a>
         </p>
       
 
@@ -327,32 +780,41 @@
 
 
   
-    <article id="post-分布式锁解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-多线程-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/18/分布式锁解决方案/">分布式锁解决方案</a>
+      <a class="article-title" href="/2023/02/02/多线程-02/">并发编程 - 线程的并发工具类</a>
     </h1>
   
 
         
-        <a href="/2022/05/18/分布式锁解决方案/" class="archive-article-date">
-  	<time datetime="2022-05-18T14:42:49.206Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+        <a href="/2023/02/02/多线程-02/" class="archive-article-date">
+  	<time datetime="2023-02-02T09:15:12.216Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>分布式锁解决方案</p>
-<h3 id="分布式锁解决方案"><a href="#分布式锁解决方案" class="headerlink" title="分布式锁解决方案"></a>分布式锁解决方案</h3><p>分布式锁：集群的情况下会产生</p>
-<p>CAP理论：一致性 可用性 分区容错性</p>
-<p>解决方案：<br>基于数据库实现分布式锁<br>基于缓存（Redis等）实现分布式锁<br>基于Zookeeper实现分布式锁</p>
+        <p>线程的并发工具类</p>
+<h2 id="线程的并发工具类"><a href="#线程的并发工具类" class="headerlink" title="线程的并发工具类"></a>线程的并发工具类</h2><ul>
+<li>Fork-Join:分治思想</li>
+<li>CountDownLatch:是一组线程等待其他的线程完成工作以后在执行,加强版join await用来等待,countDown负责计数器的减1</li>
+<li>CyclicBarrier: 让一组线程达到某个屏障,被阻塞,一直到组内最后一个线程达到屏障时,屏障开放,所有被阻塞的线程会继续运行<ul>
+<li>countdownlatch放行由第三者控制,CyclicBarrier放行由一组线程本身控制</li>
+<li>countdownlatch放行条件》=线程数,CyclicBarrier放行条件=线程数</li>
+</ul>
+</li>
+<li>Semaphore:信号量</li>
+<li>Exchange:交换</li>
+<li>Callable、Future和FutureTask </li>
+</ul>
         
-          <a class="article-more-a" href="/2022/05/18/分布式锁解决方案/#more">more >></a>
+          <a class="article-more-a" href="/2023/02/02/多线程-02/#more">more >></a>
         
       
 
@@ -366,11 +828,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">解决方案</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">分布式锁</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
         		</li>
       		
 		</ul>
@@ -380,7 +838,96 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/18/分布式锁解决方案/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/02/02/多线程-02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多线程-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/02/02/多线程-01/">并发编程 - 线程基础、线程之间的共享和协作</a>
+    </h1>
+  
+
+        
+        <a href="/2023/02/02/多线程-01/" class="archive-article-date">
+  	<time datetime="2023-02-02T09:15:12.216Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>线程基础、线程之间的共享和协作</p>
+<h2 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h2><h4 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h4><ul>
+<li>进程：程序运行资源分配的最小单位,进程内部有多个线程,会共享这个进程的资源</li>
+<li>线程：CPU调度的最小单位,必须依赖进程而存在。</li>
+</ul>
+<h4 id="高并发编程的意义、好处和注意事项"><a href="#高并发编程的意义、好处和注意事项" class="headerlink" title="高并发编程的意义、好处和注意事项"></a>高并发编程的意义、好处和注意事项</h4><ul>
+<li>好处：充分利用cpu的资源、加快用户响应的时间,程序模块化,异步化</li>
+<li>问题：  <ul>
+<li>线程共享资源,存在冲突；  </li>
+<li>容易导致死锁；  </li>
+<li>启用太多的线程,就有搞垮机器的可能</li>
+</ul>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2023/02/02/多线程-01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/02/02/多线程-01/">展开全文 >></a>
         </p>
       
 
@@ -417,13 +964,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/18/分布式事务解决方案/">分布式事务解决方案</a>
+      <a class="article-title" href="/2023/02/02/分布式事务解决方案/">分布式事务解决方案</a>
     </h1>
   
 
         
-        <a href="/2022/05/18/分布式事务解决方案/" class="archive-article-date">
-  	<time datetime="2022-05-18T14:42:49.206Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
+        <a href="/2023/02/02/分布式事务解决方案/" class="archive-article-date">
+  	<time datetime="2023-02-02T09:15:12.215Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
 </a>
         
       </header>
@@ -441,7 +988,7 @@
 </ul>
 <p>BASE理论：我们无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性。</p>
         
-          <a class="article-more-a" href="/2022/05/18/分布式事务解决方案/#more">more >></a>
+          <a class="article-more-a" href="/2023/02/02/分布式事务解决方案/#more">more >></a>
         
       
 
@@ -469,524 +1016,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/18/分布式事务解决方案/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-zookeeper集成java" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/18/zookeeper集成java/">Zookeeper集成java</a>
-    </h1>
-  
-
-        
-        <a href="/2022/05/18/zookeeper集成java/" class="archive-article-date">
-  	<time datetime="2022-05-18T14:42:49.206Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="源生API"><a href="#源生API" class="headerlink" title="源生API"></a>源生API</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Maven配置</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.4.6&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SESSION_TIMEOUT = <span class="number">10000</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONNECTION_STRING = <span class="string">"127.0.0.1:2181"</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ZK_PATH = <span class="string">"/leader"</span>;</span><br><span class="line"><span class="keyword">private</span> ZooKeeper zk = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> CountDownLatch connectedSemaphore = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建ZK连接</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> connectString  ZK服务器地址列表</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> sessionTimeout Session超时时间</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createConnection</span><span class="params">(String connectString, <span class="keyword">int</span> sessionTimeout)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.releaseConnection();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// this代表有监听</span></span><br><span class="line">        zk = <span class="keyword">new</span> ZooKeeper(connectString, sessionTimeout, <span class="keyword">this</span>);</span><br><span class="line">        connectedSemaphore.await();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">"连接创建失败，发生 InterruptedException"</span>);</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">"连接创建失败，发生 IOException"</span>);</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2022/05/18/zookeeper集成java/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/18/zookeeper集成java/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-分布式系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/18/分布式系统/">分布式系统基础知识</a>
-    </h1>
-  
-
-        
-        <a href="/2022/05/18/分布式系统/" class="archive-article-date">
-  	<time datetime="2022-05-18T14:42:49.206Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="分布式系统带来的问题"><a href="#分布式系统带来的问题" class="headerlink" title="分布式系统带来的问题"></a>分布式系统带来的问题</h4><ul>
-<li>通信异常</li>
-<li>网络分区 （脑裂）</li>
-<li>三态 （成功、失败、超时）</li>
-<li>节点故障</li>
-</ul>
-<h4 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h4><ul>
-<li><p>一致性</p>
-<p>  在分布式系统中，一致性是数据在多个副本之间是否能够保证一致的特性，这里说的一致性和前面说的对等性其实差不多。如果能够在分布式系统中针对某一个数据项的变更成功执行后，所有用户都可以马上读取到最新的值，那么这样的系统就被认为具有【强一致性】。     </p>
-</li>
-<li><p>可用性</p>
-<p>  可用性指系统提供服务必须一直处于可用状态，对于用户的操作请求总是能够在有限的时间内访问结果。这里的重点是【有限的时间】和【返回结果】为了做到有限的时间需要用到缓存，需要用到负载，这个时候服务器增加的节点是为性能考虑；为了返回结果，需要考虑服务器主备，当主节点出现问题的时候需要备份的节点能最快的顶替上来，千万不能出现OutOfMemory或者其他500，404错误，否则这样的系统我们会认为是不可用的。</p>
-</li>
-<li><p>分区容错性</p>
-<p>  分布式系统在遇到任何网络分区故障的时候，仍然需要能够对外提供满足一致性和可用性的服务，除非是整个网络环境都发生了故障。</p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2022/05/18/分布式系统/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/18/分布式系统/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring-springboot自动配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/18/spring-springboot自动配置/">SpringBoot自动配置</a>
-    </h1>
-  
-
-        
-        <a href="/2022/05/18/spring-springboot自动配置/" class="archive-article-date">
-  	<time datetime="2022-05-18T14:42:49.205Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>SpringBoot自动配置</p>
-<h3 id="SpringBoot自动配置"><a href="#SpringBoot自动配置" class="headerlink" title="SpringBoot自动配置"></a>SpringBoot自动配置</h3><p>入口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudyApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(StudyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2022/05/18/spring-springboot自动配置/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/18/spring-springboot自动配置/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring-设计模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/18/spring-设计模式/">Spring设计模式</a>
-    </h1>
-  
-
-        
-        <a href="/2022/05/18/spring-设计模式/" class="archive-article-date">
-  	<time datetime="2022-05-18T14:42:49.205Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Spring设计模式</p>
-<h3 id="Spring设计模式"><a href="#Spring设计模式" class="headerlink" title="Spring设计模式"></a>Spring设计模式</h3><h5 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h5><p>BeanFactory。Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。</p>
-<p>实现原理：<br>bean容器的启动阶段：</p>
-<p>读取bean的xml配置文件,将bean元素分别转换成一个BeanDefinition对象。<br>然后通过BeanDefinitionRegistry将这些bean注册到beanFactory中，保存在它的一个ConcurrentHashMap中。<br>将BeanDefinition注册到了beanFactory之后，在这里Spring为我们提供了一个扩展的切口，允许我们通过实现接口BeanFactoryPostProcessor 在此处来插入我们定义的代码。</p>
-<p>简单工厂模式：</p>
-<ul>
-<li>创建抽象父类</li>
-<li>子类继承父类实现抽象方法</li>
-<li>工厂类根据条件产生不同的子类</li>
-</ul>
-<p>缺点：<br>违背了开闭原则,工厂类可能容易成为上帝类。</p>
-        
-          <a class="article-more-a" href="/2022/05/18/spring-设计模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/18/spring-设计模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring-IOC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/18/spring-IOC/">SpringIOC - IOC源码分析</a>
-    </h1>
-  
-
-        
-        <a href="/2022/05/18/spring-IOC/" class="archive-article-date">
-  	<time datetime="2022-05-18T14:42:49.205Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>IOC源码分析</p>
-<h3 id="IOC流程"><a href="#IOC流程" class="headerlink" title="IOC流程"></a>IOC流程</h3><h4 id="IOC源码入口"><a href="#IOC源码入口" class="headerlink" title="IOC源码入口"></a>IOC源码入口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// Spring启动入口</span></span><br><span class="line">AnnotationConfigApplicationContext app = <span class="keyword">new</span> AnnotationConfigApplicationContext(Cap12MainConfig.class);</span><br><span class="line">app.close();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Spring容器的refresh()【创建刷新】</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>&#123;</span><br><span class="line">       Object var1 = <span class="keyword">this</span>.startupShutdownMonitor;</span><br><span class="line">       <span class="keyword">synchronized</span>(<span class="keyword">this</span>.startupShutdownMonitor) &#123;</span><br><span class="line">           <span class="keyword">this</span>.prepareRefresh();</span><br><span class="line">           ConfigurableListableBeanFactory beanFactory = <span class="keyword">this</span>.obtainFreshBeanFactory();</span><br><span class="line">           <span class="keyword">this</span>.prepareBeanFactory(beanFactory);</span><br><span class="line"></span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               <span class="keyword">this</span>.postProcessBeanFactory(beanFactory);</span><br><span class="line">               <span class="keyword">this</span>.invokeBeanFactoryPostProcessors(beanFactory);</span><br><span class="line">               <span class="keyword">this</span>.registerBeanPostProcessors(beanFactory);</span><br><span class="line">               <span class="keyword">this</span>.initMessageSource();</span><br><span class="line">               <span class="keyword">this</span>.initApplicationEventMulticaster();</span><br><span class="line">               <span class="keyword">this</span>.onRefresh();</span><br><span class="line">               <span class="keyword">this</span>.registerListeners();</span><br><span class="line">               <span class="keyword">this</span>.finishBeanFactoryInitialization(beanFactory);</span><br><span class="line">               <span class="keyword">this</span>.finishRefresh();</span><br><span class="line">           &#125; <span class="keyword">catch</span> (BeansException var9) &#123;</span><br><span class="line">               <span class="keyword">if</span> (<span class="keyword">this</span>.logger.isWarnEnabled()) &#123;</span><br><span class="line">                   <span class="keyword">this</span>.logger.warn(<span class="string">"Exception encountered during context initialization - cancelling refresh attempt: "</span> + var9);</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">this</span>.destroyBeans();</span><br><span class="line">               <span class="keyword">this</span>.cancelRefresh(var9);</span><br><span class="line">               <span class="keyword">throw</span> var9;</span><br><span class="line">           &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">               <span class="keyword">this</span>.resetCommonCaches();</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2022/05/18/spring-IOC/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/18/spring-IOC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-zookeeper特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/18/zookeeper特性/">Zookeeper特性</a>
-    </h1>
-  
-
-        
-        <a href="/2022/05/18/zookeeper特性/" class="archive-article-date">
-  	<time datetime="2022-05-18T14:42:49.205Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h4><ul>
-<li>简单的数据结构：共享的树形结构，类似文件系统，存储于内存；</li>
-<li>可以构建集群：避免单点故障，3-5台机器就可以组成集群，超过半数正常工作就能对外提供服务；</li>
-<li>顺序访问：对于每个读请求，zk会分配一个全局唯一的递增编号，利用这个特性可以实现高级协调服务；</li>
-<li>高性能：基于内存操作，服务于非事务请求，适用于读操作为主的业务场景。3台zk集群能达到13w QPS；</li>
-</ul>
-<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><ul>
-<li>数据发布订阅</li>
-<li>负载均衡</li>
-<li>命名服务</li>
-<li>Master选举</li>
-<li>集群管理</li>
-<li>配置管理</li>
-<li>分布式队列</li>
-<li>分布式锁</li>
-</ul>
-        
-          <a class="article-more-a" href="/2022/05/18/zookeeper特性/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/18/zookeeper特性/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/02/02/分布式事务解决方案/">展开全文 >></a>
         </p>
       
 
@@ -1018,7 +1048,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1030,7 +1060,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 Caichuang
+    		&copy; 2023 Caichuang
     	</div>
       	<div class="footer-right">
 
@@ -1109,6 +1139,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JDK源码解析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
@@ -1117,11 +1151,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+                <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1137,10 +1171,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kafka</a>
               </li>
              
@@ -1149,7 +1179,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MongoDb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1161,11 +1203,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color5">zookeeper</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">zookeeper</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1181,7 +1223,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1189,7 +1231,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">手写RPC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1201,15 +1251,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">适配器模式</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
