@@ -150,6 +150,53 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-面试题-多线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/02/03/面试题-多线程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-总结-MQ" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1072,7 +1119,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>创建线程的方式，继承Thread类，实现Runable接口，但是Java是单继承多实现，所有推荐使用Runable的方式。</p>
-<p>线程的状态： </p>
+<p>线程的状态</p>
 <ul>
 <li>新建状态，new 一个线程的时候就是新建状态。</li>
 <li>就绪状态，调用start方法之后，等待CPU调度。</li>
@@ -1080,9 +1127,11 @@
 <li>阻塞状态，执行wait/sleep、等待锁 等方法。</li>
 <li>死亡 run执行完成之后或者执行了stop方法。调用stop方法不会释放锁，可能会造成死锁。</li>
 </ul>
+<hr>
 <p>seelp和wait的区别  </p>
 <p>seelp是Thrad类中的一个方法，执行时不会释放锁，到了指定的时候继续执行，wait是Object中的方法，会释放锁，进入等待，需要notify/notigyall唤醒后才能继续执行。</p>
-<p>为什么时候线程池</p>
+<hr>
+<p>为什么使用线程池</p>
 <p>降低频繁创建线程的消耗，方便管理线程。</p>
 <p>线程池的关键参数：</p>
 <ul>
@@ -1100,19 +1149,23 @@
 <li>达到最大线程数之后的任务则按照拒绝策略执行</li>
 <li>任务执行完成后如果当前的线程数量大于核心线程数，则超过存活时间则会销毁掉多余的线程</li>
 </ol>
+<hr>
 <p>为什么不推荐Executors创建线程池</p>
 <ul>
 <li>fix和single的使用的是无界队列</li>
 <li>scheduleh和delay最大线程数是intmax</li>
 </ul>
 <p>两种情况都会导致创建大量的线程，可能会OOM</p>
-<p>线程池合理配置：</p>
+<hr>
+<p>线程池合理配置</p>
 <ol>
 <li>CPU密集型，主要是计算，压力在CPU,分配小的线程数，NCPU+1</li>
-<li>IO密集h型，压力不在CPU,可多分配线程，2 * NCPU</li>
+<li>IO密集型，压力不在CPU,可多分配线程，2 * NCPU</li>
 </ol>
+<hr>
 <p>如何停止一个线程的方法</p>
 <p>使用interrupt方法打上中断的标志，然后自己决定是否需要停止线程。</p>
+<hr>
 <p>如何保证线程安全</p>
 <ul>
 <li>栈封闭</li>
@@ -1164,95 +1217,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/02/02/总结-多线程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-通讯协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/通讯协议/">深入理解通讯协议</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/通讯协议/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.223Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>通讯协议</p>
-<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>七层模型</p>
-<ul>
-<li>OSI模型<ul>
-<li>应用层  为应用程序提供服务</li>
-<li>表示层  数据格式转换</li>
-<li>会话层  建立 管理 维护会话</li>
-<li>传输层  最重要 端对端的连接 数据可靠性传输</li>
-<li>网络层  ip 路由</li>
-<li>链路层  交换机</li>
-<li>物理层  物理介质 网线等等</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2023/02/02/通讯协议/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">通讯协议</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/通讯协议/">展开全文 >></a>
         </p>
       
 
@@ -1387,19 +1351,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1423,11 +1387,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1443,10 +1407,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">分布式事务</a>
               </li>
              
@@ -1455,7 +1415,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1467,7 +1427,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">分布式锁</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1495,15 +1455,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">通讯协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>
