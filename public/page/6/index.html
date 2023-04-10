@@ -150,40 +150,38 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-rabbitmq-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-zookeeper应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/rabbitmq-01/">RabbitMq - 入门</a>
+      <a class="article-title" href="/2023/04/10/zookeeper应用/">Zookeeper应用(服务注册与发现/分布式锁/Master选举/配置中心)</a>
     </h1>
   
 
         
-        <a href="/2023/02/02/rabbitmq-01/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.185Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+        <a href="/2023/04/10/zookeeper应用/" class="archive-article-date">
+  	<time datetime="2023-04-10T12:31:55.130Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>AMQP概论</p>
-<h2 id="交换器、队列、绑定、路由键"><a href="#交换器、队列、绑定、路由键" class="headerlink" title="交换器、队列、绑定、路由键"></a>交换器、队列、绑定、路由键</h2><ul>
-<li>rabbitMq流程</li>
-</ul>
-<p><img src="http://image.tupelo.top/rabbitmq%E6%B5%81%E7%A8%8B.png" alt="rabbitMq流程"></p>
-<pre><code>交换机类型:
-fanout 交换机绑定队列,根据交换机发送消息到指定队列
-direct 交换机通过路由键绑定队列,根据交换机和路由键发送消息
-topic  交换机通过路由键绑定队列,根据交换机和路由键发送消息(路由键可进行匹配 #匹配一次或者多次 *匹配一次)
-</code></pre><blockquote>
-<p>需要多个队列接受同样的消息 多个队列绑定同一个路由键 一条消息只能被一个消费者消费</p>
+        <h4 id="服务注册与发现"><a href="#服务注册与发现" class="headerlink" title="服务注册与发现"></a>服务注册与发现</h4><p>注册：</p>
+<blockquote>
+<p>服务启动时 在某一个节点下新建一个临时顺序节点将ip+端口保存</p>
 </blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">register</span><span class="params">(String address,<span class="keyword">int</span> port)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ZooKeeper zooKeeper = <span class="keyword">new</span> ZooKeeper(<span class="string">"localhost:2181"</span>,<span class="number">5000</span>,(watchedEvent)-&gt;&#123;&#125;);</span><br><span class="line">            logger.warn(<span class="string">"连接zk"</span>);</span><br><span class="line">            Stat exists = zooKeeper.exists(BASE_SERVICES + SERVICE_NAME, <span class="keyword">false</span>);</span><br><span class="line">            logger.warn(<span class="string">"判断是否存在"</span> + exists);</span><br><span class="line">            <span class="keyword">if</span>(exists==<span class="keyword">null</span>) &#123;</span><br><span class="line">                logger.warn(<span class="string">"创建路径"</span> );</span><br><span class="line">                zooKeeper.create(BASE_SERVICES,<span class="string">""</span>.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);</span><br><span class="line">                zooKeeper.create(BASE_SERVICES + SERVICE_NAME,<span class="string">""</span>.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            String server_path = address+<span class="string">":"</span>+port;</span><br><span class="line">            logger.warn(<span class="string">"server_path:"</span> + server_path);</span><br><span class="line">            zooKeeper.create(BASE_SERVICES + SERVICE_NAME+<span class="string">"/child"</span>,server_path.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.EPHEMERAL_SEQUENTIAL);</span><br><span class="line">            logger.warn(<span class="string">"保存成功"</span> );</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>发现：</p>
+<blockquote>
+<p>监听某一个节点，当子节点发生变化时更新ip列表，请求时从列表中获取ip+端口</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateServiceList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">try</span>&#123;</span><br><span class="line"></span><br><span class="line">           logger.warn(<span class="string">"ip 改变 开始更新ip地址"</span>);</span><br><span class="line">           List&lt;String&gt; children = zooKeeper.getChildren(BASE_SERVICES  + SERVICE_NAME, <span class="keyword">true</span>);</span><br><span class="line">           List&lt;String&gt; newServerList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">           <span class="keyword">for</span>(String subNode:children) &#123;</span><br><span class="line">               <span class="keyword">byte</span>[] data = zooKeeper.getData(BASE_SERVICES  + SERVICE_NAME + <span class="string">"/"</span> + subNode, <span class="keyword">false</span>, <span class="keyword">null</span>);</span><br><span class="line">               String host = <span class="keyword">new</span> String(data, <span class="string">"utf-8"</span>);</span><br><span class="line">               System.out.println(<span class="string">"host:"</span>+host);</span><br><span class="line">               newServerList.add(host);</span><br><span class="line">           &#125;</span><br><span class="line">           LoadBalance.SERVICE_LIST = newServerList;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2023/02/02/rabbitmq-01/#more">more >></a>
+          <a class="article-more-a" href="/2023/04/10/zookeeper应用/#more">more >></a>
         
       
 
@@ -197,7 +195,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMq</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
         		</li>
       		
 		</ul>
@@ -207,7 +205,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/rabbitmq-01/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/04/10/zookeeper应用/">展开全文 >></a>
         </p>
       
 
@@ -237,194 +235,44 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-maven-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-zookeeper特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/maven-01/">Maven基础 - 打包调用异常</a>
+      <a class="article-title" href="/2023/04/10/zookeeper特性/">Zookeeper特性</a>
     </h1>
   
 
         
-        <a href="/2023/02/02/maven-01/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.184Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+        <a href="/2023/04/10/zookeeper特性/" class="archive-article-date">
+  	<time datetime="2023-04-10T12:31:55.130Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Maven基础学习配置</p>
-<h2 id="Maven-打包遇见的问题"><a href="#Maven-打包遇见的问题" class="headerlink" title="Maven 打包遇见的问题"></a>Maven 打包遇见的问题</h2><p>一个项目依赖以另一个项目时引入其依赖,想要调用其依赖的jar包中的类，则打包方式需使用maven的打包方式，不能使用spring-boot的打包方式 可以使用@Component将jar包中的类扫描注入到当前项目的IOC容器中</p>
-        
-          <a class="article-more-a" href="/2023/02/02/maven-01/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/maven-01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jvm-执行子系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/jvm-执行子系统/">JVM - 执行子系统</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/jvm-执行子系统/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.184Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>执行子系统</p>
-<h4 id="Class类文件结构"><a href="#Class类文件结构" class="headerlink" title="Class类文件结构"></a>Class类文件结构</h4><h4 id="字节码指令"><a href="#字节码指令" class="headerlink" title="字节码指令"></a>字节码指令</h4><h4 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h4><h4 id="方法调用详解"><a href="#方法调用详解" class="headerlink" title="方法调用详解"></a>方法调用详解</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/jvm-执行子系统/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jvm-垃圾回收与内存分配策略" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/jvm-垃圾回收与内存分配策略/">JVM - 垃圾回收与内存分配策略</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/jvm-垃圾回收与内存分配策略/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.184Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>垃圾回收与内存分配策略</p>
-<h4 id="判断对象的存活"><a href="#判断对象的存活" class="headerlink" title="判断对象的存活"></a>判断对象的存活</h4><ul>
-<li><p>引用计数法</p>
-<p>  当一个对象有引用的时候计数+1,引用结束时计数-1,当计数大于0时则认为对象存活。<br>  优点：快，方便，实现简单，缺点：对象相互引用时，很难判断对象是否改回收。</p>
-</li>
-<li><p>可达性分析</p>
-<p>  通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，<br>  搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。<br>  作为GC Roots的对象包括下面几种：</p>
-<ol>
-<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。</li>
-<li>方法区中类静态属性引用的对象。</li>
-<li>方法区中常量引用的对象。</li>
-<li>本地方法栈中JNI（即一般说的Native方法）引用的对象。</li>
-</ol>
-</li>
+        <h4 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h4><ul>
+<li>简单的数据结构：共享的树形结构，类似文件系统，存储于内存；</li>
+<li>可以构建集群：避免单点故障，3-5台机器就可以组成集群，超过半数正常工作就能对外提供服务；</li>
+<li>顺序访问：对于每个读请求，zk会分配一个全局唯一的递增编号，利用这个特性可以实现高级协调服务；</li>
+<li>高性能：基于内存操作，服务于非事务请求，适用于读操作为主的业务场景。3台zk集群能达到13w QPS；</li>
+</ul>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><ul>
+<li>数据发布订阅</li>
+<li>负载均衡</li>
+<li>命名服务</li>
+<li>Master选举</li>
+<li>集群管理</li>
+<li>配置管理</li>
+<li>分布式队列</li>
+<li>分布式锁</li>
 </ul>
         
-          <a class="article-more-a" href="/2023/02/02/jvm-垃圾回收与内存分配策略/#more">more >></a>
+          <a class="article-more-a" href="/2023/04/10/zookeeper特性/#more">more >></a>
         
       
 
@@ -438,7 +286,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
         		</li>
       		
 		</ul>
@@ -448,7 +296,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/jvm-垃圾回收与内存分配策略/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/04/10/zookeeper特性/">展开全文 >></a>
         </p>
       
 
@@ -478,39 +326,30 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-kafka-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-zookeeper集成java" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/kafka-01/">Kafka学习 - 安装</a>
+      <a class="article-title" href="/2023/04/10/zookeeper集成java/">Zookeeper集成java</a>
     </h1>
   
 
         
-        <a href="/2023/02/02/kafka-01/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.184Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+        <a href="/2023/04/10/zookeeper集成java/" class="archive-article-date">
+  	<time datetime="2023-04-10T12:31:55.130Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>kafka基础学习-在centos7服务器上搭建kafka</p>
-<h3 id="安装zookeeper"><a href="#安装zookeeper" class="headerlink" title="安装zookeeper"></a>安装zookeeper</h3><ul>
-<li><p>下载zookeeper安装包 <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/</a></p>
-</li>
-<li><p>解压到指定目录 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf zookeeper-3.4.10.tar.gz -C /usr/<span class="built_in">local</span>/zookeeper</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/zookeeper/zookeeper-3.4.10/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+        <h4 id="源生API"><a href="#源生API" class="headerlink" title="源生API"></a>源生API</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Maven配置</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.4.6&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SESSION_TIMEOUT = <span class="number">10000</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONNECTION_STRING = <span class="string">"127.0.0.1:2181"</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ZK_PATH = <span class="string">"/leader"</span>;</span><br><span class="line"><span class="keyword">private</span> ZooKeeper zk = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> CountDownLatch connectedSemaphore = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建ZK连接</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> connectString  ZK服务器地址列表</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> sessionTimeout Session超时时间</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createConnection</span><span class="params">(String connectString, <span class="keyword">int</span> sessionTimeout)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.releaseConnection();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// this代表有监听</span></span><br><span class="line">        zk = <span class="keyword">new</span> ZooKeeper(connectString, sessionTimeout, <span class="keyword">this</span>);</span><br><span class="line">        connectedSemaphore.await();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">"连接创建失败，发生 InterruptedException"</span>);</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        System.out.println(<span class="string">"连接创建失败，发生 IOException"</span>);</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2023/02/02/kafka-01/#more">more >></a>
+          <a class="article-more-a" href="/2023/04/10/zookeeper集成java/#more">more >></a>
         
       
 
@@ -524,11 +363,88 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kafka</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">zookeeper</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/04/10/zookeeper集成java/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-IOC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/10/spring-IOC/">SpringIOC - IOC源码分析</a>
+    </h1>
+  
+
+        
+        <a href="/2023/04/10/spring-IOC/" class="archive-article-date">
+  	<time datetime="2023-04-10T12:31:55.129Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>IOC源码分析</p>
+<h3 id="IOC流程"><a href="#IOC流程" class="headerlink" title="IOC流程"></a>IOC流程</h3><h4 id="IOC源码入口"><a href="#IOC源码入口" class="headerlink" title="IOC源码入口"></a>IOC源码入口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// Spring启动入口</span></span><br><span class="line">AnnotationConfigApplicationContext app = <span class="keyword">new</span> AnnotationConfigApplicationContext(Cap12MainConfig.class);</span><br><span class="line">app.close();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Spring容器的refresh()【创建刷新】</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>&#123;</span><br><span class="line">       Object var1 = <span class="keyword">this</span>.startupShutdownMonitor;</span><br><span class="line">       <span class="keyword">synchronized</span>(<span class="keyword">this</span>.startupShutdownMonitor) &#123;</span><br><span class="line">           <span class="keyword">this</span>.prepareRefresh();</span><br><span class="line">           ConfigurableListableBeanFactory beanFactory = <span class="keyword">this</span>.obtainFreshBeanFactory();</span><br><span class="line">           <span class="keyword">this</span>.prepareBeanFactory(beanFactory);</span><br><span class="line"></span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               <span class="keyword">this</span>.postProcessBeanFactory(beanFactory);</span><br><span class="line">               <span class="keyword">this</span>.invokeBeanFactoryPostProcessors(beanFactory);</span><br><span class="line">               <span class="keyword">this</span>.registerBeanPostProcessors(beanFactory);</span><br><span class="line">               <span class="keyword">this</span>.initMessageSource();</span><br><span class="line">               <span class="keyword">this</span>.initApplicationEventMulticaster();</span><br><span class="line">               <span class="keyword">this</span>.onRefresh();</span><br><span class="line">               <span class="keyword">this</span>.registerListeners();</span><br><span class="line">               <span class="keyword">this</span>.finishBeanFactoryInitialization(beanFactory);</span><br><span class="line">               <span class="keyword">this</span>.finishRefresh();</span><br><span class="line">           &#125; <span class="keyword">catch</span> (BeansException var9) &#123;</span><br><span class="line">               <span class="keyword">if</span> (<span class="keyword">this</span>.logger.isWarnEnabled()) &#123;</span><br><span class="line">                   <span class="keyword">this</span>.logger.warn(<span class="string">"Exception encountered during context initialization - cancelling refresh attempt: "</span> + var9);</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">this</span>.destroyBeans();</span><br><span class="line">               <span class="keyword">this</span>.cancelRefresh(var9);</span><br><span class="line">               <span class="keyword">throw</span> var9;</span><br><span class="line">           &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">               <span class="keyword">this</span>.resetCommonCaches();</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2023/04/10/spring-IOC/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Zookeeper</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -538,7 +454,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/kafka-01/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/04/10/spring-IOC/">展开全文 >></a>
         </p>
       
 
@@ -568,31 +484,31 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
 
   
-    <article id="post-jvm-java内存区域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-spring-springboot自动配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/jvm-java内存区域/">JVM - java内存区域</a>
+      <a class="article-title" href="/2023/04/10/spring-springboot自动配置/">SpringBoot自动配置</a>
     </h1>
   
 
         
-        <a href="/2023/02/02/jvm-java内存区域/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.182Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+        <a href="/2023/04/10/spring-springboot自动配置/" class="archive-article-date">
+  	<time datetime="2023-04-10T12:31:55.129Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>java内存区域</p>
-<h4 id="java内存区域"><a href="#java内存区域" class="headerlink" title="java内存区域"></a>java内存区域</h4><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域： </p>
-<p><img src="http://image.tupelo.top/jvm%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.png?imageMogr2/auto-orient/thumbnail/700x700" alt="java内存区域"></p>
+        <p>SpringBoot自动配置</p>
+<h3 id="SpringBoot自动配置"><a href="#SpringBoot自动配置" class="headerlink" title="SpringBoot自动配置"></a>SpringBoot自动配置</h3><p>入口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudyApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(StudyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2023/02/02/jvm-java内存区域/#more">more >></a>
+          <a class="article-more-a" href="/2023/04/10/spring-springboot自动配置/#more">more >></a>
         
       
 
@@ -606,7 +522,15 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
         		</li>
       		
 		</ul>
@@ -616,355 +540,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/jvm-java内存区域/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-git使用笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/git使用笔记/">Git使用笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/git使用笔记/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.182Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Git使用笔记</p>
-<h2 id="Git使用笔记"><a href="#Git使用笔记" class="headerlink" title="Git使用笔记"></a>Git使用笔记</h2><h4 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h4><p>下载地址 ： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查看当前git用户名： ```git config user.name```      </span><br><span class="line">查看当前git邮箱： ```git config user.email```      </span><br><span class="line">切换git用户名: ```git config --global user.name &quot;user name&quot;```       </span><br><span class="line">切换git邮箱： ```git config --global user.email  &quot;e-mail&quot;```     </span><br><span class="line">生成SSH Keys: ```ssh-keygen -t rsa -C &quot;e-mail&quot;</span><br></pre></td></tr></table></figure></p>
-<h4 id="Git指令模式"><a href="#Git指令模式" class="headerlink" title="Git指令模式"></a>Git指令模式</h4><h5 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h5><ul>
-<li><code>git init</code> 初始化一个git项目</li>
-<li><code>git commit -am &#39;new project&#39;</code> 加入缓存区并提交</li>
-<li><code>git chceckout [-b] king</code>  切换(新增分支)</li>
-</ul>
-<h5 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h5><ul>
-<li><code>git remote add origin https://github.com/xx/xxx.git</code>  本地新建一个远程连接</li>
-<li><code>git remote [-v]</code>  查看远程连接(详情)</li>
-<li><code>git branch --set-upstream-to=origin/xxx xxx</code>  本地分支与远程分支关联</li>
-<li><code>git push --set-upstream origin master</code>  上传本地项目至GitHub</li>
-<li><code>git fetch</code>  提取远程仓库</li>
-</ul>
-<h5 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h5><ul>
-<li><code>git merge xxx</code> 将指定版本与当前版本合并</li>
-</ul>
-<blockquote>
-<p>有冲突的话相关的文件会显示,需要手动解决冲突后再次push</p>
-</blockquote>
-<h5 id="日志标签"><a href="#日志标签" class="headerlink" title="日志标签"></a>日志标签</h5><ul>
-<li><code>git log [--oneline] [--graph]</code> 显示提交日志(简化成一行)(显示分支)</li>
-<li><code>git tag [-a][-d] xxx -m &#39;xxxx&#39;</code> 为某一个分支(创建)(删除)一个tag</li>
-<li><code>git show xxx</code> 显示某一个tag的附属信息</li>
-<li><code>git push origin -tags</code> 本地标签提交到远程仓库</li>
-</ul>
-<h5 id="代码回滚-两种方式：回退（reset）、反做（revert）"><a href="#代码回滚-两种方式：回退（reset）、反做（revert）" class="headerlink" title="代码回滚 两种方式：回退（reset）、反做（revert）"></a>代码回滚 两种方式：回退（reset）、反做（revert）</h5><ul>
-<li><code>git reset</code> 的作用是修改HEAD的位置，即将HEAD指向的位置改变为之前存在的某个版本。（比如需要回到到V0.3）使用 <code>git reset --hard 目标版本号</code> 命令将版本回退</li>
-<li><code>git revert</code> 的作用通过反做创建一个新的版本，这个版本的内容与我们要回退到的目标版本一样，但是HEAD指针是指向这个新生成的版本，而不是目标版本。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/git使用笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/hello-world/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.182Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2023/02/02/hello-world/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-dubbo-04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/dubbo-04/">Dubbo - Spi机制</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/dubbo-04/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.182Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Dubbo Spi机制</p>
-<h2 id="Dubbo-Spi机制"><a href="#Dubbo-Spi机制" class="headerlink" title="Dubbo Spi机制"></a>Dubbo Spi机制</h2><p>本质是解决同一个接口，有多种实现时，使用者如何能够方便选择实现的问题</p>
-        
-          <a class="article-more-a" href="/2023/02/02/dubbo-04/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/dubbo-04/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-dubbo-03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/dubbo-03/">Dubbo - rpc调用过程</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/dubbo-03/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:12.182Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Dubbo rpc调用过程</p>
-<h2 id="Dubbo-rpc调用过程"><a href="#Dubbo-rpc调用过程" class="headerlink" title="Dubbo rpc调用过程"></a>Dubbo rpc调用过程</h2><ul>
-<li>Dubbo的RPC服务暴露和引入</li>
-</ul>
-<p><img src="http://image.tupelo.top/rpc%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2.png" alt="服务暴露和引入"></p>
-        
-          <a class="article-more-a" href="/2023/02/02/dubbo-03/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/dubbo-03/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/04/10/spring-springboot自动配置/">展开全文 >></a>
         </p>
       
 
@@ -996,7 +572,7 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
     </nav>
   
 
@@ -1009,6 +585,8 @@ topic  交换机通过路由键绑定队列,根据交换机和路由键发送消
     <div id="footer-info">
     	<div class="footer-left">
     		&copy; 2023 Caichuang
+    		<a href="https://beian.miit.gov.cn/" target="_blank">备案号:</a>
+    		<a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备18127660号</a>
     	</div>
       	<div class="footer-right">
 
@@ -1087,10 +665,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JDK源码解析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
@@ -1099,11 +673,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+                <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1131,14 +705,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
@@ -1148,6 +714,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1163,15 +733,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1179,11 +741,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">手写RPC</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1195,15 +757,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">适配器模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color1">适配器模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1212,10 +770,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>

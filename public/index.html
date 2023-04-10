@@ -150,12 +150,31 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-面试题-多线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/10/适配器模式/">设计模式-适配器模式</a>
+    </h1>
+  
+
+        
+        <a href="/2023/04/10/适配器模式/" class="archive-article-date">
+  	<time datetime="2023-04-10T12:31:55.136Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-10</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><blockquote>
+<p>  将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以一起工作。</p>
+</blockquote>
+<p><img src="http://image.tupelo.top/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F.png" alt="适配器模式"></p>
+
       
 
       
@@ -163,11 +182,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/03/面试题-多线程/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/04/10/适配器模式/">展开全文 >></a>
         </p>
       
 
@@ -197,47 +227,43 @@
 
 
   
-    <article id="post-总结-MQ" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-通讯协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/总结-MQ/">总结-MQ</a>
+      <a class="article-title" href="/2023/04/10/通讯协议/">深入理解通讯协议</a>
     </h1>
   
 
         
-        <a href="/2023/02/02/总结-MQ/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:52.966Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+        <a href="/2023/04/10/通讯协议/" class="archive-article-date">
+  	<time datetime="2023-04-10T12:31:55.136Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h2><p>分为生产者、broker、消费者<br>topic: 虚拟的<br>分区: 分区，实际真正存放消息的地方，多个分区中有一个主分区，主分区负责消息读取，副本负责消息同步<br>副本: 一个分区有多个副本<br>AR: 所有副本集合<br>ISR: 同步进度相差不大分副本,参与leader选举<br>OSR: AR - ISR</p>
-<p>kafka消费者偏移量的存储</p>
-<p>消费者的offset会更新到一个kafka自带的topic consumer_offsets 下面   </p>
-<p>kafka的消息丢失</p>
-<p>kafka的高可用controller选举</p>
-<p>controller实际是在zk中注册了一个临时节点，当controller挂了之后，kafka中集群监听器就会通知其它的broker到zk中创建controler的临时节点，成功了就是新的controller。</p>
-<p>kafka文件存储</p>
-<p>每个分区都会在所在broker上创建文件夹，一个分区文件又分为多段，每段两个文件，一个日志文件，一个索引文件，日志文件末尾以偏移量命名，查找消息先根据文件名称定位段，然后根据索引文件定位所在位置。</p>
-<p>kafka文件删除</p>
-<p>时间或者大小</p>
-<p>kafka零拷贝</p>
-<p>kafka分区一致性</p>
-<p>kafka rebalance</p>
-<p>kafka数据可靠性</p>
-<p>配置响应ACKS,0-无需等待落盘，1-需要等待leader落盘，-1/ALL-所有的节点都落盘</p>
-<p>不同的消息语义</p>
-<p>至少一次: ACKS = =1<br>至多一次: ACKS = 0<br>精准一次: </p>
-<h2 id="RocketMq"><a href="#RocketMq" class="headerlink" title="RocketMq"></a>RocketMq</h2><p>严格的顺序性 （kafka非严格）<br>拉模型<br>堆积能力强<br>满足至少消费一次的语义</p>
-<p>支持事务消息 保证最终一致性<br>18个等级的小时延时<br>可以指定次数和时间的重试<br>brocker</p>
-<h2 id="RabbitMq"><a href="#RabbitMq" class="headerlink" title="RabbitMq"></a>RabbitMq</h2><p>推模型</p>
-
+        <p>通讯协议</p>
+<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>七层模型</p>
+<ul>
+<li>OSI模型<ul>
+<li>应用层  为应用程序提供服务</li>
+<li>表示层  数据格式转换</li>
+<li>会话层  建立 管理 维护会话</li>
+<li>传输层  最重要 端对端的连接 数据可靠性传输</li>
+<li>网络层  ip 路由</li>
+<li>链路层  交换机</li>
+<li>物理层  物理介质 网线等等</li>
+</ul>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2023/04/10/通讯协议/#more">more >></a>
+        
       
 
       
@@ -250,7 +276,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">通讯协议</a>
         		</li>
       		
 		</ul>
@@ -260,7 +286,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/总结-MQ/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/04/10/通讯协议/">展开全文 >></a>
         </p>
       
 
@@ -290,30 +316,45 @@
 
 
   
-    <article id="post-手写RPC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-设计模式-深拷贝浅拷贝及原型模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/手写RPC/">手写RPC</a>
+      <a class="article-title" href="/2023/04/10/设计模式-深拷贝浅拷贝及原型模式/">深拷贝浅拷贝及原型模式</a>
     </h1>
   
 
         
-        <a href="/2023/02/02/手写RPC/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:52.960Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+        <a href="/2023/04/10/设计模式-深拷贝浅拷贝及原型模式/" class="archive-article-date">
+  	<time datetime="2023-04-10T12:31:55.135Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="手写RPC"><a href="#手写RPC" class="headerlink" title="手写RPC"></a>手写RPC</h4><h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><ol>
-<li>创建一个rpc组件，由生成者和消费者两者引入，实现网络通信，互相调用。</li>
-<li>组件需要注册到注册中心，此处注册到zk中。</li>
-</ol>
+        <p>深拷贝浅拷贝及原型模式</p>
+<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p>浅拷贝是按位拷贝对象，它会创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值；如果属性是内存地址（引用类型），拷贝的就是内存地址 ，因此如果其中一个对象改变了这个地址，就会影响到另一个对象。即默认拷贝构造函数只是对对象进行浅拷贝复制(逐个成员依次拷贝)，即只复制对象空间而不复制资源。</p>
+<p>如 ： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Integer age;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> Child child;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (User) <span class="keyword">super</span>.clone();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">	User user = <span class="keyword">new</span> User();</span><br><span class="line">	user.setAge(<span class="number">18</span>);</span><br><span class="line">	user.setName(<span class="string">"张三"</span>);</span><br><span class="line"></span><br><span class="line">	Child child = <span class="keyword">new</span> Child();</span><br><span class="line">	child.setAge(<span class="number">3</span>);</span><br><span class="line">	child.setName(<span class="string">"张三的儿子"</span>);</span><br><span class="line">	user.setChild(child);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 浅拷贝</span></span><br><span class="line">	User clone = user.clone();</span><br><span class="line">	System.out.println(JSON.toJSONString(clone));</span><br><span class="line">	<span class="comment">// 修改原来的对象 复制的对象也会被修改</span></span><br><span class="line">	user.setAge(<span class="number">19</span>);</span><br><span class="line">	child.setAge(<span class="number">4</span>);</span><br><span class="line">	user.setChild(child);</span><br><span class="line">	System.out.println(JSON.toJSONString(clone));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以发现对于拷贝的对象，修改拷贝之前的属性，如属性是基本类型，则无影响，如属性是对象，则会影像拷贝之后的对象。所以浅拷贝会带来数据安全上的问题。</p>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>深拷贝，在拷贝引用类型成员变量时，为引用类型的数据成员另辟了一个独立的内存空间，实现真正内容上的拷贝。</p>
+<ul>
+<li>对于基本数据类型的成员对象，因为基础数据类型是值传递的，所以是直接将属性值赋值给新的对象。基础类型的拷贝，其中一个对象修改该值，不会影响另外一个（和浅拷贝一样）。</li>
+<li>对于引用类型，比如数组或者类对象，深拷贝会新建一个对象空间，然后拷贝里面的内容，所以它们指向了不同的内存空间。改变其中一个，不会对另外一个也产生影响。</li>
+<li>对于有多层对象的，每个对象都需要实现 Cloneable 并重写 clone() 方法，进而实现了对象的串行层层拷贝。</li>
+<li>深拷贝相比于浅拷贝速度较慢并且花销较大。</li>
+</ul>
+<p>对上面的代码实现深拷贝</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Integer age;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Child <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (Child) <span class="keyword">super</span>.clone();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Integer age;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Child child;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">		User user = (User) <span class="keyword">super</span>.clone();</span><br><span class="line">		user.child = child.clone();</span><br><span class="line">		<span class="keyword">return</span> user;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>问：Cloneable接口是一个空接口，为什么需要实现Cloneable接口？</p>
+<p>答：Cloneable是标示接口与java.io.Serializable类似，用于告知JVM该对象实现clone。并且super.clone()可以返回一个复制。如果实现Cloneable接口直接super.clone()，会抛出CloneNotSupportedException。</p>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象，从一个对象创建另外一个可定制的对象，而且不需要知道任何创建的细节。</p>
+<p>基本代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcretePrototype</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> ConcretePrototype <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Object object = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			object = <span class="keyword">super</span>.clone();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (CloneNotSupportedException exception) &#123;</span><br><span class="line">			log.error(<span class="string">"Not support cloneable"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> (ConcretePrototype )object;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -327,7 +368,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">手写RPC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java基础</a>
         		</li>
       		
 		</ul>
@@ -337,7 +382,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/手写RPC/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/04/10/设计模式-深拷贝浅拷贝及原型模式/">展开全文 >></a>
         </p>
       
 
@@ -367,79 +412,61 @@
 
 
   
-    <article id="post-面试题-分布式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-设计模式原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/面试题-分布式/">面试-分布式</a>
+      <a class="article-title" href="/2023/04/10/设计模式原则/">设计模式-六大基本原则</a>
     </h1>
   
 
         
-        <a href="/2023/02/02/面试题-分布式/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:52.951Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+        <a href="/2023/04/10/设计模式原则/" class="archive-article-date">
+  	<time datetime="2023-04-10T12:31:55.135Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h3><ul>
-<li>一致性: 数据要保持完整</li>
-<li>可用性: 服务可用</li>
-<li>分区容错性： 在部分网络出现故障的时候仍可以提供一致性和可用性的服务</li>
-</ul>
-<h3 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h3><p>BASE理论是为了对cap的一种权衡</p>
+        <h3 id="六大基本原则"><a href="#六大基本原则" class="headerlink" title="六大基本原则"></a>六大基本原则</h3><blockquote>
+<p>  重要的是思想 ！！！</p>
+</blockquote>
 <ul>
-<li>基本可用： 不要求全部可用，只保证基本的功能可用</li>
-<li>软状态： 允许存在中间状态</li>
-<li>最终一致性： 可以接收数据短时间的不一致，只需要保证数据的最终一致</li>
+<li><p>开闭原则</p>
+<blockquote>
+<p>对扩展开发、对修改关闭</p>
+</blockquote>
+</li>
+<li><p>单一职责原则</p>
+<blockquote>
+<p>一个类只负责一个职责</p>
+</blockquote>
+</li>
+<li><p>依赖倒置原则</p>
+<blockquote>
+<p>面向接口编程</p>
+</blockquote>
+</li>
+<li><p>里氏替换原则</p>
+<blockquote>
+<p>子类可以扩展父类的功能、但不要改变父类原有的功能</p>
+</blockquote>
+</li>
+<li><p>接口隔离原则</p>
+<blockquote>
+<p>设计接口功能尽量细粒度、最小功能单元</p>
+</blockquote>
+</li>
+<li><p>迪米特法则</p>
+<blockquote>
+<p>降低耦合、局部变量中不要引入新的类</p>
+</blockquote>
+</li>
 </ul>
-<h3 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h3><ul>
-<li>数据库 使用数据库 乐观锁/悲观锁控制 需要注意效率问题</li>
-<li>redis 自己实现比较复杂，可用线程的框架redission</li>
-<li>zookeeper </li>
-</ul>
-<h3 id="生成唯一主键ID"><a href="#生成唯一主键ID" class="headerlink" title="生成唯一主键ID"></a>生成唯一主键ID</h3><ul>
-<li>数据库自增ID</li>
-<li>UUID</li>
-<li>雪花算法</li>
-</ul>
-<h3 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h3><ul>
-<li>2PC </li>
-</ul>
-<p>引入事务协调者，第一阶段执行事务记录日志，第二阶段协调者发起commit或者rollback<br>可能存在的问题：</p>
-<ol>
-<li>所有的节点都会阻塞。</li>
-<li>如果第二阶段出现问题，数据可能会存在不一致的情况。</li>
-<li>协调者宕机的情况可能会导致阻塞。</li>
-</ol>
-<ul>
-<li>3PC</li>
-</ul>
-<p>在2PC的基础上添加了超时时间，并且将第一阶段分为了两个部分，询问和执行<br>可能存在的问题：</p>
-<ol>
-<li>第三阶段出现问题时还是会导致数据不一致</li>
-</ol>
-<ul>
-<li>TCC</li>
-</ul>
-<p>TCC和2PC类似，try阶段预留锁定资源，confirm/cancel阶段提交或者回滚事务。   </p>
-<p>优点：</p>
-<ol>
-<li>具体业务实现锁定的资源，锁定力度小，但是同时也使得实现比较复杂。</li>
-<li>第二阶段失败会重试，实现最终一致性。</li>
-</ol>
-<p>可能存在的问题：</p>
-<ol>
-<li>加入了重试的机制，需要保证接口的幂等性。</li>
-<li>空回滚，第一阶段还没有执行的时候就调用了第二阶段的cancel，需要记录第一阶段的状态。</li>
-<li>先执行了第二阶段，后执行第一阶段导致锁住了资源无法释放，需要记录整个事务的状态。</li>
-</ol>
-<h3 id="缓存一致性"><a href="#缓存一致性" class="headerlink" title="缓存一致性"></a>缓存一致性</h3><p>延时双删： 先删除缓存，再更新数据库，再过一段时间再删除缓存。</p>
 
       
 
@@ -453,7 +480,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -463,7 +490,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/面试题-分布式/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/04/10/设计模式原则/">展开全文 >></a>
         </p>
       
 
@@ -493,77 +520,30 @@
 
 
   
-    <article id="post-面试题-mysql" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-设计模式-适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/面试题-mysql/">面试-mysql</a>
+      <a class="article-title" href="/2023/04/10/设计模式-适配器模式/">适配器模式</a>
     </h1>
   
 
         
-        <a href="/2023/02/02/面试题-mysql/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:52.950Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
+        <a href="/2023/04/10/设计模式-适配器模式/" class="archive-article-date">
+  	<time datetime="2023-04-10T12:31:55.135Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="三大范式"><a href="#三大范式" class="headerlink" title="三大范式"></a>三大范式</h3><ol>
-<li>所有的列不可分</li>
-<li>每一列都和主键相关</li>
-<li>每一列都和主键直接相关，不能间接相关</li>
-</ol>
-<p>实际使用中为了提高查下效率，有时候也会适当的冗余一些数据，空间换时间。</p>
-<h3 id="存储引擎-MyISAM和InnoDB的区别"><a href="#存储引擎-MyISAM和InnoDB的区别" class="headerlink" title="存储引擎 MyISAM和InnoDB的区别"></a>存储引擎 MyISAM和InnoDB的区别</h3><p>查下mysql的所有引擎  <code>show ENGINES</code> innodb是mysql5.6之后的默认引擎，MyISAM是5.6之前的默认引擎。</p>
-<p>区别：</p>
-<ol>
-<li>MyISAM不支持事务，不支持行级锁，不支持外键，会保存行数，查询快，但是增删慢，适合大量查询的场景。</li>
-<li>InnoDB支持事务，支持行级锁，适合执行大量insert和update的表。</li>
-</ol>
-<h3 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h3><p>SQL优化主要就是索引优化，尽量是sql使用到索引</p>
-<ul>
-<li>添加索引</li>
-<li>联合索引的时候，使用最左前缀法则，不是指sql的顺序，而是sql中需要有索引中顺序的字段。</li>
-<li>索引列不要做任何的操作</li>
-<li>尽量使用覆盖索引，能减少回表</li>
-<li>like将%放在后面</li>
-<li>字符串类型不加单引号会导致索引失效</li>
-<li>or改union</li>
-</ul>
-<h4 id="索引失效的场景"><a href="#索引失效的场景" class="headerlink" title="索引失效的场景"></a>索引失效的场景</h4><h3 id="聚集索引和非聚集索引"><a href="#聚集索引和非聚集索引" class="headerlink" title="聚集索引和非聚集索引"></a>聚集索引和非聚集索引</h3><p>聚集索引一般就是主键索引，如果没有主键，mysql会自己生成一列主键，一个表一定会有一个聚集索引。非聚集索引就是主键之外的索引，也叫辅助索引。</p>
-<h3 id="索引B-树"><a href="#索引B-树" class="headerlink" title="索引B+树"></a>索引B+树</h3><p>MyISAM和InnoDB索引都使用的是B+树的结构</p>
-<p>B+树：非叶子节点只存储索引信息，叶子节点会冗余非叶子节点的数据，还会存在指向真实数据的指针，并且还会保存相邻的叶子节点之间的双向指针。<br>B树：非叶子节点和叶子节点都会都会保存索引的数据和真实数据的指针</p>
-<p>为什么使用B+树不使用B树</p>
-<ol>
-<li>B+树非叶子节点不存数据，跟小，可以容纳更多的数据。</li>
-<li>B+树每次查询的路径大致相同跟稳定，B树可能在叶子节点就直接查询到了。</li>
-<li>B+树叶子节点间有双向指针，更适合范围查询。</li>
-</ol>
-<h3 id="事务特性和隔离级别"><a href="#事务特性和隔离级别" class="headerlink" title="事务特性和隔离级别"></a>事务特性和隔离级别</h3><h4 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h4><ul>
-<li>A 原子性</li>
-<li>C 一致性 保证数据的完整性</li>
-<li>I 隔离性</li>
-<li>D 持久性</li>
-</ul>
-<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p>事务会带来的问题：</p>
-<ol>
-<li>脏读: 一个事务中会读取到其它事务之间的数据。</li>
-<li>不可重复读： 一个事务多次读取的数据不一致。</li>
-<li>幻读: 一个事务中查询莫一类数据的时候结果不一致，如其它线程插入了新的数据。</li>
-</ol>
-<ul>
-<li>读未提交，存在脏读的问题</li>
-<li>读已提交，其它事务中没有提交的数据无法读取，解决了脏读的问题。</li>
-<li>可重复读，一次事务中查询的同一个数据不会改变，解决了不可重复读。mysql中默认的隔离级别。</li>
-<li>串行化，事务之间串行处理，级别最高，并发最差。</li>
-</ul>
-<h3 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h3><p>事务读已提交和可重复读是基于MVCC实现的，</p>
-<h3 id="数据库锁"><a href="#数据库锁" class="headerlink" title="数据库锁"></a>数据库锁</h3><h3 id="数据库日志"><a href="#数据库日志" class="headerlink" title="数据库日志"></a>数据库日志</h3><p>redoLog: 保证数据的持久性，主要作用是用于数据库的崩溃恢复，存在单独的日志文件。<br>undoLog: 记录数据的逻辑变化，用作事务回滚，存在于表空间的数据文件中。</p>
+        <p>适配器模式</p>
+<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p>将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能使用一起工作的那些类可以一起工作。</p>
+<p>如 ： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通用请求</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  正常的请求</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NormalTarget</span> <span class="keyword">extends</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"正常的请求"</span>);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 特殊请求适配器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AbnormalAdapter</span> <span class="keyword">extends</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> AbnormalAdaptee abnormalAdaptee = <span class="keyword">new</span> AbnormalAdaptee();</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>&#123;</span><br><span class="line">		abnormalAdaptee.request();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 特殊的请求</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AbnormalAdaptee</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"特殊请求"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用方式一致</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	Target normalTarget = <span class="keyword">new</span> NormalTarget();</span><br><span class="line">	normalTarget.request();</span><br><span class="line">	Target abnormalAdapter = <span class="keyword">new</span> AbnormalAdapter();</span><br><span class="line">	abnormalAdapter.request();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -577,101 +557,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/面试题-mysql/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-面试题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/面试题/">面试-面试题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/面试题/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:52.948Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="JVM篇"><a href="#JVM篇" class="headerlink" title="JVM篇"></a>JVM篇</h2><ul>
-<li>运行时区域组成结构和各部分作用</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">线程共享： 堆  方法区（包含运行时常量池）</span><br><span class="line">线程私有区： 虚拟机栈 本地方法栈 程序计数器</span><br><span class="line">直接内存</span><br><span class="line"></span><br><span class="line">虚拟栈： 每个方法会以栈帧的方式存在虚拟机栈中，每一个栈帧中包含四大区域（局部变量表、操作数栈、动态链接、返回地址），缺省值大小为1M,递归死循环会导致StackOverflowError。</span><br><span class="line"></span><br><span class="line">	局部变量表 ： 存放变量的地方，主要存方八大数据类型，如果时一个对象，则存放对象的引用地址</span><br><span class="line">	操作数栈： JVM引擎的工作区</span><br><span class="line">	动态链接： Java语言特性多态</span><br><span class="line">	返回地址： 正常情况从程序计数器中取，异常的时候从异常表里面取</span><br><span class="line"></span><br><span class="line">本地方法栈： 执行native方法</span><br><span class="line"></span><br><span class="line">程序计数器： 存储当前字节码的偏移量，线程独有，互不干扰</span><br><span class="line"></span><br><span class="line">方法区: 存储已被虚拟机加载的类信息、常量、静态变量、代码缓存等等</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">堆：分为新生代和老年代（1：2），新生代分为Eden区和两个Survivor区（8：1：1），堆主要与垃圾回收相关</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Java对象</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">对象的组成部分：  Header + 实例数据 + 对其填充</span><br><span class="line"></span><br><span class="line">Header : 包含对象头markdown(8个字节)  对象头指针（4个字节） 如果是数组还有一个数组长度（4个字节）</span><br><span class="line">实例数据：</span><br><span class="line">对其填充： 对象的整体大小需要是8的倍数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">对象创建过程：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">加载检查</span><br><span class="line">分配对象 : 如果是连续的内存，直接使用内存碰撞的方式，如不是连续的内存，需要维护一张空闲列表，性能相比连续内存较低。</span><br><span class="line">内存空间初始化 ： 属性赋予默认值</span><br><span class="line">设置对象头</span><br><span class="line">对象初始化</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">对象的分配策略</span><br><span class="line"></span><br><span class="line">1、先检查是否开启了逃逸分析，是否能够在栈上分配（更好的进行垃圾回收）</span><br><span class="line">2、检查是否是大对象，大对象直接进入老年代</span><br><span class="line">3、是否开启了本地线程缓冲，在Eden区域分配对象</span><br></pre></td></tr></table></figure>
-<ul>
-<li>类加载机制</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1、加载  根据class文件加载二进制字节流，存在方法区</span><br><span class="line">2、验证  版本号 cafababy等等</span><br><span class="line">3、准备  类变量、静态变量等分配内存，赋初始值 final常量会在这一步赋值</span><br><span class="line">4、解析  将符号引用转换为直接引用</span><br><span class="line">5、初始化</span><br></pre></td></tr></table></figure>
-<ul>
-<li>双亲委派及作用</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">加载一个类的时候先给父加载器加载，父加载器加载不了再自己加载，目的是为了防止核心类被篡改</span><br></pre></td></tr></table></figure>
-<ul>
-<li>垃圾回收机制</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">判断一个类是不是垃圾 （引用计数（只计强引用） / 可达性分析）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">常见的回收算法：</span><br><span class="line"></span><br><span class="line">复制算法</span><br><span class="line">标记清除算法</span><br><span class="line">标记整理</span><br></pre></td></tr></table></figure>
-<p>①悲观锁和乐观锁 （ 具体可以看我的这篇文章：面试必备之乐观锁与悲观锁）.<br>②synchronized 和 lock 区别以及 volatile 和 synchronized 的区别，<br>③可重入锁与非可重入锁 的区别.<br>④多线程是解决什么问题的.<br>⑤线程池解决什么问题.<br>⑥线程池的原理.⑦<br>线程池使用时的注意事项.⑧AQS 原有没有在项目中实际使用多线程的经历。所 以，如果你在你的项目中有实际使用 Java 多线程的经历 的话，会为你加分不少 哦！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">适配器模式</a>
         		</li>
       		
 		</ul>
@@ -681,542 +571,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/面试题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/redis/">redis</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/redis/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:52.900Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="redis持久化策略"><a href="#redis持久化策略" class="headerlink" title="redis持久化策略"></a>redis持久化策略</h4><p>redis持久化策略主要有RDB和AOF两种。</p>
-<h5 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h5><ul>
-<li>RDB：在指定的时间间隔能对数据进行快照储存</li>
-</ul>
-<p>触发方式</p>
-<ol>
-<li>手动触发</li>
-</ol>
-<p>SAVE 和 BGSAVE 两个命令都可以手动触发生产RDB文件</p>
-<ul>
-<li><p>SAVE: 阻塞当前redis服务，应该禁止该命令。  </p>
-</li>
-<li><p>BGSAVE: 主进程fork出一个子进程进行rdb操作，主线程继续响应其它的操作，为了保证RDB文件的完整性，子进程在操作时会先生成一个临时文件，操作完成之后再将临时文件重新命名为xxx.rdb(配置文件配置)，其中forkv操作时会阻塞redis服务。</p>
-<p>COW写时复制：当子线程和主线程都需要操作同一块内存的情况，主线程会先进行复制再进行操作复制。</p>
-</li>
-</ul>
-<ol start="2">
-<li>redis.conf配置</li>
-</ol>
-<p>在配置文件中配置 <figure class="highlight plain"><figcaption><span>m n``` 规则自动触发 m秒内有n次操作就会进行一次备份，执行SHOTDOWN命令时，如果没有开启AOF,也会触发RDB操作。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```sh</span><br><span class="line"></span><br><span class="line"># 时间策略  900秒内有一个key的值变化就会触发rdb</span><br><span class="line">save 900 1</span><br><span class="line"></span><br><span class="line"># rdb 文件的名称</span><br><span class="line">dbfilename dum.rdb</span><br><span class="line"></span><br><span class="line"># rdb文件保存的路径</span><br><span class="line">dir ./</span><br><span class="line"></span><br><span class="line"># rdb文件是否进行压缩</span><br><span class="line">rdbcompression yes</span><br></pre></td></tr></table></figure></p>
-<h6 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h6><ul>
-<li>优点</li>
-</ul>
-<p>执行效率高，适合大规模数据备份，不会影响主线程工作，备份文件占用空间小。</p>
-<ul>
-<li>缺点</li>
-</ul>
-<p>在执行RDB间隔间的数据可能会丢失，fork操作时会阻塞主线程。</p>
-<h5 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h5><ul>
-<li>AOF:记录每次对服务器写的操作，当服务重启时执行这些命令来恢复数据。（默认不开启）</li>
-</ul>
-<p>AOF持久化的实现</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">命令写入 -&gt;  AOF缓冲  -&gt;  AOF文件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># redis.conf配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启aof</span></span><br><span class="line">appendonly yes</span><br><span class="line"><span class="comment"># 命名</span></span><br><span class="line">appendfilename <span class="string">"appendonly.aof"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步策略</span></span><br><span class="line">appendfsync always  <span class="comment"># 执行一次命令 立刻同步到aof文件 消耗大 最安全</span></span><br><span class="line">appendfsync everysec  <span class="comment"># 每一秒同步一次</span></span><br><span class="line">appendfsync no  <span class="comment"># 有操作系统同步</span></span><br></pre></td></tr></table></figure>
-<p>先放入AOF缓冲区，不让磁盘IO成为redis性能瓶颈。当redis重启时，会重新加载AOF文件。</p>
-<ul>
-<li><p>AOF问题</p>
-<ul>
-<li><p>AOF文件体积膨胀? 解决： redis提供了AOF文件重写策略，FORK出子线程进行重写</p>
-<p>重写触发：</p>
-</li>
-</ul>
-<ol>
-<li>手动触发，bgrewriteaof命令</li>
-<li><p>配置文件</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当前AOF文件的大小是上次AOF文件的100% 并且体积达到64M 满足两者才会触发</span></span><br><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line">auto-aof-min-size 64mb</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ul>
-<h5 id="RDB和AOF优先级"><a href="#RDB和AOF优先级" class="headerlink" title="RDB和AOF优先级"></a>RDB和AOF优先级</h5><p>优先AOF</p>
-<h5 id="redis持久化总结"><a href="#redis持久化总结" class="headerlink" title="redis持久化总结"></a>redis持久化总结</h5><ol>
-<li>RDB和AOF都会FORK子线程，会阻塞主线测，所以应该降低FORK触发频率，</li>
-<li>控制redis最大使用内存，防止FORK时间太长</li>
-<li>RDB和AOF可以同时存在，配合使用</li>
-</ol>
-<h4 id="redis过期删除策略-amp-内存淘汰策略"><a href="#redis过期删除策略-amp-内存淘汰策略" class="headerlink" title="redis过期删除策略&amp;内存淘汰策略"></a>redis过期删除策略&amp;内存淘汰策略</h4><p>设置redis键过期时间</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">expire key ttl  <span class="comment"># 过期 秒</span></span><br><span class="line">pexpire key ttl  <span class="comment"># 过期 毫秒</span></span><br><span class="line">expireat key timestamp  <span class="comment"># 过期 秒时间戳</span></span><br><span class="line">pexpireat key timestamp <span class="comment"># 过期 毫秒时间戳</span></span><br><span class="line">persitt key <span class="comment"># 移除过期时间</span></span><br><span class="line">ttl key <span class="comment"># 查看过期时间 秒</span></span><br><span class="line">pttl key <span class="comment"># 查看过期时间 毫秒</span></span><br></pre></td></tr></table></figure>
-<h5 id="redis过期删除策略"><a href="#redis过期删除策略" class="headerlink" title="redis过期删除策略"></a>redis过期删除策略</h5><ol>
-<li>惰性删除： 获取的时候判断如果过期了就删除</li>
-<li>定期删除： 每隔一段时间随机选出一定数量的键，删除其中过期的键，默认随机选出10个。</li>
-</ol>
-<h5 id="redis内存淘汰策略"><a href="#redis内存淘汰策略" class="headerlink" title="redis内存淘汰策略"></a>redis内存淘汰策略</h5><p>redis.conf设置最大内存</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">maxmemory bytes <span class="comment"># 通常设定物理内存的3/4</span></span><br><span class="line">maxmemory-policy volatile-lru  <span class="comment"># 设置淘汰策略</span></span><br></pre></td></tr></table></figure>
-<p>换成内存淘汰策略中有 <figure class="highlight plain"><figcaption><span>,```LFU```三种，redis在使用的有```LRU``` 和```LFU```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```FIFO```: 先进先出。</span><br><span class="line">```LRU``` : 最近最少使用，核心思想，如果最近被使用，那么将来会被用到的概率变高，如果key最近被访问了，则移动到链表头部，redis中随机取出5个数据，选择时间最早的进行淘汰，存在一种情况：热点数据最近很少访问有可能被删除。</span><br><span class="line">```LFU``` : 最不经常使用，过去访问的次数越多，将来被访问的概率也越高。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">淘汰策略</span><br><span class="line"></span><br><span class="line">1. ```noeviction``` : 默认策略，内存到达最大值，所有写操作都报错。</span><br><span class="line">2. ```volatile-ttl``` : 过期时间越早被淘汰</span><br><span class="line">3. ```allkeys-random``` : 随机</span><br><span class="line">4. ```volatile-random``` : 有过期时间的key随机</span><br><span class="line">5. ```xxx-lru``` : ```LRU```算法</span><br><span class="line">6. ```xxx-lfu ```: ```LFU```算法</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 性能压测</span><br><span class="line"></span><br><span class="line">```redis-benchmark</span><br></pre></td></tr></table></figure></p>
-<h4 id="redis高可用"><a href="#redis高可用" class="headerlink" title="redis高可用"></a>redis高可用</h4><h5 id="主从架构"><a href="#主从架构" class="headerlink" title="主从架构"></a>主从架构</h5><ol>
-<li>全量复制</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 增量复制</span><br><span class="line"></span><br><span class="line">```master```和```slave```短时间断开，```salve```发送```offset```，```master```根据偏移量发送偏移数据给```slave```，如果时间太长，则需要全量复制。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">配置主从配置：</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line"></span><br><span class="line">1、 配置文件 slaveof &lt;masterip&gt;&lt;masterport&gt;</span><br><span class="line">2、 命令执行 redis-server --slaveof &lt;masterip&gt;&lt;masterport&gt;</span><br><span class="line">3、 客户端命令执行 slaveof &lt;masterip&gt;&lt;masterport&gt;</span><br></pre></td></tr></table></figure>
-<p>主节点挂了之后从节点不会自动升级为节点，这时可以加上redis哨兵实现</p>
-<h5 id="sentinel"><a href="#sentinel" class="headerlink" title="sentinel"></a>sentinel</h5><ol>
-<li><p>添加配置文件 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```sh</span><br><span class="line">sentinel monitor &lt;名称&gt; &lt;ip&gt; &lt;port&gt; &lt;得票数&gt;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>启动 <figure class="highlight plain"><figcaption><span>./sentinel.conf ```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. 选举策略 ： 复制进度大的 / ID号小的</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">问题：</span><br><span class="line"></span><br><span class="line">- 仍然只有一个master节点处理写请求，并发请求量大时，服务任然压力大。</span><br><span class="line">- 每个从节点需要保存全量的数据，冗余的数据量大</span><br><span class="line"></span><br><span class="line">##### redis cluster</span><br><span class="line"></span><br><span class="line">redis clustor 采用多主多从的方式，引入哈希槽（16384）的概念，每个主节点只保存一部分数据，当某个主节点挂了之后从节点自动升级为主节点，</span><br><span class="line"></span><br><span class="line">1. 配置文件添加</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">cluster-enabled yes</span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>启动多个服务</p>
-</li>
-<li><p>构建cluster</p>
-</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster create &lt;ip:port&gt; &lt;ip:port&gt; &lt;ip:port&gt; --cluster-replicas 1</span><br></pre></td></tr></table></figure>
-<p>cluster-replicas表示master节点下需要有几个从节点，这样cluster就会将16384个槽位平均分配到每个节点。</p>
-<ol start="4">
-<li>扩容时 先添加节点到cluster中，然后重新分配槽位到新的节点</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加节点</span></span><br><span class="line">redis-cli --cluster add-node &lt;需要添加的节点ip:port&gt; &lt;任意已存在节点 ip:port&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询节点信息</span></span><br><span class="line">cluster nodes</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加重新分片</span></span><br><span class="line">redis-cli --cluster reshard &lt;任意已存在节点ip:port&gt; --cluster-from &lt;已存在节点ID&gt; --cluster-to &lt;新添加节点ID&gt; --cluster-slots &lt;需要分配槽的个数&gt;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/redis/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mongo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/mongo/">MongoDb - 安装及基本使用</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/mongo/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:52.870Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Mongo安装</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul>
-<li>下载地址 ： <a href="https://www.mongodb.com/try/download/community" target="_blank" rel="noopener">https://www.mongodb.com/try/download/community</a></li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel80-6.0.3.tgz</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/mongo/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JDK源码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/JDK源码/">JDK源码解析</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/JDK源码/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:52.860Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h4><p>Object是所有类默认的父类，在编译的时候已经添加。</p>
-<ul>
-<li><p>equals</p>
-</li>
-<li><p>hashcode</p>
-</li>
-</ul>
-<h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p>基于定长集合,允许空值和重复元素。</p>
-<ul>
-<li>类构造器</li>
-</ul>
-<p>声明一个数组，初始长度为0.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 二者区别</span></span><br><span class="line">ArrayList list1 = <span class="keyword">new</span> ArrayList(); </span><br><span class="line">ArrayList list2 = <span class="keyword">new</span> ArrayList(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最开始两者的长度都是0 当添加一个元素之后，list1的长度为10，list2的长度为1</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>添加元素</li>
-</ul>
-<p>扩容：复制一个当前长度 + 当前长度 &gt;&gt; 1 (1.5倍长度的数组)，并将现有的数据复制过去。 先扩容，再添加数据</p>
-<ul>
-<li>删除元素</li>
-</ul>
-<p>调用native方法将删除位置后面的元素整体向前移动一位，并将最后一位置为null。</p>
-<h4 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h4><p>基于双向链表，高效插入和移除。任何操作都得从头节点遍历到index位置。</p>
-<p>问题：为什么迭代器循环更快？</p>
-<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p>基于哈希表的Map接口实现，线程不是安全的，key、value都可以为null。</p>
-<ul>
-<li>JDK1.7 数组+链表</li>
-<li>JDK1.7 数组+链表/红黑树</li>
-</ul>
-<ol>
-<li>为什么要有红黑树？</li>
-</ol>
-<p>防止链表太长导致查询速度过慢。</p>
-<ol start="2">
-<li><p>定位元素在hashMap数组中的位置</p>
-<ol>
-<li>取key的hashCode值</li>
-<li>对hashCode值进行扰动（一系列的位运算），目的是让高位也参与进来运算</li>
-<li>用扰动之后的值与上数组的长度减1得到数组的下标</li>
-</ol>
-</li>
-<li><p>为什么数组的长度必须是2的次方?</p>
-</li>
-</ol>
-<p>为了获取下标的时候可以用与运算，效率高</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 假设扰动之后的hash值为0101 0101 数组长度为16,那就是哈希与15进行与运算</span><br><span class="line"></span><br><span class="line">0101 0101</span><br><span class="line">0000 1111</span><br><span class="line"></span><br><span class="line">// 发现只有后面的4位参与了运算，并且范围在0-15之间</span><br><span class="line">// 如果数组长度不是2的次方长度，长度减一的二进制后面就不是1111，那么范围就不是数组的长度，离散性不强</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>添加元素</li>
-</ol>
-<p>jdk1.7采用头插的方式，可能会产生死循环，导致cpu100%，jdk1.8改成了尾插法避免死循环。在长度超过阈值8的时候，如数组长度此时小于64，这个时候会先进行一次扩容，尝试降低链表的长度，如果长度大于64，则转换位红黑树的结构。</p>
-<ol start="5">
-<li>删除元素</li>
-</ol>
-<p>某一个entry的长度小于6的时候红黑树结构会转回到链表结构</p>
-<ol start="6">
-<li><p>jdk1.8做了哪些优化?</p>
-<ol>
-<li>底层结构会进行红黑树的转化</li>
-<li>扰动次数优化</li>
-<li>头插法改为尾插法</li>
-</ol>
-</li>
-</ol>
-<h4 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h4><p>HashTable结构和hashMap是一样的，只是在hashTable中的方法用synchronized进行了修饰，效率较低。</p>
-<h4 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><h5 id="JDK1-7"><a href="#JDK1-7" class="headerlink" title="JDK1.7"></a>JDK1.7</h5><p>采用segments和entry分段锁的概念，segments的大小是不可变的，代表的支持并发的个数，entry和hashMap类似，每次新增一个元素需要先定位segments的位置，在定位在segments下entry中的位置，扩容也是单个segments下的entry扩容，多个segments之间没有影响。</p>
-<p>在初始化segments的时候采用CAS保证并发安全，每个Segment继承了ReentrantLock，在put操作时会进行tryLock,保证并发安全。</p>
-<h5 id="JDK1-8"><a href="#JDK1-8" class="headerlink" title="JDK1.8"></a>JDK1.8</h5><p>采用和hashMap类型的结构，使用Synchronized+CAS保证并发安全。</p>
-<p>在初始化的时候采用CAS保证并发安全，在put的时候使用Synchronized或者CAS的方式保证并发安全。</p>
-<h4 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h4><p>Synchronized的作用是保证在同一时刻，只有一个线程访问别修饰的代码块，达到保证并发安全的效果。</p>
-<p>Synchronized的用法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// （1）修饰静态方法 锁的是class</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">helloStatic</span><span class="params">()</span></span>&#123; </span><br><span class="line">  System.out.println(<span class="string">"hello world static"</span>); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）修饰成员函数  锁的是this</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span>&#123; </span><br><span class="line">  System.out.println(<span class="string">"hello world"</span>); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （3）直接定义代码块 锁的是test对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123; </span><br><span class="line">  SynchronizedTest test = <span class="keyword">new</span> SynchronizedTest(); </span><br><span class="line">  <span class="keyword">synchronized</span> (test)&#123; </span><br><span class="line">    System.out.println(<span class="string">"hello world"</span>); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Synchronized在字节层面上是两个指令</p>
-<ol>
-<li>MonitorEnter指令：插入在同步代码块的开始位置，当代码执行到该指令时，将会尝试获取该对象Monitor的所有权，即尝试获得该对象的锁；</li>
-<li>MonitorExit指令：插入在方法结束处和异常处，JVM保证每个MonitorEnter必须有对应的MonitorExit；</li>
-</ol>
-<p>Synchronized可以把任何一个非null的对象当成锁，叫做对象监视器（Object Monitor），任何一个对象有一个内部锁。</p>
-<p>一个Synchronized修饰的对象的MarkWord指针指向的是Monitor对象的起始地址</p>
-<p>每一个Object Monitor都维护了一个  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_EntryList ： 处于等待锁block状态的线程，会被加入到该列表</span><br><span class="line">_count : 记录个数</span><br><span class="line">_WaitSet : 处于wait状态的线程，会被加入到_WaitSet</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JDK源码解析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/JDK源码/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-总结-多线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/02/总结-多线程/">总结-多线程</a>
-    </h1>
-  
-
-        
-        <a href="/2023/02/02/总结-多线程/" class="archive-article-date">
-  	<time datetime="2023-02-02T09:15:52.844Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>创建线程的方式，继承Thread类，实现Runable接口，但是Java是单继承多实现，所有推荐使用Runable的方式。</p>
-<p>线程的状态</p>
-<ul>
-<li>新建状态，new 一个线程的时候就是新建状态。</li>
-<li>就绪状态，调用start方法之后，等待CPU调度。</li>
-<li>运行状态，线程获取得了CPU，开始执行run方法.</li>
-<li>阻塞状态，执行wait/sleep、等待锁 等方法。</li>
-<li>死亡 run执行完成之后或者执行了stop方法。调用stop方法不会释放锁，可能会造成死锁。</li>
-</ul>
-<hr>
-<p>seelp和wait的区别  </p>
-<p>seelp是Thrad类中的一个方法，执行时不会释放锁，到了指定的时候继续执行，wait是Object中的方法，会释放锁，进入等待，需要notify/notigyall唤醒后才能继续执行。</p>
-<hr>
-<p>为什么使用线程池</p>
-<p>降低频繁创建线程的消耗，方便管理线程。</p>
-<p>线程池的关键参数：</p>
-<ul>
-<li>核心线程数</li>
-<li>最大线程数</li>
-<li>等待队列</li>
-<li>线程存活时间</li>
-<li>拒绝策略</li>
-</ul>
-<p>线程的执行流程：</p>
-<ol>
-<li>提交一个任务判断线程池中的线程数量是否大于核心线程数，没有的话就创建一个线程执行</li>
-<li>大于等于最大核心线程数，则加入到等待队列中等待执行</li>
-<li>如果队列中已经满了，还有任务来，则继续创建线程只到达到最大线程数</li>
-<li>达到最大线程数之后的任务则按照拒绝策略执行</li>
-<li>任务执行完成后如果当前的线程数量大于核心线程数，则超过存活时间则会销毁掉多余的线程</li>
-</ol>
-<hr>
-<p>为什么不推荐Executors创建线程池</p>
-<ul>
-<li>fix和single的使用的是无界队列</li>
-<li>scheduleh和delay最大线程数是intmax</li>
-</ul>
-<p>两种情况都会导致创建大量的线程，可能会OOM</p>
-<hr>
-<p>线程池合理配置</p>
-<ol>
-<li>CPU密集型，主要是计算，压力在CPU,分配小的线程数，NCPU+1</li>
-<li>IO密集型，压力不在CPU,可多分配线程，2 * NCPU</li>
-</ol>
-<hr>
-<p>如何停止一个线程的方法</p>
-<p>使用interrupt方法打上中断的标志，然后自己决定是否需要停止线程。</p>
-<hr>
-<p>如何保证线程安全</p>
-<ul>
-<li>栈封闭</li>
-<li>无状态的类 没有任何成员变量的类</li>
-<li>没有返回值</li>
-</ul>
-<h3 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h3><h4 id="锁的对象"><a href="#锁的对象" class="headerlink" title="锁的对象"></a>锁的对象</h4><ul>
-<li>使用在方法上 或者锁的对象是this，则锁的对象是调用方</li>
-<li>使用在静态方法，则锁的对象是当前类</li>
-<li>指定具体的对象，则锁的是指定的对象</li>
-</ul>
-<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><p>使用monitorenter和monitorexit指令实现同步，本质是对一个对象的监视器进行获取，同一个时刻只有一个线程可以获取到一个对象的监视器。</p>
-<h4 id="锁升级过程"><a href="#锁升级过程" class="headerlink" title="锁升级过程"></a>锁升级过程</h4><ul>
-<li>在Synchronize加锁时，如果偏向锁已经启动的情况，则此时是锁对象是偏向锁状态，否则是无锁状态。</li>
-<li>偏向的锁的对象执行hashcode方法的时候会撤销到无锁的状态。原因是对象头中保存了对象的hashcode值。偏向锁对象头中存在的是线程ID</li>
-<li>如果有少量线程竞争时，升级为轻量级锁，</li>
-<li>大量线程竞争时，升级为重量级锁，对象头中存的是指向montior的指针。</li>
-</ul>
-<h4 id="Synchronized和Lock的区别"><a href="#Synchronized和Lock的区别" class="headerlink" title="Synchronized和Lock的区别"></a>Synchronized和Lock的区别</h4><p>Lock是java中的一个接口，是java层面的锁，需要手动的释放，可以定制为不同情况的锁，多样化<br>Synchronized是属于JVM层面的锁，不能中断，不是公平的，不支持条件唤醒。</p>
-<h3 id="TheadLocal"><a href="#TheadLocal" class="headerlink" title="TheadLocal"></a>TheadLocal</h3><p>每个线程里面都维护着一个TheadLocalMap</p>
-<p>TheadLocalMap里面又维护着一个entry数组，entry对象是ThreadLocal的弱引用，entry里面维护具体的值</p>
-<p>TheadLocal.set() 会先回去当前线程的TheadLocalMap，然后保存当前threadLocl为key 值为value到TheadLocalMap里面，获取的时候先获取当前线程的threadlocalMap,然后以当前的threadlocal为key获取值。</p>
-<p>问题：</p>
-<p>1、存在线程池的时候可能会互相影像，每次使用完成之后需要remove()一下<br>2、存在内存泄漏问题 TheadLocalMap 的生命周期和线程的生命周期是一样的，所以如果没有手动删除key，就会导致内存泄漏。</p>
-<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><p>保证线程的可见性和有序性，不能保证原子性。引入了内存屏障，防止重排序。</p>
-<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>比较并交换，操作系统保证原子性。</p>
-<h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h3><p>是一个构建锁和同步器的框架。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/02/02/总结-多线程/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/04/10/设计模式-适配器模式/">展开全文 >></a>
         </p>
       
 
@@ -1248,7 +603,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1261,6 +616,8 @@
     <div id="footer-info">
     	<div class="footer-left">
     		&copy; 2023 Caichuang
+    		<a href="https://beian.miit.gov.cn/" target="_blank">备案号:</a>
+    		<a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备18127660号</a>
     	</div>
       	<div class="footer-right">
 
@@ -1339,10 +696,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JDK源码解析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
@@ -1351,11 +704,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+                <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Dubbo</a>
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1383,14 +736,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RabbitMq</a>
               </li>
              
@@ -1400,6 +745,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1415,15 +764,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1431,11 +772,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">手写RPC</a>
+                <a href="javascript:void(0)" class="js-tag color5">并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1447,15 +788,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">适配器模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color1">适配器模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1464,10 +801,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>
