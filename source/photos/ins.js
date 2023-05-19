@@ -116,15 +116,15 @@
         var data = res.list[j].arr;
         var liTmpl = "";
         for (var i = 0, len = data.link.length; i < len; i++) {
-          var minSrc = 'http://tupelo.top/ins-min/' + data.link[i] + '.jpg';
-          var src = 'http://tupelo.top/ins/' + data.link[i];
+          var minSrc = 'https://image.tupelo.top/ins/' + data.link[i] + '.jpg';
+          var src = 'https://image.tupelo.top/ins/' + data.link[i];
           var type = data.type[i];
           var target = src + (type === 'video' ? '.mp4' : '.jpg');
           src += '.jpg';
 
           liTmpl += '<figure class="thumb" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">\
                 <a href="' + src + '" itemprop="contentUrl" data-size="640x640" data-type="' + type + '" data-target="' + target + '">\
-                  <img class="reward-img" data-type="' + type + '" data-src="' + minSrc + '" src="http://tupelo.top/ins/default.jpg" itemprop="thumbnail" onload="lzld(this)">\
+                  <img class="reward-img" data-type="' + type + '" data-src="' + minSrc + '" src="https://image.tupelo.top/ins/default.jpg" itemprop="thumbnail" onload="lzld(this)">\
                 </a>\
                 <figcaption style="display:none" itemprop="caption description">' + data.text[i] + '</figcaption>\
             </figure>';

@@ -1,7 +1,7 @@
 ---
-title: 面试-mysql
+title: 总结-mysql
 tags:
-  - 面试
+  - 总结
 ---
 
 聚集索引/非聚集索引
